@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   home.packages = with pkgs; [
     nil
@@ -6,7 +6,7 @@
     sops
     nix-weather
     devenv
-    stable.mcp-nixos
+    inputs.nixpkgs-mcp-nixos.legacyPackages.${pkgs.stdenv.hostPlatform.system}.mcp-nixos
     deadnix
   ];
 }

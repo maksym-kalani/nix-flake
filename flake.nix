@@ -22,6 +22,8 @@
     caddy-nix.url = "github:vincentbernat/caddy-nix";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
+    # Temporary package-only stable pin until fastmcp teardown fix #580411 propagates.
+    nixpkgs-mcp-nixos.url = "github:nixos/nixpkgs/718f670e845328e9c2cecdd832835712b2cbd065";
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
