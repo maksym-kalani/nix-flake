@@ -42,7 +42,11 @@ ssh virtual
 git clone https://github.com/yourusername/nixos-config.git
 cd nixos-config
 ```
-### Step 4: Apply the Configuration
+### Step 4: Validate the Configuration
+``` bash
+nix flake check --show-trace
+```
+### Step 5: Apply the Configuration
 ``` bash
 nixos-rebuild switch --flake .#virtual --target-host virtual --use-remote-sudo
 ```
