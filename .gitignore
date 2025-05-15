@@ -1,0 +1,28 @@
+# Nix build outputs
+result
+result-*
+
+# Temporarily unencrypted files
+*.unencrypted
+*.plain
+*.dec
+
+# Private keys and credentials
+*_key
+*.key
+*.pem
+*.p12
+*.pfx
+*.key.json
+/keys/
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS specific
+.DS_Store
+Thumbs.db
