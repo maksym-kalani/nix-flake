@@ -4,15 +4,15 @@ let
   # Configuration options with defaults
   cfg = {
     # Container name
-    name = "my-container";
+    name = "commafeed";
     
     # Container image
-    image = "example/image:latest";
+    image = "athou/commafeed:latest-h2";
     
     # Container port configuration
     port = {
-      internal = 8080; # Port inside the container
-      external = 8080; # Port on the host
+      internal = 8082; # Port inside the container
+      external = 8552; # Port on the host
     };
     
     # Optional settings with defaults

@@ -1,5 +1,5 @@
 {
   imports = [
-    ./commafeed.nix
+    ./jellyfin.nix
   ];
 }
