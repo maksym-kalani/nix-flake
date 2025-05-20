@@ -17,9 +17,10 @@
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixarr.url = "github:rasmus-kirk/nixarr";
   };
 
-  outputs = { self, home-manager, nixpkgs, ... }@inputs:
+  outputs = { self, home-manager, nixpkgs, nixarr, ... }@inputs:
     let
       inherit (self) outputs;
       systems = [
@@ -48,12 +49,18 @@
         "maksym@virtual" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/maksym/virtual.nix ];
+          modules = [ 
+            ./home/maksym/virtual.nix 
+            nixarr.nixosModules.default
+          ];
         };
         "maksym@aigis" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/maksym/aigis.nix ];
+          modules = [ 
+            ./home/maksym/aigis.nix 
+            nixarr.nixosModules.default
+          ];
         };
       };
     };

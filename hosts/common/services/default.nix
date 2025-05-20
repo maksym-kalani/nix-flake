@@ -2,6 +2,6 @@
   imports = [
     ./podman.nix
     ./containers
-    ./apps
+    ./nixarr.nix
   ];
 }
