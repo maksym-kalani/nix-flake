@@ -39,6 +39,10 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/virtual ];
         };
+        aigis = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/aigis ];
+        };
       };
       homeConfigurations = {
         "maksym@virtual" = home-manager.lib.homeManagerConfiguration {
