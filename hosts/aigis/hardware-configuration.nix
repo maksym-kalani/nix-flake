@@ -9,9 +9,11 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/5891a5fb-44bf-4a5f-b901-1f1f1456307e";
@@ -35,4 +37,18 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;  # If you need 32-bit support
+      extraPackages = with pkgs; [
+        intel-compute-runtime  # Intel's OpenCL implementation
+        intel-media-driver     # VAAPI driver
+        vaapiIntel             # Older VAAPI driver
+        vaapiVdpau
+        libvdpau-va-gl
+        intel-gmmlib           # Intel Graphics Memory Management Library
+      ];
+    };
+
 }
