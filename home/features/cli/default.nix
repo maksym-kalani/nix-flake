@@ -3,5 +3,6 @@
     coreutils
     htop
     zip
+    pciutils
   ];
 }
