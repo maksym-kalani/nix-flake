@@ -37,10 +37,8 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.opengl = {
+  hardware.graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;  # If you need 32-bit support
       extraPackages = with pkgs; [
         intel-compute-runtime  # Intel's OpenCL implementation
         intel-media-driver     # VAAPI driver
