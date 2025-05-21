@@ -5,7 +5,7 @@
   ...
 }: {
   users.users.maksym = {
-    initialHashedPassword = "$y$j9T$t8IR2KrGwN7RpIY7wacgM1$pnrN7H8AJPcqnA5BlGXjJkU.zRB3.XfoTDdAvpgE2WC";
+    hashedPasswordFile = config.sops.secrets.maksym_hashed_password.path;
     isNormalUser = true;
     description = "maksym";
     extraGroups = [

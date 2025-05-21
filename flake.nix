@@ -15,11 +15,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
   };
 
-  outputs = { self, home-manager, nixpkgs, ... }@inputs:
+  outputs = { self, home-manager, nixpkgs, sops-nix, ... }@inputs:
     let
       inherit (self) outputs;
       systems = [
@@ -39,12 +43,14 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ 
             ./hosts/virtual 
+            sops-nix.nixosModules.sops
           ];
         };
         aigis = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [ 
             ./hosts/aigis
+            sops-nix.nixosModules.sops
           ];
         };
       };
