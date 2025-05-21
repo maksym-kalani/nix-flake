@@ -57,6 +57,9 @@
     intel-gpu-tools
     glxinfo
     vulkan-tools
+    git
+    wget
+    curl
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
