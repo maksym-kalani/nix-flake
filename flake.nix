@@ -38,6 +38,7 @@
       packages =
         forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
       overlays = import ./overlays { inherit inputs; };
+      
       nixosConfigurations = {
         virtual = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
@@ -54,6 +55,7 @@
           ];
         };
       };
+      
       homeConfigurations = {
         "maksym@virtual" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";

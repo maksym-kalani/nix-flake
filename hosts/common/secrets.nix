@@ -1,13 +1,16 @@
 { config, pkgs, ... }:
 
 {
-  sops.defaultSopsFile = ../../secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
-  
-  sops.age.keyFile = "/home/maksym/.config/sops/age/keys.txt";
-  
-  sops.secrets.maksym_hashed_password = {
-    sopsFile = ../../secrets/secrets.yaml;
-    key = "maksym_hashed_password";
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = "/home/maksym/.config/sops/age/keys.txt";
+    
+    secrets = {
+      maksym_hashed_password = {
+        key = "maksym_hashed_password";
+      };
+      # Add more secrets here
+    };
   };
 }
