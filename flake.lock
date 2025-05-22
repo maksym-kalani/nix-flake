@@ -1,5 +1,20 @@
 {
   "nodes": {
+    "caddy-nix": {
+      "locked": {
+        "lastModified": 1746992747,
+        "narHash": "sha256-x0MnZtKl7TDW13e/QNcmr4Nf5KTYngV+vh4BUS5gXXk=",
+        "owner": "vincentbernat",
+        "repo": "caddy-nix",
+        "rev": "4876c3494fe37fb7c418d082e6795d9dee6b6eef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vincentbernat",
+        "repo": "caddy-nix",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -54,6 +69,7 @@
     },
     "root": {
       "inputs": {
+        "caddy-nix": "caddy-nix",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",

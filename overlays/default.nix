@@ -10,6 +10,16 @@
       # example = prev.example.overrideAttrs (oldAttrs: rec {
       # ...
       # });
+      caddy = prev.caddy.overrideAttrs (oldAttrs: rec {
+        version = "2.9.1";
+        
+        src = prev.fetchFromGitHub {
+          owner = "caddyserver";
+          repo = "caddy";
+          tag = "v${version}";
+          hash = "sha256-VOPxBx0GvgidMXmt2UvVUTIT6yqF7HxeI4FT9+vk+pk=";
+        };
+      });
     };
 
   stable-packages = final: _prev: {

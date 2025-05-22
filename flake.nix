@@ -19,6 +19,7 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    caddy-nix.url  = "github:vincentbernat/caddy-nix";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
   };
@@ -37,7 +38,10 @@
     in {
       packages =
         forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-      overlays = import ./overlays { inherit inputs; };
+        
+      overlays = import ./overlays {
+        inherit inputs outputs;
+      };
       
       nixosConfigurations = {
         virtual = nixpkgs.lib.nixosSystem {
