@@ -73,4 +73,15 @@ in {
     environment = cfg.environmentVariables;
     autoStart = cfg.autoStart;
   };
+  
+  services.gatus.settings.endpoints = [
+    {
+      name      = cfg.name;
+      url       = "http://192.168.2.50:${toString cfg.port.external}";
+      interval  = "1m";
+      conditions = [
+        "[STATUS] == 200"
+      ];
+    }
+  ];
 }
