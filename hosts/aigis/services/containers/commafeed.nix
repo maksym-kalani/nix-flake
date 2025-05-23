@@ -1,6 +1,8 @@
 { lib, config, ... }:
 
 let
+  domain = "laufin.xyz";
+  ip = "192.168.2.50";
   # Configuration options with defaults
   cfg = {
     # Container name
@@ -77,7 +79,7 @@ in {
   services.gatus.settings.endpoints = [
     {
       name      = cfg.name;
-      url       = "http://192.168.2.50:${toString cfg.port.external}";
+      url       = "http://${ip}:${toString cfg.port.external}";
       interval  = "1m";
       conditions = [
         "[STATUS] == 200"
@@ -87,7 +89,7 @@ in {
   
   services.caddy.virtualHosts = 
   {
-    "${cfg.name}.laufin.xyz" = {
+    "${cfg.name}.${domain}" = {
       extraConfig = ''
         reverse_proxy 127.0.0.1:${toString cfg.port.external}
       '';

@@ -1,17 +1,14 @@
-# ntfy.nix
+﻿# ntfy.nix
 { config, pkgs, lib, ... }:
 let
-  appName = "ntfy";
-  port = 8081;
+  appName = "name";
+  port = 0000;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
 in
 {
-  services.ntfy-sh.enable = true;
-  services.ntfy-sh.settings = {
-    base-url = "http://${ip}";
-    listen-http = ":${toString port}";
-  };
+  #services.ntfy-sh.enable = true;
+  
   
   networking.firewall.allowedTCPPorts = [ port ];
   
