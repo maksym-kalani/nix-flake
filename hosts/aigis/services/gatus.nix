@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   services.gatus = {
     enable = true;
@@ -31,5 +31,14 @@
       };
     };
   };
+  
+  services.caddy.virtualHosts = lib.mkForce {
+      "gatus.laufin.xyz" = {
+        extraConfig = ''
+          reverse_proxy 127.0.0.1:8080
+        '';
+      };
+    };
+  
   networking.firewall.allowedTCPPorts = [ 8080 ];
 }

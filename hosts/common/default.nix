@@ -3,7 +3,6 @@
 { lib, inputs, outputs, ... }: {
   imports = [ 
     ./users
-    ./services
     ./secrets.nix
      inputs.home-manager.nixosModules.home-manager
   ];
