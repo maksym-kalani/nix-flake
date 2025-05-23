@@ -84,4 +84,14 @@ in {
       ];
     }
   ];
+  
+  services.caddy.virtualHosts = 
+  {
+    "${cfg.name}.laufin.xyz" = {
+      extraConfig = ''
+        reverse_proxy 127.0.0.1:${toString cfg.port.external}
+      '';
+    };
+  };
+  
 }

@@ -4,5 +4,6 @@
     htop
     zip
     pciutils
+    jq
   ];
 }
