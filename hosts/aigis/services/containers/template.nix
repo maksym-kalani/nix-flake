@@ -76,6 +76,8 @@ in {
     autoStart = cfg.autoStart;
   };
   
+  networking.firewall.allowedTCPPorts = [ cfg.port.external ];
+  
   services.gatus.settings.endpoints = [
     {
       name      = cfg.name;
