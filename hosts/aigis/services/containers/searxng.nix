@@ -6,15 +6,15 @@ let
   # Configuration options with defaults
   cfg = {
     # Container name
-    name = "my-container";
+    name = "search";
     
     # Container image
-    image = "example/image:latest";
+    image = "searxng/searxng:latest";
     
     # Container port configuration
     port = {
       internal = 8080; # Port inside the container
-      external = 8080; # Port on the host
+      external = 8882; # Port on the host
     };
     
     # Optional settings with defaults
@@ -39,7 +39,7 @@ let
     ];
     volumes = [
       # Simple host:container path mapping
-      #"/path/on/host:/path/in/container"
+      "/mnt/tank/appdata/searxng:/etc/searxng"
       
       # Configuration with read-only flag
       #"/config/files:/etc/nginx/conf.d:ro"

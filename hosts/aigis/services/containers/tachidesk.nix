@@ -6,15 +6,15 @@ let
   # Configuration options with defaults
   cfg = {
     # Container name
-    name = "my-container";
+    name = "tachidesk";
     
     # Container image
-    image = "example/image:latest";
+    image = "ghcr.io/suwayomi/tachidesk:stable";
     
     # Container port configuration
     port = {
-      internal = 8080; # Port inside the container
-      external = 8080; # Port on the host
+      internal = 4567; # Port inside the container
+      external = 4568; # Port on the host
     };
     
     # Optional settings with defaults
@@ -39,7 +39,8 @@ let
     ];
     volumes = [
       # Simple host:container path mapping
-      #"/path/on/host:/path/in/container"
+      "/mnt/tank/appdata/tachidesk/downloads:/home/suwayomi/.local/share/Tachidesk/downloads"
+      "/mnt/tank/appdata/tachidesk/:/home/suwayomi/.local/share/Tachidesk"
       
       # Configuration with read-only flag
       #"/config/files:/etc/nginx/conf.d:ro"
@@ -54,6 +55,10 @@ let
       # Simple key-value pairs
       #NGINX_HOST = "example.com";
       #NGINX_PORT = "80";
+      TZ = "Europe/Kyiv";
+      FLARESOLVERR_ENABLED = "true";
+      FLARESOLVERR_URL = "https://flaresolverr.laufin.xyz";
+      DOWNLOAD_AS_CBZ = "true";
       
       # Toggle features
       #ENABLE_GZIP = "true";

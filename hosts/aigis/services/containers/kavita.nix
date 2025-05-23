@@ -6,15 +6,15 @@ let
   # Configuration options with defaults
   cfg = {
     # Container name
-    name = "my-container";
+    name = "kavita";
     
     # Container image
-    image = "example/image:latest";
+    image = "jvmilazz0/kavita:latest";
     
     # Container port configuration
     port = {
-      internal = 8080; # Port inside the container
-      external = 8080; # Port on the host
+      internal = 5003; # Port inside the container
+      external = 5000; # Port on the host
     };
     
     # Optional settings with defaults
@@ -39,7 +39,8 @@ let
     ];
     volumes = [
       # Simple host:container path mapping
-      #"/path/on/host:/path/in/container"
+      "/mnt/tank/share/media/ttrpgs:/ttrpgs"
+      "/mnt/tank/appdata/kavita:/kavita/config"
       
       # Configuration with read-only flag
       #"/config/files:/etc/nginx/conf.d:ro"

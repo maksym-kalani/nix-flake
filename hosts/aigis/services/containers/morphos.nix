@@ -6,15 +6,15 @@ let
   # Configuration options with defaults
   cfg = {
     # Container name
-    name = "my-container";
+    name = "morphos";
     
     # Container image
-    image = "example/image:latest";
+    image = "ghcr.io/danvergara/morphos-server:latest";
     
     # Container port configuration
     port = {
       internal = 8080; # Port inside the container
-      external = 8080; # Port on the host
+      external = 7090; # Port on the host
     };
     
     # Optional settings with defaults
