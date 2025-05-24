@@ -10,6 +10,9 @@
       maksym_hashed_password = {
         key = "maksym_hashed_password";
       };
+      eklesa_hashed_password = {
+        key = "eklesa_hashed_password";
+      };
       namecheap_api_user = {
         key = "namecheap_api_user";
       };

@@ -5,5 +5,6 @@
     ./caddy.nix
     ./podman.nix
     ./wireguard.nix
+    ./samba.nix
   ];
 }

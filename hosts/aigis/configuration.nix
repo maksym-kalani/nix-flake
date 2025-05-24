@@ -13,6 +13,12 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  
+  # ZFS
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.extraPools = [ "tank" ];      # Ensure pool "tank" is imported at boot:contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
+  networking.hostId = "f6d2860c";
+  services.zfs.autoScrub.enable = true;
 
   networking.hostName = "aigis"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -62,6 +68,7 @@
     curl
     tcpdump
     sops
+    zfs
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
