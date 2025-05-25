@@ -1,7 +1,7 @@
 # ntfy.nix
 { config, pkgs, lib, ... }:
 let
-  appName = "ntfy";
+  name = "ntfy";
   port = 8081;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
@@ -17,7 +17,7 @@ in
   
   services.gatus.settings.endpoints = [
     {
-      name      = appName;
+      name      = name;
       url       = "http://${ip}:${toString port}";
       interval  = "1m";
       conditions = [
@@ -28,7 +28,7 @@ in
   
   services.caddy.virtualHosts = 
   {
-    "${appName}.laufin.xyz" = {
+    "${name}.${domain}" = {
       extraConfig = ''
         reverse_proxy 127.0.0.1:${toString port} {
           header_up Host {http.reverse_proxy.upstream.hostport}

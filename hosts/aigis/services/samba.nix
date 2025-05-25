@@ -3,12 +3,12 @@
   services.samba-wsdd.openFirewall = true;
   services.samba = {
     enable = true;
-    securityType = "user";
     openFirewall = true;  # open SMB ports if firewall is enabled
     # Samba server settings
     settings = {
       global = {
         workgroup = "WORKGROUP";
+        security = "user";
         "server string" = "Aigis File Server";
         "map to guest" = "Bad User";    # Unauthenticated users treated as guest
         # (We will require login, so guest access is disabled on shares)
