@@ -1,13 +1,13 @@
-﻿{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
-  name = "name";
-  port = 0000;
+  name = "radarr";
+  port = 7878;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
 in
 {
-  #services.ntfy-sh.enable = true;
-  
+  services.radarr = { enable = true; openFirewall = true; };
+  users.users.radarr.extraGroups = [ "tankusers" ];
   networking.firewall.allowedTCPPorts = [ port ];
   
   services.gatus.settings.endpoints = [

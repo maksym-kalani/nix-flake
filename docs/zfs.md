@@ -63,3 +63,23 @@ This tells ZFS to add a new mirror pair to the pool tank. After this, zpool stat
 No config change needed: Because the pool name is the same (tank), and we already have boot.zfs.extraPools = [ "tank" ] in place, NixOS will import the pool with all vdevs on boot as usual. There’s no need to add anything to configuration.nix for the new drives. (It might be wise to update any documentation you keep about which drives are in the pool, and you may want to label the drives physically).
 
 Verify: After adding, run zpool status to ensure the new mirror is added and resilvering is not needed (since it was adding empty drives, there’s nothing to resilver except if ZFS does a quick parity check). The status should show all vdevs ONLINE. Also check zpool list tank to see the new size, and possibly do a sudo zpool scrub tank for good measure, to ensure everything is consistent.
+
+## Let's modify your ZFS settings to be more permissive for Jellyfin:
+1. **Change aclinherit to passthrough**:
+``` bash
+   sudo zfs set aclinherit=passthrough tank/media
+```
+This ensures that new files and directories inherit all ACL entries from the parent directory.
+1. **Ensure proper group ownership**:
+``` bash
+   sudo chown -R :tankusers /mnt/tank/media
+```
+1. **Set proper permissions**:
+``` bash
+   sudo chmod -R 775 /mnt/tank/media
+```
+1. **Add posix ACLs to ensure group permissions propagate**:
+``` bash
+   sudo setfacl -R -m g:tankusers:rwx /mnt/tank/media
+   sudo setfacl -R -d -m g:tankusers:rwx /mnt/tank/media
+```

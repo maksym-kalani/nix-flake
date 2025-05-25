@@ -1,13 +1,13 @@
-﻿{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
-  name = "name";
-  port = 0000;
+  name = "sonarr";
+  port = 8989;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
 in
 {
-  #services.ntfy-sh.enable = true;
-  
+  services.sonarr = { enable = true; openFirewall = true; };
+  users.users.sonarr.extraGroups = [ "tankusers" ];
   networking.firewall.allowedTCPPorts = [ port ];
   
   services.gatus.settings.endpoints = [

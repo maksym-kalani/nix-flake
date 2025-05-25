@@ -1,12 +1,14 @@
-﻿{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
-  name = "name";
-  port = 0000;
+  name = "jellyfin";
+  port = 8096;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
 in
 {
-  #services.ntfy-sh.enable = true;
+  services.jellyfin.enable = true;
+  services.jellyfin.configDir = "/mnt/tank/appdata/jellyfin";
+  users.users.jellyfin.extraGroups = [ "tankusers" "render" "video" ];
   
   networking.firewall.allowedTCPPorts = [ port ];
   
