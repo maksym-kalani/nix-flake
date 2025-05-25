@@ -4,6 +4,7 @@
 let
   domain = "laufin.xyz";
   ip = "192.168.2.50";
+  appdata = "/mnt/tank/appdata/";
   cfg = {
     name = "dashy";
     image = "lissy93/dashy:latest";
@@ -12,7 +13,7 @@ let
       external = 4000;
     };
     volumes = [
-      "/var/lib/dashy/conf.yml:/app/user-data/conf.yml"
+      "${appdata}dashy/conf.yml:/app/user-data/conf.yml"
     ];
     autoStart = true;
   };
@@ -80,6 +81,16 @@ EOF
       conditions = [
         "[STATUS] == 200"
       ];
+      alerts = [
+      {
+        type = "ntfy";
+        enabled = true;
+        send-on-resolved = true;
+        description = "${cfg.name} health check";
+        failure-threshold = 3;
+        success-threshold = 2;
+      }
+    ];
     }
   ];
   

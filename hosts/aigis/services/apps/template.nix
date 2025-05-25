@@ -20,6 +20,16 @@ in
       conditions = [
         "[STATUS] == 200"
       ];
+      alerts = [
+        {
+          type = "ntfy";
+          enabled = true;
+          send-on-resolved = true;
+          description = "Morgana health check";
+          failure-threshold = 3;
+          success-threshold = 2;
+        }
+      ];
     }
   ];
   

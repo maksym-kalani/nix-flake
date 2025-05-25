@@ -3,6 +3,7 @@
 let
   domain = "laufin.xyz";
   ip = "192.168.2.50";
+  appdata = "/mnt/tank/appdata/";
   # Configuration options with defaults
   cfg = {
     # Container name
@@ -39,7 +40,7 @@ let
     ];
     volumes = [
       # Simple host:container path mapping
-      "/mnt/tank/appdata/${cfg.name}:/etc/dns"
+      "${appdata}${cfg.name}:/etc/dns"
       
       # Configuration with read-only flag
       #"/config/files:/etc/nginx/conf.d:ro"
@@ -77,14 +78,9 @@ in {
     volumes = cfg.volumes;
     environment = cfg.environmentVariables;
     autoStart = cfg.autoStart;
-    
-    serviceConfig = {
-      User  = "podman-tank-user";
-      Group = "podman-tank-user";
-    };
   };
   
-  networking.firewall.allowedTCPPorts = [ cfg.port.external ];
+  networking.firewall.allowedTCPPorts = [ cfg.port.external 53 ];
   
   services.gatus.settings.endpoints = [
     {
@@ -93,6 +89,16 @@ in {
       interval  = "1m";
       conditions = [
         "[STATUS] == 200"
+      ];
+      alerts = [
+        {
+          type = "ntfy";
+          enabled = true;
+          send-on-resolved = true;
+          description = "${cfg.name} health check";
+          failure-threshold = 3;
+          success-threshold = 2;
+        }
       ];
     }
   ];

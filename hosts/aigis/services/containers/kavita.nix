@@ -3,6 +3,7 @@
 let
   domain = "laufin.xyz";
   ip = "192.168.2.50";
+  appdata = "/mnt/tank/appdata/";
   # Configuration options with defaults
   cfg = {
     # Container name
@@ -13,7 +14,7 @@ let
     
     # Container port configuration
     port = {
-      internal = 5003; # Port inside the container
+      internal = 5000; # Port inside the container
       external = 5000; # Port on the host
     };
     
@@ -39,8 +40,8 @@ let
     ];
     volumes = [
       # Simple host:container path mapping
-      "/mnt/tank/share/media/ttrpgs:/ttrpgs"
-      "/mnt/tank/appdata/kavita:/kavita/config"
+      "/mnt/tank/media/ttrpgs:/ttrpgs"
+      "${appdata}${cfg.name}:/kavita/config"
       
       # Configuration with read-only flag
       #"/config/files:/etc/nginx/conf.d:ro"
@@ -75,11 +76,6 @@ in {
     volumes = cfg.volumes;
     environment = cfg.environmentVariables;
     autoStart = cfg.autoStart;
-    
-    serviceConfig = {
-      User  = "podman-tank-user";
-      Group = "podman-tank-user";
-    };
   };
   
   networking.firewall.allowedTCPPorts = [ cfg.port.external ];
@@ -91,6 +87,16 @@ in {
       interval  = "1m";
       conditions = [
         "[STATUS] == 200"
+      ];
+      alerts = [
+        {
+          type = "ntfy";
+          enabled = true;
+          send-on-resolved = true;
+          description = "${cfg.name} health check";
+          failure-threshold = 3;
+          success-threshold = 2;
+        }
       ];
     }
   ];
