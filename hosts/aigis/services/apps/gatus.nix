@@ -19,19 +19,6 @@ in
     settings = {
       web.port = 8080;
 
-      # endpoints can be defined here (or in other
-      # imported modules – they'll all get merged)
-      endpoints = [
-        {
-          name      = "Morgana";
-          url       = "http://192.168.2.20";
-          interval  = "1m";
-          conditions = [
-            "[STATUS] == 200"
-          ];
-        }
-      ];
-
       # configure a webhook notifier to ntfy.sh
       alerting = {
         ntfy = {

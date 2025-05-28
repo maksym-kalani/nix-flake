@@ -69,6 +69,7 @@
     tcpdump
     sops
     zfs
+    rsync
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -19,6 +19,9 @@
       namecheap_api_key = {
         key = "namecheap_api_key";
       };
+      openai_api_key = {
+        key = "openai_api_key";
+      };
       # Add more secrets here
     };
   };
