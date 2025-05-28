@@ -7,5 +7,6 @@
     ./morphos.nix
     ./searxng.nix
     ./technitium-dns.nix
+    ./qbittorrent.nix
   ];
 }
