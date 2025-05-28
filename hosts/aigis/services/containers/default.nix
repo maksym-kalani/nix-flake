@@ -8,5 +8,8 @@
     ./searxng.nix
     ./technitium-dns.nix
     ./qbittorrent.nix
+    ./it-tools.nix
+    ./wallos.nix
+    ./stirling-pdf.nix
   ];
 }
