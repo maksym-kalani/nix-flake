@@ -6,7 +6,7 @@ let
   ip = "192.168.2.50";
 in
 {
-  services.sonarr = { enable = true; openFirewall = true; };
+  services.sonarr = { enable = true; openFirewall = true; dataDir = "/mnt/tank/appdata/sonarr";};
   users.users.sonarr.extraGroups = [ "tankusers" ];
   networking.firewall.allowedTCPPorts = [ port ];
   

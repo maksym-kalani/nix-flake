@@ -6,7 +6,7 @@ let
   ip = "192.168.2.50";
 in
 {
-  services.radarr = { enable = true; openFirewall = true; };
+  services.radarr = { enable = true; openFirewall = true; dataDir = "/mnt/tank/appdata/radarr";};
   users.users.radarr.extraGroups = [ "tankusers" ];
   networking.firewall.allowedTCPPorts = [ port ];
   

@@ -6,7 +6,8 @@ let
   ip = "192.168.2.50";
 in
 {
-  services.prowlarr = { enable = true; openFirewall = true; };
+  services.prowlarr = { enable = true; openFirewall = true; dataDir = "/mnt/tank/appdata/prowlarr";};
+  users.users.prowlarr.extraGroups = [ "tankusers" ];
   networking.firewall.allowedTCPPorts = [ port ];
   
   services.gatus.settings.endpoints = [
