@@ -70,6 +70,7 @@
     sops
     zfs
     rsync
+    caddy
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
