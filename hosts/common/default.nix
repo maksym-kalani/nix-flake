@@ -4,6 +4,7 @@
   imports = [ 
     ./users
     ./secrets.nix
+    ./zfs-error-notifications.nix
      inputs.home-manager.nixosModules.home-manager
   ];
   home-manager = {
