@@ -41,7 +41,7 @@ let
     volumes = [
       # Simple host:container path mapping
       "${appdata}${cfg.name}:/config"
-      "/mnt/tank/downloads:/downloads"
+      "/mnt/tank/downloads:/mnt/tank/downloads"
       
       # Configuration with read-only flag
       #"/config/files:/etc/nginx/conf.d:ro"
