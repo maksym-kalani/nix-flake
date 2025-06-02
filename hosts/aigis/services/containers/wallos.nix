@@ -94,7 +94,7 @@ in {
           type = "ntfy";
           enabled = true;
           send-on-resolved = true;
-          description = "Morgana health check";
+          description = "${cfg.name} health check";
           failure-threshold = 3;
           success-threshold = 2;
         }
