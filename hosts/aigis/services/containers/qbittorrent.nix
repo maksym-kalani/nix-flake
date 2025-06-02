@@ -4,6 +4,8 @@ let
   domain = "laufin.xyz";
   ip = "192.168.2.50";
   appdata = "/mnt/tank/appdata/";
+  UID = 888;
+  GID = 990; 
   # Configuration options with defaults
   cfg = {
     # Container name
@@ -57,7 +59,9 @@ let
       WEBUI_PORT = "${toString cfg.port.external}";
       #NGINX_HOST = "example.com";
       #NGINX_PORT = "80";
-      
+      TZ = "Europe/Kyiv";
+      PUID = "${toString UID}";
+      PGID = "${toString GID}";
       # Toggle features
       #ENABLE_GZIP = "true";
       #DEBUG_MODE = "false";
@@ -67,6 +71,13 @@ let
     autoStart = true;
   };
 in {
+  users.users = {
+    pod-qbittorrent = {
+      isSystemUser = true;
+      uid = UID;
+      group = "tankusers";
+    };    
+  };      
   # Container definition
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
