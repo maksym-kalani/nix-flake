@@ -8,5 +8,6 @@
     ./samba.nix
     ./update-containers.nix
     ./restart-containers.nix
+    ./ntfy-on-ssh.nix
   ];
 }
