@@ -94,7 +94,7 @@ in {
     autoStart = cfg.autoStart;
   };
   
-  networking.firewall.allowedTCPPorts = [ cfg.port.external ];
+  networking.firewall.allowedTCPPorts = [ cfg.port.external 6881 ];
   
   services.gatus.settings.endpoints = [
     {
