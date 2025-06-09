@@ -1,6 +1,6 @@
 {
   imports = [
-    ./commafeed.nix
+    ./fusion.nix
     ./dashy.nix
     ./kavita.nix
     ./tachidesk.nix
