@@ -22,6 +22,9 @@
       openai_api_key = {
         key = "openai_api_key";
       };
+      flame_homepage_password = {
+        key = "flame_homepage_password";
+      };
       # Add more secrets here
     };
   };

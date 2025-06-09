@@ -14,5 +14,6 @@
     ./omni-tools.nix
     ./mazanoke.nix
     ./local-content-share.nix
+    ./flame-homepage.nix
   ];
 }
