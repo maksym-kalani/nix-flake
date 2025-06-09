@@ -9,5 +9,6 @@
     ./radarr.nix
     ./prowlarr.nix
     ./karakeep.nix
+    #./immich.nix
   ];
 }
