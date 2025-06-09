@@ -1,4 +1,4 @@
-﻿{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
   name = "name";
   port = 0000;
