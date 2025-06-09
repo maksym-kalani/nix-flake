@@ -11,5 +11,7 @@
     ./it-tools.nix
     ./wallos.nix
     ./stirling-pdf.nix
+    ./omni-tools.nix
+    ./mazanoke.nix
   ];
 }
