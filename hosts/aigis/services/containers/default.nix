@@ -1,7 +1,7 @@
 {
   imports = [
     ./fusion.nix
-    ./dashy.nix
+    #./dashy.nix
     ./kavita.nix
     ./tachidesk.nix
     ./morphos.nix
