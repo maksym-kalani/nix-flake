@@ -13,5 +13,6 @@
     ./stirling-pdf.nix
     ./omni-tools.nix
     ./mazanoke.nix
+    ./local-content-share.nix
   ];
 }
