@@ -25,6 +25,11 @@ let
     address = "10.0.0.3/32";
     keepAliveSeconds = 25;
   };
+  tabletClient = {
+    publicKey = "BFKqnJBlG6ANmzXId3wV/JvooVOoUS5IAocm6k2H8E0=";
+    address = "10.0.0.4/32";
+    keepAliveSeconds = 25;
+  };
 in {
   # WireGuard Interface Configuration
   networking.wireguard.interfaces.wg0 = {
@@ -44,6 +49,11 @@ in {
         publicKey = eklesaPhoneClient.publicKey;
         allowedIPs = [ eklesaPhoneClient.address ];
         persistentKeepalive = eklesaPhoneClient.keepAliveSeconds;
+      }
+      {
+        publicKey = tabletClient.publicKey;
+        allowedIPs = [ tabletClient.address ];
+        persistentKeepalive = tabletClient.keepAliveSeconds;
       }
     ];
     
