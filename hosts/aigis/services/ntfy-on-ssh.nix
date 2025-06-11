@@ -22,10 +22,10 @@ let
      
      case "''${PAM_TYPE}" in
        open_session)
-         # Priority 5 (warning) on login
+         # Priority 3 (warning) on login
          curl -s \
               -H "Title: ''${HOSTNAME} — ssh login" \
-              -H "Priority: 5" \
+              -H "Priority: 3" \
               -H "X-Tags: warning" \
               -d "$payload" \
               "''${NTFYURL}"
