@@ -16,5 +16,6 @@
     ./local-content-share.nix
     ./flame-homepage.nix
     ./vikunja.nix
+    ./local-voice
   ];
 }

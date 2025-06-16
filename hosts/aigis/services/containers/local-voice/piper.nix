@@ -1,0 +1,65 @@
+{ lib, config, ... }:
+
+let
+  appdata = "/mnt/tank/appdata/";
+  ip = "192.168.2.50";
+  cfg = {
+    name = "piper";
+    image = "lscr.io/linuxserver/piper:latest";
+    port = {
+      internal = 10200; # Port inside the container
+      external = 10200; # Port on the host
+    };
+    extraOptions = [];
+    volumes = [
+      "${appdata}${cfg.name}:/config"
+    ];
+    environmentVariables = {
+      PUID="1000";
+      PGID="1000";
+      TZ="Etc/UTC+2";
+      PIPER_VOICE="en_US-amy-medium";
+      PIPER_LENGTH="1.0";
+      PIPER_NOISE="0.667";
+      PIPER_NOISEW="0.333"; 
+      PIPER_SPEAKER="0"; 
+      PIPER_PROCS="1"; 
+    };
+    autoStart = true;
+  };
+in {
+  # Container definition
+  virtualisation.oci-containers.containers.${cfg.name} = {
+    image = cfg.image;
+    ports = ["${toString cfg.port.external}:${toString cfg.port.internal}"];
+    
+    # Optional configs
+    extraOptions = cfg.extraOptions;
+    volumes = cfg.volumes;
+    environment = cfg.environmentVariables;
+    autoStart = cfg.autoStart;
+  };
+  
+  networking.firewall.allowedTCPPorts = [ cfg.port.external ];
+  
+  services.gatus.settings.endpoints = [
+    {
+      name      = cfg.name;
+      url       = "tcp://${ip}:${toString cfg.port.external}";
+      interval  = "1m";
+      conditions = [
+        "[CONNECTED] == true"
+      ];
+      alerts = [
+        {
+          type = "ntfy";
+          enabled = true;
+          send-on-resolved = true;
+          description = "${cfg.name} health check";
+          failure-threshold = 3;
+          success-threshold = 2;
+        }
+      ];
+    }
+  ];
+}
