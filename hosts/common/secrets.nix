@@ -25,6 +25,12 @@
       flame_homepage_password = {
         key = "flame_homepage_password";
       };
+      hass_mariadb_root_password = {
+        key = "hass_mariadb_root_password";
+      };
+      hass_mariadb_password = {
+        key = "hass_mariadb_password";
+      };
       # Add more secrets here
     };
   };

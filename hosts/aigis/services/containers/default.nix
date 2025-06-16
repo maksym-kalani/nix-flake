@@ -17,5 +17,6 @@
     ./flame-homepage.nix
     ./vikunja.nix
     ./local-voice
+    ./hass-mariadb.nix
   ];
 }
