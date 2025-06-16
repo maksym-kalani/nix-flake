@@ -33,6 +33,63 @@ in
           };
         };
       };
+      
+      endpoints = [
+        {
+          name      = "Morgana";
+          url       = "tcp://192.168.2.20:8006";
+          interval  = "1m";
+          conditions = [
+            "[CONNECTED] == true"
+          ];
+          alerts = [
+            {
+              type = "ntfy";
+              enabled = true;
+              send-on-resolved = true;
+              description = "Morgana health check";
+              failure-threshold = 3;
+              success-threshold = 2;
+            }
+          ];
+        }
+        {
+          name      = "Home Assistant";
+          url       = "http://192.168.2.5:8123";
+          interval  = "1m";
+          conditions = [
+            "[STATUS] == 200"
+          ];
+          alerts = [
+            {
+              type = "ntfy";
+              enabled = true;
+              send-on-resolved = true;
+              description = "Home Assistant health check";
+              failure-threshold = 3;
+              success-threshold = 2;
+            }
+          ];
+        }
+        {
+          name      = "Cloudflare Tunnel";
+          url       = "https://matrix.laufin.online/";
+          interval  = "1m";
+          conditions = [
+            "[STATUS] == 200"
+          ];
+          alerts = [
+            {
+              type = "ntfy";
+              enabled = true;
+              send-on-resolved = true;
+              description = "Cloudflare Tunnel health check";
+              failure-threshold = 3;
+              success-threshold = 2;
+            }
+          ];
+        }
+      ];
     };
   };
   
