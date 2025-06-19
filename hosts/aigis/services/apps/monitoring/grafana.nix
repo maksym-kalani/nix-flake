@@ -37,10 +37,8 @@ in
   };
   
   systemd.services."grafana-server" = {
-    after = [ "network-interfaces.target" ];
-    wants = [ "network-interfaces.target" ];
-    after = [ "loki.target" ];
-    wants = [ "loki.target" ];
+    after = [ "network.target" "loki.target" ];
+    wants = [ "network.target" "loki.target"];
   };
   
   networking.firewall.allowedTCPPorts = [ port ];
