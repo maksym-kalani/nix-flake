@@ -18,5 +18,6 @@
     ./vikunja.nix
     ./local-voice
     ./hass-mariadb.nix
+    ./mafl.nix
   ];
 }
