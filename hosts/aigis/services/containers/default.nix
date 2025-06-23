@@ -19,5 +19,6 @@
     ./local-voice
     ./hass-mariadb.nix
     ./mafl.nix
+    ./recommendarr.nix
   ];
 }
