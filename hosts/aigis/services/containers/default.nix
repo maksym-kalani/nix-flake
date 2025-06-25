@@ -1,7 +1,6 @@
 {
   imports = [
     ./fusion.nix
-    #./dashy.nix
     ./kavita.nix
     ./tachidesk.nix
     ./morphos.nix
@@ -18,7 +17,6 @@
     ./vikunja.nix
     ./local-voice
     ./hass-mariadb.nix
-    ./mafl.nix
     ./recommendarr.nix
     ./matrix-admin.nix
   ];
