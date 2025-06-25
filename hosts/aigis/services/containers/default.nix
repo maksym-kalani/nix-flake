@@ -20,5 +20,6 @@
     ./hass-mariadb.nix
     ./mafl.nix
     ./recommendarr.nix
+    ./matrix-admin.nix
   ];
 }

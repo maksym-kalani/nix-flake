@@ -7,15 +7,15 @@ let
   # Configuration options with defaults
   cfg = {
     # Container name
-    name = "kavita";
+    name = "matrix-admin";
     
     # Container image
-    image = "jvmilazz0/kavita:latest";
+    image = "awesometechnologies/synapse-admin";
     
     # Container port configuration
     port = {
-      internal = 5000; # Port inside the container
-      external = 5000; # Port on the host
+      internal = 80; # Port inside the container
+      external = 7373; # Port on the host
     };
     
     # Optional settings with defaults
@@ -40,8 +40,7 @@ let
     ];
     volumes = [
       # Simple host:container path mapping
-      "/mnt/tank/media/ttrpgs:/ttrpgs"
-      "${appdata}${cfg.name}:/kavita/config"
+      "${appdata}${cfg.name}:/app"
       
       # Configuration with read-only flag
       #"/config/files:/etc/nginx/conf.d:ro"
@@ -86,7 +85,7 @@ in {
       url       = "http://${ip}:${toString cfg.port.external}";
       interval  = "1m";
       conditions = [
-        "[STATUS] == 200"
+        "[STATUS] == 403"
       ];
       alerts = [
         {

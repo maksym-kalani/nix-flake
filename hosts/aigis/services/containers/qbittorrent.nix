@@ -111,7 +111,7 @@ in {
           send-on-resolved = true;
           description = "${cfg.name} health check";
           failure-threshold = 3;
-          success-threshold = 2;
+          success-threshold = 1;
         }
       ];
     }
