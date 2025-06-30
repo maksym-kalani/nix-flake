@@ -4,6 +4,7 @@
   pkgs,
   ...
 }:
+#add restic init if running first time
 let
   restic_backup = pkgs.writeShellScriptBin "restic-backup" 
      ''
@@ -14,7 +15,7 @@ let
        /mnt/tank/media/ttrpgs
        /mnt/tank/users
      )
-     
+
      # 1) Run the backup
      restic backup "''${SOURCES[@]}" \
        --verbose \
@@ -55,8 +56,8 @@ in
     description = "Weekly Restic → ZFS share backup";
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      # Every Sunday at 03:00 local time
-      OnCalendar   = "Sun *-*-* 03:00:00";
+      # Every Friday at 03:00 local time
+      OnCalendar   = "Fri *-*-* 03:00:00";
       Persistent = true;
     };
   };
