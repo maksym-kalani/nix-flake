@@ -31,6 +31,12 @@
       hass_mariadb_password = {
         key = "hass_mariadb_password";
       };
+      restic_repo = {
+        key = "restic_repo";
+      };
+      restic_password = {
+        key = "restic_password";
+      };
       # Add more secrets here
     };
   };
