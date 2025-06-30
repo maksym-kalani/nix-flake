@@ -1,32 +1,24 @@
 { config, pkgs, lib, ... }:
 let
   name = "immich";
-  port = 3001;
+  port = 2283;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
 in
 {
-  services.immich = {
-    enable = true;
-    package = pkgs.immich;
-    openFirewall = true;
-    port = port;
-    host = "${name}.${domain}";
-    group = "tankusers";
-    mediaLocation = "/mnt/tank/media/photos";
-    environment = {
-      IMMICH_TRUSTED_PROXIES = "192.168.2.205";
-    };
-    settings.server.externalDomain = "${name}.${domain}";
+  services.immich.enable = true;
+  # Listen on all network interfaces (for reverse proxy access) over HTTP
+  services.immich.host = ip;
+  services.immich.port = port;
 
-    redis = {
-      enable = true;
-      host = "127.0.0.1";
-      port = 6379;
-    };
-  };
-  
-  networking.firewall.allowedTCPPorts = [ port ];
+  # Store media on the ZFS pool mount (existing directory on /mnt/tank)
+  services.immich.mediaLocation = "/mnt/tank/appdata/immich";
+
+  # Run Immich under the 'tankusers' group for write access to media directory
+  services.immich.group = "tankusers";
+
+  # Open the firewall for Immich's port (allow access from 192.168.2.205)
+  services.immich.openFirewall = true;
   
   services.gatus.settings.endpoints = [
     {
