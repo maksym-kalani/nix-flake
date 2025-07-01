@@ -20,6 +20,7 @@ in
   services.meilisearch = {
     enable = true;
     package = pkgs.meilisearch;
+    dumplessUpgrade = true;
   };
   
   systemd.services.karakeep-backup = {
