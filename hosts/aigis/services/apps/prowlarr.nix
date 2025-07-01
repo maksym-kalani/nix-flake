@@ -7,6 +7,8 @@ let
 in
 {
   services.prowlarr = { enable = true; openFirewall = true; dataDir = "/mnt/tank/appdata/prowlarr";};
+  users.users.prowlarr.group = "prowlarr";
+  users.groups.prowlarr = {};
   users.users.prowlarr.extraGroups = "tankusers";
   users.users.prowlarr.isSystemUser = true;
   networking.firewall.allowedTCPPorts = [ port ];
