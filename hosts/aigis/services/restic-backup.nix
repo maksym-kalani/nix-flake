@@ -39,7 +39,7 @@ in
     after       = [ "network-online.target" ];
     serviceConfig = {
       Type        = "oneshot";
-      User = "maksym";
+      User = "root";
       Environment = [
         # point PATH at the active system profile
         "PATH=/run/current-system/sw/bin:$PATH"
