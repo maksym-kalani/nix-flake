@@ -10,7 +10,7 @@ in
       enable = true;
       extraEnvironment = {
         PORT = "${toString port}";
-        NEXTAUTH_URL = "${name}.${domain}";
+        NEXTAUTH_URL = "https://${name}.${domain}";
         DISABLE_NEW_RELEASE_CHECK = "true";
         OCR_LANGS = "eng,ukr";
       };
