@@ -17,12 +17,12 @@ let
      )
 
      # 1) Run the backup
-     restic backup "''${SOURCES[@]}" \
+     restic backup -v "''${SOURCES[@]}" \
        --verbose \
        --tag zfs-share
      
      # 2) Forget/prune old snapshots (e.g. keep 7 daily, 4 weekly, 6 monthly)
-     restic forget \
+     restic forget -v \
        --prune \
        --keep-daily 7 \
        --keep-weekly 4 \

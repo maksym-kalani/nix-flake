@@ -11,6 +11,14 @@ in
   users.groups.prowlarr = {};
   users.users.prowlarr.extraGroups = ["tankusers"];
   users.users.prowlarr.isSystemUser = true;
+  systemd.services.prowlarr = {
+    serviceConfig = lib.mkForce {
+      DynamicUser = false;
+      ExecStart = "${pkgs.prowlarr}/bin/Prowlarr -nobrowser -data=/mnt/tank/appdata/prowlarr";
+      User = "prowlarr";
+      Group = "tankusers";
+    };
+  };
   networking.firewall.allowedTCPPorts = [ port ];
   
   services.gatus.settings.endpoints = [
