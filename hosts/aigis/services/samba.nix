@@ -49,6 +49,15 @@
         "create mask" = "0660";
         "directory mask" = "0770";
       };
+      "hass-backups" = {
+        path = "/mnt/tank/users/maksym/backups/hass";
+        browseable = "yes";
+        "read only" = "no";
+        "valid users" = "maksym";
+        "force group" = "tankusers";
+        "create mask" = "0660";
+        "directory mask" = "0770";
+      };
     };
   };
 }
