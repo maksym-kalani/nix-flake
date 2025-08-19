@@ -10,5 +10,6 @@
     ./prowlarr.nix
     ./karakeep.nix
     ./immich.nix
+    ./vikunja.nix
   ];
 }

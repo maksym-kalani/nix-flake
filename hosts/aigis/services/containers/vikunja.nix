@@ -60,6 +60,7 @@ let
       # Toggle features
       #ENABLE_GZIP = "true";
       #DEBUG_MODE = "false";
+      VIKUNJA_DATABASE_PATH = "/db/vikunja.db";
     };
     
     # Run settings
