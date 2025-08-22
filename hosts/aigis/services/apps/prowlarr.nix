@@ -18,6 +18,8 @@ in
     extraGroups = [ "tankusers" ];
   };
   
+  users.groups.prowlarr = {};
+  
   networking.firewall.allowedTCPPorts = [ port ];
   
   services.gatus.settings.endpoints = [
