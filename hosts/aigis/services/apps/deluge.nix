@@ -47,7 +47,7 @@ in
     ];
     serviceConfig = {
       # Keep files/dirs group-writable for tankusers workflows
-      UMask = "007";
+      UMask = lib.mkForce "007";
       SupplementaryGroups = [ "tankusers" ];
       ReadWritePaths = [ "/mnt/tank/appdata/deluge" "/mnt/tank/downloads" ];
     };
