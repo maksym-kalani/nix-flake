@@ -37,7 +37,7 @@ in
     Group = "deluge";
     SupplementaryGroups = [ "tankusers" ];
     ReadWritePaths = [ "/mnt/tank/appdata/deluge" "/mnt/tank/downloads" ];
-    UMask = "007"; # files 660, dirs 770
+    UMask = lib.mkForce "007"; # files 660, dirs 770
   };
 
   systemd.services.deluge-web.serviceConfig = {
@@ -46,7 +46,7 @@ in
     Group = "deluge";
     SupplementaryGroups = [ "tankusers" ];
     ReadWritePaths = [ "/mnt/tank/appdata/deluge" ];
-    UMask = "007";
+    UMask = lib.mkForce "007";
   };
 
   users.users.deluge.extraGroups = [ "tankusers" ];
