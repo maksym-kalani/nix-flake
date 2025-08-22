@@ -12,14 +12,26 @@ in
     dataDir = "/mnt/tank/appdata/prowlarr";
   };
 
+  users.groups.prowlarr = {};
   users.users.prowlarr = {
     isSystemUser = true;
     group = "prowlarr";
     extraGroups = [ "tankusers" ];
   };
   
-  users.groups.prowlarr = {};
-  
+  systemd.tmpfiles.rules = [
+    "d /mnt/tank/appdata/prowlarr 0750 prowlarr tankusers -"
+  ];
+
+  systemd.services.prowlarr.serviceConfig = {
+    ExecStart = lib.mkForce "${pkgs.prowlarr}/bin/Prowlarr -nobrowser -data=/mnt/tank/appdata/prowlarr";
+    DynamicUser = lib.mkForce false;
+    User = "prowlarr";
+    Group = "prowlarr";
+    ReadWritePaths = [ "/mnt/tank/appdata/prowlarr" ];
+    UMask = "007"; # optional
+  };
+
   networking.firewall.allowedTCPPorts = [ port ];
   
   services.gatus.settings.endpoints = [
