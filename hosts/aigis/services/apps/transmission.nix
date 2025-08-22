@@ -10,8 +10,6 @@ in
       enable = true;
       settings = {
         download-dir = "/mnt/tank/downloads";
-        incomplete-dir = "/mnt/tank/downloads/.incomplete/";
-        incomplete-dir-enabled = true;
       };
     };
   users.users.transmission.extraGroups = [ "tankusers" ];
