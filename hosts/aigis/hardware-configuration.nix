@@ -12,7 +12,7 @@
   boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-  boot.kernelPackages = pkgs.linuxPackages_6_15;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
 
   fileSystems."/" =
