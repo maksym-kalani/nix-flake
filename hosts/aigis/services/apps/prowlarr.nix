@@ -6,19 +6,18 @@ let
   ip = "192.168.2.50";
 in
 {
-  services.prowlarr = { enable = true; openFirewall = true; dataDir = "/mnt/tank/appdata/prowlarr";};
-  users.users.prowlarr.group = "prowlarr";
-  users.groups.prowlarr = {};
-  users.users.prowlarr.extraGroups = ["tankusers"];
-  users.users.prowlarr.isSystemUser = true;
-  systemd.services.prowlarr = {
-    serviceConfig = lib.mkForce {
-      DynamicUser = false;
-      ExecStart = "${pkgs.prowlarr}/bin/Prowlarr -nobrowser -data=/mnt/tank/appdata/prowlarr";
-      User = "prowlarr";
-      Group = "tankusers";
-    };
+  services.prowlarr = {
+    enable = true;
+    openFirewall = true;
+    dataDir = "/mnt/tank/appdata/prowlarr";
   };
+
+  users.users.prowlarr = {
+    isSystemUser = true;
+    group = "prowlarr";
+    extraGroups = [ "tankusers" ];
+  };
+  
   networking.firewall.allowedTCPPorts = [ port ];
   
   services.gatus.settings.endpoints = [
