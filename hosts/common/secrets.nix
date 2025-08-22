@@ -37,6 +37,9 @@
       restic_password = {
         key = "restic_password";
       };
+      deluge_auth = {
+        key = "deluge_auth";
+      };
       # Add more secrets here
     };
   };
