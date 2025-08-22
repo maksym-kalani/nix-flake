@@ -11,6 +11,7 @@ in
       declarative = true;
       dataDir = "/mnt/tank/appdata/deluge";
       openFirewall = true;
+      authFile = config.sops.secrets.deluge_auth.path;
       config = {
         download_location = "/mnt/tank/downloads";
         max_upload_speed = "1000.0";
