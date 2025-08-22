@@ -14,7 +14,7 @@ in
       openPeerPorts = true;
       performanceNetParameters = true;
       rpc-authentication-required = false;
-      rpc-whitelist = "127.0.0.1";
+      rpc-whitelist = "127.0.0.1,${ip}";
       rpc-host-whitelist = "${name}.${domain}";
       rpc-bind-address = "0.0.0.0";
     };
