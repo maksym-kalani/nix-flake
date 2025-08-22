@@ -12,5 +12,6 @@
     ./immich.nix
     ./vikunja.nix
     ./transmission.nix
+    ./deluge.nix
   ];
 }
