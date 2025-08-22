@@ -1,15 +1,22 @@
 { config, pkgs, lib, ... }:
 let
   name = "deluge";
-  port = 9150;
+  port = 8112;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
 in
 {
   services.deluge = {
       enable = true;
-      dataDir = "/mnt/tank/downloads";
+      declarative = true;
+      dataDir = "/mnt/tank/appdata/deluge";
       openFirewall = true;
+      config = {
+        download_location = "/mnt/tank/downloads";
+        max_upload_speed = "1000.0";
+        share_ratio_limit = "2.0";
+        allow_remote = true;
+      };
       extraPackages = [
         pkgs.unzip
         pkgs.gnutar
@@ -19,6 +26,7 @@ in
       web = {
         enable = true;
         openFirewall = true;
+        port = port;
       };
     };
   users.users.deluge.extraGroups = [ "tankusers" ];
