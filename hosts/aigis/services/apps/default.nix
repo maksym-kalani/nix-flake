@@ -11,5 +11,6 @@
     ./karakeep.nix
     ./immich.nix
     ./vikunja.nix
+    ./transmission.nix
   ];
 }
