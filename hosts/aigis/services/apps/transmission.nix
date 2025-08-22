@@ -7,11 +7,18 @@ let
 in
 {
   services.transmission = {
-      enable = true;
-      settings = {
-        download-dir = "/mnt/tank/downloads";
-      };
+    enable = true;
+    package = pkgs.transmission_4;
+    settings = {
+      download-dir = "/mnt/tank/downloads";
+      openPeerPorts = true;
+      performanceNetParameters = true;
+      rpc-authentication-required = false;
+      rpc-whitelist = "127.0.0.1";
+      rpc-host-whitelist = "${name}.${domain}";
+      rpc-bind-address = "0.0.0.0";
     };
+  };
   users.users.transmission.extraGroups = [ "tankusers" ];
   networking.firewall.allowedTCPPorts = [ port ];
   
