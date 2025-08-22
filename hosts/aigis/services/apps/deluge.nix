@@ -30,29 +30,28 @@ in
         port = port;
       };
     };
+    
+  systemd.services.deluged.serviceConfig = {
+    DynamicUser = lib.mkForce false;
+    User = "deluge";
+    Group = "deluge";
+    SupplementaryGroups = [ "tankusers" ];
+    ReadWritePaths = [ "/mnt/tank/appdata/deluge" "/mnt/tank/downloads" ];
+    UMask = "007"; # files 660, dirs 770
+  };
+
+  systemd.services.deluge-web.serviceConfig = {
+    DynamicUser = lib.mkForce false;
+    User = "deluge";
+    Group = "deluge";
+    SupplementaryGroups = [ "tankusers" ];
+    ReadWritePaths = [ "/mnt/tank/appdata/deluge" ];
+    UMask = "007";
+  };
+
   users.users.deluge.extraGroups = [ "tankusers" ];
   networking.firewall.allowedTCPPorts = [ port ];
   
-  systemd.tmpfiles.rules = [
-    "d /mnt/tank/appdata/deluge 0770 deluge deluge -"
-    "d /mnt/tank/appdata/deluge/.config 0770 deluge deluge -"
-    "d /mnt/tank/appdata/deluge/.config/deluge 0770 deluge deluge -"
-  ];
-
-  # Make sure the service only starts after the pool/path is available
-  systemd.services.deluged = {
-    unitConfig.RequiresMountsFor = [
-      "/mnt/tank/appdata/deluge"
-      "/mnt/tank/downloads"
-    ];
-    serviceConfig = {
-      # Keep files/dirs group-writable for tankusers workflows
-      UMask = lib.mkForce "007";
-      SupplementaryGroups = [ "tankusers" ];
-      ReadWritePaths = [ "/mnt/tank/appdata/deluge" "/mnt/tank/downloads" ];
-    };
-  };
-
   services.gatus.settings.endpoints = [
     {
       name      = name;
