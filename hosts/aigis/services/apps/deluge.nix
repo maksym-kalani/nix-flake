@@ -34,8 +34,7 @@ in
   systemd.services.deluged.serviceConfig = {
     DynamicUser = lib.mkForce false;
     User = "deluge";
-    Group = "deluge";
-    SupplementaryGroups = [ "tankusers" ];
+    Group = "tankusers";
     ReadWritePaths = [ "/mnt/tank/appdata/deluge" "/mnt/tank/downloads" ];
     UMask = lib.mkForce "007"; # files 660, dirs 770
     RequiresMountsFor = [ "/mnt/tank/downloads" "/mnt/tank/appdata/deluge" ];
@@ -45,8 +44,7 @@ in
   systemd.services.deluge-web.serviceConfig = {
     DynamicUser = lib.mkForce false;
     User = "deluge";
-    Group = "deluge";
-    SupplementaryGroups = [ "tankusers" ];
+    Group = "tankusers";
     ReadWritePaths = [ "/mnt/tank/appdata/deluge" ];
     UMask = lib.mkForce "007";
     RequiresMountsFor = [ "/mnt/tank/appdata/deluge" ];
