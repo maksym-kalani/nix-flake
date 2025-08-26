@@ -38,6 +38,8 @@ in
     SupplementaryGroups = [ "tankusers" ];
     ReadWritePaths = [ "/mnt/tank/appdata/deluge" "/mnt/tank/downloads" ];
     UMask = lib.mkForce "007"; # files 660, dirs 770
+    RequiresMountsFor = [ "/mnt/tank/downloads" "/mnt/tank/appdata/deluge" ];
+    After = [ "zfs-mount.service" ];
   };
 
   systemd.services.deluge-web.serviceConfig = {
@@ -47,10 +49,16 @@ in
     SupplementaryGroups = [ "tankusers" ];
     ReadWritePaths = [ "/mnt/tank/appdata/deluge" ];
     UMask = lib.mkForce "007";
+    RequiresMountsFor = [ "/mnt/tank/appdata/deluge" ];
+    After = [ "zfs-mount.service" ];
   };
 
   users.users.deluge.extraGroups = [ "tankusers" ];
   networking.firewall.allowedTCPPorts = [ port ];
+  
+  systemd.tmpfiles.rules = [
+    "d /mnt/tank/downloads 0770 maksym tankusers -"
+  ];
   
   services.gatus.settings.endpoints = [
     {
