@@ -5,7 +5,7 @@ let
   ip = "192.168.2.50";
   cfg = {
     name = "piper";
-    image = "lscr.io/linuxserver/piper:latest";
+    image = "rhasspy/wyoming-piper:latest";
     port = {
       internal = 10200; # Port inside the container
       external = 10200; # Port on the host
@@ -15,15 +15,7 @@ let
       "${appdata}${cfg.name}:/config"
     ];
     environmentVariables = {
-      PUID="1000";
-      PGID="1000";
-      TZ="Etc/UTC+2";
-      PIPER_VOICE="en_US-amy-medium";
-      PIPER_LENGTH="1.0";
-      PIPER_NOISE="0.667";
-      PIPER_NOISEW="0.333"; 
-      PIPER_SPEAKER="0"; 
-      PIPER_PROCS="1"; 
+      voice="en_US-amy-medium";
     };
     autoStart = true;
   };
