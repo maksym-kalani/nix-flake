@@ -30,6 +30,9 @@ in {
     volumes = cfg.volumes;
     environment = cfg.environmentVariables;
     autoStart = cfg.autoStart;
+    cmd = [
+      "--voice en_US-lessac-medium"
+    ];
   };
   
   networking.firewall.allowedTCPPorts = [ cfg.port.external ];
