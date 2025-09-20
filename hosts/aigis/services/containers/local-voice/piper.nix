@@ -31,7 +31,7 @@ in {
     environment = cfg.environmentVariables;
     autoStart = cfg.autoStart;
     cmd = [
-      "--voice en_US-lessac-medium"
+      "--voice=en_US-lessac-medium"
     ];
   };
   
