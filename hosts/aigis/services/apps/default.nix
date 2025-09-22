@@ -13,6 +13,5 @@
     ./vikunja.nix
     ./transmission.nix
     ./deluge.nix
-    ./outline.nix
   ];
 }
