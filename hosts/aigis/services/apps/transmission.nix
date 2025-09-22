@@ -10,7 +10,7 @@ in
     enable = true;
     package = pkgs.transmission_4;
     settings = {
-      download-dir = "/mnt/tank/downloads";
+      download-dir = "/mnt/tank/media/downloads";
       openPeerPorts = true;
       performanceNetParameters = true;
       rpc-authentication-required = false;
