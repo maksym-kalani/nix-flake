@@ -35,7 +35,7 @@ in
   services.gatus.settings.endpoints = [
     {
       name = "outline";
-      url = "https://outline.${domain}";
+      url = "http://${ip}:${toString port}";
       interval = "1m";
       conditions = [
         "[STATUS] == 200"
