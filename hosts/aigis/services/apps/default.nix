@@ -2,7 +2,7 @@
   imports = [
     ./gatus.nix
     ./ntfy.nix
-    ./monitoring
+    #./monitoring
     ./jellyfin.nix
     ./jellyseerr.nix
     ./sonarr.nix
@@ -12,6 +12,6 @@
     ./immich.nix
     ./vikunja.nix
     ./transmission.nix
-    ./deluge.nix
+    #./deluge.nix
   ];
 }
