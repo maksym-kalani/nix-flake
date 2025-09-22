@@ -4,7 +4,7 @@
    enable = true;
    package = pkgs.caddy.withPlugins {
      plugins = [ "github.com/caddy-dns/namecheap@v0.0.0-20250228023406-ef9fadb67785" ];
-     hash = "sha256-//dLv0ZvU4WVlSTzv7XvYmdBwNM3xYxF+omfPrqkRho=";
+     hash = "sha256-wUePK4L1BUfyhCviR9gl8WPTGKfEog5ikRRlTxp95KQ=";
    };
    configFile = "/mnt/tank/appdata/caddy/Caddyfile";
    group = "tankusers";
