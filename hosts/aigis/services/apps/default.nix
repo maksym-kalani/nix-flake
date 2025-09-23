@@ -13,5 +13,6 @@
     ./vikunja.nix
     ./transmission.nix
     #./deluge.nix
+    ./minio.nix
   ];
 }
