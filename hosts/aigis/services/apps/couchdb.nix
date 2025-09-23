@@ -9,9 +9,11 @@ in
 {
   services.couchdb = {
     enable = true;
-    databaseDir = "${appdata}/db";
-    viewIndexDir = "${appdata}/index";
+    databaseDir = "${appdata}${name}/db";
+    viewIndexDir = "${appdata}${name}/index";
     port = port;
+    group = "tankusers";
+    configFile = "${appdata}${name}/local.ini";
   };
   
   networking.firewall.allowedTCPPorts = [ port ];
