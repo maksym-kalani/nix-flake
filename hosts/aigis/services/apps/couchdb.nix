@@ -17,16 +17,6 @@ in
   users.users.couchdb.extraGroups = [ "tankusers" ];
   networking.firewall.allowedTCPPorts = [ port ];
   
-  systemd.tmpfiles.rules = [
-    # Base directory for couchdb data/config
-    "d ${appdata}${name} 0770 couchdb tankusers -"
-    "d ${appdata}${name}/db 0770 couchdb tankusers -"
-    "d ${appdata}${name}/index 0770 couchdb tankusers -"
-    # Config file that ExecStartPre touches
-    "f ${appdata}${name}/local.ini 0660 couchdb tankusers -"
-  ];
-
-  
   services.gatus.settings.endpoints = [
     {
       name      = name;
