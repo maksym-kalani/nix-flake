@@ -6,8 +6,8 @@
     ./podman.nix
     ./wireguard.nix
     ./samba.nix
-    ./update-containers.nix
-    ./restart-containers.nix
+    #./update-containers.nix
+    #./restart-containers.nix
     ./ntfy-on-ssh.nix
     ./restic-backup.nix
   ];
