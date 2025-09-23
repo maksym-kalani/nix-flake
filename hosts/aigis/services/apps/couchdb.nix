@@ -12,9 +12,10 @@ in
     databaseDir = "${appdata}${name}/db";
     viewIndexDir = "${appdata}${name}/index";
     port = port;
+    group = "tankusers";
     configFile = "${appdata}${name}/local.ini";
   };
-  users.users.couchdb.extraGroups = [ "tankusers" ];
+  
   networking.firewall.allowedTCPPorts = [ port ];
   
   services.gatus.settings.endpoints = [
