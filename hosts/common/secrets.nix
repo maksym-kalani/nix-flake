@@ -37,13 +37,6 @@
       restic_password = {
         key = "restic_password";
       };
-      deluge_auth = {
-        key = "deluge_auth";
-        owner = "deluge";
-        group = "deluge";
-        mode = "0400";
-      };
-      # Add more secrets here
     };
   };
 }
