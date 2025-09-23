@@ -19,6 +19,5 @@
     ./hass-mariadb.nix
     ./recommendarr.nix
     ./matrix-admin.nix
-    ./couchdb.nix
   ];
 }
