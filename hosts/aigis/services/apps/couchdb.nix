@@ -13,8 +13,6 @@ in
     viewIndexDir = "${appdata}${name}/index";
     port = port;
     configFile = "${appdata}${name}/local.ini";
-    adminUser = "admin";
-    adminPass = "changeme";
   };
   users.users.couchdb.extraGroups = [ "tankusers" ];
   networking.firewall.allowedTCPPorts = [ port ];
