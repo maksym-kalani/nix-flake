@@ -19,7 +19,7 @@ in
       # File containing the MINIO_ROOT_USER, default is “minioadmin”, and MINIO_ROOT_PASSWORD (length >= 8), default is “minioadmin”;
       rootCredentialsFile = config.sops.secrets.minio.path;
     };
-  
+  users.users.minio.extraGroups = [ "tankusers" ];
   networking.firewall.allowedTCPPorts = [ port 9097 ];
   
   services.gatus.settings.endpoints = [
