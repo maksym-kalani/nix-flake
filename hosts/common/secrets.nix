@@ -37,6 +37,9 @@
       restic_password = {
         key = "restic_password";
       };
+      couchdb_password = {
+        key = "couchdb_password";
+      };
     };
   };
 }
