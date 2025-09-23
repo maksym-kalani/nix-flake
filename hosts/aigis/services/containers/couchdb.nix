@@ -6,7 +6,7 @@ let
   appdata = "/mnt/tank/appdata/";
   cfg = {
     name = "couchdb";
-    image = "couchdb:3.5.0";
+    image = "couchdb:3.3.3";
     port = {
       internal = 5984; # Port inside the container
       external = 5984; # Port on the host
