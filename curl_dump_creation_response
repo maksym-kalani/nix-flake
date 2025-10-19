@@ -1,0 +1,7 @@
+HTTP/1.1 403 Forbidden
+content-length: 146
+vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+content-type: application/json
+date: Tue, 01 Jul 2025 16:01:00 GMT
+
+{"message":"The provided API key is invalid.","code":"invalid_api_key","type":"auth","link":"https://docs.meilisearch.com/errors#invalid_api_key"}
