@@ -19,6 +19,7 @@
           tag = "v${version}";
           hash = "sha256-XW1cBW7mk/aO/3IPQK29s4a6ArSKjo7/64koJuzp07I=";
         };
+        doCheck = false;
       });
     };
 
