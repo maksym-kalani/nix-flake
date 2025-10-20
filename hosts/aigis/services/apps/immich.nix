@@ -19,6 +19,7 @@ in
 
   # Open the firewall for Immich's port (allow access from 192.168.2.205)
   services.immich.openFirewall = true;
+  services.immich.database.enableVectors = false;
   
   services.gatus.settings.endpoints = [
     {
