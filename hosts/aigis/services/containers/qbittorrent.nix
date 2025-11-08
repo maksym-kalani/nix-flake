@@ -44,6 +44,7 @@ let
       # Simple host:container path mapping
       "${appdata}${cfg.name}:/config"
       "/mnt/tank/downloads:/mnt/tank/downloads"
+      "/mnt/incomplete:/mnt/incomplete" 
       
       # Configuration with read-only flag
       #"/config/files:/etc/nginx/conf.d:ro"
