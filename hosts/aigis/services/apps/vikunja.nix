@@ -18,6 +18,14 @@ in
     port = port;
     frontendHostname = "todo.${domain}";
     frontendScheme = "https";
+    database = {
+      path = "/var/lib/vikunja/vikunja.db";
+    };
+    settings = {
+      service = {
+        rootpath = "/var/lib/vikunja";
+      };
+    };
   };
   
   networking.firewall.allowedTCPPorts = [ port ];
