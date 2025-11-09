@@ -16,7 +16,7 @@
   
   # ZFS
   boot.supportedFilesystems = [ "zfs" ];
-  boot.zfs.extraPools = [ "tank" ];      # Ensure pool "tank" is imported at boot:contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
+  #boot.zfs.extraPools = [ "tank" ];      # Ensure pool "tank" is imported at boot:contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
   networking.hostId = "f6d2860c";
   services.zfs.autoScrub.enable = true;
 
