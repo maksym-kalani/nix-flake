@@ -4,7 +4,14 @@ let
   port = 3050;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
+  mkBackupJob = import ../mk-backup-job.nix { inherit pkgs; };
 in
+(mkBackupJob {
+  name = name;
+  src = "/var/lib/karakeep/";
+  dest = "/mnt/tank/appdata/${name}/";
+  schedule = "*-*-* 04:00:00";
+}) //
 {
   services.karakeep = {
       enable = true;
@@ -22,27 +29,6 @@ in
     package = pkgs.meilisearch;
     settings = {
         experimental_dumpless_upgrade = true;
-    };
-  };
-  
-  systemd.services.karakeep-backup = {
-    description = "Backup Karakeep Data";
-    after = [ "network.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.rsync}/bin/rsync -a --delete /var/lib/karakeep/ /mnt/tank/appdata/karakeep/";
-      User = "root";
-      Group = "root";
-    };
-  };
-  
-  systemd.timers.karakeep-backup = {
-    description = "Run Karakeep backup daily at 4 AM";
-    wantedBy = [ "timers.target" ];
-    requires = [ "karakeep-backup.service" ];
-    timerConfig = {
-      OnCalendar = "*-*-* 04:00:00";
-      Persistent = true;
     };
   };
   
