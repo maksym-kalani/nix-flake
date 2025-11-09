@@ -13,7 +13,9 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
   boot.kernelPackages = pkgs.linuxPackages;
-
+  boot.kernelParams = [
+      "zfs.zfs_arc_max=34359738368"  # 32 GB in bytes
+    ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/5891a5fb-44bf-4a5f-b901-1f1f1456307e";
