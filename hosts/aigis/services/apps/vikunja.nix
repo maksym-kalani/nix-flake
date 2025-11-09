@@ -4,35 +4,21 @@ let
   port = 1337;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
+  mkBackupJob = import ../mk-backup-job.nix { inherit pkgs; };
 in
+(mkBackupJob {
+  name = name;
+  src = "/var/lib/vikunja/";
+  dest = "/mnt/tank/appdata/${name}/";
+  schedule = "*-*-* 04:00:00";
+}) //
 {
   services.vikunja = {
     enable = true;
     port = port;
     frontendHostname = "todo.${domain}";
     frontendScheme = "https";
-    database = {
-      path = "/mnt/tank/appdata/vikunja/db/vikunja.db";
-    };
-    settings = {
-      service = {
-        rootpath = "/mnt/tank/appdata/vikunja";
-      };
-    };
   };
-
-  users.groups.vikunja = {};
-  users.users.vikunja = { isSystemUser = true; group = "vikunja"; extraGroups = [ "tankusers" ]; };
-
-  systemd.services.vikunja.serviceConfig = {
-    DynamicUser = lib.mkForce false;
-    User = "vikunja";
-    Group = "vikunja";
-    SupplementaryGroups = [ "tankusers" ];
-    ReadWritePaths = [ "/mnt/tank/appdata/vikunja" ];
-    UMask = "007"; # new files 660, dirs 770
-  };
-
   
   networking.firewall.allowedTCPPorts = [ port ];
   
