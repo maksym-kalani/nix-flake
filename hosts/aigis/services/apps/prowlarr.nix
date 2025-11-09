@@ -4,32 +4,18 @@ let
   port = 9696;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
+  mkBackupJob = import ../mk-backup-job.nix { inherit pkgs; };
 in
+(mkBackupJob {
+  name = name;
+  src = "/var/lib/prowlarr/";
+  dest = "/mnt/tank/appdata/${name}/";
+  schedule = "*-*-* 04:00:00";
+}) //
 {
   services.prowlarr = {
     enable = true;
     openFirewall = true;
-    dataDir = "/mnt/tank/appdata/prowlarr";
-  };
-
-  users.groups.prowlarr = {};
-  users.users.prowlarr = {
-    isSystemUser = true;
-    group = "prowlarr";
-    extraGroups = [ "tankusers" ];
-  };
-  
-  systemd.tmpfiles.rules = [
-    "d /mnt/tank/appdata/prowlarr 0750 prowlarr tankusers -"
-  ];
-
-  systemd.services.prowlarr.serviceConfig = {
-    ExecStart = lib.mkForce "${pkgs.prowlarr}/bin/Prowlarr -nobrowser -data=/mnt/tank/appdata/prowlarr";
-    DynamicUser = lib.mkForce false;
-    User = "prowlarr";
-    Group = "prowlarr";
-    ReadWritePaths = [ "/mnt/tank/appdata/prowlarr" ];
-    UMask = "007"; # optional
   };
 
   networking.firewall.allowedTCPPorts = [ port ];
