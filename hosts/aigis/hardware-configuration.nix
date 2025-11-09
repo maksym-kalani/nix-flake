@@ -42,7 +42,7 @@
       extraPackages = with pkgs; [
         intel-compute-runtime  # Intel's OpenCL implementation
         intel-media-driver     # VAAPI driver
-        vaapiIntel             # Older VAAPI driver
+        intel-vaapi-driver             # Older VAAPI driver
         vaapiVdpau
         libvdpau-va-gl
         intel-gmmlib           # Intel Graphics Memory Management Library
