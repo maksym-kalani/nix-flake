@@ -8,7 +8,7 @@ let
 in
 mkBackupJob {
   name = name;
-  src = /var/lib/jellyfin/;
+  src = "/var/lib/jellyfin/";
   dest = "/mnt/tank/appdata/${name}/";
   schedule = "*-*-* 04:00:00";
 }
