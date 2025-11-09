@@ -15,6 +15,7 @@
   boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelParams = [
       "zfs.zfs_arc_max=34359738368"  # 32 GB in bytes
+      "libata.force=noncq"
     ];
 
   fileSystems."/" =
