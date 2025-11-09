@@ -4,9 +4,16 @@ let
   port = 7878;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
+  mkBackupJob = import ../mk-backup-job.nix { inherit pkgs; };
 in
+(mkBackupJob {
+  name = name;
+  src = "/var/lib/radarr/";
+  dest = "/mnt/tank/appdata/${name}/";
+  schedule = "*-*-* 04:00:00";
+}) //
 {
-  services.radarr = { enable = true; openFirewall = true; dataDir = "/mnt/tank/appdata/radarr";};
+  services.radarr = { enable = true; openFirewall = true;};
   users.users.radarr.extraGroups = [ "tankusers" ];
   networking.firewall.allowedTCPPorts = [ port ];
   
