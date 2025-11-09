@@ -4,14 +4,7 @@ let
   port = 8989;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
-  mkBackupJob = import ../mk-backup-job.nix { inherit pkgs; };
 in
-(mkBackupJob {
-  name = name;
-  src = "/var/lib/sonarr/";
-  dest = "/mnt/tank/appdata/${name}/";
-  schedule = "*-*-* 04:00:00";
-}) //
 {
   services.sonarr = { enable = true; openFirewall = true;};
   users.users.sonarr.extraGroups = [ "tankusers" ];

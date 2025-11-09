@@ -1,7 +1,7 @@
 { lib, config, ... }:
 
 let
-  appdata = "/mnt/tank/appdata/";
+  appdata = "/var/lib/containers/";
   ip = "192.168.2.50";
   cfg = {
     name = "piper";

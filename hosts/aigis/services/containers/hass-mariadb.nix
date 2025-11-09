@@ -3,7 +3,7 @@
 let
   domain = "laufin.xyz";
   ip = "192.168.2.50";
-  appdata = "/mnt/tank/appdata/";
+  appdata = "/var/lib/containers/";
   cfg = {
     name = "hass-mariadb";
     image = "mariadb";

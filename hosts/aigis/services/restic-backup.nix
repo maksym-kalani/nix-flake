@@ -14,6 +14,13 @@ let
        /mnt/tank/appdata
        /mnt/tank/media/ttrpgs
        /mnt/tank/users
+       /var/lib/containers
+       /var/lib/jellyfin
+       /var/lib/karakeep
+       /var/lib/prowlarr
+       /var/lib/radarr
+       /var/lib/sonarr
+       /var/lib/vikunja
      )
 
      # 1) Run the backup

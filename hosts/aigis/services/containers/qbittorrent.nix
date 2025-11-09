@@ -3,7 +3,7 @@
 let
   domain = "laufin.xyz";
   ip = "192.168.2.50";
-  appdata = "/mnt/tank/appdata/";
+  appdata = "/var/lib/containers/";
   UID = 888;
   GID = 990; 
   # Configuration options with defaults
