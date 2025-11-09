@@ -10,6 +10,6 @@
     #./restart-containers.nix
     ./ntfy-on-ssh.nix
     ./restic-backup.nix
-    ./mk-backup-job.nix
+    #./mk-backup-job.nix
   ];
 }
