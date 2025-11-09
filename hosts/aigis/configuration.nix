@@ -74,6 +74,7 @@
     lm_sensors
     restic
     openssh
+    sysstat
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
