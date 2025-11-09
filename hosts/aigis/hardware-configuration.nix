@@ -43,7 +43,7 @@
         intel-compute-runtime  # Intel's OpenCL implementation
         intel-media-driver     # VAAPI driver
         intel-vaapi-driver             # Older VAAPI driver
-        vaapiVdpau
+        libva-vdpau-driver
         libvdpau-va-gl
         intel-gmmlib           # Intel Graphics Memory Management Library
       ];
