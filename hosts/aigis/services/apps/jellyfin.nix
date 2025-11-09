@@ -4,10 +4,17 @@ let
   port = 8096;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
+  mkBackupJob = import ../lib/mk-backup-job.nix { inherit pkgs; };
 in
+mkBackupJob {
+  name = name;
+  src = services.jellyfin.configDir;
+  dest = "/mnt/tank/appdata/${name}/";
+  schedule = "*-*-* 04:00:00";
+}
 {
   services.jellyfin.enable = true;
-  services.jellyfin.configDir = "/mnt/tank/appdata/jellyfin";
+  #services.jellyfin.configDir = "/mnt/tank/appdata/jellyfin";
   users.users.jellyfin.extraGroups = [ "tankusers" "render" "video" ];
   
   networking.firewall.allowedTCPPorts = [ port ];
