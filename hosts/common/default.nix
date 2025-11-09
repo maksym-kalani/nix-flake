@@ -65,4 +65,8 @@
     dates = "04:00";
     randomizedDelaySec = "45min";
   };
+  
+  environment.interactiveShellInit = ''
+    alias rebuild='sudo nixos-rebuild switch --flake .#aigis'
+  '';
 }
