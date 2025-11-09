@@ -61,7 +61,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     intel-gpu-tools
-    glxinfo
+    mesa-demos
     vulkan-tools
     git
     wget
