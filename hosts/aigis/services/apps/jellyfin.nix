@@ -4,7 +4,7 @@ let
   port = 8096;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
-  mkBackupJob = import ../lib/mk-backup-job.nix { inherit pkgs; };
+  mkBackupJob = import ../mk-backup-job.nix { inherit pkgs; };
 in
 mkBackupJob {
   name = name;
