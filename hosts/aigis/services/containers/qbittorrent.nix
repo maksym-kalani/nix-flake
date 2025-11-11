@@ -43,7 +43,7 @@ let
     volumes = [
       # Simple host:container path mapping
       "${appdata}${cfg.name}:/config"
-      "/mnt/tank/media/downloads:/mnt/tank/downloads"
+      "/mnt/tank/media/downloads:/mnt/tank/media/downloads"
       "/mnt/incomplete:/mnt/incomplete" 
       
       # Configuration with read-only flag
