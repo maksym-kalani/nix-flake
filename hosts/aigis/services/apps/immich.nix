@@ -12,7 +12,7 @@ in
   services.immich.port = port;
 
   # Store media on the ZFS pool mount (existing directory on /mnt/tank)
-  services.immich.mediaLocation = "/mnt/tank/appdata/immich";
+  services.immich.mediaLocation = "/mnt/tank/media/photos/immich";
 
   # Run Immich under the 'tankusers' group for write access to media directory
   services.immich.group = "tankusers";
