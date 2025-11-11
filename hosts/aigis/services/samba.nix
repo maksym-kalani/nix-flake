@@ -13,24 +13,6 @@
         "map to guest" = "Bad User";    # Unauthenticated users treated as guest
         # (We will require login, so guest access is disabled on shares)
       };
-      "appdata" = {
-        path = "/mnt/tank/appdata";
-        browseable = "yes";
-        "read only" = "no";
-        "valid users" = "maksym";
-        "force group" = "tankusers";
-        "create mask" = "0660";
-        "directory mask" = "0770";
-      };
-      "downloads" = {
-        path = "/mnt/tank/downloads";
-        browseable = "yes";
-        "read only" = "no";
-        "valid users" = "maksym eklesa";
-        "force group" = "tankusers";
-        "create mask" = "0660";
-        "directory mask" = "0770";
-      };
       "media" = {
         path = "/mnt/tank/media";
         browseable = "yes";
