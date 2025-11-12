@@ -21,6 +21,8 @@ let
        /var/lib/radarr
        /var/lib/sonarr
        /var/lib/vikunja
+       /var/lib/immich
+       /var/lib/caddy
      )
 
      # 1) Run the backup
