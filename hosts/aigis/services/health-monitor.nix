@@ -7,7 +7,7 @@
 let
   # Define the monitoring script as a separate package
   healthMonitor = pkgs.writeShellApplication {
-    name = "zfs-health-monitor";
+    name = "health-monitor";
     runtimeInputs = with pkgs; [ 
       coreutils 
       procps 
@@ -28,15 +28,15 @@ in
   ];
   
   systemd.services.health-monitor = {
-    description = "ZFS System Health Monitor with ntfy Alerts";
+    description = "System Health Monitor with ntfy Alerts";
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${healthMonitor}/bin/zfs-health-monitor";
+      ExecStart = "${healthMonitor}/bin/health-monitor";
       User = "root";
     };
   };
   
-  systemd.timers.zfs-health-monitor = {
+  systemd.timers.health-monitor = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "daily";
