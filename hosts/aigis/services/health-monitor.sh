@@ -214,7 +214,7 @@ else
     
     # Send ntfy notification
     ALERT_MESSAGE=$(printf '%s\n' "${ALERTS[@]}")
-    send_alert "urgent" "ZFS System Alert - $POOL_NAME" "$ALERT_MESSAGE"
+    send_alert "default" "ZFS System Alert - $POOL_NAME" "$ALERT_MESSAGE"
     
     exit 1
 fi
