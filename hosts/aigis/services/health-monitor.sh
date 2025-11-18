@@ -15,6 +15,7 @@ ALERT_THRESHOLD_ARC_HIT=80
 ALERT_THRESHOLD_IOWAIT=30
 ALERT_THRESHOLD_UTIL=95
 ALERT_THRESHOLD_AWAIT=50
+ALERT_THRESHOLD_DSTATE=5
 
 # Colors for output
 RED='\033[0;31m'
@@ -98,9 +99,9 @@ echo ""
 # 2. Stuck Processes
 echo "--- Stuck Processes ---"
 STUCK_COUNT=$(ps aux | awk '$8 ~ /D/' | wc -l)
-if ! check_metric "D-state processes" "$STUCK_COUNT" "0" "greater"; then
+if ! check_metric "D-state processes" "$STUCK_COUNT" "$ALERT_THRESHOLD_DSTATE" "greater"; then
     STUCK_PROCS=$(ps aux | awk '$8 ~ /D/ {print $11}' | tr '\n' ', ')
-    ALERTS+=("$STUCK_COUNT processes stuck in D state: $STUCK_PROCS")
+    ALERTS+=("$STUCK_COUNT processes stuck in D state (threshold: > $ALERT_THRESHOLD_DSTATE): $STUCK_PROCS")
 fi
 echo ""
 
