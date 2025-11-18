@@ -60,6 +60,7 @@ let
       WEBUI_PORT = "${toString cfg.port.external}";
       #NGINX_HOST = "example.com";
       #NGINX_PORT = "80";
+      UMASK = "0002";
       TZ = "Europe/Kyiv";
       PUID = "${toString UID}";
       PGID = "${toString GID}";
