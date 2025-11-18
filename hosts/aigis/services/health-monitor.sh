@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Enforce C locale to avoid commas as decimal separators, etc.
+export LC_ALL=C
+export LANG=C
+
 # ZFS System Health Monitor with ntfy Alerts
 # Configuration
 NTFY_URL="http://localhost:8081/homelab"  # Change this to your ntfy topic
@@ -34,32 +38,40 @@ send_alert() {
 # Function to check and report metric
 check_metric() {
     local name=$1
-    local value=$2
-    local threshold=$3
-    local comparison=$4  # "less" or "greater"
+    local value=$2        # may include units like % or ms
+    local threshold=$3    # numeric (unitless)
+    local comparison=$4   # "less" or "greater"
     local status="OK"
     local color=$GREEN
-    
+
+    # Normalize number: replace comma with dot, strip non-numeric except dot and minus
+    local num
+    num=$(printf "%s" "$value" | tr ',' '.' | sed 's/[^0-9.\-]//g')
+    # Fallback to 0 if empty after sanitization
+    if [ -z "$num" ]; then num=0; fi
+
     if [ "$comparison" = "greater" ]; then
-        if (( $(echo "$value > $threshold" | bc -l) )); then
+        if (( $(echo "$num > $threshold" | bc -l) )); then
             status="ALERT"
             color=$RED
+            echo -e "${color}${name}: ${value} [${status}]${NC}"
             return 1
-        elif (( $(echo "$value > $threshold * 0.8" | bc -l) )); then
+        elif (( $(echo "$num > $threshold * 0.8" | bc -l) )); then
             status="WARNING"
             color=$YELLOW
         fi
     elif [ "$comparison" = "less" ]; then
-        if (( $(echo "$value < $threshold" | bc -l) )); then
+        if (( $(echo "$num < $threshold" | bc -l) )); then
             status="ALERT"
             color=$RED
+            echo -e "${color}${name}: ${value} [${status}]${NC}"
             return 1
-        elif (( $(echo "$value < $threshold * 1.2" | bc -l) )); then
+        elif (( $(echo "$num < $threshold * 1.2" | bc -l) )); then
             status="WARNING"
             color=$YELLOW
         fi
     fi
-    
+
     echo -e "${color}${name}: ${value} [${status}]${NC}"
     return 0
 }
@@ -115,7 +127,7 @@ echo ""
 # 4. Fragmentation
 echo "--- Fragmentation ---"
 FRAG=$(zpool list -Ho frag "$POOL_NAME" | tr -d '%')
-if ! check_metric "Fragmentation" "$FRAG%" "$ALERT_THRESHOLD_FRAG" "greater"; then
+if ! check_metric "Fragmentation" "${FRAG}%" "$ALERT_THRESHOLD_FRAG" "greater"; then
     ALERTS+=("High fragmentation: ${FRAG}% (threshold: ${ALERT_THRESHOLD_FRAG}%)")
 fi
 echo ""
@@ -130,8 +142,8 @@ echo ""
 
 # 6. ARC Statistics
 echo "--- ZFS ARC ---"
-ARC_HITS=$(cat /proc/spl/kstat/zfs/arcstats | grep "^hits " | awk '{print $3}')
-ARC_MISSES=$(cat /proc/spl/kstat/zfs/arcstats | grep "^misses " | awk '{print $3}')
+ARC_HITS=$(grep "^hits " /proc/spl/kstat/zfs/arcstats | awk '{print $3}')
+ARC_MISSES=$(grep "^misses " /proc/spl/kstat/zfs/arcstats | awk '{print $3}')
 ARC_TOTAL=$((ARC_HITS + ARC_MISSES))
 if [ $ARC_TOTAL -gt 0 ]; then
     ARC_HIT_RATIO=$(echo "scale=1; ($ARC_HITS * 100) / $ARC_TOTAL" | bc)
@@ -144,41 +156,48 @@ echo ""
 # 7. Disk I/O Statistics
 echo "--- Disk I/O ---"
 # Get 2 samples 1 second apart to calculate rates
-IOSTAT_OUTPUT=$(iostat -x sda sdb 1 2 | tail -n 3)
+IOSTAT_OUTPUT=$(iostat -x sda sdb 1 2 2>/dev/null)
 
-echo "$IOSTAT_OUTPUT" | while read line; do
+# Parse the last sample lines for the listed devices without using a pipe (to preserve ALERTS)
+while read -r line; do
     if [[ $line == sda* ]] || [[ $line == sdb* ]]; then
-        DEVICE=$(echo $line | awk '{print $1}')
-        UTIL=$(echo $line | awk '{print $NF}' | cut -d. -f1)
-        AWAIT=$(echo $line | awk '{print $10}' | cut -d. -f1)
-        
+        DEVICE=$(echo "$line" | awk '{print $1}')
+        # %util is last column; await is typically column 10 under LC_ALL=C for Linux iostat
+        UTIL_RAW=$(echo "$line" | awk '{print $NF}')
+        AWAIT_RAW=$(echo "$line" | awk '{print $10}')
+
+        # Sanitize and convert to integers for threshold comparisons
+        UTIL_INT=$(printf "%s" "$UTIL_RAW" | tr ',' '.' | awk '{printf("%d", $1)}')
+        AWAIT_INT=$(printf "%s" "$AWAIT_RAW" | tr ',' '.' | awk '{printf("%d", $1)}')
+
         echo -n "Device $DEVICE: "
-        check_metric "util" "${UTIL}%" "$ALERT_THRESHOLD_UTIL" "greater" 2>/dev/null
-        if [ $UTIL -gt $ALERT_THRESHOLD_UTIL ]; then
-            ALERTS+=("High disk utilization on $DEVICE: ${UTIL}%")
+        check_metric "util" "${UTIL_RAW}%" "$ALERT_THRESHOLD_UTIL" "greater" 2>/dev/null
+        if [ -n "$UTIL_INT" ] && [ "$UTIL_INT" -gt "$ALERT_THRESHOLD_UTIL" ]; then
+            ALERTS+=("High disk utilization on $DEVICE: ${UTIL_INT}%")
         fi
-        
+
         echo -n "  "
-        check_metric "await" "${AWAIT}ms" "$ALERT_THRESHOLD_AWAIT" "greater" 2>/dev/null
-        if [ $AWAIT -gt $ALERT_THRESHOLD_AWAIT ]; then
-            ALERTS+=("High disk latency on $DEVICE: ${AWAIT}ms")
+        check_metric "await" "${AWAIT_RAW}ms" "$ALERT_THRESHOLD_AWAIT" "greater" 2>/dev/null
+        if [ -n "$AWAIT_INT" ] && [ "$AWAIT_INT" -gt "$ALERT_THRESHOLD_AWAIT" ]; then
+            ALERTS+=("High disk latency on $DEVICE: ${AWAIT_INT}ms")
         fi
     fi
-done
+done < <(echo "$IOSTAT_OUTPUT" | awk 'BEGIN{p=0} /^Device/ {p=1; next} p==1{last[$1]=$0} END{for(k in last) print last[k]}' )
 echo ""
 
 # 8. I/O Wait
 echo "--- CPU I/O Wait ---"
-IOWAIT=$(iostat -c 1 2 | tail -n 2 | head -n 1 | awk '{print $4}' | cut -d. -f1)
-if ! check_metric "I/O Wait" "${IOWAIT}%" "$ALERT_THRESHOLD_IOWAIT" "greater"; then
-    ALERTS+=("High I/O wait: ${IOWAIT}% (threshold: ${ALERT_THRESHOLD_IOWAIT}%)")
+IOWAIT_RAW=$(iostat -c 1 2 2>/dev/null | awk '/^ /{val=$4} END{print val}')
+IOWAIT_INT=$(printf "%s" "$IOWAIT_RAW" | tr ',' '.' | awk '{printf("%d", $1)}')
+if ! check_metric "I/O Wait" "${IOWAIT_RAW}%" "$ALERT_THRESHOLD_IOWAIT" "greater"; then
+    ALERTS+=("High I/O wait: ${IOWAIT_INT}% (threshold: ${ALERT_THRESHOLD_IOWAIT}%)")
 fi
 echo ""
 
 # 9. Uptime
 echo "--- System Info ---"
-UPTIME=$(uptime | awk '{print $3, $4, $5}')
-echo "Uptime: $UPTIME"
+UPTIME=$(uptime -p 2>/dev/null || true)
+echo "Uptime: ${UPTIME#up }"
 echo ""
 
 # Summary and Alerts

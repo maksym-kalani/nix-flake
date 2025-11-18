@@ -1,46 +1,39 @@
+{ config, lib, pkgs, ... }:
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  # Define the monitoring script as a separate package
-  healthMonitor = pkgs.writeShellApplication {
-    name = "health-monitor";
-    runtimeInputs = with pkgs; [ 
-      coreutils 
-      procps 
-      bc 
-      gnugrep 
-      gawk 
-    ];
-    text = builtins.readFile ./health-monitor.sh;
-  };
-in
-{
+  # Install the script to /etc to mirror zfs-health-check pattern
+  environment.etc."health-monitor.sh".text = builtins.readFile ./health-monitor.sh;
+  environment.etc."health-monitor.sh".mode = "0755";
+
+  # Ensure required tools are available for the script
   environment.systemPackages = with pkgs; [
-      coreutils 
-      procps 
-      bc 
-      gnugrep 
-      gawk 
+    coreutils
+    procps
+    bc
+    gnugrep
+    gawk
+    curl
+    sysstat  # provides iostat
+    zfs
   ];
-  
-  systemd.services.health-monitor = {
+
+  # Oneshot service executing the script
+  systemd.services."health-monitor" = {
     description = "System Health Monitor with ntfy Alerts";
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${healthMonitor}/bin/health-monitor";
-      User = "root";
+      ExecStart = "${pkgs.bash}/bin/bash /etc/health-monitor.sh";
     };
+    wantedBy = [ "multi-user.target" ];
   };
-  
-  systemd.timers.health-monitor = {
-    wantedBy = [ "timers.target" ];
+
+  # Timer that runs the service periodically (hourly, persistent), like zfs-health-check
+  systemd.timers."health-monitor" = {
+    description = "Run health monitor periodically";
+    wantedBy   = [ "timers.target" ];
     timerConfig = {
-      OnCalendar = "daily";
+      OnCalendar = "hourly";
       Persistent = true;
+      Unit = "health-monitor.service";
     };
   };
 }
