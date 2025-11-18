@@ -19,6 +19,18 @@
   # Oneshot service executing the script
   systemd.services."health-monitor" = {
     description = "System Health Monitor with ntfy Alerts";
+    # Ensure required binaries are on PATH for this unit (systemd does not
+    # inherit user shell PATH). This fixes "command not found" for zpool, awk, bc, free, iostat, curl, etc.
+    path = with pkgs; [
+      coreutils
+      procps
+      bc
+      gnugrep
+      gawk
+      curl
+      sysstat  # provides iostat
+      zfs
+    ];
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "${pkgs.bash}/bin/bash /etc/health-monitor.sh";
