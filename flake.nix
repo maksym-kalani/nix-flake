@@ -24,7 +24,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
   };
 
-  outputs = { self, home-manager, nixpkgs, sops-nix, ... }@inputs:
+  outputs = { self, home-manager, nixpkgs, sops-nix, stdenv, ... }@inputs:
     let
       inherit (self) outputs;
       systems = [
