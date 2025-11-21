@@ -19,5 +19,6 @@
     ./hass-mariadb.nix
     ./recommendarr.nix
     ./matrix-admin.nix
+    ./kiwix.nix
   ];
 }
