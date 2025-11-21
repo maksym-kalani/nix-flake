@@ -3,7 +3,7 @@
 let
   domain = "laufin.xyz";
   ip = "192.168.2.50";
-  appdata = "/var/lib/containers/";
+  appdata = "/srv/kiwix";
   # Configuration options with defaults
   cfg = {
     # Container name
@@ -20,7 +20,7 @@ let
     
     # Optional settings with defaults
     extraOptions = [
-      # Resource constraints
+      "--userns=host"
       #"--memory=512m"
       #"--cpus=2"
       
@@ -40,7 +40,7 @@ let
     ];
     volumes = [
       # Simple host:container path mapping
-      "${appdata}${cfg.name}:/data"
+      "${appdata}:/data:ro"
       
       # Configuration with read-only flag
       #"/config/files:/etc/nginx/conf.d:ro"
