@@ -75,6 +75,7 @@ in {
     volumes = cfg.volumes;
     environment = cfg.environmentVariables;
     autoStart = cfg.autoStart;
+    cmd = [ "*.zim" ];
   };
   
   networking.firewall.allowedTCPPorts = [ cfg.port.external ];
