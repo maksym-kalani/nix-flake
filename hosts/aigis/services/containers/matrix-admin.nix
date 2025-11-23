@@ -85,7 +85,7 @@ in {
       url       = "http://${ip}:${toString cfg.port.external}";
       interval  = "1m";
       conditions = [
-        "[STATUS] == 403"
+        "[STATUS] == 200"
       ];
       alerts = [
         {
