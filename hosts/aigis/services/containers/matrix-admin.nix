@@ -40,7 +40,7 @@ let
     ];
     volumes = [
       # Simple host:container path mapping
-      "${appdata}${cfg.name}:/app"
+      #"${appdata}${cfg.name}:/app"
       
       # Configuration with read-only flag
       #"/config/files:/etc/nginx/conf.d:ro"
