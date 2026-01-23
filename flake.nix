@@ -44,13 +44,6 @@
       };
       
       nixosConfigurations = {
-        virtual = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ 
-            ./hosts/virtual 
-            sops-nix.nixosModules.sops
-          ];
-        };
         aigis = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [ 
@@ -61,13 +54,6 @@
       };
       
       homeConfigurations = {
-        "maksym@virtual" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ 
-            ./home/maksym/virtual.nix 
-          ];
-        };
         "maksym@aigis" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
