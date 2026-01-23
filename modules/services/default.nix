@@ -1,0 +1,36 @@
+{
+  imports = [
+    ./gatus.nix
+    ./ntfy.nix
+    ./jellyfin.nix
+    ./jellyseerr.nix
+    ./sonarr.nix
+    ./radarr.nix
+    ./prowlarr.nix
+    ./karakeep.nix
+    ./immich.nix
+    ./vikunja.nix
+    ./kavita.nix
+    ./fusion.nix
+    ./tachidesk.nix
+    ./morphos.nix
+    ./searxng.nix
+    ./technitium-dns.nix
+    ./qbittorrent.nix
+    ./it-tools.nix
+    ./wallos.nix
+    ./stirling-pdf.nix
+    ./omni-tools.nix
+    ./mazanoke.nix
+    ./local-content-share.nix
+    ./flame-homepage.nix
+    ./piper.nix
+    ./whisper.nix
+    ./hass-mariadb.nix
+    ./recommendarr.nix
+    ./matrix-admin.nix
+    ./kiwix.nix
+    ./commafeed.nix
+    ./dashy.nix
+  ];
+}
