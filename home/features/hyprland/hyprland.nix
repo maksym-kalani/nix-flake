@@ -367,7 +367,7 @@
     swaynotificationcenter
 
     # Launchers & menus
-    rofi-wayland
+    rofi
     wlogout
 
     # Clipboard
