@@ -8,5 +8,4 @@
     btop
     git
   ];
-  users.defaultUserShell = pkgs.zsh;
 }
