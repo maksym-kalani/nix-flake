@@ -53,6 +53,9 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Required for xdg.portal when using home-manager with useUserPackages
+  environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
