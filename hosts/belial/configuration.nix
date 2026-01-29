@@ -17,6 +17,8 @@
 
   networking.hostName = "belial"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  
+  services.openssh.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
