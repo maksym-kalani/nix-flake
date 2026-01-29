@@ -8,5 +8,6 @@
     btop
     git
     gh
+    fastfetch
   ];
 }
