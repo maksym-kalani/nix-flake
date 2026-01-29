@@ -42,6 +42,7 @@
     ./configuration.nix 
     ./services
     ./zfs-logging.nix
+    ./zfs-error-notifications.nix
   ];
   
   services.podman.enable = true;
