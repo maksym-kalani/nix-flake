@@ -10,5 +10,6 @@
     ../features/kitty
     ../features/theming
     ../features/waybar
+    ../features/rofi
   ];
 }
