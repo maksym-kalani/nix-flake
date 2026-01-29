@@ -376,6 +376,7 @@ in
 
   # Required packages
   home.packages = with pkgs; [
+    VirtualBox-GuestAdditions
     # Core Hyprland ecosystem
     hyprlock
     hypridle
