@@ -376,7 +376,6 @@ in
 
   # Required packages
   home.packages = with pkgs; [
-    linuxKernel.packages.linux_zen.virtualboxGuestAdditions
     # Core Hyprland ecosystem
     hyprlock
     hypridle

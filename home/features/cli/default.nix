@@ -7,5 +7,6 @@
     jq
     btop
     git
+    gh
   ];
 }
