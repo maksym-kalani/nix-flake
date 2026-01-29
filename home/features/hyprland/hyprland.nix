@@ -1,6 +1,19 @@
 { config, pkgs, lib, ... }:
 
+let
+  wallpaper = ./assets/wallpaper.png;
+in
 {
+  # Hyprpaper wallpaper service
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = [ "${wallpaper}" ];
+      wallpaper = [ ",${wallpaper}" ];
+      splash = false;
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
