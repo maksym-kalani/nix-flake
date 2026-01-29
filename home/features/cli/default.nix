@@ -5,5 +5,7 @@
     zip
     pciutils
     jq
+    btop
+    git
   ];
 }
