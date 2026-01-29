@@ -10,6 +10,8 @@
       monitor = [
         "DP-2,3440x1440@144,0x0,1"
         "DP-3,1920x1080@100,3440x0,1,transform,3"
+        # Fallback for VMs and unknown monitors
+        ",preferred,auto,1"
       ];
 
       workspace = [
@@ -36,6 +38,11 @@
       "$error" = "rgba(ffb4abff)";
 
       env = [
+        # VirtualBox software rendering (remove on real hardware)
+        "WLR_RENDERER_ALLOW_SOFTWARE,1"
+        "WLR_NO_HARDWARE_CURSORS,1"
+        "LIBGL_ALWAYS_SOFTWARE,1"
+
         "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_TYPE,wayland"
         "XDG_SESSION_DESKTOP,Hyprland"
