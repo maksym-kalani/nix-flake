@@ -107,7 +107,7 @@
           "type": "text",
           "style": "plain",
           "foreground": "p:blush",
-          "template": ">"
+          "template": "❯"
         }
       ]
     }
