@@ -3,7 +3,7 @@
 {
   programs.zsh = {
     enable = true;
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
 
     history = {
       size = 10000;
@@ -64,7 +64,7 @@
       EDITOR = "nvim";
     };
 
-    initExtra = ''
+    initContent = ''
       # FZF key bindings
       source <(fzf --zsh)
 
