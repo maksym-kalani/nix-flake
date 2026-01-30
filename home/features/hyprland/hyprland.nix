@@ -185,6 +185,8 @@ in
         "hyprctl setcursor Bibata-Modern-Ice 24"
         "swaync"
         "hypridle"
+        "hyprpaper"
+        "waybar"
         "wl-paste --watch cliphist store"
       ];
 
