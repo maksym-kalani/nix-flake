@@ -40,7 +40,7 @@ in
         "10,monitor:HDMI-A-1"
       ];
 
-      "$mainMod" = "SUPER";
+      "$mainMod" = "ALT";
       "$terminal" = "kitty";
       "$browser" = "firefox";
       "$fileManager" = "nautilus";
