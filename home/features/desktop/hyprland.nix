@@ -5,18 +5,6 @@ let
   wallpaper = ./assets/wallpaper.png;
 in
 {
-  # Hyprpaper wallpaper service
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      preload = [ "${wallpaper}" ];
-      wallpaper = [
-        ",${wallpaper}"           # Fallback for all monitors
-        "Virtual-1,${wallpaper}"  # VirtualBox display
-      ];
-      splash = false;
-    };
-  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -186,7 +174,7 @@ in
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "hyprctl setcursor Bibata-Modern-Ice 24"
         "swaync"
-        "hyprpaper"
+        "swaybg -i ${wallpaper} -m fill"
         "waybar"
         "wl-paste --watch cliphist store"
       ];

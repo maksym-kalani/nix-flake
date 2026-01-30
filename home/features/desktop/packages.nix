@@ -16,7 +16,7 @@ in
     # === Hyprland ecosystem ===
     hyprlock
     hypridle
-    hyprpaper
+    swaybg
     xdg-desktop-portal-hyprland
 
     # === Notifications ===
