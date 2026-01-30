@@ -29,7 +29,7 @@
       "logo": {
         "type": "small",
         "padding": {
-          "top": 5
+          "top": 4
         }
       },
       "display": {
