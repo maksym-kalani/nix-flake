@@ -47,9 +47,7 @@ in
 
     widgets = [
       "dnd"
-      "buttons-grid"
       "backlight"
-      "volume"
       "mpris"
       "title"
       "notifications"
@@ -70,38 +68,6 @@ in
       };
       backlight = {
         label = "󰃟";
-      };
-      volume = {
-        label = "";
-      };
-      buttons-grid = {
-        actions = [
-          {
-            label = "";
-            type = "toggle";
-            active = true;
-            command = "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'";
-            update-command = "sh -c '[[ $(nmcli r wifi) == \"enabled\" ]] && echo true || echo false'";
-          }
-          {
-            label = "";
-            type = "toggle";
-            active = true;
-            command = "rfkill toggle bluetooth";
-            update-command = "";
-          }
-          {
-            label = "󰕾";
-            type = "toggle";
-            active = true;
-            command = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-            update-command = "";
-          }
-          {
-            label = "";
-            command = "hyprlock";
-          }
-        ];
       };
     };
   };
@@ -320,50 +286,21 @@ in
       padding: 8px 8px 0 8px;
     }
 
-    /* === Buttons grid === */
-    .widget-buttons-grid {
-      margin: 6px 6px 6px 6px;
-      border-radius: 0px;
-    }
-
-    .widget-buttons-grid > flowbox > flowboxchild > button {
-      margin: 7px 7px 7px 7px;
-      padding: 1.3rem 4rem;
-      background: @buttoncolor;
-      color: @on_primary_fixed;
-      border-radius: 8px;
-      border: 2px solid @bordercolor;
-      font-size: 15em;
-    }
-
-    .widget-buttons-grid > flowbox > flowboxchild > button:hover {
-      background: @hoverbutton;
-      color: @text;
-    }
-
-    .widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
-      background: @activebutton;
-      color: @on_primary;
-    }
-
     /* === Brightness === */
-    .widget-backlight,
-    .widget-volume {
+    .widget-backlight {
       padding: 12px 16px;
       margin: 0px 12px 12px 12px;
       border-radius: 8px;
       background: @surface_custom;
     }
 
-    .widget-backlight trough,
-    .widget-volume trough {
+    .widget-backlight trough {
       background: @surface_container_low;
       margin: 8px 8px;
       border: 3px;
     }
 
-    .widget-backlight trough highlight,
-    .widget-volume trough highlight {
+    .widget-backlight trough highlight {
       background: @primary;
       border: 2px solid @primary;
       border-radius: 5px;
