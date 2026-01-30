@@ -23,89 +23,35 @@
     };
   };
 
-  xdg.configFile."fastfetch/config.jsonc".text = ''
-    {
-      "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
-      "logo": {
-        "type": "small",
-        "padding": {
-          "top": 1
-        }
-      },
-      "display": {
-        "separator": " "
-      },
-      "modules": [
-        {
-          "key": "╭───────────╮",
-          "type": "custom"
-        },
-        {
-          "key": "│ {#31} user    {#keys}│",
-          "type": "title",
-          "format": "{user-name}"
-        },
-        {
-          "key": "│ {#32}󰇅 hname   {#keys}│",
-          "type": "title",
-          "format": "{host-name}"
-        },
-        {
-          "key": "│ {#33}󰅐 uptime  {#keys}│",
-          "type": "uptime"
-        },
-        {
-          "key": "│ {#34}{icon} distro  {#keys}│",
-          "type": "os"
-        },
-        {
-          "key": "│ {#35} kernel  {#keys}│",
-          "type": "kernel"
-        },
-        {
-          "key": "│ {#36} wm      {#keys}│",
-          "type": "wm"
-        },
-        {
-          "key": "│ {#36}󰇄 desktop {#keys}│",
-          "type": "de"
-        },
-        {
-          "key": "│ {#31} term    {#keys}│",
-          "type": "terminal"
-        },
-        {
-          "key": "│ {#32} shell   {#keys}│",
-          "type": "shell"
-        },
-        {
-          "key": "│ {#33}󰍛 cpu     {#keys}│",
-          "type": "cpu",
-          "showPeCoreCount": true
-        },
-        {
-          "key": "│ {#34}󰉉 disk    {#keys}│",
-          "type": "disk",
-          "folders": "/"
-        },
-        {
-          "key": "│ {#36} memory  {#keys}│",
-          "type": "memory"
-        },
-        {
-          "key": "├───────────┤",
-          "type": "custom"
-        },
-        {
-          "key": "│ {#39} colors  {#keys}│",
-          "type": "colors",
-          "symbol": "circle"
-        },
-        {
-          "key": "╰───────────╯",
-          "type": "custom"
-        }
-      ]
-    }
-  '';
+  xdg.configFile."fastfetch/config.jsonc".text = builtins.toJSON {
+    "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
+    logo = {
+      type = "auto";
+      padding = {
+        top = 2;
+        left = 2;
+        right = 3;
+      };
+    };
+    display = {
+      separator = "  ";
+    };
+    modules = [
+      { type = "custom"; key = "╭──────────────╮"; }
+      { type = "title"; key = "│ {#31}  {#keys}user    │"; format = "{user-name}"; }
+      { type = "title"; key = "│ {#32}󰇅  {#keys}host    │"; format = "{host-name}"; }
+      { type = "uptime"; key = "│ {#33}󰅐  {#keys}uptime  │"; }
+      { type = "os"; key = "│ {#34}  {#keys}distro  │"; }
+      { type = "kernel"; key = "│ {#35}  {#keys}kernel  │"; }
+      { type = "wm"; key = "│ {#36}  {#keys}wm      │"; }
+      { type = "terminal"; key = "│ {#31}  {#keys}term    │"; }
+      { type = "shell"; key = "│ {#32}  {#keys}shell   │"; }
+      { type = "cpu"; key = "│ {#33}󰍛  {#keys}cpu     │"; showPeCoreCount = true; }
+      { type = "disk"; key = "│ {#34}󰉉  {#keys}disk    │"; folders = "/"; }
+      { type = "memory"; key = "│ {#35}  {#keys}memory  │"; }
+      { type = "custom"; key = "├──────────────┤"; }
+      { type = "colors"; key = "│ {#39}  {#keys}colors  │"; symbol = "circle"; }
+      { type = "custom"; key = "╰──────────────╯"; }
+    ];
+  };
 }
