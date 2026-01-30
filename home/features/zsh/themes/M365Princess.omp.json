@@ -47,7 +47,7 @@
       "segments": [
         {
           "leading_diamond": "\ue0b6",
-          "template": "{{ .UserName }} ",
+          "template": "{{ .UserName }}@{{ .HostName }} ",
           "foreground": "p:white",
           "background": "p:plum",
           "type": "session",
