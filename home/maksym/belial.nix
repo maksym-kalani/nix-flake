@@ -11,7 +11,7 @@
   ];
 
   # Auto-start Hyprland on TTY1 login
-  programs.zsh.loginShellInit = ''
+  programs.zsh.profileExtra = ''
     if [ "$(tty)" = "/dev/tty1" ]; then
       exec start-hyprland &> /dev/null
     fi
