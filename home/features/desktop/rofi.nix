@@ -76,7 +76,7 @@ in
       padding: 20px;
       background-color: transparent;
       orientation: vertical;
-      children: [ "inputbar", "dummy", "mode-switcher" ];
+      children: [ "inputbar", "dummy" ];
     }
 
     dummy {
