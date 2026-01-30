@@ -106,19 +106,199 @@ in
     };
   };
 
-  # Style file (CSS)
+  # Main style file - imports the other two
   xdg.configFile."swaync/style.css".text = ''
-    @import "colors.css";
+    @import "notifications.css";
+    @import "control_center.css";
+  '';
+
+  # Colors file
+  xdg.configFile."swaync/colors.css".text = ''
+    @define-color surface ${colors.surface};
+    @define-color surface_container ${colors.surfaceContainer};
+    @define-color surface_container_high ${colors.surfaceContainerHigh};
+    @define-color surface_container_low ${colors.surfaceContainerLow};
+    @define-color primary ${colors.primary};
+    @define-color primary_container ${colors.primaryContainer};
+    @define-color primary_fixed ${colors.primaryFixed};
+    @define-color on_surface ${colors.onSurface};
+    @define-color on_primary ${colors.onPrimary};
+    @define-color on_primary_fixed ${colors.onPrimaryFixed};
+    @define-color inverse_primary ${colors.inversePrimary};
+    @define-color secondary ${colors.secondary};
+    @define-color error_container ${colors.errorContainer};
+    @define-color on_error_container ${colors.onErrorContainer};
+  '';
+
+  # Notifications CSS (floating notifications)
+  xdg.configFile."swaync/notifications.css".text = ''
+    @import 'colors.css';
 
     /* === Derived dynamic colors === */
     @define-color base alpha(@surface, 0.5);
-    @define-color surface_custom alpha(@surface_container_high, 0.8);
-    @define-color hovercolor alpha(@surface_container_high, 0.8);
+    @define-color surface_custom alpha(@surface_container_high,0.8);
+    @define-color hovercolor alpha(@surface_container_high,0.8);
     @define-color activecolor @primary_container;
-    @define-color buttoncolor alpha(@inverse_primary, 0.3);
-    @define-color hoverbutton alpha(@inverse_primary, 0.5);
+
+    @define-color buttoncolor alpha(@inverse_primary,0.3);
+    @define-color hoverbutton alpha(@inverse_primary,0.5);
     @define-color activebutton @inverse_primary;
+
     @define-color bordercolor @primary;
+    @define-color fontcolor @on_surface;
+    @define-color text @on_surface;
+
+
+    * {
+      color: @text;
+      font-size: 1rem;
+      font-weight: 900;
+      all: unset;
+      font-family: "Fira Sans Semibold", "Font Awesome 6 Free", "Font Awesome 6 Brands", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+      transition: 200ms;
+    }
+
+    .widget-mpris {
+      all: unset;
+    }
+
+    .notification-row {
+      outline: none;
+      margin: 0;
+      padding: 0px;
+    }
+
+    .floating-notifications.background .notification-row .notification-background {
+      background: @base;
+      border-radius: 10px;
+      border: 2px solid @primary;
+      margin: 5px 10px;
+    }
+
+    /* Critical floating notifications */
+    .floating-notifications.background
+    .notification-row
+    .notification-background
+    .notification.critical {
+      background: alpha(@error_container, 0.85);
+      color: @on_error_container;
+      border-radius: 10px;
+    }
+
+    .floating-notifications.background
+      .notification-row
+      .notification-background
+      .notification
+      .notification-content {
+      margin: 1.2rem;
+    }
+
+    .floating-notifications.background
+      .notification-row
+      .notification-background
+      .notification
+      > *:last-child
+      > * {
+      min-height: 2.4em;
+    }
+
+    .floating-notifications.background
+      .notification-row
+      .notification-background
+      .notification
+      > *:last-child
+      > *
+      .notification-action {
+      border-radius: 0.5rem;
+      background-color: alpha(@surface, 0.95);
+      margin: 0.4rem;
+      border: 1px solid transparent;
+    }
+
+    .floating-notifications.background
+      .notification-row
+      .notification-background
+      .notification
+      > *:last-child
+      > *
+      .notification-action:hover {
+      background-color: @hovercolor;
+      border: 1px solid @primary;
+    }
+
+    .floating-notifications.background
+      .notification-row
+      .notification-background
+      .notification
+      > *:last-child
+      > *
+      .notification-action:active {
+      background-color: @primary;
+      color: @text;
+    }
+
+    .summary {
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .body {
+      font-size: 0.8rem;
+    }
+
+    .floating-notifications.background
+      .notification-row
+      .notification-background
+      .close-button {
+      background: transparent;
+      border-radius: 20px;
+      color: @text;
+      background-color: alpha(#fff, 0.5);
+      margin: 0px;
+      padding: 4px;
+    }
+
+    .floating-notifications.background
+      .notification-row
+      .notification-background
+      .close-button:hover {
+      background-color: @primary;
+    }
+
+    .floating-notifications.background
+      .notification-row
+      .notification-background
+      .close-button:active {
+      background-color: @primary;
+      color: @text;
+    }
+
+    .notification.critical progress {
+      background-color: @primary;
+    }
+
+    .notification.low progress,
+    .notification.normal progress {
+      background-color: @primary;
+    }
+  '';
+
+  # Control Center CSS
+  xdg.configFile."swaync/control_center.css".text = ''
+    @import 'colors.css';
+
+    /* === Derived dynamic colors === */
+    @define-color base alpha(@surface, 0.5);
+    @define-color surface_custom alpha(@surface_container_high,0.8);
+    @define-color hovercolor alpha(@surface_container_high,0.8);
+    @define-color activecolor @primary_container;
+
+    @define-color buttoncolor alpha(@inverse_primary,0.3);
+    @define-color hoverbutton alpha(@inverse_primary,0.5);
+    @define-color activebutton @inverse_primary;
+
+    @define-color bordercolor @primary;
+    @define-color fontcolor @on_surface;
     @define-color text @on_surface;
 
     /* === Global Reset === */
@@ -126,7 +306,7 @@ in
       color: @text;
       font-size: 1rem;
       font-weight: 900;
-      font-family: "Fira Sans Semibold", "Font Awesome 6 Free", "Font Awesome 6 Brands", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+      font-family: "Fira Sans Semibold", "Font Awesome 6 Free", "Font Awesome 6 Brands", FontAwesome;
       transition: 200ms;
     }
 
@@ -140,12 +320,12 @@ in
 
     /* === Buttons grid === */
     .widget-buttons-grid {
-      margin: 6px;
+      margin: 6px 6px 6px 6px;
       border-radius: 0px;
     }
 
     .widget-buttons-grid > flowbox > flowboxchild > button {
-      margin: 7px;
+      margin: 7px 7px 7px 7px;
       padding: 1.3rem 4rem;
       background: @buttoncolor;
       color: @on_primary_fixed;
@@ -164,7 +344,7 @@ in
       color: @on_primary;
     }
 
-    /* === Brightness & Volume === */
+    /* === Brightness === */
     .widget-backlight,
     .widget-volume {
       padding: 12px 16px;
@@ -176,7 +356,7 @@ in
     .widget-backlight trough,
     .widget-volume trough {
       background: @surface_container_low;
-      margin: 8px;
+      margin: 8px 8px;
       border: 3px;
     }
 
@@ -284,7 +464,7 @@ in
       background: @inverse_primary;
     }
 
-    /* === Notifications in Control Center === */
+    /* === Notifications === */
     .control-center .notification-row .notification-background {
       background-color: @surface_container;
       border-radius: 10px;
@@ -311,46 +491,6 @@ in
       background-color: @activecolor;
     }
 
-    /* === Floating Notifications === */
-    .floating-notifications.background .notification-row .notification-background {
-      background: @base;
-      border-radius: 10px;
-      border: 2px solid @primary;
-      margin: 5px 10px;
-    }
-
-    .floating-notifications.background .notification-row .notification-background .notification.critical {
-      background: alpha(@error_container, 0.85);
-      color: @on_error_container;
-      border-radius: 10px;
-    }
-
-    .floating-notifications.background .notification-row .notification-background .notification .notification-content {
-      margin: 1.2rem;
-    }
-
-    .floating-notifications.background .notification-row .notification-background .close-button {
-      background: transparent;
-      border-radius: 20px;
-      color: @text;
-      background-color: alpha(#fff, 0.5);
-      margin: 0px;
-      padding: 4px;
-    }
-
-    .floating-notifications.background .notification-row .notification-background .close-button:hover {
-      background-color: @primary;
-    }
-
-    .summary {
-      font-weight: 800;
-      font-size: 1rem;
-    }
-
-    .body {
-      font-size: 0.8rem;
-    }
-
     /* === Progress Bars === */
     trough highlight {
       background: @primary;
@@ -360,7 +500,7 @@ in
 
     /* === Notification Groups === */
     .notification-group {
-      margin: 4px 12px;
+      margin: 4px 12px 4px 12px;
     }
 
     .notification-group-headers {
@@ -383,23 +523,5 @@ in
     .notification-group-close-all-button:hover {
       background: @hovercolor;
     }
-  '';
-
-  # Colors file (imported by style.css)
-  xdg.configFile."swaync/colors.css".text = ''
-    @define-color surface ${colors.surface};
-    @define-color surface_container ${colors.surfaceContainer};
-    @define-color surface_container_high ${colors.surfaceContainerHigh};
-    @define-color surface_container_low ${colors.surfaceContainerLow};
-    @define-color primary ${colors.primary};
-    @define-color primary_container ${colors.primaryContainer};
-    @define-color primary_fixed ${colors.primaryFixed};
-    @define-color on_surface ${colors.onSurface};
-    @define-color on_primary ${colors.onPrimary};
-    @define-color on_primary_fixed ${colors.onPrimaryFixed};
-    @define-color inverse_primary ${colors.inversePrimary};
-    @define-color secondary ${colors.secondary};
-    @define-color error_container ${colors.errorContainer};
-    @define-color on_error_container ${colors.onErrorContainer};
   '';
 }
