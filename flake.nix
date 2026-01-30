@@ -22,6 +22,10 @@
     caddy-nix.url  = "github:vincentbernat/caddy-nix";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, home-manager, nixpkgs, sops-nix, ... }@inputs:
