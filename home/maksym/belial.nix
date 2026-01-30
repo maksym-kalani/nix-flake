@@ -8,8 +8,8 @@
     ../features/zsh
     ../features/hyprland
     ../features/kitty
-    ../features/theming
-    ../features/waybar
-    ../features/rofi
+    #../features/theming
+    #../features/waybar
+    #../features/rofi
   ];
 }
