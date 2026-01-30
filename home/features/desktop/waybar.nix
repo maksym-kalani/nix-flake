@@ -126,7 +126,6 @@ in
           tooltip-format-ethernet = "{ifname}\nIP: {ipaddr}\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}";
           tooltip-format-disconnected = "Disconnected";
           max-length = 50;
-          on-click = "nm-connection-editor";
         };
 
         pulseaudio = {
