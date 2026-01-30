@@ -324,14 +324,11 @@ in
 
       /* Custom Appmenu */
       #custom-appmenu {
-        background-color: @backgrounddark;
-        font-size: 16px;
+        background-color: transparent;
+        font-size: 24px;
         color: @textcolor1;
-        border-radius: 15px;
-        padding: 0px 10px 0px 10px;
+        padding: 0px 10px 0px 14px;
         margin: 8px 16px 8px 0px;
-        opacity: 0.8;
-        border: 3px solid @bordercolor;
       }
 
       /* Custom Notification */
