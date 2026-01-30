@@ -376,48 +376,6 @@ in
     };
   };
 
-  # Required packages
-  home.packages = with pkgs; [
-    # Core Hyprland ecosystem
-    hyprlock
-    hypridle
-    hyprpaper
-    xdg-desktop-portal-hyprland
-
-    # Notifications
-    swaynotificationcenter
-    libnotify
-
-    # Clipboard
-    cliphist
-    wl-clipboard
-
-    # Authentication
-    polkit_gnome
-
-    # System controls
-    brightnessctl
-    playerctl
-    wireplumber
-    pulseaudio
-    pavucontrol
-
-    # Screenshots
-    grim
-    slurp
-    swappy
-
-    # Wallpaper
-    waypaper
-
-    # Settings
-    nwg-look
-    nwg-displays
-
-    # Cursor theme
-    bibata-cursors
-  ];
-
   # Cursor configuration
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";

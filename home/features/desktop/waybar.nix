@@ -3,11 +3,6 @@ let
   colors = import ./colors.nix;
 in
 {
-  home.packages = with pkgs; [
-    waybar
-    font-awesome
-  ];
-
   programs.waybar = {
     enable = true;
 

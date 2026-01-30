@@ -19,11 +19,6 @@ in
   # Cliphist
   services.cliphist.enable = true;
 
-  home.packages = with pkgs; [
-    rofi
-    wl-clipboard
-  ];
-
   # Main rofi config
   xdg.configFile."rofi/config.rasi".text = ''
     configuration {

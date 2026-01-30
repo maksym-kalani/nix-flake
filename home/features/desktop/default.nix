@@ -16,6 +16,7 @@
 # are not designed to work independently.
 {
   imports = [
+    ./packages.nix
     ./hyprland.nix
     ./hypridle.nix
     ./hyprlock.nix
