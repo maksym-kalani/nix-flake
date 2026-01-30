@@ -111,12 +111,6 @@ in
         background-image: image(url("${./assets/suspend.png}"));
       }
 
-      #hibernate {
-        margin: 10px;
-        border-radius: 20px;
-        background-image: image(url("${./assets/hibernate.png}"));
-      }
-
       #shutdown {
         margin: 10px;
         border-radius: 20px;
