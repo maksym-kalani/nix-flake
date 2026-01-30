@@ -9,7 +9,7 @@
     ../features/hyprland
     ../features/kitty
     #../features/theming
-    #../features/waybar
-    #../features/rofi
+    ../features/waybar
+    ../features/rofi
   ];
 }
