@@ -7,8 +7,7 @@
     ../features/cli
     ../features/zsh
     ../features/kitty
-    ../features/theming
-    ../features/desktop  # Bundles hyprland, waybar, rofi, wlogout
+    ../features/desktop
   ];
   
   home.packages = with pkgs; [
