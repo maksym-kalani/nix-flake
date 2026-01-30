@@ -303,7 +303,7 @@ in
         "$mainMod, mouse:273, resizewindow"
       ];
 
-      layerrule = [
+      layerrule2 = [
         "blur, waybar"
         "blur, swaync-control-center"
         "blur, swaync-notification-window"

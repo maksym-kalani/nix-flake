@@ -9,5 +9,6 @@
     git
     gh
     fastfetch
+    bat
   ];
 }
