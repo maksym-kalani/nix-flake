@@ -27,7 +27,7 @@ in
     layout = [
       {
         label = "logout";
-        action = "hyprctl dispatch exit";
+        action = "loginctl terminate-session $XDG_SESSION_ID";
         text = "Log Out";
         keybind = "e";
       }
