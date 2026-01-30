@@ -13,6 +13,7 @@ in
     settings = [
       {
         layer = "top";
+        output = "Virtual-1";
         margin-top = 0;
         margin-bottom = 0;
         margin-left = 0;
@@ -75,7 +76,7 @@ in
 
         "custom/exit" = {
           format = "";
-          on-click = "wlogout -r 1 -c 5";
+          on-click = "wlogout-launcher";
           on-click-right = "hyprlock";
           tooltip-format = "Left: Power menu\nRight: Lock screen";
         };
@@ -198,7 +199,7 @@ in
 
         "custom/exit" = {
           format = "";
-          on-click = "wlogout -r 1 -c 5";
+          on-click = "wlogout-launcher";
           on-click-right = "hyprlock";
           tooltip-format = "Left: Power menu\nRight: Lock screen";
         };

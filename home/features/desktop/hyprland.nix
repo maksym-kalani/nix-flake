@@ -25,19 +25,19 @@ in
 
     settings = {
       monitor = [
-        "DP-2,3440x1440@144,0x0,1"
-        "DP-3,1920x1080@100,3440x0,1,transform,3"
+        #"DP-2,3440x1440@144,0x0,1"
+        #"DP-3,1920x1080@100,3440x0,1,transform,3"
         # Fallback for VMs and unknown monitors
         ",preferred,auto,1"
       ];
 
       workspace = [
-        "1,monitor:DP-2"
-        "2,monitor:DP-2"
-        "3,monitor:DP-2"
-        "4,monitor:DP-2"
-        "5,monitor:DP-2"
-        "6,monitor:DP-2"
+        "1,monitor:Virtual-1"
+        "2,monitor:Virtual-1"
+        "3,monitor:Virtual-1"
+        "4,monitor:Virtual-1"
+        "5,monitor:Virtual-1"
+        "6,monitor:Virtual-1"
         "7,monitor:DP-3"
         "8,monitor:DP-3"
         "9,monitor:DP-3"
@@ -230,7 +230,7 @@ in
 
         # Actions
         "$mainMod CTRL, R, exec, hyprctl reload"
-        "$mainMod CTRL, Q, exec, wlogout -r 1 -c 5"
+        "$mainMod CTRL, Q, exec, wlogout-launcher"
         "$mainMod CTRL, L, exec, hyprlock"
         "$mainMod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
         "$mainMod SHIFT, B, exec, pkill waybar || waybar"
