@@ -30,5 +30,11 @@
     caligula
     #wonderdraft
     nautilus
+    libreoffice-fresh
+    solaar
+    vlc
+    mission-center
+    element-desktop
+    papers
   ];
 }

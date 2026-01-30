@@ -28,6 +28,7 @@ in
   services.cliphist.enable = true;
 
   home.packages = with pkgs; [
+    rofi
     wl-clipboard
   ];
 

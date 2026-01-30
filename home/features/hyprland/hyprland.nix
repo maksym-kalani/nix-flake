@@ -385,12 +385,10 @@ in
     hyprpaper
     xdg-desktop-portal-hyprland
 
-    # Status bar & notifications
-    waybar
+    # Notifications
     swaynotificationcenter
 
     # Launchers & menus
-    rofi
     wlogout
 
     # Clipboard
