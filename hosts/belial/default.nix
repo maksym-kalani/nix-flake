@@ -6,5 +6,6 @@
   imports = [
     ../common
     ./configuration.nix
+    ./hyprland.nix
   ];
 }
