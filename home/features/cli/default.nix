@@ -11,4 +11,13 @@
     fastfetch
     bat
   ];
+  
+  programs.git = {
+    enable = true;
+    userName = "maksym-kalani";
+    userEmail = "kalanimaxim@gmail.com";
+    extraConfig = {
+        init.defaultBranch = "main";
+    };
+  };
 }
