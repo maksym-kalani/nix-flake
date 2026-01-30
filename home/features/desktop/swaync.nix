@@ -306,7 +306,9 @@ in
       color: @text;
       font-size: 1rem;
       font-weight: 900;
-      font-family: "Fira Sans Semibold", "Font Awesome 6 Free", "Font Awesome 6 Brands", FontAwesome;
+      font-family: "Fira Sans Semibold", "Symbols Nerd Font", "Font Awesome 7 Free",
+      "Font Awesome 7 Brands", "Font Awesome 6 Free", "Font Awesome 6 Brands",
+      FontAwesome;
       transition: 200ms;
     }
 
@@ -331,7 +333,7 @@ in
       color: @on_primary_fixed;
       border-radius: 8px;
       border: 2px solid @bordercolor;
-      font-size: 1.5rem;
+      font-size: 15em;
     }
 
     .widget-buttons-grid > flowbox > flowboxchild > button:hover {
@@ -403,7 +405,7 @@ in
 
     .widget-mpris-title {
       font-weight: 900;
-      font-size: 1.2rem;
+      font-size: 2em;
       margin: 10px 20px 0 0;
       color: alpha(white, 0.9);
       background-color: alpha(black, 0.6);
