@@ -386,6 +386,7 @@ in
 
     # Notifications
     swaynotificationcenter
+    libnotify
 
     # Clipboard
     cliphist
