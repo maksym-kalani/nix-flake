@@ -9,7 +9,10 @@ in
     enable = true;
     settings = {
       preload = [ "${wallpaper}" ];
-      wallpaper = [ ",${wallpaper}" ];
+      wallpaper = [
+        ",${wallpaper}"           # Fallback for all monitors
+        "Virtual-1,${wallpaper}"  # VirtualBox display
+      ];
       splash = false;
     };
   };
