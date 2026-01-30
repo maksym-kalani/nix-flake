@@ -14,10 +14,12 @@
   
   programs.git = {
     enable = true;
-    userName = "maksym-kalani";
-    userEmail = "kalanimaxim@gmail.com";
-    extraConfig = {
+    settings = {
+      user = {
+        email = "kalanimaxim@gmail.com";
+        name = "Maksym Kalani";
         init.defaultBranch = "main";
+      };
     };
   };
 }

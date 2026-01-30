@@ -28,6 +28,6 @@
     blueman
     rofi-network-manager
     caligula
-    wonderdraft
+    #wonderdraft
   ];
 }
