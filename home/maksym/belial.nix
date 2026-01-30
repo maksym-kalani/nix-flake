@@ -11,6 +11,7 @@
     ../features/theming
     ../features/waybar
     ../features/rofi
+    ../features/wlogout
   ];
   
   home.packages = with pkgs; [
