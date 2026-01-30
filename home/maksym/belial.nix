@@ -9,7 +9,14 @@
     ../features/kitty
     ../features/desktop
   ];
-  
+
+  # Auto-start Hyprland on TTY1 login
+  programs.zsh.loginShellInit = ''
+    if [ "$(tty)" = "/dev/tty1" ]; then
+      exec start-hyprland &> /dev/null
+    fi
+  '';
+
   home.packages = with pkgs; [
     zed-editor
     spotify
