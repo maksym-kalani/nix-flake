@@ -72,7 +72,7 @@ in
         };
 
         "custom/appmenu" = {
-          format = "Apps";
+          format = "󱄅";
           on-click = "sleep 0.2;pkill rofi || rofi -show drun -replace";
           tooltip-format = "Open the application launcher";
         };
