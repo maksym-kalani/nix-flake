@@ -1,28 +1,53 @@
-{pkgs, ...}: {
+{pkgs, ...}:
+let
+  # Colors from your current theme
+  colors = {
+    background = "rgba(44, 47, 66, 0.7)";
+    primary = "#b8c3ff";
+    surface = "#121318";
+    on-surface = "#e3e1e9";
+  };
+
+  # Wallpaper for rofi background (same as hyprland)
+  wallpaper = ../hyprland/assets/wallpaper.png;
+
+  # Generate blurred wallpaper at build time
+  blurredWallpaper = pkgs.runCommand "blurred-wallpaper.png" {
+    nativeBuildInputs = [ pkgs.imagemagick ];
+  } ''
+    convert ${wallpaper} -blur 0x50 -brightness-contrast -10x-10 $out
+  '';
+in
+{
   programs.rofi = {
     enable = true;
     package = pkgs.rofi;
 
     extraConfig = {
-      modi = "drun";
+      modi = "drun,filebrowser,window,run";
       font = "Fira Sans 11";
       show-icons = true;
       display-drun = " ";
+      display-run = " ";
+      display-filebrowser = "";
+      display-window = "";
       drun-display-format = "{name}";
       hover-select = false;
       scroll-method = 1;
       me-select-entry = "";
       me-accept-entry = "MousePrimary";
+      window-format = "{w} · {c} · {t}";
     };
 
     theme = {
       "*" = {
-        background = "rgba(44, 47, 66, 0.7)";
-        primary = "#b8c3ff";
-        surface = "#121318";
-        on-surface = "#e3e1e9";
+        background = "${colors.background}";
+        primary = "${colors.primary}";
+        surface = "${colors.surface}";
+        on-surface = "${colors.on-surface}";
         border-width = "2px";
-        border-radius = "12px";
+        border-radius = "2em";
+        current-image = "url(\"${blurredWallpaper}\", height)";
       };
 
       window = {
@@ -44,9 +69,46 @@
         enabled = true;
         spacing = "0em";
         padding = "0em";
-        orientation = "vertical";
-        children = ["inputbar" "listview"];
+        orientation = "horizontal";
+        children = ["imagebox" "listbox"];
         background-color = "transparent";
+        background-image = "@current-image";
+      };
+
+      imagebox = {
+        padding = "20px";
+        background-color = "transparent";
+        orientation = "vertical";
+        children = ["inputbar" "dummy" "mode-switcher"];
+      };
+
+      dummy = {
+        background-color = "transparent";
+      };
+
+      "mode-switcher" = {
+        orientation = "horizontal";
+        width = "6.6em";
+        enabled = true;
+        padding = "1.5em";
+        spacing = "1.5em";
+        background-color = "transparent";
+      };
+
+      button = {
+        padding = "15px";
+        border-radius = "2em";
+        border = 0;
+        cursor = "pointer";
+        background-color = "@background";
+        text-color = "@on-surface";
+      };
+
+      "button selected" = {
+        padding = "15px";
+        border-radius = "2em";
+        background-color = "@surface";
+        text-color = "@on-surface";
       };
 
       inputbar = {
@@ -77,8 +139,16 @@
         placeholder-color = "inherit";
       };
 
+      listbox = {
+        padding = "0em";
+        spacing = "0em";
+        orientation = "horizontal";
+        children = ["listview"];
+        background-color = "@background";
+      };
+
       listview = {
-        padding = "1em";
+        padding = "1.5em";
         spacing = "0.5em";
         enabled = true;
         columns = 1;
@@ -115,7 +185,22 @@
         text-color = "@on-surface";
       };
 
+      "element normal.urgent" = {
+        background-color = "inherit";
+        text-color = "@on-surface";
+      };
+
       "element normal.active" = {
+        background-color = "inherit";
+        text-color = "@on-surface";
+      };
+
+      "element selected.urgent" = {
+        background-color = "inherit";
+        text-color = "@on-surface";
+      };
+
+      "element selected.active" = {
         background-color = "inherit";
         text-color = "@on-surface";
       };
@@ -125,8 +210,18 @@
         text-color = "@on-surface";
       };
 
+      "element alternate.urgent" = {
+        background-color = "inherit";
+        text-color = "@on-surface";
+      };
+
+      "element alternate.active" = {
+        background-color = "inherit";
+        text-color = "@on-surface";
+      };
+
       element-icon = {
-        size = "2.5em";
+        size = "3em";
         cursor = "inherit";
         background-color = "transparent";
         text-color = "inherit";
@@ -176,12 +271,12 @@
     }
 
     * {
-      background: rgba(44, 47, 66, 0.7);
-      primary: #b8c3ff;
-      surface: #121318;
-      on-surface: #e3e1e9;
+      background: ${colors.background};
+      primary: ${colors.primary};
+      surface: ${colors.surface};
+      on-surface: ${colors.on-surface};
       border-width: 2px;
-      border-radius: 12px;
+      border-radius: 2em;
     }
 
     window {
