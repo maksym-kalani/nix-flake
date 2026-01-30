@@ -52,7 +52,7 @@ in
 
       env = [
         # VirtualBox software rendering (remove on real hardware)
-        "WLR_RENDERER_ALLOW_SOFTWARE,1"
+        #"WLR_RENDERER_ALLOW_SOFTWARE,1"
         "WLR_NO_HARDWARE_CURSORS,1"
         "LIBGL_ALWAYS_SOFTWARE,1"
 
