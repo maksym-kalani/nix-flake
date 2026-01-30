@@ -1,0 +1,402 @@
+{ pkgs, ... }:
+let
+  colors = import ./colors.nix;
+in
+{
+  services.swaync = {
+    enable = true;
+
+    settings = {
+      positionX = "right";
+      positionY = "top";
+      layer = "overlay";
+      cssPriority = "user";
+
+      control-center-width = 360;
+      control-center-height = 560;
+      control-center-margin-top = 13;
+      control-center-margin-bottom = 13;
+      control-center-margin-right = 14;
+      control-center-margin-left = 0;
+
+      notification-window-width = 300;
+      notification-icon-size = 24;
+      notification-body-image-height = 100;
+      notification-body-image-width = 200;
+
+      timeout = 4;
+      timeout-low = 2;
+      timeout-critical = 6;
+
+      fit-to-screen = true;
+      keyboard-shortcuts = true;
+      image-visibility = "when-available";
+      transition-time = 200;
+      hide-on-clear = true;
+      hide-on-action = true;
+      script-fail-notify = true;
+
+      scripts = { };
+
+      notification-visibility = {
+        spotify = {
+          state = "muted";
+          urgency = "Normal";
+          app-name = "Spotify";
+        };
+      };
+
+      widgets = [
+        "dnd"
+        "buttons-grid"
+        "backlight"
+        "volume"
+        "mpris"
+        "title"
+        "notifications"
+      ];
+
+      widget-config = {
+        dnd = {
+          text = "Do not Disturb";
+        };
+        title = {
+          text = "Notifications";
+          clear-all-button = true;
+          button-text = "Clear";
+        };
+        mpris = {
+          image-size = 0;
+          image-radius = 0;
+        };
+        backlight = {
+          label = "󰃟";
+        };
+        volume = {
+          label = "";
+        };
+        buttons-grid = {
+          actions = [
+            {
+              label = "";
+              type = "toggle";
+              active = true;
+              command = "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'";
+              update-command = "sh -c '[[ $(nmcli r wifi) == \"enabled\" ]] && echo true || echo false'";
+            }
+            {
+              label = "";
+              type = "toggle";
+              active = true;
+              command = "rfkill toggle bluetooth";
+              update-command = "";
+            }
+            {
+              label = "󰕾";
+              type = "toggle";
+              active = true;
+              command = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+              update-command = "";
+            }
+            {
+              label = "";
+              command = "hyprlock";
+            }
+          ];
+        };
+      };
+    };
+
+    style = ''
+      /* === Color definitions === */
+      @define-color surface ${colors.surface};
+      @define-color surface_container ${colors.surfaceContainer};
+      @define-color surface_container_high ${colors.surfaceContainerHigh};
+      @define-color surface_container_low ${colors.surfaceContainerLow};
+      @define-color primary ${colors.primary};
+      @define-color primary_container ${colors.primaryContainer};
+      @define-color primary_fixed ${colors.primaryFixed};
+      @define-color on_surface ${colors.onSurface};
+      @define-color on_primary ${colors.onPrimary};
+      @define-color on_primary_fixed ${colors.onPrimaryFixed};
+      @define-color inverse_primary ${colors.inversePrimary};
+      @define-color secondary ${colors.secondary};
+      @define-color error_container ${colors.errorContainer};
+      @define-color on_error_container ${colors.onErrorContainer};
+
+      /* === Derived dynamic colors === */
+      @define-color base alpha(@surface, 0.5);
+      @define-color surface_custom alpha(@surface_container_high, 0.8);
+      @define-color hovercolor alpha(@surface_container_high, 0.8);
+      @define-color activecolor @primary_container;
+      @define-color buttoncolor alpha(@inverse_primary, 0.3);
+      @define-color hoverbutton alpha(@inverse_primary, 0.5);
+      @define-color activebutton @inverse_primary;
+      @define-color bordercolor @primary;
+      @define-color text @on_surface;
+
+      /* === Global Reset === */
+      * {
+        color: @text;
+        font-size: 1rem;
+        font-weight: 900;
+        font-family: "Fira Sans Semibold", "Font Awesome 6 Free", "Font Awesome 6 Brands", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+        transition: 200ms;
+      }
+
+      /* === Control Center Container === */
+      .control-center {
+        background: @base;
+        border-radius: 10px;
+        border: 2px solid @bordercolor;
+        padding: 8px 8px 0 8px;
+      }
+
+      /* === Buttons grid === */
+      .widget-buttons-grid {
+        margin: 6px;
+        border-radius: 0px;
+      }
+
+      .widget-buttons-grid > flowbox > flowboxchild > button {
+        margin: 7px;
+        padding: 1.3rem 4rem;
+        background: @buttoncolor;
+        color: @on_primary_fixed;
+        border-radius: 8px;
+        border: 2px solid @bordercolor;
+        font-size: 1.5rem;
+      }
+
+      .widget-buttons-grid > flowbox > flowboxchild > button:hover {
+        background: @hoverbutton;
+        color: @text;
+      }
+
+      .widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+        background: @activebutton;
+        color: @on_primary;
+      }
+
+      /* === Brightness & Volume === */
+      .widget-backlight,
+      .widget-volume {
+        padding: 12px 16px;
+        margin: 0px 12px 12px 12px;
+        border-radius: 8px;
+        background: @surface_custom;
+      }
+
+      .widget-backlight trough,
+      .widget-volume trough {
+        background: @surface_container_low;
+        margin: 8px;
+        border: 3px;
+      }
+
+      .widget-backlight trough highlight,
+      .widget-volume trough highlight {
+        background: @primary;
+        border: 2px solid @primary;
+        border-radius: 5px;
+      }
+
+      /* === Music Player === */
+      .widget-mpris {
+        border-radius: 10px;
+        margin: 2px 12px 12px 12px;
+        align-items: center;
+        color: alpha(#000000, 0.8);
+      }
+
+      .widget-mpris button {
+        background: @surface_custom;
+        border-radius: 20px;
+        padding: 4px;
+        margin: 20px 2px;
+        color: alpha(#000000, 0.8);
+      }
+
+      .widget-mpris button:hover {
+        background: @hovercolor;
+      }
+
+      .widget-mpris-player {
+        border-radius: 10px;
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        color: alpha(#000000, 0.8);
+      }
+
+      .widget-mpris-album-art {
+        border-radius: 1000px;
+        margin: 8px 0 0 8px;
+      }
+
+      .widget-mpris-title {
+        font-weight: 900;
+        font-size: 1.2rem;
+        margin: 10px 20px 0 0;
+        color: alpha(white, 0.9);
+        background-color: alpha(black, 0.6);
+      }
+
+      .widget-mpris-subtitle {
+        font-weight: 900;
+        font-size: 0.8rem;
+        margin: 0px 20px 5px 0px;
+        color: alpha(white, 0.9);
+        background-color: alpha(black, 0.6);
+      }
+
+      /* === Notification Clear Button === */
+      .widget-title {
+        font-size: 1.5rem;
+        margin: 0 12px 5px 12px;
+      }
+
+      .widget-title button {
+        background: @surface_container;
+        border-radius: 8px;
+        padding: 4px 16px;
+      }
+
+      .widget-title button:hover {
+        background: @hovercolor;
+      }
+
+      /* === Do Not Disturb === */
+      .widget-dnd {
+        margin: 5px 12px 0px 12px;
+      }
+
+      .widget-dnd > switch {
+        color: @text;
+        background: @buttoncolor;
+        border-radius: 5px;
+        box-shadow: none;
+      }
+
+      .widget-dnd > switch:hover {
+        background: @hovercolor;
+      }
+
+      .widget-dnd > switch:checked {
+        background: @buttoncolor;
+        color: @on_primary;
+      }
+
+      .widget-dnd > switch slider {
+        background: @secondary;
+        border-radius: 5px;
+        border: 2px solid @buttoncolor;
+      }
+
+      .widget-dnd > switch:checked slider {
+        background: @inverse_primary;
+      }
+
+      /* === Notifications in Control Center === */
+      .control-center .notification-row .notification-background {
+        background-color: @surface_container;
+        border-radius: 10px;
+        margin: 5px 0px;
+        padding: 15px;
+        border: 2px solid @bordercolor;
+        min-height: 2.5em;
+      }
+
+      .control-center .notification-row .notification-background .notification.critical {
+        background-color: @error_container;
+        color: @on_error_container;
+        border-radius: 10px;
+      }
+
+      .control-center .notification-row .notification-background .close-button {
+        background-color: @hoverbutton;
+        border-radius: 5px;
+        color: @text;
+        padding: 5px;
+      }
+
+      .control-center .notification-row .notification-background .close-button:hover {
+        background-color: @activecolor;
+      }
+
+      /* === Floating Notifications === */
+      .floating-notifications.background .notification-row .notification-background {
+        background: @base;
+        border-radius: 10px;
+        border: 2px solid @primary;
+        margin: 5px 10px;
+      }
+
+      .floating-notifications.background .notification-row .notification-background .notification.critical {
+        background: alpha(@error_container, 0.85);
+        color: @on_error_container;
+        border-radius: 10px;
+      }
+
+      .floating-notifications.background .notification-row .notification-background .notification .notification-content {
+        margin: 1.2rem;
+      }
+
+      .floating-notifications.background .notification-row .notification-background .close-button {
+        background: transparent;
+        border-radius: 20px;
+        color: @text;
+        background-color: alpha(#fff, 0.5);
+        margin: 0px;
+        padding: 4px;
+      }
+
+      .floating-notifications.background .notification-row .notification-background .close-button:hover {
+        background-color: @primary;
+      }
+
+      .summary {
+        font-weight: 800;
+        font-size: 1rem;
+      }
+
+      .body {
+        font-size: 0.8rem;
+      }
+
+      /* === Progress Bars === */
+      trough highlight {
+        background: @primary;
+        border: 2px solid @primary_fixed;
+        border-radius: 20px;
+      }
+
+      /* === Notification Groups === */
+      .notification-group {
+        margin: 4px 12px;
+      }
+
+      .notification-group-headers {
+        font-weight: 900;
+        font-size: 0;
+      }
+
+      .notification-group-icon {
+        padding: 0px;
+      }
+
+      .notification-group-collapse-button,
+      .notification-group-close-all-button {
+        background: @surface_container;
+        border-radius: 5px;
+        padding: 5px;
+      }
+
+      .notification-group-collapse-button:hover,
+      .notification-group-close-all-button:hover {
+        background: @hovercolor;
+      }
+    '';
+  };
+}

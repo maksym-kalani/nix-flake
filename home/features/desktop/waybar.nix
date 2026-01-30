@@ -5,6 +5,7 @@ in
 {
   home.packages = with pkgs; [
     waybar
+    font-awesome
   ];
 
   programs.waybar = {
@@ -46,12 +47,7 @@ in
           on-click = "activate";
           active-only = false;
           all-outputs = true;
-          format = "{icon}";
-          format-icons = {
-            urgent = "";
-            active = "";
-            default = "";
-          };
+          format = "{id}";
           persistent-workspaces = {
             "*" = 5;
           };
@@ -75,7 +71,7 @@ in
         };
 
         "custom/exit" = {
-          format = "";
+          format = "⏻";
           on-click = "wlogout-launcher";
           on-click-right = "hyprlock";
           tooltip-format = "Left: Power menu\nRight: Lock screen";
@@ -85,14 +81,14 @@ in
           tooltip-format = "Left: Notifications\nRight: Do not disturb";
           format = "{icon}";
           format-icons = {
-            notification = "<span foreground='red'><sup></sup></span>";
-            none = "";
-            dnd-notification = "<span foreground='red'><sup></sup></span>";
-            dnd-none = "";
-            inhibited-notification = "<span foreground='red'><sup></sup></span>";
-            inhibited-none = "";
-            dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>";
-            dnd-inhibited-none = "";
+            notification = "🔔";
+            none = "🔔";
+            dnd-notification = "🔕";
+            dnd-none = "🔕";
+            inhibited-notification = "🔔";
+            inhibited-none = "🔔";
+            dnd-inhibited-notification = "🔕";
+            dnd-inhibited-none = "🔕";
           };
           return-type = "json";
           exec-if = "which swaync-client";
@@ -114,38 +110,38 @@ in
 
         network = {
           format = "{ifname}";
-          format-wifi = " {essid} ({signalStrength}%)";
-          format-ethernet = "  {ifname}";
-          format-disconnected = "Disconnected";
-          tooltip-format = " {ifname} via {gwaddr}";
-          tooltip-format-wifi = "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}";
-          tooltip-format-ethernet = " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}";
+          format-wifi = "📶 {essid} ({signalStrength}%)";
+          format-ethernet = "🌐 {ifname}";
+          format-disconnected = "⚠ Disconnected";
+          tooltip-format = "{ifname} via {gwaddr}";
+          tooltip-format-wifi = "{ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}";
+          tooltip-format-ethernet = "{ifname}\nIP: {ipaddr}\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}";
           tooltip-format-disconnected = "Disconnected";
           max-length = 50;
           on-click = "nm-connection-editor";
         };
 
         pulseaudio = {
-          format = "{icon}  {volume}%";
+          format = "{icon} {volume}%";
           format-bluetooth = "{volume}% {icon} {format_source}";
-          format-bluetooth-muted = " {icon} {format_source}";
-          format-muted = " {format_source}";
-          format-source = "{volume}% ";
-          format-source-muted = "";
+          format-bluetooth-muted = "🔇 {icon} {format_source}";
+          format-muted = "🔇 {format_source}";
+          format-source = "{volume}% 🎤";
+          format-source-muted = "🎤";
           format-icons = {
-            headphone = " ";
-            hands-free = " ";
-            headset = " ";
-            phone = " ";
-            portable = " ";
-            car = " ";
-            default = ["" "" ""];
+            headphone = "🎧";
+            hands-free = "🎧";
+            headset = "🎧";
+            phone = "📱";
+            portable = "📱";
+            car = "🚗";
+            default = ["🔈" "🔉" "🔊"];
           };
           on-click = "pavucontrol";
         };
 
         bluetooth = {
-          format = " {status}";
+          format = "🔵 {status}";
           format-disabled = "";
           format-off = "";
           interval = 30;
@@ -181,12 +177,7 @@ in
           on-click = "activate";
           active-only = false;
           all-outputs = true;
-          format = "{icon}";
-          format-icons = {
-            urgent = "";
-            active = "";
-            default = "";
-          };
+          format = "{id}";
           persistent-workspaces = {
             "*" = 5;
           };
@@ -198,7 +189,7 @@ in
         };
 
         "custom/exit" = {
-          format = "";
+          format = "⏻";
           on-click = "wlogout-launcher";
           on-click-right = "hyprlock";
           tooltip-format = "Left: Power menu\nRight: Lock screen";
