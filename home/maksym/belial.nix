@@ -8,7 +8,7 @@
     ../features/zsh
     ../features/hyprland
     ../features/kitty
-    #../features/theming
+    ../features/theming
     ../features/waybar
     ../features/rofi
   ];
