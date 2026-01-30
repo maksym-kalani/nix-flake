@@ -1,8 +1,12 @@
-{pkgs, ...}: {
+{pkgs, ...}:
+let
+  colors = import ./colors.nix;
+in
+{
   home.packages = with pkgs; [
     waybar
   ];
-  
+
   programs.waybar = {
     enable = true;
 
@@ -207,17 +211,17 @@
     ];
 
     style = ''
-      /* Colors - blur-light theme */
-      @define-color blur_background rgba(18, 19, 24, 0.3);
-      @define-color backgroundlight #e3e1e9;
-      @define-color backgrounddark #07164b;
-      @define-color workspacesbackground1 #e3e1e9;
-      @define-color workspacesbackground2 #07164b;
-      @define-color bordercolor #e3e1e9;
-      @define-color textcolor1 #e3e1e9;
-      @define-color textcolor2 #07164b;
-      @define-color textcolor3 #e3e1e9;
-      @define-color iconcolor #e3e1e9;
+      /* Colors - shared theme */
+      @define-color blur_background ${colors.backgroundTransparent};
+      @define-color backgroundlight ${colors.foreground};
+      @define-color backgrounddark ${colors.backgroundDark};
+      @define-color workspacesbackground1 ${colors.foreground};
+      @define-color workspacesbackground2 ${colors.backgroundDark};
+      @define-color bordercolor ${colors.foreground};
+      @define-color textcolor1 ${colors.foreground};
+      @define-color textcolor2 ${colors.backgroundDark};
+      @define-color textcolor3 ${colors.foreground};
+      @define-color iconcolor ${colors.foreground};
 
       /* General */
       * {

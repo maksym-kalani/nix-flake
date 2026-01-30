@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
+  colors = import ./colors.nix;
   wallpaper = ./assets/wallpaper.png;
 in
 {
@@ -48,10 +49,10 @@ in
       "$browser" = "firefox";
       "$fileManager" = "nautilus";
 
-      "$background" = "rgba(121318ff)";
-      "$primary" = "rgba(b8c3ffff)";
-      "$on_surface" = "rgba(e3e1e9ff)";
-      "$error" = "rgba(ffb4abff)";
+      "$background" = colors.backgroundRgba;
+      "$primary" = colors.primaryRgba;
+      "$on_surface" = colors.onSurfaceRgba;
+      "$error" = colors.errorRgba;
 
       env = [
         "WLR_NO_HARDWARE_CURSORS,1"
@@ -387,9 +388,6 @@ in
 
     # Notifications
     swaynotificationcenter
-
-    # Launchers & menus
-    wlogout
 
     # Clipboard
     cliphist

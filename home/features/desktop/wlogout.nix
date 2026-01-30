@@ -1,7 +1,7 @@
 {pkgs, ...}:
 let
-  # Wallpaper for wlogout background (same as hyprland)
-  wallpaper = ../hyprland/assets/wallpaper.png;
+  colors = import ./colors.nix;
+  wallpaper = ./assets/wallpaper.png;
 
   # Generate blurred wallpaper at build time
   blurredWallpaper = pkgs.runCommand "wlogout-blurred-wallpaper.png" {
@@ -9,15 +9,6 @@ let
   } ''
     convert ${wallpaper} -blur 0x50 -brightness-contrast -10x-10 $out
   '';
-
-  # Colors
-  colors = {
-    background = "#121318";
-    foreground = "#e3e1e9";
-    primary = "#b8c3ff";
-    on_primary = "#202c61";
-    shadow = "#000000";
-  };
 in
 {
   programs.wlogout = {
@@ -91,7 +82,7 @@ in
       button:hover {
         background-color: alpha(${colors.primary}, 0.9);
         opacity: 0.8;
-        color: ${colors.on_primary};
+        color: ${colors.onPrimary};
         background-size: 30%;
         margin: 30px;
         border-radius: 80px;
@@ -105,37 +96,37 @@ in
       #lock {
         margin: 10px;
         border-radius: 20px;
-        background-image: image(url("${./icons/lock.png}"));
+        background-image: image(url("${./assets/lock.png}"));
       }
 
       #logout {
         margin: 10px;
         border-radius: 20px;
-        background-image: image(url("${./icons/logout.png}"));
+        background-image: image(url("${./assets/logout.png}"));
       }
 
       #suspend {
         margin: 10px;
         border-radius: 20px;
-        background-image: image(url("${./icons/suspend.png}"));
+        background-image: image(url("${./assets/suspend.png}"));
       }
 
       #hibernate {
         margin: 10px;
         border-radius: 20px;
-        background-image: image(url("${./icons/hibernate.png}"));
+        background-image: image(url("${./assets/hibernate.png}"));
       }
 
       #shutdown {
         margin: 10px;
         border-radius: 20px;
-        background-image: image(url("${./icons/shutdown.png}"));
+        background-image: image(url("${./assets/shutdown.png}"));
       }
 
       #reboot {
         margin: 10px;
         border-radius: 20px;
-        background-image: image(url("${./icons/reboot.png}"));
+        background-image: image(url("${./assets/reboot.png}"));
       }
     '';
   };

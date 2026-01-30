@@ -6,12 +6,9 @@
     ../common
     ../features/cli
     ../features/zsh
-    ../features/hyprland
     ../features/kitty
     ../features/theming
-    ../features/waybar
-    ../features/rofi
-    ../features/wlogout
+    ../features/desktop  # Bundles hyprland, waybar, rofi, wlogout
   ];
   
   home.packages = with pkgs; [

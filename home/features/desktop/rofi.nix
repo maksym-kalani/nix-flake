@@ -1,15 +1,7 @@
 {pkgs, ...}:
 let
-  # Colors from your current theme
-  colors = {
-    background = "rgba(44, 47, 66, 0.7)";
-    primary = "#b8c3ff";
-    surface = "#121318";
-    on-surface = "#e3e1e9";
-  };
-
-  # Wallpaper for rofi background (same as hyprland)
-  wallpaper = ../hyprland/assets/wallpaper.png;
+  colors = import ./colors.nix;
+  wallpaper = ./assets/wallpaper.png;
 
   # Generate blurred wallpaper at build time
   blurredWallpaper = pkgs.runCommand "blurred-wallpaper.png" {
@@ -51,10 +43,10 @@ in
     }
 
     * {
-      background: ${colors.background};
+      background: ${colors.surfaceRgba};
       primary: ${colors.primary};
       surface: ${colors.surface};
-      on-surface: ${colors.on-surface};
+      on-surface: ${colors.onSurface};
       border-width: 2px;
       border-radius: 2em;
       current-image: url("${blurredWallpaper}", height);
@@ -245,10 +237,10 @@ in
     }
 
     * {
-      background: ${colors.background};
+      background: ${colors.surfaceRgba};
       primary: ${colors.primary};
       surface: ${colors.surface};
-      on-surface: ${colors.on-surface};
+      on-surface: ${colors.onSurface};
       border-width: 2px;
       border-radius: 2em;
     }
