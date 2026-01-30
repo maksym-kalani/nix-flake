@@ -8,6 +8,6 @@
     ./configuration.nix
     ./hyprland.nix
     ./zen.nix
-    ./gaming.mix
+    ./gaming.nix
   ];
 }
