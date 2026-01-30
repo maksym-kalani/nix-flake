@@ -121,6 +121,7 @@ in
           format-ethernet = "󰈀 {ifname}";
           format-disconnected = "󰖪 Disconnected";
           tooltip-format = "{ifname} via {gwaddr}";
+          on-click = "nm-connection-editor";
           tooltip-format-wifi = "{ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}";
           tooltip-format-ethernet = "{ifname}\nIP: {ipaddr}\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}";
           tooltip-format-disconnected = "Disconnected";
