@@ -29,5 +29,6 @@
     rofi-network-manager
     caligula
     #wonderdraft
+    nautilus
   ];
 }
