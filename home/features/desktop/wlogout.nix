@@ -9,29 +9,27 @@ let
   } ''
     convert ${wallpaper} -blur 0x50 -brightness-contrast -10x-10 $out
   '';
+
+  # Wlogout launcher script with dynamic margins based on monitor
+  wlogoutScript = pkgs.writeShellScriptBin "wlogout-launcher" ''
+    res_h=$(hyprctl -j monitors | ${pkgs.jq}/bin/jq '.[] | select(.focused==true) | .height')
+    h_scale=$(hyprctl -j monitors | ${pkgs.jq}/bin/jq '.[] | select (.focused == true) | .scale' | sed 's/\.//')
+    w_margin=$((res_h * 27 / h_scale))
+    wlogout -b 3 -T $w_margin -B $w_margin
+  '';
 in
 {
+  home.packages = [ wlogoutScript ];
+
   programs.wlogout = {
     enable = true;
 
     layout = [
       {
-        label = "lock";
-        action = "hyprlock";
-        text = "Lock";
-        keybind = "l";
-      }
-      {
         label = "logout";
         action = "hyprctl dispatch exit";
         text = "Log Out";
         keybind = "e";
-      }
-      {
-        label = "suspend";
-        action = "systemctl suspend";
-        text = "Suspend";
-        keybind = "u";
       }
       {
         label = "reboot";
@@ -83,16 +81,8 @@ in
         border: 1px solid rgba(255, 255, 255, 0.3);
       }
 
-      #lock {
-        background-image: image(url("${./assets/lock.png}"));
-      }
-
       #logout {
         background-image: image(url("${./assets/logout.png}"));
-      }
-
-      #suspend {
-        background-image: image(url("${./assets/suspend.png}"));
       }
 
       #shutdown {

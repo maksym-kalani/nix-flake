@@ -218,7 +218,7 @@ in
         # Actions
         "$mainMod CTRL, R, exec, hyprctl reload"
         "$mainMod CTRL, Q, exec, wlogout-launcher"
-        "$mainMod CTRL, L, exec, hyprlock"
+        "$mainMod CTRL, L, exec, hyprctl dispatch exit"
         "$mainMod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
         "$mainMod SHIFT, B, exec, pkill waybar || waybar"
 
@@ -279,7 +279,7 @@ in
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86AudioMicMute, exec, pactl set-source-mute @DEFAULT_SOURCE@ toggle"
-        ", XF86Lock, exec, hyprlock"
+        ", XF86Lock, exec, hyprctl dispatch exit"
       ];
 
       binde = [

@@ -3,8 +3,6 @@
 # - waybar (status bar)
 # - rofi (application launcher)
 # - wlogout (power menu)
-# - hypridle (idle daemon)
-# - hyprlock (lock screen)
 # - swaync (notification center)
 #
 # These components share:
@@ -18,8 +16,6 @@
   imports = [
     ./packages.nix
     ./hyprland.nix
-    ./hypridle.nix
-    ./hyprlock.nix
     ./waybar.nix
     ./rofi.nix
     ./wlogout.nix
