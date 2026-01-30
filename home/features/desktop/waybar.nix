@@ -75,7 +75,7 @@ in
 
         "custom/exit" = {
           format = "";
-          on-click = "wlogout";
+          on-click = "wlogout -r 1 -c 5";
           on-click-right = "hyprlock";
           tooltip-format = "Left: Power menu\nRight: Lock screen";
         };
@@ -198,7 +198,7 @@ in
 
         "custom/exit" = {
           format = "";
-          on-click = "wlogout";
+          on-click = "wlogout -r 1 -c 5";
           on-click-right = "hyprlock";
           tooltip-format = "Left: Power menu\nRight: Lock screen";
         };

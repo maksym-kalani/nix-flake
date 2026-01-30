@@ -58,68 +58,48 @@ in
       window {
         background: url("${blurredWallpaper}");
         background-size: cover;
-        font-size: 16pt;
+        font-size: 14pt;
       }
 
       button {
         background-repeat: no-repeat;
-        background-position: center;
-        background-size: 20%;
-        animation: gradient_f 20s ease-in infinite;
-        border-radius: 80px;
-        border: 0px;
-        transition: all 0.3s cubic-bezier(.55, 0.0, .28, 1.682), box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        background-position: center 35%;
+        background-size: 25%;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 10px;
+        transition: all 0.3s ease-in-out;
         color: ${colors.foreground};
-        background-color: alpha(${colors.primary}, 0.2);
+        background-color: alpha(${colors.primary}, 0.15);
       }
 
       button:focus {
-        background-color: alpha(${colors.primary}, 0.5);
-        background-size: 25%;
-        border: 0px;
+        background-color: alpha(${colors.primary}, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
       }
 
       button:hover {
-        background-color: alpha(${colors.primary}, 0.9);
-        opacity: 0.8;
-        color: ${colors.onPrimary};
-        background-size: 30%;
-        margin: 30px;
-        border-radius: 80px;
-        box-shadow: 0 0 50px ${colors.shadow};
-      }
-
-      button span {
-        font-size: 1.2em;
+        background-color: alpha(${colors.primary}, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.3);
       }
 
       #lock {
-        margin: 10px;
-        border-radius: 20px;
         background-image: image(url("${./assets/lock.png}"));
       }
 
       #logout {
-        margin: 10px;
-        border-radius: 20px;
         background-image: image(url("${./assets/logout.png}"));
       }
 
       #suspend {
-        margin: 10px;
-        border-radius: 20px;
         background-image: image(url("${./assets/suspend.png}"));
       }
 
       #shutdown {
-        margin: 10px;
-        border-radius: 20px;
         background-image: image(url("${./assets/shutdown.png}"));
       }
 
       #reboot {
-        margin: 10px;
-        border-radius: 20px;
         background-image: image(url("${./assets/reboot.png}"));
       }
     '';

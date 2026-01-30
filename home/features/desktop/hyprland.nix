@@ -230,7 +230,7 @@ in
 
         # Actions
         "$mainMod CTRL, R, exec, hyprctl reload"
-        "$mainMod CTRL, Q, exec, wlogout"
+        "$mainMod CTRL, Q, exec, wlogout -r 1 -c 5"
         "$mainMod CTRL, L, exec, hyprlock"
         "$mainMod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
         "$mainMod SHIFT, B, exec, pkill waybar || waybar"
