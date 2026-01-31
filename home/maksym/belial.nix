@@ -40,5 +40,6 @@
     mission-center
     element-desktop
     papers
+    claude-code
   ];
 }
