@@ -40,6 +40,8 @@
     mission-center
     element-desktop
     papers
+    loupe
     claude-code
+    sops
   ];
 }

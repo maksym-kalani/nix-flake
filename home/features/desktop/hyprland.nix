@@ -34,7 +34,7 @@ in
 
       "$mainMod" = "ALT";
       "$terminal" = "kitty";
-      "$browser" = "firefox";
+      "$browser" = "zen-browser";
       "$fileManager" = "nautilus";
 
       "$background" = colors.backgroundRgba;
