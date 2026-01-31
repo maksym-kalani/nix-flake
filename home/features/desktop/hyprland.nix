@@ -278,6 +278,15 @@ in
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86AudioMicMute, exec, pactl set-source-mute @DEFAULT_SOURCE@ toggle"
         ", XF86Lock, exec, loginctl terminate-session $XDG_SESSION_ID"
+
+        # Custom scripts (macro keys)
+        ", code:201, exec, toggle-audio"
+        ", code:202, exec, toggle-mute"
+        ", code:197, exec, toggle-mute-zen"
+        ", code:195, exec, dec-volume-zen"
+        ", code:196, exec, inc-volume-zen"
+        ", code:192, exec, prepare-game"
+        ", code:198, exec, toggle-tv"
       ];
 
       binde = [

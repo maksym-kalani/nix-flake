@@ -15,6 +15,7 @@
 {
   imports = [
     ./packages.nix
+    ./scripts.nix
     ./hyprland.nix
     ./waybar.nix
     ./rofi.nix
