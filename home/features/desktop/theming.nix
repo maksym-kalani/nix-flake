@@ -1,4 +1,32 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  colors = import ./colors.nix;
+
+  # GTK CSS color definitions to override Adwaita colors
+  gtkColorsCss = ''
+    /*
+     * GTK Colors
+     * Material Design 3 palette
+     */
+
+    @define-color accent_color ${colors.primary};
+    @define-color accent_fg_color ${colors.onPrimaryFixed};
+    @define-color accent_bg_color ${colors.primary};
+    @define-color window_bg_color ${colors.background};
+    @define-color window_fg_color ${colors.foreground};
+    @define-color headerbar_bg_color ${colors.background};
+    @define-color headerbar_fg_color ${colors.foreground};
+    @define-color popover_bg_color ${colors.background};
+    @define-color popover_fg_color ${colors.foreground};
+    @define-color view_bg_color ${colors.background};
+    @define-color view_fg_color ${colors.foreground};
+    @define-color card_bg_color ${colors.background};
+    @define-color card_fg_color ${colors.foreground};
+    @define-color sidebar_bg_color @window_bg_color;
+    @define-color sidebar_fg_color @window_fg_color;
+    @define-color sidebar_border_color @window_bg_color;
+    @define-color sidebar_backdrop_color @window_bg_color;
+  '';
+in {
   gtk = {
     enable = true;
 
@@ -37,9 +65,13 @@
       gtk-application-prefer-dark-theme = 1;
     };
 
+    gtk3.extraCss = gtkColorsCss;
+
     gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
     };
+
+    gtk4.extraCss = gtkColorsCss;
   };
 
   qt = {
@@ -47,6 +79,12 @@
     platformTheme.name = "qtct";
     style.name = "kvantum";
   };
+
+  # Kvantum configuration - use Nordic-Darker-Solid theme
+  xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
+    [General]
+    theme=Nordic-Darker-Solid
+  '';
 
   # Qt5ct configuration
   xdg.configFile."qt5ct/qt5ct.conf".text = ''
@@ -70,14 +108,22 @@
     stylesheets=@Invalid()
   '';
 
-  # Qt6ct configuration
+  # Qt6ct darker color scheme (matching CachyOS)
+  xdg.configFile."qt6ct/colors/darker.conf".text = ''
+    [ColorScheme]
+    active_colors=#ffffffff, #ff424245, #ff979797, #ff5e5c5b, #ff302f2e, #ff4a4947, #ffffffff, #ffffffff, #ffffffff, #ff3d3d3d, #ff222020, #ffe7e4e0, #ff12608a, #fff9f9f9, #ff0986d3, #ffa70b06, #ff5c5b5a, #ffffffff, #ff3f3f36, #ffffffff, #80ffffff
+    disabled_colors=#ff808080, #ff424245, #ff979797, #ff5e5c5b, #ff302f2e, #ff4a4947, #ff808080, #ffffffff, #ff808080, #ff3d3d3d, #ff222020, #ffe7e4e0, #ff12608a, #ff808080, #ff0986d3, #ffa70b06, #ff5c5b5a, #ffffffff, #ff3f3f36, #ffffffff, #80ffffff
+    inactive_colors=#ffffffff, #ff424245, #ff979797, #ff5e5c5b, #ff302f2e, #ff4a4947, #ffffffff, #ffffffff, #ffffffff, #ff3d3d3d, #ff222020, #ffe7e4e0, #ff12608a, #fff9f9f9, #ff0986d3, #ffa70b06, #ff5c5b5a, #ffffffff, #ff3f3f36, #ffffffff, #80ffffff
+  '';
+
+  # Qt6ct configuration - use Breeze with darker palette (matching CachyOS)
   xdg.configFile."qt6ct/qt6ct.conf".text = ''
     [Appearance]
-    color_scheme_path=
-    custom_palette=false
-    icon_theme=Colloid
+    color_scheme_path=~/.config/qt6ct/colors/darker.conf
+    custom_palette=true
+    icon_theme=breeze-dark
     standard_dialogs=default
-    style=kvantum
+    style=Breeze
 
     [Interface]
     activate_item_on_single_click=1

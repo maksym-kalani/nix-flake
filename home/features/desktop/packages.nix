@@ -52,6 +52,9 @@
     kdePackages.qt6ct
     libsForQt5.qtstyleplugin-kvantum
     kdePackages.qtstyleplugin-kvantum
+    nordic                          # Kvantum Nordic theme
+    kdePackages.breeze-icons        # Breeze icon theme for Qt6
+    kdePackages.breeze              # Breeze style for Qt6
 
     # === Fonts ===
     fira
