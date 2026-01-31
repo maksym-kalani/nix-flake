@@ -14,13 +14,15 @@
 
   programs.git = {
     enable = true;
-    userName = "Maksym Kalani";
-    userEmail = "kalanimaxim@gmail.com";
-    extraConfig = {
-      init.defaultBranch = "main";
-      credential = {
-        "https://github.com".helper = "!gh auth git-credential";
-        "https://gist.github.com".helper = "!gh auth git-credential";
+    settings = {
+      user = {
+        email = "kalanimaxim@gmail.com";
+        name = "Maksym Kalani";
+        init.defaultBranch = "main";
+        credential = {
+          "https://github.com".helper = "!gh auth git-credential";
+          "https://gist.github.com".helper = "!gh auth git-credential";
+        };
       };
     };
   };
