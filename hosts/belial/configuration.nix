@@ -19,6 +19,10 @@
   # AMD GPU (RX 9070 - RDNA 4)
   hardware.enableRedistributableFirmware = true;
   boot.initrd.kernelModules = [ "amdgpu" ];
+  environment.variables = {
+    # Force Mesa to use radeonsi driver
+    MESA_LOADER_DRIVER_OVERRIDE = "radeonsi";
+  };
 
   networking.hostName = "belial"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
