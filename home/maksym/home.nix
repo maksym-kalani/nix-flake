@@ -76,4 +76,16 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # SSH configuration
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      "aigis" = {
+        hostname = "192.168.2.50";
+        user = "maksym";
+        identityFile = "~/.ssh/maksym-aigis";
+      };
+    };
+  };
 }
