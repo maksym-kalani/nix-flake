@@ -16,7 +16,8 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # Early KMS for AMD GPU
+  # AMD GPU (RX 9070 - RDNA 4)
+  hardware.enableRedistributableFirmware = true;
   boot.initrd.kernelModules = [ "amdgpu" ];
 
   networking.hostName = "belial"; # Define your hostname.
