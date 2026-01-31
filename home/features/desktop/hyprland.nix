@@ -13,26 +13,24 @@ in
 
     settings = {
       monitor = [
-        #"DP-2,3440x1440@144,0x0,1"
-        #"DP-3,1920x1080@100,3440x0,1,transform,3"
-        # Fallback for VMs and unknown monitors
-        ",preferred,auto,1"
+        "DP-2,3440x1440@144,0x0,1"
+        "DP-3,1920x1080@100,3440x0,1,transform,3"
       ];
 
       workspace = [
-        "1,monitor:Virtual-1"
-        "2,monitor:Virtual-1"
-        "3,monitor:Virtual-1"
-        "4,monitor:Virtual-1"
-        "5,monitor:Virtual-1"
-        "6,monitor:Virtual-1"
+        "1,monitor:DP-2"
+        "2,monitor:DP-2"
+        "3,monitor:DP-2"
+        "4,monitor:DP-2"
+        "5,monitor:DP-2"
+        "6,monitor:DP-2"
         "7,monitor:DP-3"
         "8,monitor:DP-3"
         "9,monitor:DP-3"
         "10,monitor:HDMI-A-1"
       ];
 
-      "$mainMod" = "ALT";
+      "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$browser" = "zen-browser";
       "$fileManager" = "nautilus";
