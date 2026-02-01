@@ -32,7 +32,7 @@ in
 
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
-      "$browser" = "zen-browser";
+      "$browser" = "zen";
       "$fileManager" = "nautilus";
 
       "$background" = colors.backgroundRgba;
