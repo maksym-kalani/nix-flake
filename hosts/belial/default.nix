@@ -6,6 +6,10 @@
   imports = [
     ../common
     ./configuration.nix
+    ./audio.nix
+    ./bluetooth.nix
+    ./printing.nix
+    ./shell.nix
     ./hyprland.nix
     ./zen.nix
     ./gaming.nix
