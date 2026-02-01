@@ -82,7 +82,7 @@ let
     MON="HDMI-A-1"
     PLACEMENT="3840x2160@60,-3840x0,1"
     USB_SINK="alsa_output.usb-Burr-Brown_from_TI_USB_Audio_CODEC-00.analog-stereo-output"
-    HDMI_SINK="alsa_output.pci-0000_0d_00.1.hdmi-stereo"
+    HDMI_SINK="alsa_output.pci-0000_0d_00.1.pro-output-9"
 
     sink_exists() {
       ${pkgs.pulseaudio}/bin/pactl list short sinks | ${pkgs.gawk}/bin/awk '{print $2}' | grep -Fxq "$1"
