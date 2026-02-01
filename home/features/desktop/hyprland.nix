@@ -13,20 +13,20 @@ in
 
     settings = {
       monitor = [
-        "DP-2,3440x1440@144,0x0,1"
-        "DP-3,1920x1080@100,3440x0,1,transform,3"
+        "DP-1,3440x1440@144,0x0,1"
+        "DP-2,1920x1080@100,3440x0,1,transform,3"
       ];
 
       workspace = [
-        "1,monitor:DP-2"
-        "2,monitor:DP-2"
-        "3,monitor:DP-2"
-        "4,monitor:DP-2"
-        "5,monitor:DP-2"
-        "6,monitor:DP-2"
-        "7,monitor:DP-3"
-        "8,monitor:DP-3"
-        "9,monitor:DP-3"
+        "1,monitor:DP-1"
+        "2,monitor:DP-1"
+        "3,monitor:DP-1"
+        "4,monitor:DP-1"
+        "5,monitor:DP-1"
+        "6,monitor:DP-1"
+        "7,monitor:DP-2"
+        "8,monitor:DP-2"
+        "9,monitor:DP-2"
         "10,monitor:HDMI-A-1"
       ];
 

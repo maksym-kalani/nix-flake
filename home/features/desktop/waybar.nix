@@ -9,7 +9,7 @@ in
     settings = [
       {
         layer = "top";
-        output = "DP-2";
+        output = "DP-1";
         margin-top = 0;
         margin-bottom = 0;
         margin-left = 0;
