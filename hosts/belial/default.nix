@@ -13,5 +13,6 @@
     ./hyprland.nix
     ./zen.nix
     ./gaming.nix
+    ./smb.nix
   ];
 }
