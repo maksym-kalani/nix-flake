@@ -4,12 +4,12 @@
   imports = [ 
     ./users
     ./secrets.nix
-    ./zfs-error-notifications.nix
      inputs.home-manager.nixosModules.home-manager
   ];
   home-manager = {
     useUserPackages = true;
     extraSpecialArgs = {inherit inputs outputs;};
+    backupFileExtension = "bak";
   };
   nixpkgs = {
     # You can add overlays here
