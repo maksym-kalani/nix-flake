@@ -65,7 +65,7 @@ in
         numlock_by_default = true;
         follow_mouse = 1;
         mouse_refocus = false;
-        sensitivity = 0;
+        sensitivity = -1;
 
         touchpad = {
           natural_scroll = false;
@@ -310,61 +310,48 @@ in
 
       windowrule = [
         # Pavucontrol
-        "float, class:(.*org.pulseaudio.pavucontrol.*)"
-        "center, class:(.*org.pulseaudio.pavucontrol.*)"
-        "pin, class:(.*org.pulseaudio.pavucontrol.*)"
-        "size 700 600, class:(.*org.pulseaudio.pavucontrol.*)"
+        "float on, pin on, center on, match:class (.*org.pulseaudio.pavucontrol.*)"
+        "size 700 600, match:class (.*org.pulseaudio.pavucontrol.*)"
 
         # Waypaper
-        "float, class:(.*waypaper.*)"
-        "center, class:(.*waypaper.*)"
-        "pin, class:(.*waypaper.*)"
-        "size 900 700, class:(.*waypaper.*)"
+        "float on, pin on, center on, match:class (.*waypaper.*)"
+        "size 900 700, match:class (.*waypaper.*)"
 
         # Blueman Manager
-        "float, class:(blueman-manager)"
-        "center, class:(blueman-manager)"
-        "size 800 600, class:(blueman-manager)"
+        "float on, center on, match:class (blueman-manager)"
+        "size 800 600, match:class (blueman-manager)"
 
         # nwg-look
-        "float, class:(nwg-look)"
-        "center, class:(nwg-look)"
-        "size 700 600, class:(nwg-look)"
+        "float on, center on, match:class (nwg-look)"
+        "size 700 600, match:class (nwg-look)"
 
         # nwg-displays
-        "float, class:(nwg-displays)"
-        "center, class:(nwg-displays)"
-        "size 900 600, class:(nwg-displays)"
+        "float on, center on, match:class (nwg-displays)"
+        "size 900 600, match:class (nwg-displays)"
 
         # Gnome Calculator
-        "float, class:(org.gnome.Calculator)"
-        "center, class:(org.gnome.Calculator)"
-        "size 700 600, class:(org.gnome.Calculator)"
+        "float on, center on, match:class (org.gnome.Calculator)"
+        "size 700 600, match:class (org.gnome.Calculator)"
 
         # Hyprland Share Picker
-        "float, class:(hyprland-share-picker)"
-        "pin, class:(hyprland-share-picker)"
-        "center, class:(hyprland-share-picker)"
-        "size 600 400, class:(hyprland-share-picker)"
+        "float on, pin on, center on, match:class (hyprland-share-picker)"
+        "size 600 400, match:class (hyprland-share-picker)"
 
         # nm-connection-editor
-        "float, class:(nm-connection-editor)"
-        "center, class:(nm-connection-editor)"
-        "size 800 700, class:(nm-connection-editor)"
+        "float on, center on, match:class (nm-connection-editor)"
+        "size 800 700, match:class (nm-connection-editor)"
 
         # Picture-in-Picture
-        "float, title:(Picture-in-Picture)"
-        "pin, title:(Picture-in-Picture)"
-        "center, title:(Picture-in-Picture)"
+        "float on, center on, pin on, match:title (Picture-in-Picture)"
 
         # Steam
-        "float, class:^(steam)$"
-        "tile, class:^(steam)$, title:^(Steam)$"
-        "workspace 10, class:^(steam)$, title:.*Big Picture.*"
-        "fullscreen, class:^(steam)$, title:.*Big Picture.*"
+        "float on, match:class ^(steam)$"
+        "tile on, match:class ^(steam)$, match:title ^(Steam)$"
+        "workspace 10, match:class ^(steam)$, match:title .*Big Picture.*"
+        "fullscreen on, match:class ^(steam)$, match:title .*Big Picture.*"
 
         # Bitwarden
-        "float, title:.*Bitwarden Password Manager.*"
+        "float on, match:title .*Bitwarden Password Manager.*"
       ];
     };
   };
