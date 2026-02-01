@@ -283,7 +283,7 @@ in
         ", code:195, exec, dec-volume-zen"
         ", code:196, exec, inc-volume-zen"
         ", code:192, exec, prepare-game"
-        ", code:198, exec, toggle-tv"
+        ", code:193, exec, toggle-tv"
       ];
 
       binde = [
