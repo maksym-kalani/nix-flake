@@ -43,6 +43,5 @@
     loupe
     claude-code
     sops
-    jetbrains.rider
   ];
 }
