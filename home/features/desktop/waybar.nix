@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 let
   colors = import ./colors.nix;
 in
@@ -113,6 +113,7 @@ in
         clock = {
           format = "{:%H:%M - %a %d.%m.%Y}";
           tooltip = false;
+          on-click = "gnome-calendar";
         };
 
         network = {
@@ -142,7 +143,11 @@ in
             phone = "󰏲";
             portable = "󰏲";
             car = "󰄋";
-            default = ["󰕿" "󰖀" "󰕾"];
+            default = [
+              "󰕿"
+              "󰖀"
+              "󰕾"
+            ];
           };
           on-click = "pavucontrol";
         };
@@ -217,6 +222,7 @@ in
         clock = {
           format = "{:%H:%M}";
           tooltip = false;
+          on-click = "gnome-calendar";
         };
       }
     ];

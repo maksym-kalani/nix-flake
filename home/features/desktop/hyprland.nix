@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   colors = import ./colors.nix;
@@ -15,6 +20,7 @@ in
       monitor = [
         "DP-1,3440x1440@144,0x0,1"
         "DP-2,1920x1080@100,3440x0,1,transform,3"
+        "HDMI-A-1,3840x2160@60,-3840x0,1"
       ];
 
       workspace = [
@@ -352,6 +358,11 @@ in
 
         # Bitwarden
         "float on, match:title .*Bitwarden Password Manager.*"
+
+        # Calendar
+        "float on, pin on, match:title .*Calendar.*"
+        "size 800 700, match:title .*Calendar.*"
+        "move 100%-w-20 86, match:title .*Calendar.*"
       ];
     };
   };
