@@ -308,7 +308,7 @@ in
         "ignorealpha 0.5, swaync-notification-window"
       ];
 
-      windowrulev2 = [
+      windowrule = [
         # Pavucontrol
         "float, class:(.*org.pulseaudio.pavucontrol.*)"
         "center, class:(.*org.pulseaudio.pavucontrol.*)"
