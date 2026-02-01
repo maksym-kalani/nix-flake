@@ -214,7 +214,7 @@ in
         "$mainMod CTRL, R, exec, hyprctl reload"
         "$mainMod CTRL, Q, exec, wlogout-launcher"
         "$mainMod CTRL, L, exec, loginctl terminate-session $XDG_SESSION_ID"
-        "$mainMod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+        "$mainMod, V, exec, cliphist-rofi"
         "$mainMod SHIFT, B, exec, pkill waybar || waybar"
 
         # Screenshot
