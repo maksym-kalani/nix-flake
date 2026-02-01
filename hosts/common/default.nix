@@ -67,7 +67,6 @@
   };
   
   environment.interactiveShellInit = ''
-    alias rebuild='sudo nixos-rebuild switch --flake .#aigis'
     alias sstop='sudo systemctl stop'
     alias sstart='sudo systemctl start'
     alias srestart='sudo systemctl restart'
