@@ -45,5 +45,7 @@
     sops
     nil
     nixd
+    gnome-calendar
+    gnome-calculator
   ];
 }
