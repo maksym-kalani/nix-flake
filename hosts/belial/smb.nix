@@ -15,7 +15,7 @@
     device = "//192.168.2.50/users";
     fsType = "cifs";
     options = let
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100,forceuid,forcegid";
     in ["${automount_opts},credentials=${config.sops.secrets.smb_credentials.path}"];
   };
 
@@ -23,7 +23,7 @@
     device = "//192.168.2.50/media";
     fsType = "cifs";
     options = let
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100,forceuid,forcegid";
     in ["${automount_opts},credentials=${config.sops.secrets.smb_credentials.path}"];
   };
 }
