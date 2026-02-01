@@ -24,6 +24,16 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  fileSystems."/mnt/ssd1" = {
+    device = "/dev/disk/by-uuid/a0cc22cd-3a00-42f4-8813-85d4e9baa795";
+    fsType = "ext4";
+  };
+
+  fileSystems."/mnt/ssd2" = {
+    device = "/dev/disk/by-uuid/5a909848-10ef-4aea-8b15-430afb5daced";
+    fsType = "ext4";
+  };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/4235bca5-7fe7-4a39-862d-75af730fffdc"; }
     ];
