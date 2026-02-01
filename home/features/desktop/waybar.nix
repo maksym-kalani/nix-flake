@@ -29,7 +29,6 @@ in
           "hyprland/language"
           "pulseaudio"
           "bluetooth"
-          "network"
           "tray"
           "custom/notification"
           "custom/exit"
