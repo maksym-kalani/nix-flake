@@ -44,5 +44,6 @@
     claude-code
     sops
     nil
+    nixd
   ];
 }
