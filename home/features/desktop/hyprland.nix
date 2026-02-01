@@ -41,9 +41,6 @@ in
       "$error" = colors.errorRgba;
 
       env = [
-        "WLR_NO_HARDWARE_CURSORS,1"
-        "LIBGL_ALWAYS_SOFTWARE,1"
-
         "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_TYPE,wayland"
         "XDG_SESSION_DESKTOP,Hyprland"

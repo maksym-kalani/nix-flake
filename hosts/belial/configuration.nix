@@ -16,14 +16,6 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # AMD GPU (RX 9070 - RDNA 4)
-  hardware.enableRedistributableFirmware = true;
-  boot.initrd.kernelModules = [ "amdgpu" ];
-
-  # Use stable Mesa (unstable has issues with RDNA 4)
-  hardware.graphics.package = pkgs.stable.mesa;
-  hardware.graphics.package32 = pkgs.stable.pkgsi686Linux.mesa;
-
   networking.hostName = "belial"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   
