@@ -22,6 +22,10 @@
     caddy-nix.url  = "github:vincentbernat/caddy-nix";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, home-manager, nixpkgs, sops-nix, ... }@inputs:
@@ -46,8 +50,15 @@
       nixosConfigurations = {
         aigis = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ 
+          modules = [
             ./hosts/aigis
+            sops-nix.nixosModules.sops
+          ];
+        };
+        belial = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./hosts/belial
             sops-nix.nixosModules.sops
           ];
         };
@@ -57,8 +68,15 @@
         "maksym@aigis" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ 
+          modules = [
             ./home/maksym/aigis.nix
+          ];
+        };
+        "maksym@belial" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            ./home/maksym/belial.nix
           ];
         };
       };

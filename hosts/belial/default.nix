@@ -1,0 +1,17 @@
+# Belial - Gaming PC configuration
+# Generate hardware-configuration.nix on the target machine with:
+# sudo nixos-generate-config --dir ./hosts/belial
+
+{
+  imports = [
+    ../common
+    ./configuration.nix
+    ./audio.nix
+    ./bluetooth.nix
+    ./printing.nix
+    ./shell.nix
+    ./hyprland.nix
+    ./zen.nix
+    ./gaming.nix
+  ];
+}
