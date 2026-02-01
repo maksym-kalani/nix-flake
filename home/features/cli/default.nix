@@ -19,6 +19,7 @@
         email = "kalanimaxim@gmail.com";
         name = "Maksym Kalani";
         init.defaultBranch = "main";
+        credential.helper = "!gh auth git-credential";
       };
     };
   };
