@@ -64,5 +64,7 @@
     nerd-fonts.fira-mono
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
+    
+    wev
   ];
 }
