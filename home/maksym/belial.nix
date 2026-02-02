@@ -47,6 +47,5 @@
     nixd
     gnome-calendar
     gnome-calculator
-    nix-init
   ];
 }
