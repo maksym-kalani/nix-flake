@@ -264,7 +264,7 @@ in
 
         # Custom applications
         "$mainMod, D, exec, vesktop"
-        "$mainMod, L, exec, telegram-desktop"
+        "$mainMod, L, exec, Telegram"
         "$mainMod, S, exec, steam"
 
         # Group navigation
