@@ -324,8 +324,8 @@ in
         "size 900 700, match:class (.*waypaper.*)"
 
         # Blueman Manager
-        "float on, center on, match:class (blueman-manager)"
-        "size 800 600, match:class (blueman-manager)"
+        "float on, center on, match:title (Bluetooth Devices)"
+        "size 800 600, match:title (Bluetooth Devices)"
 
         # nwg-look
         "float on, center on, match:class (nwg-look)"
@@ -360,9 +360,9 @@ in
         "float on, match:title .*Bitwarden Password Manager.*"
 
         # Calendar
-        "float on, pin on, match:title .*Calendar.*"
-        "size 800 700, match:title .*Calendar.*"
-        "move 100%-w-20 86, match:title .*Calendar.*"
+        "float on, pin on, match:class (org.gnome.Calendar)"
+        "size 400 400, match:class (org.gnome.Calendar)"
+        "move monitor_w-window_w-21 160, match:class (org.gnome.Calendar)"
       ];
     };
   };
