@@ -14,5 +14,6 @@
     ./zen.nix
     ./gaming.nix
     ./smb.nix
+    ./packages.nix
   ];
 }
