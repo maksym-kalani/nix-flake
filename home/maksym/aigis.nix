@@ -1,9 +1,7 @@
-{ config, ... }:
-{
-  imports = [
-    ./home.nix
-    ../common
-    ../features/cli
-    ../features/zsh
-  ];
+{ config, ... }: 
+{ imports = [ 
+  ./home.nix 
+  ../common
+  ../features/cli
+]; 
 }
