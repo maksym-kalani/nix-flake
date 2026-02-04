@@ -69,7 +69,7 @@
       source <(fzf --zsh)
 
       # Oh-my-posh prompt
-      eval "$(oh-my-posh init zsh --config ${./themes/di4am0nd.omp.json})"
+      eval "$(oh-my-posh init zsh --config ${./themes/probua.minimal.omp.json})"
 
       # Fastfetch on terminal start
       if [[ $(tty) == *"pts"* ]]; then
