@@ -15,5 +15,6 @@
     ./gaming.nix
     ./smb.nix
     ./packages.nix
+    ./obs.nix
   ];
 }
