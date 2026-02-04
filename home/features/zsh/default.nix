@@ -60,10 +60,6 @@
       aigis = "kitten ssh aigis";
     };
 
-    sessionVariables = {
-      EDITOR = "nvim";
-    };
-
     initContent = ''
       # FZF key bindings
       source <(fzf --zsh)
