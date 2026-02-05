@@ -1,7 +1,7 @@
 # Common configuration for all hosts
 
 { lib, inputs, outputs, ... }: {
-  imports = [ 
+  imports = [
     ./users
     ./secrets.nix
      inputs.home-manager.nixosModules.home-manager
@@ -53,19 +53,7 @@
       ((lib.filterAttrs (_: lib.isType "flake")) inputs);
     nixPath = [ "/etc/nix/path" ];
   };
-  
-  system.autoUpgrade = {
-    enable = true;
-    flake = inputs.self.outPath;
-    flags = [
-      "--update-input"
-      "nixpkgs"
-      "-L" # print build logs
-    ];
-    dates = "04:00";
-    randomizedDelaySec = "45min";
-  };
-  
+
   environment.interactiveShellInit = ''
     alias sstop='sudo systemctl stop'
     alias sstart='sudo systemctl start'
