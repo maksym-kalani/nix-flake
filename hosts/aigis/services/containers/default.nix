@@ -14,7 +14,6 @@
     ./mazanoke.nix
     ./local-content-share.nix
     ./flame-homepage.nix
-    #./vikunja.nix
     ./local-voice
     ./hass-mariadb.nix
     ./recommendarr.nix
