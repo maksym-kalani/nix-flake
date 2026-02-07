@@ -1,4 +1,4 @@
-﻿## Generating Wireguard keys
+## Generating Wireguard keys
 ### 1. On Your NixOS Server: Generate the Server Key-Pair
 ``` bash
 # Become root (or use sudo) so the files land in /etc/wireguard

@@ -1,4 +1,4 @@
-﻿## ZFS configuration manual steps
+## ZFS configuration manual steps
 
 Wipe existing partition tables: If the drives have been used before, you may want to clear any partition table or ZFS label. You can use gdisk or wipefs. For example:
 ``` bash
