@@ -1,8 +1,6 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   colors = import ./colors.nix;
-in
-{
+in {
   # Config file (JSON)
   xdg.configFile."swaync/config.json".text = builtins.toJSON {
     "$schema" = "/etc/xdg/swaync/configSchema.json";
@@ -35,7 +33,7 @@ in
     hide-on-action = true;
     script-fail-notify = true;
 
-    scripts = { };
+    scripts = {};
 
     notification-visibility = {
       example-name = {

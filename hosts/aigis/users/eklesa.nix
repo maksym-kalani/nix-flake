@@ -8,6 +8,6 @@
     isNormalUser = true;
     description = "Eklesa (SMB user)";
     hashedPasswordFile = config.sops.secrets.eklesa_hashed_password.path;
-    extraGroups = [ "wheel" "tankusers" ];
+    extraGroups = ["wheel" "tankusers"];
   };
 }

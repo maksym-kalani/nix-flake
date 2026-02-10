@@ -1,25 +1,28 @@
-{ config, pkgs, lib, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   name = "vikunja";
   port = 1337;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
-in
-{
+in {
   services.vikunja = {
     enable = true;
     port = port;
     frontendHostname = "todo.${domain}";
     frontendScheme = "https";
   };
-  
-  networking.firewall.allowedTCPPorts = [ port ];
-  
+
+  networking.firewall.allowedTCPPorts = [port];
+
   services.gatus.settings.endpoints = [
     {
-      name      = name;
-      url       = "http://${ip}:${toString port}";
-      interval  = "1m";
+      name = name;
+      url = "http://${ip}:${toString port}";
+      interval = "1m";
       conditions = [
         "[STATUS] == 200"
       ];
@@ -35,14 +38,12 @@ in
       ];
     }
   ];
-  
-  services.caddy.virtualHosts = 
-  {
+
+  services.caddy.virtualHosts = {
     "${name}.${domain}" = {
       extraConfig = ''
         reverse_proxy 127.0.0.1:${toString port}
       '';
     };
   };
-  
 }

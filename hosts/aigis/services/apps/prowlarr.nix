@@ -1,23 +1,26 @@
-{ config, pkgs, lib, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   name = "prowlarr";
   port = 9696;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
-in
-{
+in {
   services.prowlarr = {
     enable = true;
     openFirewall = true;
   };
 
-  networking.firewall.allowedTCPPorts = [ port ];
-  
+  networking.firewall.allowedTCPPorts = [port];
+
   services.gatus.settings.endpoints = [
     {
-      name      = name;
-      url       = "http://${ip}:${toString port}";
-      interval  = "1m";
+      name = name;
+      url = "http://${ip}:${toString port}";
+      interval = "1m";
       conditions = [
         "[STATUS] == 200"
       ];
@@ -33,14 +36,12 @@ in
       ];
     }
   ];
-  
-  services.caddy.virtualHosts = 
-  {
+
+  services.caddy.virtualHosts = {
     "${name}.${domain}" = {
       extraConfig = ''
         reverse_proxy 127.0.0.1:${toString port}
       '';
     };
   };
-  
 }

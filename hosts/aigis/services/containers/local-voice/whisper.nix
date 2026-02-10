@@ -1,6 +1,8 @@
-{ lib, config, ... }:
-
-let
+{
+  lib,
+  config,
+  ...
+}: let
   appdata = "/var/lib/containers/";
   ip = "192.168.2.50";
   cfg = {
@@ -20,7 +22,7 @@ let
     environmentVariables = {};
     autoStart = true;
     cmd = [
-      "--model=tiny-int8" 
+      "--model=tiny-int8"
       "--language=en"
     ];
   };
@@ -29,7 +31,7 @@ in {
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
     ports = ["${toString cfg.port.external}:${toString cfg.port.internal}"];
-    
+
     # Optional configs
     extraOptions = cfg.extraOptions;
     volumes = cfg.volumes;
@@ -37,14 +39,14 @@ in {
     autoStart = cfg.autoStart;
     cmd = cfg.cmd;
   };
-  
-  networking.firewall.allowedTCPPorts = [ cfg.port.external ];
-  
+
+  networking.firewall.allowedTCPPorts = [cfg.port.external];
+
   services.gatus.settings.endpoints = [
     {
-      name      = cfg.name;
-      url       = "tcp://${ip}:${toString cfg.port.external}";
-      interval  = "1m";
+      name = cfg.name;
+      url = "tcp://${ip}:${toString cfg.port.external}";
+      interval = "1m";
       conditions = [
         "[CONNECTED] == true"
       ];

@@ -1,7 +1,6 @@
 # All packages for the desktop environment
 # Consolidated from hyprland, waybar, rofi, and theming modules
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # === Hyprland ecosystem ===
     swaybg
@@ -52,9 +51,9 @@
     kdePackages.qt6ct
     libsForQt5.qtstyleplugin-kvantum
     kdePackages.qtstyleplugin-kvantum
-    nordic                          # Kvantum Nordic theme
-    kdePackages.breeze-icons        # Breeze icon theme for Qt6
-    kdePackages.breeze              # Breeze style for Qt6
+    nordic # Kvantum Nordic theme
+    kdePackages.breeze-icons # Breeze icon theme for Qt6
+    kdePackages.breeze # Breeze style for Qt6
 
     # === Fonts ===
     fira
@@ -64,7 +63,7 @@
     nerd-fonts.fira-mono
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
-    
+
     wev
   ];
 }

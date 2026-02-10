@@ -1,6 +1,8 @@
-{ lib, config, ... }:
-
-let
+{
+  lib,
+  config,
+  ...
+}: let
   domain = "laufin.xyz";
   ip = "192.168.2.50";
   appdata = "/var/lib/containers/";
@@ -26,17 +28,17 @@ in {
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
     ports = ["${toString cfg.port.external}:${toString cfg.port.internal}"];
-    
+
     # Optional configs
     extraOptions = cfg.extraOptions;
     volumes = cfg.volumes;
     environment = cfg.environmentVariables;
     autoStart = cfg.autoStart;
     environmentFiles = [
-      config.sops.secrets.hass_mariadb_password.path 
+      config.sops.secrets.hass_mariadb_password.path
       config.sops.secrets.hass_mariadb_root_password.path
     ];
   };
-  
-  networking.firewall.allowedTCPPorts = [ cfg.port.external ];
+
+  networking.firewall.allowedTCPPorts = [cfg.port.external];
 }

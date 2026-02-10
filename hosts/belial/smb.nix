@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # CIFS utilities for mounting SMB shares
-  environment.systemPackages = [ pkgs.cifs-utils ];
+  environment.systemPackages = [pkgs.cifs-utils];
 
   # SMB credentials secret
   sops.secrets.smb_credentials = {

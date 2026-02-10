@@ -1,7 +1,5 @@
 # Custom scripts for desktop environment
-{ pkgs, ... }:
-
-let
+{pkgs, ...}: let
   toggle-audio = pkgs.writeShellScriptBin "toggle-audio" ''
     # toggle-audio — cycle through all sinks, move streams, and notify
     mapfile -t sinks < <(${pkgs.pulseaudio}/bin/pactl list short sinks | ${pkgs.gawk}/bin/awk '{print $2}')
@@ -154,7 +152,6 @@ let
     sleep 0.5
     hyprctl dispatch workspace number 1
   '';
-
 in {
   home.packages = [
     toggle-audio
