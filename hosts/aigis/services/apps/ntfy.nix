@@ -1,33 +1,35 @@
 # ntfy.nix
-{ config, pkgs, lib, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   name = "ntfy";
   port = 8081;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
-in
-{
+in {
   services.ntfy-sh.enable = true;
   services.ntfy-sh.settings = {
     base-url = "http://${ip}";
     listen-http = ":${toString port}";
   };
-  
-  networking.firewall.allowedTCPPorts = [ port ];
-  
+
+  networking.firewall.allowedTCPPorts = [port];
+
   services.gatus.settings.endpoints = [
     {
-      name      = name;
-      url       = "http://${ip}:${toString port}";
-      interval  = "1m";
+      name = name;
+      url = "http://${ip}:${toString port}";
+      interval = "1m";
       conditions = [
         "[STATUS] == 200"
       ];
     }
   ];
-  
-  services.caddy.virtualHosts = 
-  {
+
+  services.caddy.virtualHosts = {
     "${name}.${domain}" = {
       extraConfig = ''
         reverse_proxy 127.0.0.1:${toString port} {
@@ -42,5 +44,4 @@ in
       '';
     };
   };
-  
 }

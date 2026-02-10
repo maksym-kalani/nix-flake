@@ -1,42 +1,44 @@
-{ lib, config, ... }:
-
-let
+{
+  lib,
+  config,
+  ...
+}: let
   domain = "laufin.xyz";
   ip = "192.168.2.50";
   appdata = "/var/lib/containers/";
   UID = 888;
-  GID = 990; 
+  GID = 990;
   # Configuration options with defaults
   cfg = {
     # Container name
     name = "qbittorrent";
-    
+
     # Container image
     image = "lscr.io/linuxserver/qbittorrent:latest";
-    
+
     # Container port configuration
     port = {
       internal = 8082; # Port inside the container
       external = 8082; # Port on the host
     };
-    
+
     # Optional settings with defaults
     extraOptions = [
       # Resource constraints
       #"--memory=512m"
       #"--cpus=2"
-      
+
       # Network settings
       #"--network=host"
-      
+
       # Security options
       #"--cap-drop=ALL"
       #"--cap-add=NET_BIND_SERVICE"
-      
+
       # Health check
       #"--health-cmd=curl -f http://localhost/ || exit 1"
       #"--health-interval=30s"
-      
+
       # Labels
       #"--label=com.example.description=Web server"
     ];
@@ -44,14 +46,14 @@ let
       # Simple host:container path mapping
       "${appdata}${cfg.name}:/config"
       "/mnt/tank/media/downloads:/mnt/tank/media/downloads"
-      "/mnt/incomplete:/mnt/incomplete" 
-      
+      "/mnt/incomplete:/mnt/incomplete"
+
       # Configuration with read-only flag
       #"/config/files:/etc/nginx/conf.d:ro"
-      
+
       # Named volume
       #"nginx-data:/var/www/html"
-      
+
       # Bind mount with specific options
       #"/var/log/nginx:/var/log/nginx:Z"
     ];
@@ -68,7 +70,7 @@ let
       #ENABLE_GZIP = "true";
       #DEBUG_MODE = "false";
     };
-    
+
     # Run settings
     autoStart = true;
   };
@@ -78,31 +80,31 @@ in {
       isSystemUser = true;
       uid = UID;
       group = "tankusers";
-    };    
-  };      
+    };
+  };
   # Container definition
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
     ports = [
-    "${toString cfg.port.external}:${toString cfg.port.internal}"
-    "6881:6881"
-    "6881:6881/udp"
+      "${toString cfg.port.external}:${toString cfg.port.internal}"
+      "6881:6881"
+      "6881:6881/udp"
     ];
-    
+
     # Optional configs
     extraOptions = cfg.extraOptions;
     volumes = cfg.volumes;
     environment = cfg.environmentVariables;
     autoStart = cfg.autoStart;
   };
-  
-  networking.firewall.allowedTCPPorts = [ cfg.port.external 6881 ];
-  
+
+  networking.firewall.allowedTCPPorts = [cfg.port.external 6881];
+
   services.gatus.settings.endpoints = [
     {
-      name      = cfg.name;
-      url       = "http://${ip}:${toString cfg.port.external}";
-      interval  = "1m";
+      name = cfg.name;
+      url = "http://${ip}:${toString cfg.port.external}";
+      interval = "1m";
       conditions = [
         "[STATUS] == 200"
       ];
@@ -118,9 +120,8 @@ in {
       ];
     }
   ];
-  
-  services.caddy.virtualHosts = 
-  {
+
+  services.caddy.virtualHosts = {
     "${cfg.name}.${domain}" = {
       extraConfig = ''
         reverse_proxy 127.0.0.1:${toString cfg.port.external}

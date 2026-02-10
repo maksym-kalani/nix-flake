@@ -1,8 +1,6 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   colors = import ./colors.nix;
-in
-{
+in {
   programs.waybar = {
     enable = true;
 

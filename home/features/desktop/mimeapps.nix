@@ -1,6 +1,5 @@
 # XDG MIME type associations (file type defaults)
-{ ... }:
-{
+{...}: {
   xdg.mimeApps = {
     enable = true;
 

@@ -3,14 +3,10 @@
   pkgs,
   lib,
   ...
-}:
-
-let
+}: let
   colors = import ./colors.nix;
   wallpaper = ./assets/wallpaper.png;
-in
-{
-
+in {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -152,7 +148,7 @@ in
         preserve_split = true;
       };
 
-      master = { };
+      master = {};
 
       binds = {
         workspace_back_and_forth = false;

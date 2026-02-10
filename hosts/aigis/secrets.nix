@@ -1,11 +1,13 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
     age.keyFile = "/home/maksym/.config/sops/age/keys.txt";
-    
+
     secrets = {
       eklesa_hashed_password = {
         key = "eklesa_hashed_password";

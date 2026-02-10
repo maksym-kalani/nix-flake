@@ -1,16 +1,15 @@
-{pkgs, ...}:
-let
+{pkgs, ...}: let
   colors = import ./colors.nix;
   wallpaper = ./assets/wallpaper.png;
 
   # Generate blurred wallpaper at build time
-  blurredWallpaper = pkgs.runCommand "blurred-wallpaper.png" {
-    nativeBuildInputs = [ pkgs.imagemagick ];
-  } ''
-    convert ${wallpaper} -blur 0x50 -brightness-contrast -10x-10 $out
-  '';
-in
-{
+  blurredWallpaper =
+    pkgs.runCommand "blurred-wallpaper.png" {
+      nativeBuildInputs = [pkgs.imagemagick];
+    } ''
+      convert ${wallpaper} -blur 0x50 -brightness-contrast -10x-10 $out
+    '';
+in {
   programs.rofi = {
     enable = true;
     package = pkgs.rofi;
