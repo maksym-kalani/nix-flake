@@ -176,6 +176,8 @@ in
         "swaybg -i ${wallpaper} -m fill"
         "waybar"
         "wl-paste --watch cliphist store"
+        "gsettings set org.gnome.desktop.interface gtk-theme \"Adwaita-dark\""
+        "gsettings set org.gnome.desktop.interface color-scheme \"prefer-dark\""
       ];
 
       bind = [
