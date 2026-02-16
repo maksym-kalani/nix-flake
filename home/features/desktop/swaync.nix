@@ -1,6 +1,8 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   colors = import ./colors.nix;
-in {
+in
+{
   # Config file (JSON)
   xdg.configFile."swaync/config.json".text = builtins.toJSON {
     "$schema" = "/etc/xdg/swaync/configSchema.json";
@@ -9,17 +11,17 @@ in {
     layer = "overlay";
     cssPriority = "user";
 
-    control-center-width = 360;
+    control-center-width = 450;
     control-center-height = 560;
     control-center-margin-top = 13;
     control-center-margin-bottom = 13;
     control-center-margin-right = 14;
     control-center-margin-left = 0;
 
-    notification-window-width = 300;
-    notification-icon-size = 24;
-    notification-body-image-height = 100;
-    notification-body-image-width = 200;
+    notification-window-width = 450;
+    notification-icon-size = 120;
+    notification-body-image-height = 200;
+    notification-body-image-width = 400;
 
     timeout = 4;
     timeout-low = 2;
@@ -33,7 +35,7 @@ in {
     hide-on-action = true;
     script-fail-notify = true;
 
-    scripts = {};
+    scripts = { };
 
     notification-visibility = {
       example-name = {
@@ -115,7 +117,7 @@ in {
 
     * {
       color: @text;
-      font-size: 1rem;
+      font-size: 2rem;
       font-weight: 900;
       all: unset;
       font-family: "Fira Sans Semibold", "Font Awesome 6 Free", "Font Awesome 6 Brands", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
