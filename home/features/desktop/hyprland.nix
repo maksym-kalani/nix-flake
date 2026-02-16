@@ -3,10 +3,12 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   colors = import ./colors.nix;
   wallpaper = ./assets/wallpaper.png;
-in {
+in
+{
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -148,7 +150,7 @@ in {
         preserve_split = true;
       };
 
-      master = {};
+      master = { };
 
       binds = {
         workspace_back_and_forth = false;
@@ -300,14 +302,13 @@ in {
         "$mainMod, mouse:273, resizewindow"
       ];
 
-      layerrule2 = [
-        "blur, waybar"
-        "blur, swaync-control-center"
-        "blur, swaync-notification-window"
-        "ignorezero, swaync-control-center"
-        "ignorezero, swaync-notification-window"
-        "ignorealpha 0.5, swaync-control-center"
-        "ignorealpha 0.5, swaync-notification-window"
+      layerrule = [
+        "blur on, match:namespace waybar"
+        "blur on, match:namespace swaync-control-center"
+        "blur on, match:namespace swaync-notification-window"
+        "ignore_alpha 0.01, match:namespace waybar"
+        "ignore_alpha 0, match:namespace swaync-control-center"
+        "ignore_alpha 0, match:namespace swaync-notification-window"
       ];
 
       windowrule = [
