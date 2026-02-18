@@ -1,6 +1,8 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   colors = import ./colors.nix;
-in {
+in
+{
   programs.waybar = {
     enable = true;
 
@@ -24,6 +26,7 @@ in {
         ];
 
         modules-right = [
+          "mpris"
           "hyprland/language"
           "pulseaudio"
           "bluetooth"
@@ -156,6 +159,20 @@ in {
           interval = 30;
           on-click = "blueman-manager";
           format-no-controller = "";
+        };
+
+        mpris = {
+          format = "{player_icon}  {artist} - {title}";
+          format-paused = "{player_icon}  {artist} - {title}";
+          player-icons = {
+            spotify = "";
+            mpv = "";
+            firefox = "";
+            chromium = "";
+            default = "";
+          };
+          tooltip-format = "{player}\n{artist} — {title}";
+          max-length = 50;
         };
       }
       {
@@ -416,6 +433,16 @@ in {
       #bluetooth,
       #bluetooth.on,
       #bluetooth.connected {
+        background-color: @backgroundlight;
+        font-size: 16px;
+        color: @textcolor2;
+        border-radius: 15px;
+        padding: 2px 10px 0px 10px;
+        margin: 8px 15px 8px 0px;
+        opacity: 0.8;
+      }
+
+      #mpris {
         background-color: @backgroundlight;
         font-size: 16px;
         color: @textcolor2;
