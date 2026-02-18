@@ -225,7 +225,7 @@ in
 
         # Screenshot
         ", PRINT, exec, grim -g \"$(slurp)\" - | wl-copy"
-        "$mainMod, PRINT, exec, grim - | wl-copy"
+        "$mainMod, PRINT, exec, grim -g \"$(slurp)\" - | satty --filename -"
         "$mainMod SHIFT, PRINT, exec, grim -g \"$(slurp)\" ~/Pictures/Screenshots/$(date +%Y%m%d_%H%M%S).png"
 
         # Workspaces

@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./home.nix
     ../common
@@ -49,5 +50,6 @@
     nixd
     gnome-calendar
     gnome-calculator
+    satty
   ];
 }
