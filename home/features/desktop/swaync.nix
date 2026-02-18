@@ -19,7 +19,7 @@ in
     control-center-margin-left = 0;
 
     notification-window-width = 450;
-    notification-icon-size = 120;
+    notification-icon-size = 96;
     notification-body-image-height = 200;
     notification-body-image-width = 400;
 
@@ -201,6 +201,10 @@ in
       .notification-action:active {
       background-color: @primary;
       color: @text;
+    }
+
+    .notification-content .image {
+      margin-right: 12px;
     }
 
     .summary {
