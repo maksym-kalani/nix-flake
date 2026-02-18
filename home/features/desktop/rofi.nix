@@ -1,15 +1,19 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   colors = import ./colors.nix;
   wallpaper = ./assets/wallpaper.png;
 
   # Generate blurred wallpaper at build time
   blurredWallpaper =
-    pkgs.runCommand "blurred-wallpaper.png" {
-      nativeBuildInputs = [pkgs.imagemagick];
-    } ''
-      convert ${wallpaper} -blur 0x50 -brightness-contrast -10x-10 $out
-    '';
-in {
+    pkgs.runCommand "blurred-wallpaper.png"
+      {
+        nativeBuildInputs = [ pkgs.imagemagick ];
+      }
+      ''
+        convert ${wallpaper} -blur 0x50 -brightness-contrast -10x-10 $out
+      '';
+in
+{
   programs.rofi = {
     enable = true;
     package = pkgs.rofi;
@@ -48,7 +52,7 @@ in {
 
     window {
       height: 35em;
-      width: 56em;
+      width: 30em;
       transparency: "real";
       fullscreen: false;
       enabled: true;
@@ -65,21 +69,10 @@ in {
       enabled: true;
       spacing: 0em;
       padding: 0em;
-      orientation: horizontal;
-      children: [ "imagebox", "listbox" ];
+      orientation: vertical;
+      children: [ "inputbar", "listview" ];
       background-color: transparent;
       background-image: @current-image;
-    }
-
-    imagebox {
-      padding: 20px;
-      background-color: transparent;
-      orientation: vertical;
-      children: [ "inputbar", "dummy" ];
-    }
-
-    dummy {
-      background-color: transparent;
     }
 
     mode-switcher {
@@ -135,18 +128,11 @@ in {
       placeholder-color: inherit;
     }
 
-    listbox {
-      padding: 0em;
-      spacing: 0em;
-      orientation: horizontal;
-      children: [ "listview" ];
-      background-color: @background;
-    }
-
     listview {
       padding: 1.5em;
       spacing: 0.5em;
       enabled: true;
+      border: 0;
       columns: 1;
       lines: 10;
       cycle: true;
