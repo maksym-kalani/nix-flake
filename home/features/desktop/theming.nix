@@ -1,4 +1,5 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   colors = import ./colors.nix;
 
   # GTK CSS color definitions to override Adwaita colors
@@ -26,7 +27,8 @@
     @define-color sidebar_border_color @window_bg_color;
     @define-color sidebar_backdrop_color @window_bg_color;
   '';
-in {
+in
+{
   gtk = {
     enable = true;
 
@@ -47,7 +49,7 @@ in {
     };
 
     font = {
-      name = "Cantarell";
+      name = "Noto Sans";
       size = 11;
     };
 
@@ -146,5 +148,22 @@ in {
   '';
 
   # Fonts for waybar, rofi, etc.
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = { };
+  };
+
+  xdg.configFile."fontconfig/conf.d/10-antialiasing.conf".text = ''
+    <?xml version="1.0"?>
+    <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+    <fontconfig>
+      <match target="font">
+        <edit name="antialias" mode="assign"><bool>true</bool></edit>
+        <edit name="hinting" mode="assign"><bool>true</bool></edit>
+        <edit name="hintstyle" mode="assign"><const>hintslight</const></edit>
+        <edit name="rgba" mode="assign"><const>rgb</const></edit>
+        <edit name="lcdfilter" mode="assign"><const>lcddefault</const></edit>
+      </match>
+    </fontconfig>
+  '';
 }
