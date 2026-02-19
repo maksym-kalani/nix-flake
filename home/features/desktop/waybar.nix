@@ -29,8 +29,8 @@ in
           "mpris"
           "hyprland/language"
           "pulseaudio"
-          "bluetooth"
           "tray"
+          "bluetooth"
           "custom/notification"
           "custom/exit"
           "clock"
@@ -433,7 +433,7 @@ in
       #bluetooth,
       #bluetooth.on,
       #bluetooth.connected {
-        margin: 0px 0px 0px 0px;
+        margin: 0px 13px 0px 0px;
         padding: 0px;
         font-size: 20px;
         color: @iconcolor;
