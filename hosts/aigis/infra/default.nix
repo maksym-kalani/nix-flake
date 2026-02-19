@@ -6,5 +6,7 @@
     ./samba.nix
     ./restic-backup.nix
     ./ntfy-on-ssh.nix
+    ./ssh.nix
+    ./zfs.nix
   ];
 }
