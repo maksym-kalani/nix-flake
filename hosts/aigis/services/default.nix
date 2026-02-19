@@ -8,6 +8,5 @@
     ./samba.nix
     ./ntfy-on-ssh.nix
     ./restic-backup.nix
-    ./health-monitor.nix
   ];
 }
