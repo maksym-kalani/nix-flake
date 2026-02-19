@@ -4,29 +4,23 @@
   pkgs,
   ...
 }:
-with lib; let
-  cfg = config.services.podman;
-in {
-  options.services.podman.enable = mkEnableOption "enable podman";
-
-  config = mkIf cfg.enable {
-    virtualisation = {
-      podman = {
+{
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      autoPrune = {
         enable = true;
-        dockerCompat = true;
-        autoPrune = {
-          enable = true;
-          dates = "weekly";
-          flags = [
-            "--filter=until=24h"
-            "--filter=label!=important"
-          ];
-        };
-        defaultNetwork.settings.dns_enabled = false;
+        dates = "weekly";
+        flags = [
+          "--filter=until=24h"
+          "--filter=label!=important"
+        ];
       };
+      defaultNetwork.settings.dns_enabled = false;
     };
-    environment.systemPackages = with pkgs; [
-      podman-compose
-    ];
   };
+  environment.systemPackages = with pkgs; [
+    podman-compose
+  ];
 }
