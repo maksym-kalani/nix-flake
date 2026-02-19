@@ -36,13 +36,12 @@
   imports = [
     ../common
     ./configuration.nix
+    ./infra
     ./services
     ./health
     ./secrets.nix
     ./users
   ];
-
-  services.podman.enable = true;
 
   environment.interactiveShellInit = ''
     alias rebuild='sudo nixos-rebuild switch --flake .#aigis'
