@@ -1,12 +1,33 @@
 {
   imports = [
-    ./containers
-    ./apps
-    ./caddy.nix
-    ./podman.nix
-    ./wireguard.nix
-    ./samba.nix
-    ./ntfy-on-ssh.nix
-    ./restic-backup.nix
+    ./flame-homepage.nix
+    ./fusion.nix
+    ./gatus.nix
+    ./hass-mariadb.nix
+    ./immich.nix
+    ./it-tools.nix
+    ./jellyfin.nix
+    ./jellyseerr.nix
+    ./karakeep.nix
+    ./kavita.nix
+    ./kiwix.nix
+    ./local-content-share.nix
+    ./local-voice
+    ./matrix-admin.nix
+    ./mazanoke.nix
+    ./morphos.nix
+    ./ntfy.nix
+    ./omni-tools.nix
+    ./prowlarr.nix
+    ./qbittorrent.nix
+    ./radarr.nix
+    ./recommendarr.nix
+    ./searxng.nix
+    ./sonarr.nix
+    ./stirling-pdf.nix
+    ./tachidesk.nix
+    ./technitium-dns.nix
+    ./vikunja.nix
+    ./wallos.nix
   ];
 }
