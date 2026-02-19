@@ -1,6 +1,7 @@
 # All packages for the desktop environment
 # Consolidated from hyprland, waybar, rofi, and theming modules
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     # === Hyprland ecosystem ===
     swaybg
@@ -57,13 +58,12 @@
 
     # === Fonts ===
     fira
-    fira-sans
+    inter
     fira-code
     nerd-fonts.fira-code
     nerd-fonts.fira-mono
     nerd-fonts.jetbrains-mono
-    nerd-fonts.symbols-only
-
+    inter
     wev
   ];
 }

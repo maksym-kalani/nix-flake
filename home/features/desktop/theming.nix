@@ -49,7 +49,7 @@ in
     };
 
     font = {
-      name = "Noto Sans";
+      name = "Inter";
       size = 11;
     };
 
@@ -97,7 +97,7 @@ in
 
     [Fonts]
     fixed="Monospace,10,-1,5,50,0,0,0,0,0"
-    general="Noto Sans,10,-1,5,50,0,0,0,0,0"
+    general="Inter,10,-1,5,50,0,0,0,0,0"
 
     [Interface]
     activate_item_on_single_click=1

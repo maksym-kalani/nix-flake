@@ -120,7 +120,7 @@ in
       font-size: 2rem;
       font-weight: 900;
       all: unset;
-      font-family: "Fira Sans Semibold", "Font Awesome 6 Free", "Font Awesome 6 Brands", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+      font-family: "Inter", "Font Awesome 6 Free", "Font Awesome 6 Brands", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
       transition: 200ms;
     }
 
@@ -276,7 +276,7 @@ in
       color: @text;
       font-size: 1rem;
       font-weight: 900;
-      font-family: "Fira Sans Semibold", "Symbols Nerd Font", "Font Awesome 7 Free",
+      font-family: "Inter", "JetBrainsMono Nerd Font Propo", "Font Awesome 7 Free",
       "Font Awesome 7 Brands", "Font Awesome 6 Free", "Font Awesome 6 Brands",
       FontAwesome;
       transition: 200ms;

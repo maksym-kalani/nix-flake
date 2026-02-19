@@ -1,14 +1,17 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   colors = import ./colors.nix;
   wallpaper = ./assets/wallpaper.png;
 
   # Generate blurred wallpaper at build time
   blurredWallpaper =
-    pkgs.runCommand "wlogout-blurred-wallpaper.png" {
-      nativeBuildInputs = [pkgs.imagemagick];
-    } ''
-      convert ${wallpaper} -blur 0x50 -brightness-contrast -10x-10 $out
-    '';
+    pkgs.runCommand "wlogout-blurred-wallpaper.png"
+      {
+        nativeBuildInputs = [ pkgs.imagemagick ];
+      }
+      ''
+        convert ${wallpaper} -blur 0x50 -brightness-contrast -10x-10 $out
+      '';
 
   # Wlogout launcher script with dynamic margins based on monitor
   wlogoutScript = pkgs.writeShellScriptBin "wlogout-launcher" ''
@@ -17,8 +20,9 @@
     w_margin=$((res_h * 27 / h_scale))
     wlogout -b 3 -T $w_margin -B $w_margin
   '';
-in {
-  home.packages = [wlogoutScript];
+in
+{
+  home.packages = [ wlogoutScript ];
 
   programs.wlogout = {
     enable = true;
@@ -46,7 +50,7 @@ in {
 
     style = ''
       * {
-        font-family: "Fira Sans Semibold", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+        font-family: "Inter", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
         background-image: none;
         transition: 20ms;
         box-shadow: none;
