@@ -37,8 +37,7 @@
     ../common
     ./configuration.nix
     ./services
-    ./zfs-logging.nix
-    ./zfs-error-notifications.nix
+    ./health
     ./secrets.nix
     ./users
   ];
