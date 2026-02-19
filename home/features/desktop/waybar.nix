@@ -256,7 +256,7 @@ in
 
       /* General */
       * {
-        font-family: "Fira Sans Semibold", "Symbols Nerd Font Propo", Roboto, Helvetica, Arial, sans-serif;
+        font-family: "Inter Semibold", "JetBrainsMono Nerd Font Propo", Roboto, Helvetica, Arial, sans-serif;
         border: none;
         border-radius: 0px;
       }
@@ -282,7 +282,7 @@ in
         font-weight: bold;
         font-style: normal;
         opacity: 0.8;
-        font-size: 16px;
+        font-size: 14px;
         color: @textcolor1;
       }
 
@@ -333,7 +333,7 @@ in
         padding: 2px 10px 0px 10px;
         border-radius: 12px;
         color: @textcolor2;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: normal;
         opacity: 0.8;
       }
@@ -372,7 +372,7 @@ in
       /* Language */
       #language {
         background-color: @backgroundlight;
-        font-size: 16px;
+        font-size: 14px;
         color: @textcolor2;
         border-radius: 15px;
         padding: 2px 10px 0px 10px;
@@ -383,7 +383,7 @@ in
       /* Clock */
       #clock {
         background-color: @backgrounddark;
-        font-size: 16px;
+        font-size: 14px;
         color: @textcolor1;
         border-radius: 15px;
         padding: 1px 10px 0px 10px;
@@ -395,7 +395,7 @@ in
       /* Pulseaudio */
       #pulseaudio {
         background-color: @backgroundlight;
-        font-size: 16px;
+        font-size: 14px;
         color: @textcolor2;
         border-radius: 15px;
         padding: 2px 10px 0px 10px;
@@ -411,7 +411,7 @@ in
       /* Network */
       #network {
         background-color: @backgroundlight;
-        font-size: 16px;
+        font-size: 14px;
         color: @textcolor2;
         border-radius: 15px;
         padding: 2px 10px 0px 10px;
@@ -442,7 +442,7 @@ in
 
       #mpris {
         background-color: @backgroundlight;
-        font-size: 16px;
+        font-size: 14px;
         color: @textcolor2;
         border-radius: 15px;
         padding: 2px 10px 0px 10px;

@@ -26,7 +26,7 @@ in
   xdg.configFile."rofi/config.rasi".text = ''
     configuration {
       modi: "drun,filebrowser,window,run";
-      font: "Fira Sans 11";
+      font: "Inter 11";
       show-icons: true;
       display-drun: " ";
       display-run: " ";
@@ -52,7 +52,7 @@ in
 
     window {
       height: 35em;
-      width: 30em;
+      width: 36em;
       transparency: "real";
       fullscreen: false;
       enabled: true;
@@ -208,7 +208,7 @@ in
   xdg.configFile."rofi/config-cliphist.rasi".text = ''
     configuration {
       modi: "drun";
-      font: "Fira Sans 11";
+      font: "Inter 11";
       show-icons: false;
       hover-select: false;
       scroll-method: 1;
