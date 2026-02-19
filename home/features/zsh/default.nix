@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   programs.zsh = {
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
@@ -86,7 +87,6 @@
   home.packages = with pkgs; [
     eza
     fzf
-    fastfetch
     oh-my-posh
     neovim
   ];
