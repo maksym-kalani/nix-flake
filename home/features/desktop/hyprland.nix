@@ -18,7 +18,7 @@ in
       monitor = [
         "DP-1,3440x1440@144,0x0,1"
         "DP-2,1920x1080@100,3440x0,1,transform,3"
-        #"HDMI-A-1,3840x2160@60,-3840x0,1"
+        "HDMI-A-1,disable"
       ];
 
       workspace = [
