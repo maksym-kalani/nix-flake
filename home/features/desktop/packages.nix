@@ -63,7 +63,6 @@
     nerd-fonts.fira-code
     nerd-fonts.fira-mono
     nerd-fonts.jetbrains-mono
-    inter
     wev
   ];
 }
