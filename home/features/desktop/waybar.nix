@@ -130,12 +130,12 @@ in
         };
 
         pulseaudio = {
-          format = "{icon} {volume}%";
-          format-bluetooth = "{volume}% {icon} {format_source}";
-          format-bluetooth-muted = "󰝟 {icon} {format_source}";
-          format-muted = "󰝟 {format_source}";
-          format-source = "{volume}% 󰍬";
-          format-source-muted = "󰍭";
+          format = "<span size='18pt' rise='-3pt'>{icon}</span> {volume}%";
+          format-bluetooth = "{volume}% <span size='18pt' rise='-3pt'>{icon}</span> {format_source}";
+          format-bluetooth-muted = "<span size='18pt' rise='-3pt'>󰝟</span> <span size='18pt' rise='-3pt'>{icon}</span> {format_source}";
+          format-muted = "<span size='18pt' rise='-3pt'>󰝟</span> {format_source}";
+          format-source = "{volume}% <span size='18pt' rise='-3pt'>󰍬</span>";
+          format-source-muted = "<span size='18pt' rise='-3pt'>󰍭</span>";
           format-icons = {
             headphone = "󰋋";
             hands-free = "󰋋";
@@ -162,8 +162,8 @@ in
         };
 
         mpris = {
-          format = "{player_icon}  {artist} - {title}";
-          format-paused = "{player_icon}  {artist} - {title}";
+          format = "<span size='18pt' rise='-3pt'>{player_icon}  </span>{artist} - {title}";
+          format-paused = "<span size='18pt' rise='-3pt'>{player_icon} </span> {artist} - {title}";
           player-icons = {
             spotify = "󰓇";
             mpv = "󰐊";
@@ -398,7 +398,7 @@ in
         font-size: 14px;
         color: @textcolor2;
         border-radius: 15px;
-        padding: 2px 10px 0px 10px;
+        padding: 0px 10px;
         margin: 8px 15px 8px 0px;
         opacity: 0.8;
       }
@@ -433,7 +433,7 @@ in
       #bluetooth,
       #bluetooth.on,
       #bluetooth.connected {
-        margin: 0px 13px 0px 0px;
+        margin: 0px 0px 0px 0px;
         padding: 0px;
         font-size: 20px;
         color: @iconcolor;
@@ -445,7 +445,7 @@ in
         font-size: 14px;
         color: @textcolor2;
         border-radius: 15px;
-        padding: 2px 10px 0px 10px;
+        padding: 0px 10px;
         margin: 8px 15px 8px 0px;
         opacity: 0.8;
       }
