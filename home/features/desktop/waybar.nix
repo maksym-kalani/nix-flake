@@ -153,7 +153,7 @@ in
         };
 
         bluetooth = {
-          format = "󰂯 {status}";
+          format = "󰂯";
           format-disabled = "";
           format-off = "";
           interval = 30;
@@ -165,11 +165,11 @@ in
           format = "{player_icon}  {artist} - {title}";
           format-paused = "{player_icon}  {artist} - {title}";
           player-icons = {
-            spotify = "";
-            mpv = "";
-            firefox = "";
-            chromium = "";
-            default = "";
+            spotify = "󰓇";
+            mpv = "󰐊";
+            firefox = "󰈹";
+            chromium = "󰊯";
+            default = "󰎆";
           };
           tooltip-format = "{player}\n{artist} — {title}";
           max-length = 50;
@@ -256,7 +256,7 @@ in
 
       /* General */
       * {
-        font-family: "Fira Sans Semibold", "Font Awesome 6 Free", "Font Awesome 6 Brands", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+        font-family: "Fira Sans Semibold", "Symbols Nerd Font Propo", Roboto, Helvetica, Arial, sans-serif;
         border: none;
         border-radius: 0px;
       }
@@ -433,12 +433,10 @@ in
       #bluetooth,
       #bluetooth.on,
       #bluetooth.connected {
-        background-color: @backgroundlight;
-        font-size: 16px;
-        color: @textcolor2;
-        border-radius: 15px;
-        padding: 2px 10px 0px 10px;
-        margin: 8px 15px 8px 0px;
+        margin: 0px 13px 0px 0px;
+        padding: 0px;
+        font-size: 20px;
+        color: @iconcolor;
         opacity: 0.8;
       }
 
@@ -453,9 +451,11 @@ in
       }
 
       #bluetooth.off {
-        background-color: transparent;
+        margin: 0px 13px 0px 0px;
         padding: 0px;
-        margin: 0px;
+        font-size: 20px;
+        color: @iconcolor;
+        opacity: 0.8;
       }
 
       /* Tray */
