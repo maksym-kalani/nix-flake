@@ -1,13 +1,14 @@
 {
-  config,
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   # Replace these with your real ntfy.sh topics/URLs:
   ntfyTopicZfs = "http://localhost:8081/homelab";
   ntfyTopicSmart = "http://localhost:8081/homelab";
-in {
+in
+{
   ############################################################################
   # 1) SMARTD Notifier Script                                                 #
   ############################################################################
@@ -76,14 +77,14 @@ in {
       Type = "oneshot";
       ExecStart = "${pkgs.bash}/bin/bash /etc/zfs-health-check.sh";
     };
-    wantedBy = ["multi-user.target"];
+    wantedBy = [ "multi-user.target" ];
   };
 
   # 3.c) Attach a timer that fires hourly *and* points back at the above service.
   #       Note: the “Unit” must live inside timerConfig, not at top‐level.
   systemd.timers."zfs-health-check" = {
     description = "Run ZFS health check every hour";
-    wantedBy = ["timers.target"];
+    wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "hourly"; # Every hour on the hour :contentReference[oaicite:2]{index=2}
       Persistent = true; # Catch up if the machine was off

@@ -1,9 +1,8 @@
 {
-  config,
   pkgs,
-  lib,
   ...
-}: {
+}:
+{
   # ZFS Event Daemon (ZED) → writes events to its debug log & syslog
   systemd.services."zfs-zed".enable = true;
   services.zfs.zed.settings = {
@@ -17,8 +16,8 @@
 
   systemd.services.zpool-events = {
     description = "Stream zpool events into journald";
-    after = ["zfs-import.target"];
-    wantedBy = ["multi-user.target"];
+    after = [ "zfs-import.target" ];
+    wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       ExecStart = "${pkgs.zfs}/bin/zpool events -f";
       StandardOutput = "journal";

@@ -3,14 +3,16 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   domain = "laufin.xyz";
   ip = "192.168.2.50";
   name = "gatus";
   ntfyLink = "http://192.168.2.50:8081";
   ntfyTopic = "health";
   port = 8080;
-in {
+in
+{
   services.gatus = {
     enable = true;
     # you can override the package if you like
@@ -104,7 +106,7 @@ in {
               type = "ntfy";
               enabled = true;
               send-on-resolved = true;
-              description = "Cloudflare Tunnel health check";
+              description = "Kavita on Morgana health check";
               failure-threshold = 3;
               success-threshold = 1;
             }
@@ -122,7 +124,7 @@ in {
               type = "ntfy";
               enabled = true;
               send-on-resolved = true;
-              description = "Cloudflare Tunnel health check";
+              description = "Synapse on Morgana health check";
               failure-threshold = 3;
               success-threshold = 1;
             }
@@ -140,7 +142,7 @@ in {
               type = "ntfy";
               enabled = true;
               send-on-resolved = true;
-              description = "Cloudflare Tunnel health check";
+              description = "DNS 2 on Morgana health check";
               failure-threshold = 3;
               success-threshold = 1;
             }
@@ -158,5 +160,5 @@ in {
     };
   };
 
-  networking.firewall.allowedTCPPorts = [port];
+  networking.firewall.allowedTCPPorts = [ port ];
 }

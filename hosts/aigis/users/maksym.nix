@@ -1,9 +1,5 @@
+{ ... }:
 {
-  config,
-  pkgs,
-  inputs,
-  ...
-}: {
   users.users.maksym = {
     extraGroups = [
       "tankusers"
