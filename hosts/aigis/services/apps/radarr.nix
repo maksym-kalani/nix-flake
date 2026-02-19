@@ -3,18 +3,19 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   name = "radarr";
   port = 7878;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
-in {
+in
+{
   services.radarr = {
     enable = true;
     openFirewall = true;
   };
-  users.users.radarr.extraGroups = ["tankusers"];
-  networking.firewall.allowedTCPPorts = [port];
+  users.users.radarr.extraGroups = [ "tankusers" ];
 
   services.gatus.settings.endpoints = [
     {

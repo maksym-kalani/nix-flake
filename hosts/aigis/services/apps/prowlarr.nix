@@ -3,18 +3,18 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   name = "prowlarr";
   port = 9696;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
-in {
+in
+{
   services.prowlarr = {
     enable = true;
     openFirewall = true;
   };
-
-  networking.firewall.allowedTCPPorts = [port];
 
   services.gatus.settings.endpoints = [
     {

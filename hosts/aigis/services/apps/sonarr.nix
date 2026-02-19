@@ -3,18 +3,19 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   name = "sonarr";
   port = 8989;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
-in {
+in
+{
   services.sonarr = {
     enable = true;
     openFirewall = true;
   };
-  users.users.sonarr.extraGroups = ["tankusers"];
-  networking.firewall.allowedTCPPorts = [port];
+  users.users.sonarr.extraGroups = [ "tankusers" ];
 
   services.gatus.settings.endpoints = [
     {
