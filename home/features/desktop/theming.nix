@@ -34,7 +34,7 @@ in
 
     theme = {
       name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
+      package = pkgs.gnome-themes-extra;
     };
 
     iconTheme = {
@@ -88,27 +88,27 @@ in
     theme=Nordic-Darker-Solid
   '';
 
-  # Qt5ct configuration
-  xdg.configFile."qt5ct/qt5ct.conf".text = ''
-    [Appearance]
-    color_scheme_path=
-    custom_palette=false
-    style=kvantum
-
-    [Fonts]
-    fixed="Monospace,10,-1,5,50,0,0,0,0,0"
-    general="Inter,10,-1,5,50,0,0,0,0,0"
-
-    [Interface]
-    activate_item_on_single_click=1
-    buttonbox_layout=0
-    cursor_flash_time=1000
-    dialog_buttons_have_icons=1
-    double_click_interval=400
-    gui_effects=@Invalid()
-    menus_have_icons=true
-    stylesheets=@Invalid()
-  '';
+  qt.qt5ctSettings = {
+    Appearance = {
+      color_scheme_path = "";
+      custom_palette = false;
+      style = "kvantum";
+    };
+    Fonts = {
+      fixed = ''"Monospace,10,-1,5,50,0,0,0,0,0"'';
+      general = ''"Inter,10,-1,5,50,0,0,0,0,0"'';
+    };
+    Interface = {
+      activate_item_on_single_click = 1;
+      buttonbox_layout = 0;
+      cursor_flash_time = 1000;
+      dialog_buttons_have_icons = 1;
+      double_click_interval = 400;
+      gui_effects = "@Invalid()";
+      menus_have_icons = true;
+      stylesheets = "@Invalid()";
+    };
+  };
 
   # Qt6ct darker color scheme (matching CachyOS)
   xdg.configFile."qt6ct/colors/darker.conf".text = ''
@@ -118,39 +118,38 @@ in
     inactive_colors=#ffffffff, #ff424245, #ff979797, #ff5e5c5b, #ff302f2e, #ff4a4947, #ffffffff, #ffffffff, #ffffffff, #ff3d3d3d, #ff222020, #ffe7e4e0, #ff12608a, #fff9f9f9, #ff0986d3, #ffa70b06, #ff5c5b5a, #ffffffff, #ff3f3f36, #ffffffff, #80ffffff
   '';
 
-  # Qt6ct configuration - use Breeze with darker palette (matching CachyOS)
-  xdg.configFile."qt6ct/qt6ct.conf".text = ''
-    [Appearance]
-    color_scheme_path=~/.config/qt6ct/colors/darker.conf
-    custom_palette=true
-    icon_theme=breeze-dark
-    standard_dialogs=default
-    style=Breeze
-
-    [Interface]
-    activate_item_on_single_click=1
-    buttonbox_layout=0
-    cursor_flash_time=1000
-    dialog_buttons_have_icons=1
-    double_click_interval=400
-    gui_effects=@Invalid()
-    keyboard_scheme=2
-    menus_have_icons=true
-    show_shortcuts_in_context_menus=true
-    stylesheets=@Invalid()
-    toolbutton_style=4
-    underline_shortcut=1
-    wheel_scroll_lines=3
-
-    [Troubleshooting]
-    force_raster_widgets=1
-    ignored_applications=@Invalid()
-  '';
+  qt.qt6ctSettings = {
+    Appearance = {
+      color_scheme_path = "~/.config/qt6ct/colors/darker.conf";
+      custom_palette = true;
+      icon_theme = "breeze-dark";
+      standard_dialogs = "default";
+      style = "Breeze";
+    };
+    Interface = {
+      activate_item_on_single_click = 1;
+      buttonbox_layout = 0;
+      cursor_flash_time = 1000;
+      dialog_buttons_have_icons = 1;
+      double_click_interval = 400;
+      gui_effects = "@Invalid()";
+      keyboard_scheme = 2;
+      menus_have_icons = true;
+      show_shortcuts_in_context_menus = true;
+      stylesheets = "@Invalid()";
+      toolbutton_style = 4;
+      underline_shortcut = 1;
+      wheel_scroll_lines = 3;
+    };
+    Troubleshooting = {
+      force_raster_widgets = 1;
+      ignored_applications = "@Invalid()";
+    };
+  };
 
   # Fonts for waybar, rofi, etc.
   fonts.fontconfig = {
     enable = true;
-    defaultFonts = { };
     hinting = "slight";
     antialiasing = true;
   };
