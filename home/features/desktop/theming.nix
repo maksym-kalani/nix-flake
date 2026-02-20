@@ -152,5 +152,20 @@ in
     enable = true;
     hinting = "slight";
     antialiasing = true;
+    defaultFonts = {
+      sansSerif = [
+        "Inter"
+        "Noto Color Emoji"
+      ];
+      serif = [
+        "Noto Serif"
+        "Noto Color Emoji"
+      ];
+      monospace = [
+        "JetBrainsMono Nerd Font"
+        "Noto Color Emoji"
+      ];
+      emoji = [ "Noto Color Emoji" ];
+    };
   };
 }
