@@ -6,7 +6,8 @@
   background = "#121318";
   backgroundRgba = "rgba(121318ff)";
   backgroundTransparent = "rgba(18, 19, 24, 0.3)";
-  backgroundDark = "#07164b";
+  backgroundDark = "#1a1b2e";
+  backgroundDarkTransparent = "rgba(43, 45, 68, 0.3)";
 
   # Surface colors
   surface = "#121318";
@@ -23,6 +24,7 @@
 
   # Text/foreground colors
   foreground = "#e3e1e9";
+  foregroundTransparent = "rgba(227, 225, 233, 0.5)";
   onBackground = "#e3e1e9";
   onSurface = "#e3e1e9";
   onSurfaceVariant = "#c6c5d0";
@@ -74,6 +76,9 @@
   # Outline colors
   outline = "#90909a";
   outlineVariant = "#45464f";
+
+  # Focus/Active
+  focus = "#b8c3ff";
 
   # Other
   scrim = "#000000";

@@ -318,9 +318,9 @@ in
         "float on, pin on, center on, match:class (.*org.pulseaudio.pavucontrol.*)"
         "size 700 600, match:class (.*org.pulseaudio.pavucontrol.*)"
 
-        # Waypaper
-        "float on, pin on, center on, match:class (.*waypaper.*)"
-        "size 900 700, match:class (.*waypaper.*)"
+        # Satty
+        "float on, pin on, center on, match:class (.*satty.*)"
+        "size 900 700, match:class (.*satty.*)"
 
         # Blueman Manager
         "float on, center on, match:title (Bluetooth Devices)"
