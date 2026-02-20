@@ -80,18 +80,18 @@ in
 
   # Colors file
   xdg.configFile."swaync/colors.css".text = ''
-    @define-color surface ${colors.surface};
-    @define-color surface_container ${colors.surfaceContainer};
-    @define-color surface_container_high ${colors.surfaceContainerHigh};
-    @define-color surface_container_low ${colors.surfaceContainerLow};
-    @define-color primary ${colors.primary};
+    @define-color surface ${colors.backgroundDark};
+    @define-color surface_container ${colors.backgroundDark};
+    @define-color surface_container_high ${colors.backgroundDark};
+    @define-color surface_container_low ${colors.background};
+    @define-color primary ${colors.focus};
     @define-color primary_container ${colors.primaryContainer};
-    @define-color primary_fixed ${colors.primaryFixed};
-    @define-color on_surface ${colors.onSurface};
-    @define-color on_primary ${colors.onPrimary};
-    @define-color on_primary_fixed ${colors.onPrimaryFixed};
-    @define-color inverse_primary ${colors.inversePrimary};
-    @define-color secondary ${colors.secondary};
+    @define-color primary_fixed ${colors.focus};
+    @define-color on_surface ${colors.focus};
+    @define-color on_primary ${colors.backgroundDark};
+    @define-color on_primary_fixed ${colors.backgroundDark};
+    @define-color inverse_primary ${colors.focus};
+    @define-color secondary ${colors.focus};
     @define-color error_container ${colors.errorContainer};
     @define-color on_error_container ${colors.onErrorContainer};
   '';
@@ -101,9 +101,9 @@ in
     @import 'colors.css';
 
     /* === Derived dynamic colors === */
-    @define-color base alpha(@surface, 0.5);
-    @define-color surface_custom alpha(@surface_container_high,0.8);
-    @define-color hovercolor alpha(@surface_container_high,0.8);
+    @define-color base alpha(@surface, 0.85);
+    @define-color surface_custom alpha(@surface_container_high,0.9);
+    @define-color hovercolor alpha(@surface_container_high,0.9);
     @define-color activecolor @primary_container;
 
     @define-color buttoncolor alpha(@inverse_primary,0.3);
@@ -258,9 +258,9 @@ in
     @import 'colors.css';
 
     /* === Derived dynamic colors === */
-    @define-color base alpha(@surface, 0.5);
-    @define-color surface_custom alpha(@surface_container_high,0.8);
-    @define-color hovercolor alpha(@surface_container_high,0.8);
+    @define-color base alpha(@surface, 0.85);
+    @define-color surface_custom alpha(@surface_container_high,0.9);
+    @define-color hovercolor alpha(@surface_container_high,0.9);
     @define-color activecolor @primary_container;
 
     @define-color buttoncolor alpha(@inverse_primary,0.3);

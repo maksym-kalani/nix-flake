@@ -193,7 +193,6 @@ in
         ];
 
         modules-right = [
-          "custom/exit"
           "clock"
         ];
 
@@ -226,13 +225,6 @@ in
           separate-outputs = true;
         };
 
-        "custom/exit" = {
-          format = "󰐥";
-          on-click = "wlogout-launcher";
-          on-click-right = "hyprlock";
-          tooltip-format = "Left: Power menu\nRight: Lock screen";
-        };
-
         clock = {
           format = "{:%H:%M}";
           tooltip = false;
@@ -244,15 +236,16 @@ in
     style = ''
       /* Colors - shared theme */
       @define-color blur_background ${colors.backgroundTransparent};
-      @define-color backgroundlight ${colors.foreground};
+      @define-color backgroundlight ${colors.backgroundDark};
       @define-color backgrounddark ${colors.backgroundDark};
-      @define-color workspacesbackground1 ${colors.foreground};
+      @define-color workspacesbackground1 ${colors.backgroundDark};
       @define-color workspacesbackground2 ${colors.backgroundDark};
       @define-color bordercolor ${colors.foreground};
-      @define-color textcolor1 ${colors.foreground};
-      @define-color textcolor2 ${colors.backgroundDark};
-      @define-color textcolor3 ${colors.foreground};
-      @define-color iconcolor ${colors.foreground};
+      @define-color textcolor1 ${colors.focus};
+      @define-color textcolor2 ${colors.focus};
+      @define-color textcolor3 ${colors.focus};
+      @define-color iconcolor ${colors.focus};
+      @define-color focuscolor ${colors.focus};
 
       /* General */
       * {
@@ -298,8 +291,8 @@ in
       }
 
       #workspaces button.active {
-        color: @textcolor1;
-        background: @workspacesbackground2;
+        color: @backgrounddark;
+        background: @focuscolor;
         border-radius: 15px;
         min-width: 40px;
         transition: all 0.3s ease-in-out;
@@ -353,19 +346,22 @@ in
 
       /* Custom Notification */
       #custom-notification {
-        margin: 0px 13px 0px 0px;
-        padding: 0px;
+        background-color: @backgroundlight;
         font-size: 20px;
-        color: @iconcolor;
+        color: @textcolor2;
+        padding: 0px 10px;
+        margin: 8px 0px 8px 0px;
         opacity: 0.8;
       }
 
       /* Custom Exit */
       #custom-exit {
-        margin: 0px 13px 0px 0px;
-        padding: 0px;
+        background-color: @backgroundlight;
         font-size: 20px;
-        color: @iconcolor;
+        color: @textcolor2;
+        border-radius: 0px 15px 15px 0px;
+        padding: 0px 10px;
+        margin: 8px 15px 8px 0px;
         opacity: 0.8;
       }
 
@@ -382,14 +378,14 @@ in
 
       /* Clock */
       #clock {
-        background-color: @backgrounddark;
+        background-color: @backgroundlight;
         font-size: 14px;
-        color: @textcolor1;
+        color: @focuscolor;
         border-radius: 15px;
         padding: 1px 10px 0px 10px;
         margin: 8px 15px 8px 0px;
         opacity: 0.8;
-        border: 3px solid @bordercolor;
+        border: 2px solid @focuscolor;
       }
 
       /* Pulseaudio */
@@ -433,10 +429,12 @@ in
       #bluetooth,
       #bluetooth.on,
       #bluetooth.connected {
-        margin: 0px 13px 0px 0px;
-        padding: 0px;
+        background-color: @backgroundlight;
         font-size: 20px;
-        color: @iconcolor;
+        color: @textcolor2;
+        border-radius: 15px 0px 0px 15px;
+        padding: 0px 10px;
+        margin: 8px 0px 8px 0px;
         opacity: 0.8;
       }
 
@@ -451,10 +449,12 @@ in
       }
 
       #bluetooth.off {
-        margin: 0px 13px 0px 0px;
-        padding: 0px;
+        background-color: @backgroundlight;
         font-size: 20px;
-        color: @iconcolor;
+        color: @textcolor2;
+        border-radius: 15px 0px 0px 15px;
+        padding: 0px 10px;
+        margin: 8px 0px 8px 0px;
         opacity: 0.8;
       }
 

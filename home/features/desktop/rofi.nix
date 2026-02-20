@@ -1,17 +1,6 @@
 { pkgs, ... }:
 let
   colors = import ./colors.nix;
-  wallpaper = ./assets/wallpaper.png;
-
-  # Generate blurred wallpaper at build time
-  blurredWallpaper =
-    pkgs.runCommand "blurred-wallpaper.png"
-      {
-        nativeBuildInputs = [ pkgs.imagemagick ];
-      }
-      ''
-        convert ${wallpaper} -blur 0x50 -brightness-contrast -10x-10 $out
-      '';
 in
 {
   programs.rofi = {
@@ -41,13 +30,12 @@ in
     }
 
     * {
-      background: ${colors.surfaceRgba};
-      primary: ${colors.primary};
-      surface: ${colors.surface};
-      on-surface: ${colors.onSurface};
+      background: rgba(26, 27, 46, 0.85);
+      primary: ${colors.focus};
+      surface: ${colors.backgroundDark};
+      on-surface: ${colors.focus};
       border-width: 2px;
       border-radius: 2em;
-      current-image: url("${blurredWallpaper}", height);
     }
 
     window {
@@ -72,7 +60,6 @@ in
       orientation: vertical;
       children: [ "inputbar", "listview" ];
       background-color: transparent;
-      background-image: @current-image;
     }
 
     mode-switcher {
@@ -217,18 +204,16 @@ in
     }
 
     * {
-      background: ${colors.surfaceRgba};
-      primary: ${colors.primary};
-      surface: ${colors.surface};
-      on-surface: ${colors.onSurface};
+      background: rgba(26, 27, 46, 0.85);
+      primary: ${colors.focus};
+      surface: ${colors.backgroundDark};
+      on-surface: ${colors.focus};
       border-width: 2px;
       border-radius: 2em;
     }
 
     window {
       width: 30em;
-      x-offset: -2em;
-      y-offset: 2em;
       spacing: 0px;
       padding: 0px;
       margin: 0px;
@@ -236,8 +221,8 @@ in
       border-color: @primary;
       cursor: "default";
       transparency: "real";
-      location: northeast;
-      anchor: northeast;
+      location: center;
+      anchor: center;
       fullscreen: false;
       enabled: true;
       border-radius: @border-radius;
@@ -259,6 +244,7 @@ in
       padding: 1em;
       children: [ "textbox-prompt-colon", "entry" ];
       background-color: @surface;
+      border: 0px;
     }
 
     textbox-prompt-colon {
@@ -285,6 +271,7 @@ in
       padding: 1em;
       spacing: 0em;
       margin: 0em;
+      border: 0px;
       enabled: true;
       columns: 1;
       lines: 8;
