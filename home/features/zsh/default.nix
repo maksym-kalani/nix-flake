@@ -74,6 +74,8 @@
       if [[ $(tty) == *"pts"* ]]; then
         fastfetch
       fi
+
+      ns() { nix shell "''${@/#/nixpkgs#}"; }
     '';
   };
 
