@@ -46,6 +46,7 @@
 
     # === Rofi ===
     rofi
+    vicinae
 
     # === Qt theming ===
     libsForQt5.qt5ct

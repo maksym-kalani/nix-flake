@@ -22,6 +22,7 @@
     ./wlogout.nix
     ./swaync.nix
     ./theming.nix
+    ./vicinae.nix
     ./mimeapps.nix
   ];
 }
