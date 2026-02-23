@@ -3,20 +3,23 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   name = "vikunja";
   port = 1337;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
-in {
+in
+{
   services.vikunja = {
+    package = pkgs.stable.vikunja;
     enable = true;
     port = port;
     frontendHostname = "todo.${domain}";
     frontendScheme = "https";
   };
 
-  networking.firewall.allowedTCPPorts = [port];
+  networking.firewall.allowedTCPPorts = [ port ];
 
   services.gatus.settings.endpoints = [
     {
