@@ -179,7 +179,7 @@ in
         "gsettings set org.gnome.desktop.interface gtk-theme \"Adwaita-dark\""
         "gsettings set org.gnome.desktop.interface color-scheme \"prefer-dark\""
         "vicinae server"
-        "vicinae theme set catppuccin-frappe`"
+        "vicinae theme set desktop"
       ];
 
       bind = [

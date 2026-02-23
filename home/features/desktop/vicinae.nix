@@ -1,4 +1,3 @@
-# Vicinae launcher theme matching waybar/swaync styling
 let
   colors = import ./colors.nix;
 in
@@ -6,27 +5,23 @@ in
   xdg.dataFile."vicinae/themes/desktop.toml".text = ''
     [meta]
     name = "Desktop"
-    description = "Matches waybar and swaync dark blue-lavender theme"
+    description = "Material Design 3 dark theme"
     variant = "dark"
     inherits = "vicinae-dark"
 
     [colors.core]
-    accent = "${colors.focus}"
-    accent_foreground = "${colors.backgroundDark}"
-    background = "#1a1b2ed9"
-    foreground = "${colors.focus}"
-    secondary_background = "${colors.backgroundDark}"
-    border = "${colors.focus}"
+    accent = "${colors.primary}"
+    accent_foreground = "${colors.onPrimary}"
+    background = "#D9${builtins.substring 1 6 colors.backgroundDark}"
+    foreground = "${colors.onSurface}"
+    secondary_background = "colors.core.background"
+    border = "${colors.outlineVariant}"
 
     [colors.main_window]
-    border = "${colors.focus}"
-    footer = { background = "colors.core.secondary_background" }
-
-    [colors.settings_window]
-    border = "${colors.focus}"
+    border = "${colors.outlineVariant}"
 
     [colors.accents]
-    blue = "${colors.focus}"
+    blue = "${colors.primary}"
     green = "#3a9c61"
     magenta = "${colors.tertiary}"
     orange = "#f0883e"
@@ -35,48 +30,43 @@ in
     cyan = "#18a5b3"
     purple = "${colors.tertiary}"
 
-    [colors.shortcut]
-    border = "colors.core.border"
-
     [colors.text]
-    default = "colors.core.foreground"
     muted = "${colors.onSurfaceVariant}"
     danger = "${colors.error}"
     success = "#3a9c61"
     placeholder = "${colors.outline}"
-    selection = { background = "${colors.backgroundDark}", foreground = "${colors.focus}" }
+    selection = { background = "${colors.primaryContainer}", foreground = "${colors.onPrimaryContainer}" }
 
     [colors.text.links]
-    default = "${colors.focus}"
+    default = "${colors.primary}"
     visited = "${colors.tertiary}"
 
     [colors.input]
-    border = "${colors.backgroundDark}"
-    border_focus = "${colors.focus}"
+    border = "${colors.surfaceVariant}"
+    border_focus = "${colors.primary}"
     border_error = "${colors.error}"
 
     [colors.button.primary]
-    background = "${colors.backgroundDark}"
-    foreground = "${colors.focus}"
-    hover = { background = "${colors.surfaceContainerHigh}" }
-    focus = { outline = "colors.core.accent" }
+    background = "${colors.surfaceContainerHigh}"
+    foreground = "${colors.onSurface}"
+    hover = { background = "${colors.surfaceContainerHighest}" }
 
     [colors.list.item.selection]
-    background = "${colors.backgroundDark}"
-    foreground = "${colors.focus}"
-    secondary_background = "${colors.backgroundDark}"
-    secondary_foreground = "${colors.focus}"
+    background = "${colors.primaryContainer}"
+    foreground = "${colors.onPrimaryContainer}"
+    secondary_background = "${colors.surfaceContainerHigh}"
+    secondary_foreground = "${colors.onSurfaceVariant}"
 
     [colors.grid.item]
-    background = "${colors.backgroundDark}"
-    hover = { outline = "${colors.focus}" }
-    selection = { outline = "${colors.focus}" }
+    background = "${colors.surfaceContainer}"
+    hover = { outline = "${colors.primary}" }
+    selection = { outline = "${colors.primary}" }
 
     [colors.scrollbars]
-    background = "${colors.backgroundDark}"
+    background = "${colors.surfaceContainerHigh}"
 
     [colors.loading]
-    bar = "${colors.focus}"
-    spinner = "${colors.focus}"
+    bar = "${colors.primary}"
+    spinner = "${colors.primary}"
   '';
 }
