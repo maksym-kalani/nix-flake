@@ -178,6 +178,8 @@ in
         "wl-paste --watch cliphist store"
         "gsettings set org.gnome.desktop.interface gtk-theme \"Adwaita-dark\""
         "gsettings set org.gnome.desktop.interface color-scheme \"prefer-dark\""
+        "vicinae server"
+        "vicinae theme set catppuccin-frappe`"
       ];
 
       bind = [
@@ -185,7 +187,7 @@ in
         "$mainMod, RETURN, exec, $terminal"
         "$mainMod, B, exec, $browser"
         "$mainMod, E, exec, $fileManager"
-        "$mainMod CTRL, RETURN, exec, pkill rofi || rofi -show drun -replace -i"
+        "$mainMod CTRL, RETURN, exec, vicinae toggle"
 
         # Windows
         "$mainMod, Q, killactive"
@@ -220,7 +222,7 @@ in
         "$mainMod CTRL, R, exec, hyprctl reload"
         "$mainMod CTRL, Q, exec, wlogout-launcher"
         "$mainMod CTRL, L, exec, loginctl terminate-session $XDG_SESSION_ID"
-        "$mainMod, V, exec, cliphist-rofi"
+        "$mainMod, V, exec, vicinae vicinae://extensions/vicinae/clipboard/history"
         "$mainMod SHIFT, B, exec, pkill waybar || waybar"
 
         # Screenshot
@@ -308,9 +310,11 @@ in
         "blur on, match:namespace waybar"
         "blur on, match:namespace swaync-control-center"
         "blur on, match:namespace swaync-notification-window"
+        "blur on, match:namespace vicinae"
         "ignore_alpha 0.01, match:namespace waybar"
         "ignore_alpha 0, match:namespace swaync-control-center"
         "ignore_alpha 0, match:namespace swaync-notification-window"
+        "ignore_alpha 0, match:namespace vicinae"
       ];
 
       windowrule = [
