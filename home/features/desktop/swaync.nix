@@ -205,6 +205,7 @@ in
 
     .notification-content .image {
       margin-right: 12px;
+      border-radius: 10px;
     }
 
     .summary {

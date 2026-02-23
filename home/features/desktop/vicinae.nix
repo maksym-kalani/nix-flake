@@ -13,12 +13,12 @@ in
     accent = "${colors.primary}"
     accent_foreground = "${colors.onPrimary}"
     background = "#D9${builtins.substring 1 6 colors.backgroundDark}"
-    foreground = "${colors.onSurface}"
+    foreground = "${colors.primary}"
     secondary_background = "colors.core.background"
-    border = "${colors.outlineVariant}"
+    border = "${colors.primary}"
 
     [colors.main_window]
-    border = "${colors.outlineVariant}"
+    border = "${colors.primary}"
 
     [colors.accents]
     blue = "${colors.primary}"
