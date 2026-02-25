@@ -26,11 +26,11 @@ in
         ];
 
         modules-right = [
-          "mpris"
           "custom/mic"
           "custom/camera"
-          "hyprland/language"
+          "mpris"
           "pulseaudio"
+          "hyprland/language"
           "tray"
           "bluetooth"
           "custom/notification"
@@ -195,8 +195,8 @@ in
         };
 
         mpris = {
-          format = "<span size='18pt' rise='-3pt'>{player_icon}  </span>{artist} - {title}";
-          format-paused = "<span size='18pt' rise='-3pt'>{player_icon} </span> {artist} - {title}";
+          format = "<span size='18pt' rise='-3pt'> </span>{player_icon} {artist} - {title}";
+          format-paused = "<span size='18pt' rise='-3pt'> </span>{player_icon} {artist} - {title}";
           player-icons = {
             spotify = "󰓇";
             mpv = "󰐊";
@@ -279,73 +279,110 @@ in
       @define-color textcolor3 ${colors.focus};
       @define-color iconcolor ${colors.focus};
       @define-color focuscolor ${colors.focus};
+      @define-color surface ${colors.surface};
+      @define-color primary ${colors.primary};
+      @define-color secondary ${colors.secondary};
+      @define-color error ${colors.error};
+      @define-color on_error ${colors.onError};
+      @define-color on_secondary ${colors.onSecondary};
+      @define-color on_surface ${colors.onSurface};
 
       /* General */
       * {
         font-family: "Inter Semibold", "JetBrainsMono Nerd Font Propo", Roboto, Helvetica, Arial, sans-serif;
         border: none;
         border-radius: 0px;
+        padding: 0;
+        margin: 0;
       }
 
       window#waybar {
-        background-color: @blur_background;
-        border-bottom: 0px solid #ffffff;
-        transition-property: background-color;
-        transition-duration: 0.5s;
+        background: transparent;
+        color: @textcolor1;
       }
 
       .modules-left {
-        padding-left: 14px;
+        border-radius: 12px;
+        border: 1px solid transparent;
+        opacity: 0.8;
+        padding: 0px;
+        margin: 10px 8px 0px 20px;
+        box-shadow: inset 2px 2px 14px alpha(@textcolor1, 0.15),
+                    inset 0 1px 2px 0px alpha(@textcolor1, 0.15),
+                    inset 1px 1px 1px alpha(@textcolor1, 0.15);
+        background-color: @blur_background;
+      }
+
+      .modules-right {
+        border-radius: 12px;
+        border: 1px solid transparent;
+        opacity: 0.8;
+        padding: 0px;
+        margin: 10px 20px 0px 8px;
+        box-shadow: inset 0px 2px 14px 2px alpha(@textcolor1, 0.15),
+                    inset 0 1px 2px 0px alpha(@textcolor1, 0.15),
+                    inset 1px 1px 1px alpha(@textcolor1, 0.15);
+        background-color: @blur_background;
+      }
+
+      .modules-center {
+        border-radius: 12px;
+        border: 1px solid transparent;
+        opacity: 0.8;
+        margin: 10px 8px 0px 8px;
+        box-shadow: inset 2px 2px 14px alpha(@textcolor1, 0.15),
+                    inset 0 1px 2px 0px alpha(@textcolor1, 0.15),
+                    inset 0 1px 1px alpha(@textcolor1, 0.15);
+        background-color: @blur_background;
+      }
+
+      label.module {
+        font-size: 14px;
+        margin-left: 8px;
+        margin-right: 8px;
+        border-radius: 5px;
       }
 
       /* Workspaces */
       #workspaces {
-        background: @workspacesbackground1;
-        margin: 5px 1px 6px 1px;
-        padding: 0px 1px;
-        border-radius: 15px;
-        border: 0px;
-        font-weight: bold;
-        font-style: normal;
-        opacity: 0.8;
-        font-size: 14px;
-        color: @textcolor1;
+        padding: 5px 3px 5px 3px;
+        min-width: 176px;
       }
 
       #workspaces button {
-        padding: 0px 5px;
-        margin: 4px 3px;
-        border-radius: 15px;
-        border: 0px;
-        color: @textcolor1;
-        background-color: @workspacesbackground2;
+        color: @on_surface;
+        border-radius: 3px;
+        padding: 0px 5px 0px 5px;
+        margin: 0px 2px 0px 2px;
         transition: all 0.3s ease-in-out;
-        opacity: 0.4;
+        border: 1px solid transparent;
       }
 
       #workspaces button.active {
-        color: @backgrounddark;
-        background: @focuscolor;
-        border-radius: 15px;
-        min-width: 40px;
+        background: alpha(@primary, 0.3);
+        border: 1px solid transparent;
         transition: all 0.3s ease-in-out;
-        opacity: 1;
+        min-width: 30px;
+        border-radius: 8px;
+        box-shadow: inset 1px 2px 2px alpha(@textcolor1, 0.2),
+                    inset 0 1px 1px alpha(@textcolor1, 0.3);
       }
 
       #workspaces button:hover {
-        color: @textcolor1;
-        background: @workspacesbackground2;
+        background: alpha(@secondary, 0.2);
         border-radius: 15px;
-        opacity: 0.7;
       }
 
       /* Tooltips */
       tooltip {
-        border-radius: 16px;
-        background-color: @backgroundlight;
-        opacity: 0.9;
-        padding: 20px;
-        margin: 0px;
+        background-color: alpha(@surface, 0.7);
+        border-radius: 12px;
+        border: 1px solid transparent;
+        opacity: 0.7;
+        margin: 10px;
+        box-shadow: inset 2px 2px 30px alpha(@textcolor1, 0.2),
+                    inset 0 1px 2px 0px alpha(@textcolor1, 0.25),
+                    inset 0 1px 1px alpha(@textcolor1, 0.25);
       }
 
       tooltip label {
@@ -354,107 +391,96 @@ in
 
       /* Window */
       #window {
-        background: @backgroundlight;
-        margin: 8px 15px 8px 0px;
-        padding: 2px 10px 0px 10px;
-        border-radius: 12px;
-        color: @textcolor2;
         font-size: 14px;
         font-weight: normal;
-        opacity: 0.8;
+        color: @textcolor2;
+        padding: 0px 8px;
       }
 
       window#waybar.empty #window {
         background-color: transparent;
       }
 
+      /* Taskbar */
+      #taskbar {
+        padding: 5px 0px 5px 0px;
+      }
+
+      #taskbar button {
+        border-radius: 6px;
+        padding: 0px 5px 0px 5px;
+      }
+
+      #taskbar button:hover {
+        background: @primary;
+        color: @backgrounddark;
+      }
+
       /* Custom Appmenu */
       #custom-appmenu {
-        background-color: transparent;
         font-size: 24px;
         color: @textcolor1;
-        padding: 0px 10px 0px 14px;
-        margin: 8px 16px 8px 0px;
+        padding-right: 3px;
+        padding-left: 5px;
       }
 
       /* Custom Notification */
       #custom-notification {
-        background-color: @backgroundlight;
         font-size: 20px;
-        color: @textcolor2;
-        padding: 0px 10px;
-        margin: 8px 0px 8px 0px;
-        opacity: 0.8;
+        color: @iconcolor;
       }
 
       /* Custom Exit */
       #custom-exit {
-        background-color: @backgroundlight;
         font-size: 20px;
         color: @textcolor2;
-        border-radius: 0px 15px 15px 0px;
-        padding: 0px 10px;
-        margin: 8px 15px 8px 0px;
-        opacity: 0.8;
       }
 
-      /* Language */
+      /* Custom Updates */
+      #custom-updates.yellow {
+        border-radius: 8px;
+        margin: 5px 0px 5px 5px;
+        padding: 0px 6px 0px 6px;
+        background-color: @secondary;
+        color: @on_secondary;
+      }
+
+      #custom-updates.red {
+        border-radius: 8px;
+        margin: 6px 0px 6px 7px;
+        padding: 0px 6px 0px 6px;
+        background-color: @error;
+        color: @on_error;
+      }
+
+      /* Hardware */
+      #disk, #memory, #cpu {
+        margin: 0px;
+        padding: 0px;
+      }
+
       #language {
-        background-color: @backgroundlight;
-        font-size: 14px;
-        color: @textcolor2;
-        border-radius: 15px;
-        padding: 2px 10px 0px 10px;
-        margin: 8px 15px 8px 0px;
-        opacity: 0.8;
+        padding-top: 2px;
       }
 
       /* Clock */
       #clock {
-        background-color: @backgroundlight;
-        font-size: 14px;
         color: @focuscolor;
-        border-radius: 15px;
-        padding: 1px 10px 0px 10px;
-        margin: 8px 15px 8px 0px;
-        opacity: 0.8;
-        border: 2px solid @focuscolor;
       }
 
       /* Pulseaudio */
       #pulseaudio {
-        background-color: @backgroundlight;
         font-size: 14px;
         color: @textcolor2;
-        border-radius: 15px;
-        padding: 0px 10px;
-        margin: 8px 15px 8px 0px;
-        opacity: 0.8;
       }
 
       #pulseaudio.muted {
-        background-color: @backgrounddark;
         color: @textcolor1;
       }
 
       /* Network */
       #network {
-        background-color: @backgroundlight;
         font-size: 14px;
-        color: @textcolor2;
-        border-radius: 15px;
-        padding: 2px 10px 0px 10px;
-        margin: 8px 15px 8px 0px;
-        opacity: 0.8;
-      }
-
-      #network.ethernet {
-        background-color: @backgroundlight;
-        color: @textcolor2;
-      }
-
-      #network.wifi {
-        background-color: @backgroundlight;
         color: @textcolor2;
       }
 
@@ -462,58 +488,54 @@ in
       #bluetooth,
       #bluetooth.on,
       #bluetooth.connected {
-        background-color: @backgroundlight;
         font-size: 20px;
         color: @textcolor2;
-        border-radius: 15px 0px 0px 15px;
-        padding: 0px 10px;
-        margin: 8px 0px 8px 0px;
-        opacity: 0.8;
-      }
-
-      #mpris {
-        background-color: @backgroundlight;
-        font-size: 14px;
-        color: @textcolor2;
-        border-radius: 15px;
-        padding: 0px 10px;
-        margin: 8px 15px 8px 0px;
-        opacity: 0.8;
-      }
-
-      #custom-mic.active,
-      #custom-camera.active {
-        background: @focuscolor;
-        font-size: 18px;
-        color: @backgrounddark;
-        border-radius: 15px;
-        padding: 0px 10px;
-        margin: 8px 15px 8px 0px;
-      }
-
-      #custom-mic.muted {
-        background-color: alpha(#ff4444, 0.8);
-        font-size: 18px;
-        color: #ffffff;
-        border-radius: 15px;
-        padding: 0px 10px;
-        margin: 8px 15px 8px 0px;
       }
 
       #bluetooth.off {
-        background-color: @backgroundlight;
         font-size: 20px;
         color: @textcolor2;
-        border-radius: 15px 0px 0px 15px;
+      }
+
+      /* Mpris */
+      #mpris {
+        font-size: 14px;
+        color: @textcolor2;
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+
+      /* Mic & Camera indicators */
+      #custom-mic.active,
+      #custom-camera.active {
+        background: alpha(@focuscolor, 0.3);
+        font-size: 18px;
+        color: @focuscolor;
+        border-radius: 8px;
         padding: 0px 10px;
-        margin: 8px 0px 8px 0px;
-        opacity: 0.8;
+        margin: 5px 2px;
+        box-shadow: inset 1px 2px 2px alpha(@textcolor1, 0.2),
+                    inset 0 1px 1px alpha(@textcolor1, 0.3);
+      }
+
+      #custom-mic.muted {
+        background-color: alpha(@error, 0.3);
+        font-size: 18px;
+        color: @error;
+        border-radius: 8px;
+        padding: 0px 10px;
+        margin: 5px 2px;
       }
 
       /* Tray */
       #tray {
-        padding: 0px 15px 0px 0px;
+        padding: 0px 5px 0px 10px;
         color: @textcolor3;
+      }
+
+      #tray.empty {
+        padding: 0px;
+        margin: 0px;
       }
 
       #tray > .passive {
