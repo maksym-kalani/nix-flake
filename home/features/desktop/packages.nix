@@ -24,6 +24,7 @@
     wireplumber
     pulseaudio
     pavucontrol
+    psmisc
 
     # === Screenshots ===
     grim
