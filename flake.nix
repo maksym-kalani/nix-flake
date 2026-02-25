@@ -85,5 +85,10 @@
         ];
       };
     };
+    
+    checks.x86_64-linux = import ./tests {
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      inherit inputs outputs;
+    };
   };
 }
