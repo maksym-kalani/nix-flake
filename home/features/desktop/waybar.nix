@@ -27,6 +27,8 @@ in
 
         modules-right = [
           "mpris"
+          "custom/mic"
+          "custom/camera"
           "hyprland/language"
           "pulseaudio"
           "tray"
@@ -159,6 +161,37 @@ in
           interval = 30;
           on-click = "blueman-manager";
           format-no-controller = "";
+        };
+
+        "custom/mic" = {
+          format = "{}";
+          return-type = "json";
+          interval = 3;
+          exec = ''
+            if pactl list sources short 2>/dev/null | grep -v '\.monitor' | grep -q RUNNING; then
+              muted=$(pactl get-source-mute @DEFAULT_SOURCE@ 2>/dev/null | awk '{print $2}')
+              if [ "$muted" = "yes" ]; then
+                echo '{"text": "󰍭", "tooltip": "Microphone is muted", "class": "muted"}'
+              else
+                echo '{"text": "󰍬", "tooltip": "Microphone is active", "class": "active"}'
+              fi
+            else
+              echo '{"text": "", "tooltip": "", "class": ""}'
+            fi
+          '';
+        };
+
+        "custom/camera" = {
+          format = "{}";
+          return-type = "json";
+          interval = 3;
+          exec = ''
+            if fuser /dev/video* 2>/dev/null | grep -q .; then
+              echo '{"text": "󰄀", "tooltip": "Camera is active", "class": "active"}'
+            else
+              echo '{"text": "", "tooltip": "", "class": ""}'
+            fi
+          '';
         };
 
         mpris = {
@@ -446,6 +479,25 @@ in
         padding: 0px 10px;
         margin: 8px 15px 8px 0px;
         opacity: 0.8;
+      }
+
+      #custom-mic.active,
+      #custom-camera.active {
+        background: @focuscolor;
+        font-size: 18px;
+        color: @backgrounddark;
+        border-radius: 15px;
+        padding: 0px 10px;
+        margin: 8px 15px 8px 0px;
+      }
+
+      #custom-mic.muted {
+        background-color: alpha(#ff4444, 0.8);
+        font-size: 18px;
+        color: #ffffff;
+        border-radius: 15px;
+        padding: 0px 10px;
+        margin: 8px 15px 8px 0px;
       }
 
       #bluetooth.off {
