@@ -101,16 +101,16 @@ in
     @import 'colors.css';
 
     /* === Derived dynamic colors === */
-    @define-color base alpha(@surface, 0.85);
-    @define-color surface_custom alpha(@surface_container_high,0.9);
-    @define-color hovercolor alpha(@surface_container_high,0.9);
+    @define-color base alpha(@surface, 0.3);
+    @define-color surface_custom alpha(@surface_container_high, 0.3);
+    @define-color hovercolor alpha(@surface_container_high, 0.5);
     @define-color activecolor @primary_container;
 
-    @define-color buttoncolor alpha(@inverse_primary,0.3);
-    @define-color hoverbutton alpha(@inverse_primary,0.5);
+    @define-color buttoncolor alpha(@inverse_primary, 0.3);
+    @define-color hoverbutton alpha(@inverse_primary, 0.5);
     @define-color activebutton @inverse_primary;
 
-    @define-color bordercolor @primary;
+    @define-color bordercolor transparent;
     @define-color fontcolor @on_surface;
     @define-color text @on_surface;
 
@@ -136,9 +136,12 @@ in
 
     .floating-notifications.background .notification-row .notification-background {
       background: @base;
-      border-radius: 10px;
-      border: 2px solid @primary;
-      margin: 5px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      margin: 20px 20px;
+      box-shadow: inset 2px 2px 14px alpha(@on_surface, 0.15),
+                  inset 0 1px 2px 0px alpha(@on_surface, 0.15),
+                  inset 1px 1px 1px alpha(@on_surface, 0.15);
     }
 
     /* Critical floating notifications */
@@ -146,9 +149,9 @@ in
     .notification-row
     .notification-background
     .notification.critical {
-      background: alpha(@error_container, 0.85);
+      background: alpha(@error_container, 0.3);
       color: @on_error_container;
-      border-radius: 10px;
+      border-radius: 12px;
     }
 
     .floating-notifications.background
@@ -175,10 +178,11 @@ in
       > *:last-child
       > *
       .notification-action {
-      border-radius: 0.5rem;
-      background-color: alpha(@surface, 0.95);
+      border-radius: 8px;
+      background-color: alpha(@surface, 0.3);
       margin: 0.4rem;
       border: 1px solid transparent;
+      box-shadow: inset 1px 1px 4px alpha(@on_surface, 0.1);
     }
 
     .floating-notifications.background
@@ -188,8 +192,8 @@ in
       > *:last-child
       > *
       .notification-action:hover {
-      background-color: @hovercolor;
-      border: 1px solid @primary;
+      background-color: alpha(@surface_container_high, 0.5);
+      border: 1px solid transparent;
     }
 
     .floating-notifications.background
@@ -199,7 +203,7 @@ in
       > *:last-child
       > *
       .notification-action:active {
-      background-color: @primary;
+      background-color: alpha(@primary, 0.3);
       color: @text;
     }
 
@@ -224,7 +228,7 @@ in
       background: transparent;
       border-radius: 20px;
       color: @text;
-      background-color: alpha(#fff, 0.5);
+      background-color: alpha(@on_surface, 0.15);
       margin: 0px;
       padding: 4px;
     }
@@ -233,14 +237,14 @@ in
       .notification-row
       .notification-background
       .close-button:hover {
-      background-color: @primary;
+      background-color: alpha(@primary, 0.3);
     }
 
     .floating-notifications.background
       .notification-row
       .notification-background
       .close-button:active {
-      background-color: @primary;
+      background-color: alpha(@primary, 0.5);
       color: @text;
     }
 
@@ -259,16 +263,16 @@ in
     @import 'colors.css';
 
     /* === Derived dynamic colors === */
-    @define-color base alpha(@surface, 0.85);
-    @define-color surface_custom alpha(@surface_container_high,0.9);
-    @define-color hovercolor alpha(@surface_container_high,0.9);
-    @define-color activecolor @primary_container;
+    @define-color base alpha(@surface, 0.3);
+    @define-color surface_custom alpha(@surface_container_high, 0.3);
+    @define-color hovercolor alpha(@surface_container_high, 0.5);
+    @define-color activecolor alpha(@primary, 0.3);
 
-    @define-color buttoncolor alpha(@inverse_primary,0.3);
-    @define-color hoverbutton alpha(@inverse_primary,0.5);
+    @define-color buttoncolor alpha(@inverse_primary, 0.3);
+    @define-color hoverbutton alpha(@inverse_primary, 0.5);
     @define-color activebutton @inverse_primary;
 
-    @define-color bordercolor @primary;
+    @define-color bordercolor transparent;
     @define-color fontcolor @on_surface;
     @define-color text @on_surface;
 
@@ -286,9 +290,12 @@ in
     /* === Control Center Container === */
     .control-center {
       background: @base;
-      border-radius: 10px;
-      border: 2px solid @bordercolor;
+      border-radius: 12px;
+      border: 1px solid transparent;
       padding: 8px 8px 0 8px;
+      box-shadow: inset 2px 2px 14px alpha(@on_surface, 0.15),
+                  inset 0 1px 2px 0px alpha(@on_surface, 0.15),
+                  inset 1px 1px 1px alpha(@on_surface, 0.15);
     }
 
     /* === Brightness === */
@@ -297,23 +304,24 @@ in
       margin: 0px 12px 12px 12px;
       border-radius: 8px;
       background: @surface_custom;
+      box-shadow: inset 1px 1px 4px alpha(@on_surface, 0.1);
     }
 
     .widget-backlight trough {
-      background: @surface_container_low;
+      background: alpha(@surface_container_low, 0.3);
       margin: 8px 8px;
       border: 3px;
     }
 
     .widget-backlight trough highlight {
-      background: @primary;
-      border: 2px solid @primary;
+      background: alpha(@primary, 0.5);
+      border: 2px solid alpha(@primary, 0.5);
       border-radius: 5px;
     }
 
     /* === Music Player === */
     .widget-mpris {
-      border-radius: 10px;
+      border-radius: 12px;
       margin: 2px 12px 12px 12px;
       align-items: center;
       color: alpha(#000000, 0.8);
@@ -332,7 +340,7 @@ in
     }
 
     .widget-mpris-player {
-      border-radius: 10px;
+      border-radius: 12px;
       position: absolute;
       inset: 0;
       z-index: 0;
@@ -368,9 +376,10 @@ in
     }
 
     .widget-title button {
-      background: @surface_container;
+      background: alpha(@surface_container, 0.3);
       border-radius: 8px;
       padding: 4px 16px;
+      box-shadow: inset 1px 1px 4px alpha(@on_surface, 0.1);
     }
 
     .widget-title button:hover {
@@ -399,46 +408,47 @@ in
     }
 
     .widget-dnd > switch slider {
-      background: @secondary;
+      background: alpha(@secondary, 0.5);
       border-radius: 5px;
       border: 2px solid @buttoncolor;
     }
 
     .widget-dnd > switch:checked slider {
-      background: @inverse_primary;
+      background: alpha(@inverse_primary, 0.7);
     }
 
     /* === Notifications === */
     .control-center .notification-row .notification-background {
-      background-color: @surface_container;
-      border-radius: 10px;
+      background-color: alpha(@surface_container, 0.3);
+      border-radius: 12px;
       margin: 5px 0px;
       padding: 15px;
-      border: 2px solid @bordercolor;
+      border: 1px solid transparent;
       min-height: 2.5em;
+      box-shadow: inset 1px 1px 4px alpha(@on_surface, 0.1);
     }
 
     .control-center .notification-row .notification-background .notification.critical {
-      background-color: @error_container;
+      background-color: alpha(@error_container, 0.3);
       color: @on_error_container;
-      border-radius: 10px;
+      border-radius: 12px;
     }
 
     .control-center .notification-row .notification-background .close-button {
-      background-color: @hoverbutton;
+      background-color: alpha(@on_surface, 0.15);
       border-radius: 5px;
       color: @text;
       padding: 5px;
     }
 
     .control-center .notification-row .notification-background .close-button:hover {
-      background-color: @activecolor;
+      background-color: alpha(@primary, 0.3);
     }
 
     /* === Progress Bars === */
     trough highlight {
-      background: @primary;
-      border: 2px solid @primary_fixed;
+      background: alpha(@primary, 0.5);
+      border: 2px solid alpha(@primary_fixed, 0.5);
       border-radius: 20px;
     }
 
@@ -458,7 +468,7 @@ in
 
     .notification-group-collapse-button,
     .notification-group-close-all-button {
-      background: @surface_container;
+      background: alpha(@surface_container, 0.3);
       border-radius: 5px;
       padding: 5px;
     }
