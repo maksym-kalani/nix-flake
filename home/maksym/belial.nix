@@ -51,5 +51,6 @@
     gnome-calendar
     gnome-calculator
     satty
+    kenku-fm
   ];
 }
