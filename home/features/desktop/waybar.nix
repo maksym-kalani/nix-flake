@@ -179,6 +179,7 @@ in
               echo '{"text": "", "tooltip": "", "class": ""}'
             fi
           '';
+          on-click = "toggle-mute";
         };
 
         "custom/camera" = {
