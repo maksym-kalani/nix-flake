@@ -1,4 +1,4 @@
-{pkgs, ...}: {
-  # Define your custom packages here
-  #  my-package = pkgs.callPackage ./my-package {};
+{ pkgs, ... }:
+{
+  kenku-fm = pkgs.callPackage ./kenku-fm { };
 }
