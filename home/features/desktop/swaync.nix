@@ -13,8 +13,8 @@ in
 
     control-center-width = 450;
     control-center-height = 560;
-    control-center-margin-top = 13;
-    control-center-margin-bottom = 13;
+    control-center-margin-top = 20;
+    control-center-margin-bottom = 500;
     control-center-margin-right = 14;
     control-center-margin-left = 0;
 
@@ -321,8 +321,8 @@ in
 
     /* === Music Player === */
     .widget-mpris {
-      border-radius: 12px;
-      margin: 2px 12px 12px 12px;
+      border-radius: 10px;
+      margin: 12px 12px 12px 12px;
       align-items: center;
       color: alpha(#000000, 0.8);
     }
@@ -340,7 +340,7 @@ in
     }
 
     .widget-mpris-player {
-      border-radius: 12px;
+      border-radius: 10px;
       position: absolute;
       inset: 0;
       z-index: 0;
@@ -362,6 +362,7 @@ in
     }
 
     .widget-mpris-subtitle {
+
       font-weight: 900;
       font-size: 0.8rem;
       margin: 0px 20px 5px 0px;
