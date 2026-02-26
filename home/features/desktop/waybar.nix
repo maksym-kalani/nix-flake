@@ -75,7 +75,7 @@ in
 
         "custom/appmenu" = {
           format = "󱄅";
-          on-click = "sleep 0.2;pkill rofi || rofi -show drun -replace";
+          on-click = "vicinae toggle";
           tooltip-format = "Open the application launcher";
         };
 
