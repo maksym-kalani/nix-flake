@@ -12,7 +12,7 @@ let
 in
 {
   services.vikunja = {
-    package = pkgs.stable.vikunja;
+    package = pkgs.vikunja;
     enable = true;
     port = port;
     frontendHostname = "todo.${domain}";

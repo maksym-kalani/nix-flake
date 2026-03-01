@@ -59,7 +59,7 @@ Both patterns include:
 Uses sops-nix with age encryption. Secrets defined in `hosts/common/secrets.nix` and stored in `secrets/secrets.yaml`. Age key located at `/home/maksym/.config/sops/age/keys.txt`.
 
 ### Flake Inputs
-- `nixpkgs` (unstable) and `nixpkgs-stable` (24.11)
+- `nixpkgs` (unstable) and `nixpkgs-stable` (25.11)
 - `home-manager` for user environment management
 - `sops-nix` for secrets encryption
 - `caddy-nix` for Caddy with custom plugins
