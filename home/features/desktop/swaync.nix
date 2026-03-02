@@ -21,7 +21,7 @@ in
     notification-window-width = 450;
     notification-icon-size = 96;
     notification-body-image-height = 200;
-    notification-body-image-width = 400;
+    notification-body-image-width = 200;
 
     timeout = 4;
     timeout-low = 2;
