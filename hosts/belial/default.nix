@@ -15,5 +15,6 @@
     ./smb.nix
     ./packages.nix
     ./obs.nix
+    ./webcam.nix
   ];
 }
