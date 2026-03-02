@@ -196,9 +196,9 @@ in
         "$mainMod, M, fullscreen, 1"
         "$mainMod, T, togglefloating"
         "$mainMod SHIFT, T, workspaceopt, allfloat"
-        "$mainMod, J, togglesplit"
+        "$mainMod, J, layoutmsg, togglesplit"
         "$mainMod, G, togglegroup"
-        "$mainMod, K, swapsplit"
+        "$mainMod, K, layoutmsg, swapsplit"
 
         # Focus
         "$mainMod, left, movefocus, l"
