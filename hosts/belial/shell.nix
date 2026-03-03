@@ -12,11 +12,7 @@
     alias rebuild='sudo nixos-rebuild switch --flake .#belial'
   '';
 
-  services.getty.greetingLine = ""; # suppress default
-  services.getty.helpLine = "";
-
-  environment.etc."issue".text = ''
-    \e[H\e[2J\e[3J
+  services.getty.helpLine = ''
     \e[1;34m          ▗▄▄▄       ▗▄▄▄▄    ▄▄▄▖             \e[1;31m\e[0m
     \e[1;34m          ▜███▙       ▜███▙  ▟███▛             \e[1;31m\e[0m
     \e[1;34m           ▜███▙       ▜███▙▟███▛              \e[1;31m\e[0m
@@ -37,6 +33,5 @@
     \e[1;34m          ▟███▛▜███▙         ▜███▙             \e[1;31m\e[0m
     \e[1;34m         ▟███▛  ▜███▙         ▜███▙            \e[1;31m\e[0m
     \e[1;34m         ▝▀▀▀    ▀▀▀▀▘         ▀▀▀▘            \e[1;31m\e[0m
-
   '';
 }
