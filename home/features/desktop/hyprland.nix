@@ -169,7 +169,7 @@ in
       };
 
       exec-once = [
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "dbus-update-activation-environment --systemd --all"
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "hyprctl setcursor Bibata-Modern-Ice 24"
         "swaync"
@@ -366,6 +366,11 @@ in
         "float on, pin on, match:class (org.gnome.Calendar)"
         "size 400 400, match:class (org.gnome.Calendar)"
         "move monitor_w-window_w-21 160, match:class (org.gnome.Calendar)"
+        
+        # Toolbox
+        "float on, pin on, match:class (jetbrains-toolbox)"
+        "size 400 600, match:class (jetbrains-toolbox)"
+        "move monitor_w-window_w-21 160, match:class (jetbrains-toolbox)"
       ];
     };
   };
