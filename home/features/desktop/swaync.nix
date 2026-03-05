@@ -22,6 +22,7 @@ in
     notification-icon-size = 96;
     notification-body-image-height = 200;
     notification-body-image-width = 200;
+    notification-window-preferred-output = "DP-1";
 
     timeout = 4;
     timeout-low = 2;

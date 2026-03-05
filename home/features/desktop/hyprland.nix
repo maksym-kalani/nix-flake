@@ -363,14 +363,14 @@ in
         "float on, match:title .*Bitwarden Password Manager.*"
 
         # Calendar
-        "float on, pin on, match:class (org.gnome.Calendar)"
-        "size 400 400, match:class (org.gnome.Calendar)"
-        "move monitor_w-window_w-21 160, match:class (org.gnome.Calendar)"
-        
+        "float on, match:class (org.gnome.Calendar)"
+        "size 400 600, match:class (org.gnome.Calendar)"
+        "move 3020 70, match:class (org.gnome.Calendar)"
+
         # Toolbox
-        "float on, pin on, match:class (jetbrains-toolbox)"
-        "size 400 600, match:class (jetbrains-toolbox)"
-        "move monitor_w-window_w-21 160, match:class (jetbrains-toolbox)"
+        "float on, match:class (jetbrains-toolbox)"
+        "size 440 700, match:class (jetbrains-toolbox)"
+        "move 2980 70, match:class (jetbrains-toolbox)"
       ];
     };
   };
