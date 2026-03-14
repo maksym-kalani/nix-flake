@@ -1,5 +1,6 @@
 # Custom scripts for desktop environment
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   toggle-audio = pkgs.writeShellScriptBin "toggle-audio" ''
     # toggle-audio — cycle through all sinks, move streams, and notify
     mapfile -t sinks < <(${pkgs.pulseaudio}/bin/pactl list short sinks | ${pkgs.gawk}/bin/awk '{print $2}')
@@ -79,7 +80,7 @@
 
     MON="HDMI-A-1"
     PLACEMENT="3840x2160@60,-3840x0,1"
-    USB_SINK="alsa_output.usb-Burr-Brown_from_TI_USB_Audio_CODEC-00.analog-stereo-output"
+    USB_SINK="alsa_output.usb-Solid_State_Logic_SSL_2_Mk_II-00.pro-output-0"
     HDMI_SINK="alsa_output.pci-0000_0d_00.1.pro-output-9"
 
     sink_exists() {
@@ -152,7 +153,8 @@
     sleep 0.5
     hyprctl dispatch workspace number 1
   '';
-in {
+in
+{
   home.packages = [
     toggle-audio
     toggle-mute
