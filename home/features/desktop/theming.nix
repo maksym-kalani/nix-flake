@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   colors = import ./colors.nix;
 
@@ -68,6 +68,8 @@ in
     };
 
     gtk3.extraCss = gtkColorsCss;
+
+    gtk4.theme = config.gtk.theme;
 
     gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
