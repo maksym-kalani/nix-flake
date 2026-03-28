@@ -14,6 +14,7 @@
 
   programs.git = {
     enable = true;
+    signing.format = "openpgp";
     settings = {
       user = {
         email = "kalanimaxim@gmail.com";
