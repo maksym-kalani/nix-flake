@@ -187,7 +187,7 @@ in
         "$mainMod, RETURN, exec, $terminal"
         "$mainMod, B, exec, $browser"
         "$mainMod, E, exec, $fileManager"
-        "$mainMod CTRL, RETURN, exec, vicinae toggle"
+        "$mainMod, A, exec, vicinae toggle"
 
         # Windows
         "$mainMod, Q, killactive"
