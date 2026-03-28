@@ -43,16 +43,6 @@ in
           reverse_proxy http://192.168.2.50:8012
         }
 
-        @deluge host deluge.laufin.xyz
-        handle @deluge {
-          reverse_proxy http://192.168.2.50:8112
-        }
-
-        @transmission host transmission.laufin.xyz
-        handle @transmission {
-          reverse_proxy http://127.0.0.1:9091
-        }
-
         @immich host immich.laufin.xyz
         handle @immich {
           reverse_proxy http://192.168.2.50:2283
@@ -108,11 +98,6 @@ in
           reverse_proxy http://192.168.2.50:1337
         }
 
-        @git host git.laufin.xyz
-        handle @git {
-          reverse_proxy http://192.168.2.201:3443
-        }
-
         @search host search.laufin.xyz
         handle @search {
           reverse_proxy http://192.168.2.50:8882
@@ -153,11 +138,6 @@ in
           reverse_proxy http://192.168.2.50:8096
         }
 
-        @kuma host kuma.laufin.xyz
-        handle @kuma {
-          reverse_proxy http://192.168.2.201:3001
-        }
-
         @gatus host gatus.laufin.xyz
         handle @gatus {
           reverse_proxy http://192.168.2.50:8080
@@ -176,11 +156,6 @@ in
           redir @httpget https://{host}{uri}
         }
 
-        @flaresolverr host flaresolverr.laufin.xyz
-        handle @flaresolverr {
-          reverse_proxy http://192.168.2.201:8191
-        }
-
         @kavita host kavita.laufin.xyz
         handle @kavita {
           reverse_proxy http://192.168.2.50:5000
@@ -194,11 +169,6 @@ in
         @rss host rss.laufin.xyz
         handle @rss {
           reverse_proxy http://192.168.2.50:8085
-        }
-
-        @dashy host dashy.laufin.xyz
-        handle @dashy {
-          reverse_proxy http://192.168.2.50:4000
         }
 
         @matrix-admin host matrix-admin.laufin.xyz
