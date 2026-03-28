@@ -14,9 +14,11 @@
       };
       namecheap_api_user = {
         key = "namecheap_api_user";
+        owner = "caddy";
       };
       namecheap_api_key = {
         key = "namecheap_api_key";
+        owner = "caddy";
       };
       openai_api_key = {
         key = "openai_api_key";
