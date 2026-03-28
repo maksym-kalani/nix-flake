@@ -3,12 +3,14 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   name = "immich";
   port = 2283;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
-in {
+in
+{
   services.immich.enable = true;
   # Listen on all network interfaces (for reverse proxy access) over HTTP
   services.immich.host = ip;
@@ -22,7 +24,6 @@ in {
 
   # Open the firewall for Immich's port (allow access from 192.168.2.205)
   services.immich.openFirewall = true;
-  services.immich.database.enableVectors = false;
 
   services.gatus.settings.endpoints = [
     {
