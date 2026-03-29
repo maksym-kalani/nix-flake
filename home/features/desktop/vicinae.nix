@@ -8,4 +8,6 @@
   stylix.targets.vicinae.colors.override = {
     base01 = config.lib.stylix.colors.base00;
   };
+
+  stylix.targets.vicinae.opacity.enable = true;
 }
