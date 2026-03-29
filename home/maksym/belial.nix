@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   imports = [
     ./home.nix
@@ -21,7 +17,6 @@
   '';
 
   home.packages = with pkgs; [
-    zed-editor
     spotify
     vesktop
     telegram-desktop

@@ -44,7 +44,6 @@
 
     # === Rofi ===
     rofi
-    vicinae
 
     # === Qt theming - runtime plugins (stylix generates the Base16Kvantum theme) ===
     libsForQt5.qt5ct

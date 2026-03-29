@@ -5,6 +5,7 @@
   imports = [
     ../common
     ./stylix.nix
+    ./vicinae.nix
     ./configuration.nix
     ./audio.nix
     ./bluetooth.nix

@@ -162,8 +162,6 @@
         "waybar"
         "wl-paste --watch cliphist store"
         #"gsettings set org.gnome.desktop.interface color-scheme \"prefer-dark\""
-        "vicinae server"
-        "vicinae theme set catppuccin-frappe"
       ];
 
       bind = [
