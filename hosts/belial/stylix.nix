@@ -55,5 +55,7 @@
       name = "Bibata-Modern-Ice";
       size = 24;
     };
+
+    targets.console.enable = false;
   };
 }
