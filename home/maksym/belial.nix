@@ -22,7 +22,6 @@
     telegram-desktop
     jellyfin-desktop
     obsidian
-    jetbrains-toolbox
     chromium
     audacity
     bitwarden-desktop
@@ -46,5 +45,6 @@
     gnome-calculator
     satty
     kenku-fm
+    jetbrains.rider
   ];
 }
