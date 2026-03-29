@@ -1,7 +1,6 @@
 # Desktop environment feature
 # Bundles Hyprland WM with its co-dependent components:
 # - waybar (status bar)
-# - rofi (application launcher)
 # - wlogout (power menu)
 # - swaync (notification center)
 #
@@ -22,5 +21,7 @@
     ./wlogout.nix
     ./swaync.nix
     ./mimeapps.nix
+    ./vicinae.nix
+    ./zed.nix
   ];
 }

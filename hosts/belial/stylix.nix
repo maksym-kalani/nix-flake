@@ -9,7 +9,7 @@
       scheme = "Material Dark";
       author = "maksym";
       # Backgrounds
-      base00 = "121318"; # background
+      base00 = "0f1019"; # background
       base01 = "1a1b2e"; # backgroundDark
       base02 = "292a2f"; # surfaceContainerHigh
       base03 = "45464f"; # surfaceVariant
@@ -47,6 +47,8 @@
         applications = 11;
       };
     };
+
+    opacity.popups = 0.85;
 
     cursor = {
       package = pkgs.bibata-cursors;

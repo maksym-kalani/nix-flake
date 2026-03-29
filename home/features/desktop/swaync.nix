@@ -1,4 +1,7 @@
-{ lib, ... }:
+{ config, lib, ... }:
+let
+  c = config.lib.stylix.colors;
+in
 {
   # Config file (JSON)
   xdg.configFile."swaync/config.json".text = builtins.toJSON {
@@ -70,24 +73,30 @@
     };
   };
 
-  # Appended after stylix injects @base00–@base0F.
-  # Defines named aliases then inlines notification + control center styles.
-  services.swaync.style = lib.mkAfter ''
-    /* === Color aliases from stylix base16 palette === */
-    @define-color surface @base01;
-    @define-color surface_container @base01;
-    @define-color surface_container_high @base02;
-    @define-color surface_container_low @base00;
-    @define-color primary @base0D;
-    @define-color primary_container @base0E;
-    @define-color primary_fixed @base0D;
-    @define-color on_surface @base0D;
-    @define-color on_primary @base01;
-    @define-color on_primary_fixed @base01;
-    @define-color inverse_primary @base0D;
-    @define-color secondary @base0D;
-    @define-color error_container @base08;
-    @define-color on_error_container @base07;
+  xdg.configFile."swaync/style.css".text = ''
+    @import "notifications.css";
+    @import "control_center.css";
+  '';
+
+  xdg.configFile."swaync/colors.css".text = ''
+    @define-color surface #${c.base01};
+    @define-color surface_container #${c.base01};
+    @define-color surface_container_high #${c.base02};
+    @define-color surface_container_low #${c.base00};
+    @define-color primary #${c.base0D};
+    @define-color primary_container #${c.base0E};
+    @define-color primary_fixed #${c.base0D};
+    @define-color on_surface #${c.base0D};
+    @define-color on_primary #${c.base01};
+    @define-color on_primary_fixed #${c.base01};
+    @define-color inverse_primary #${c.base0D};
+    @define-color secondary #${c.base0D};
+    @define-color error_container #${c.base08};
+    @define-color on_error_container #${c.base07};
+  '';
+
+  xdg.configFile."swaync/notifications.css".text = ''
+    @import 'colors.css';
 
     /* === Derived dynamic colors === */
     @define-color base alpha(@surface, 0.3);
@@ -103,7 +112,6 @@
     @define-color fontcolor @on_surface;
     @define-color text @on_surface;
 
-    /* === Floating notifications === */
     * {
       color: @text;
       font-size: 2rem;
@@ -244,8 +252,25 @@
     .notification.normal progress {
       background-color: @primary;
     }
+  '';
 
-    /* === Global Reset (control center) === */
+  xdg.configFile."swaync/control_center.css".text = ''
+    @import 'colors.css';
+
+    /* === Derived dynamic colors === */
+    @define-color base alpha(@surface, 0.3);
+    @define-color surface_custom alpha(@surface_container_high, 0.3);
+    @define-color hovercolor alpha(@surface_container_high, 0.5);
+    @define-color activecolor alpha(@primary, 0.3);
+
+    @define-color buttoncolor alpha(@inverse_primary, 0.3);
+    @define-color hoverbutton alpha(@inverse_primary, 0.5);
+    @define-color activebutton @inverse_primary;
+
+    @define-color bordercolor transparent;
+    @define-color fontcolor @on_surface;
+    @define-color text @on_surface;
+
     * {
       color: @text;
       font-size: 1rem;
@@ -256,7 +281,6 @@
       transition: 200ms;
     }
 
-    /* === Control Center Container === */
     .control-center {
       background: @base;
       border-radius: 12px;
@@ -267,7 +291,6 @@
                   inset 1px 1px 1px alpha(@on_surface, 0.15);
     }
 
-    /* === Brightness === */
     .widget-backlight {
       padding: 12px 16px;
       margin: 0px 12px 12px 12px;
@@ -288,7 +311,6 @@
       border-radius: 5px;
     }
 
-    /* === Music Player === */
     .widget-mpris {
       border-radius: 10px;
       margin: 12px 12px 12px 12px;
@@ -338,7 +360,6 @@
       background-color: alpha(black, 0.6);
     }
 
-    /* === Notification Clear Button === */
     .widget-title {
       font-size: 1.5rem;
       margin: 0 12px 5px 12px;
@@ -355,7 +376,6 @@
       background: @hovercolor;
     }
 
-    /* === Do Not Disturb === */
     .widget-dnd {
       margin: 5px 12px 0px 12px;
     }
@@ -386,7 +406,6 @@
       background: alpha(@inverse_primary, 0.7);
     }
 
-    /* === Notifications (control center) === */
     .control-center .notification-row .notification-background {
       background-color: alpha(@surface_container, 0.3);
       border-radius: 12px;
@@ -414,14 +433,12 @@
       background-color: alpha(@primary, 0.3);
     }
 
-    /* === Progress Bars === */
     trough highlight {
       background: alpha(@primary, 0.5);
       border: 2px solid alpha(@primary_fixed, 0.5);
       border-radius: 20px;
     }
 
-    /* === Notification Groups === */
     .notification-group {
       margin: 4px 12px 4px 12px;
     }
