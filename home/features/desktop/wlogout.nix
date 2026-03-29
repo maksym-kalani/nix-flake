@@ -1,16 +1,15 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
-  colors = import ./colors.nix;
-  wallpaper = ./assets/wallpaper.png;
+  c = config.lib.stylix.colors;
 
-  # Generate blurred wallpaper at build time
+  # Generate blurred wallpaper at build time from stylix image
   blurredWallpaper =
     pkgs.runCommand "wlogout-blurred-wallpaper.png"
       {
         nativeBuildInputs = [ pkgs.imagemagick ];
       }
       ''
-        convert ${wallpaper} -blur 0x50 -brightness-contrast -10x-10 $out
+        convert ${config.stylix.image} -blur 0x50 -brightness-contrast -10x-10 $out
       '';
 
   # Wlogout launcher script with dynamic margins based on monitor
@@ -70,17 +69,17 @@ in
         border: 1px solid rgba(255, 255, 255, 0.1);
         margin: 10px;
         transition: all 0.3s ease-in-out;
-        color: ${colors.foreground};
-        background-color: alpha(${colors.primary}, 0.15);
+        color: #${c.base05};
+        background-color: alpha(#${c.base0D}, 0.15);
       }
 
       button:focus {
-        background-color: alpha(${colors.primary}, 0.3);
+        background-color: alpha(#${c.base0D}, 0.3);
         border: 1px solid rgba(255, 255, 255, 0.2);
       }
 
       button:hover {
-        background-color: alpha(${colors.primary}, 0.4);
+        background-color: alpha(#${c.base0D}, 0.4);
         border: 1px solid rgba(255, 255, 255, 0.3);
       }
 

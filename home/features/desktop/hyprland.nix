@@ -1,13 +1,8 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }:
-let
-  colors = import ./colors.nix;
-  wallpaper = ./assets/wallpaper.png;
-in
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -38,11 +33,6 @@ in
       "$terminal" = "kitty";
       "$browser" = "zen";
       "$fileManager" = "nautilus";
-
-      "$background" = colors.backgroundRgba;
-      "$primary" = colors.primaryRgba;
-      "$on_surface" = colors.onSurfaceRgba;
-      "$error" = colors.errorRgba;
 
       env = [
         "XDG_CURRENT_DESKTOP,Hyprland"
@@ -81,8 +71,6 @@ in
         gaps_in = 10;
         gaps_out = 20;
         border_size = 2;
-        "col.active_border" = "$on_surface";
-        "col.inactive_border" = "$primary";
         layout = "dwindle";
         resize_on_border = true;
       };
@@ -106,7 +94,6 @@ in
           enabled = true;
           range = 10;
           render_power = 2;
-          color = "0x33000000";
         };
       };
 
@@ -150,8 +137,6 @@ in
         preserve_split = true;
       };
 
-      master = { };
-
       binds = {
         workspace_back_and_forth = false;
         allow_workspace_cycles = true;
@@ -173,11 +158,10 @@ in
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "hyprctl setcursor Bibata-Modern-Ice 24"
         "swaync"
-        "swaybg -i ${wallpaper} -m fill"
+        "swaybg -i ${config.stylix.image} -m fill"
         "waybar"
         "wl-paste --watch cliphist store"
-        "gsettings set org.gnome.desktop.interface gtk-theme \"Adwaita-dark\""
-        "gsettings set org.gnome.desktop.interface color-scheme \"prefer-dark\""
+        #"gsettings set org.gnome.desktop.interface color-scheme \"prefer-dark\""
         "vicinae server"
         "vicinae theme set catppuccin-frappe"
       ];
@@ -376,11 +360,4 @@ in
     };
   };
 
-  # Cursor configuration
-  home.pointerCursor = {
-    name = "Bibata-Modern-Ice";
-    package = pkgs.bibata-cursors;
-    size = 24;
-    gtk.enable = true;
-  };
 }

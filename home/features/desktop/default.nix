@@ -6,22 +6,21 @@
 # - swaync (notification center)
 #
 # These components share:
-# - Color scheme (colors.nix)
-# - Wallpaper (assets/wallpaper.png)
+# - Color scheme (stylix, generated from base16Scheme in hosts/belial/stylix.nix)
+# - Wallpaper (assets/wallpaper.png via stylix.image)
 # - Integration via keybindings and exec-once
 #
 # This feature should be enabled as a whole. Individual components
 # are not designed to work independently.
 {
   imports = [
+    ./stylix.nix
     ./packages.nix
     ./scripts.nix
     ./hyprland.nix
     ./waybar.nix
-    ./rofi.nix
     ./wlogout.nix
     ./swaync.nix
-    ./theming.nix
     ./mimeapps.nix
   ];
 }
