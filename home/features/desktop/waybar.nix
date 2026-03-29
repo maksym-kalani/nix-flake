@@ -308,7 +308,7 @@
         box-shadow: inset 2px 2px 14px alpha(@textcolor1, 0.15),
                     inset 0 1px 2px 0px alpha(@textcolor1, 0.15),
                     inset 1px 1px 1px alpha(@textcolor1, 0.15);
-        background-color: @blur_background;
+        background-color: @backgrounddark;
       }
 
       .modules-right {
@@ -320,7 +320,7 @@
         box-shadow: inset 0px 2px 14px 2px alpha(@textcolor1, 0.15),
                     inset 0 1px 2px 0px alpha(@textcolor1, 0.15),
                     inset 1px 1px 1px alpha(@textcolor1, 0.15);
-        background-color: @blur_background;
+        background-color: @backgrounddark;
       }
 
       .modules-center {
@@ -331,7 +331,7 @@
         box-shadow: inset 2px 2px 14px alpha(@textcolor1, 0.15),
                     inset 0 1px 2px 0px alpha(@textcolor1, 0.15),
                     inset 0 1px 1px alpha(@textcolor1, 0.15);
-        background-color: @blur_background;
+        background-color: @backgrounddark;
       }
 
       label.module {
