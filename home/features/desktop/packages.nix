@@ -38,9 +38,6 @@
     nwg-look
     nwg-displays
 
-    # === Cursor theme ===
-    bibata-cursors
-
     # === Waybar ===
     waybar
     font-awesome
@@ -49,14 +46,11 @@
     rofi
     vicinae
 
-    # === Qt theming ===
+    # === Qt theming - runtime plugins (stylix generates the Base16Kvantum theme) ===
     libsForQt5.qt5ct
     kdePackages.qt6ct
     libsForQt5.qtstyleplugin-kvantum
     kdePackages.qtstyleplugin-kvantum
-    nordic # Kvantum Nordic theme
-    kdePackages.breeze-icons # Breeze icon theme for Qt6
-    kdePackages.breeze # Breeze style for Qt6
 
     # === Fonts ===
     fira

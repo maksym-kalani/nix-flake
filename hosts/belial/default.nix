@@ -4,6 +4,7 @@
 {
   imports = [
     ../common
+    ./stylix.nix
     ./configuration.nix
     ./audio.nix
     ./bluetooth.nix

@@ -1,7 +1,4 @@
 { pkgs, ... }:
-let
-  colors = import ./colors.nix;
-in
 {
   programs.waybar = {
     enable = true;
@@ -268,25 +265,25 @@ in
     ];
 
     style = ''
-      /* Colors - shared theme */
-      @define-color blur_background ${colors.backgroundTransparent};
-      @define-color backgroundlight ${colors.backgroundDark};
-      @define-color backgrounddark ${colors.backgroundDark};
-      @define-color workspacesbackground1 ${colors.backgroundDark};
-      @define-color workspacesbackground2 ${colors.backgroundDark};
-      @define-color bordercolor ${colors.foreground};
-      @define-color textcolor1 ${colors.focus};
-      @define-color textcolor2 ${colors.focus};
-      @define-color textcolor3 ${colors.focus};
-      @define-color iconcolor ${colors.focus};
-      @define-color focuscolor ${colors.focus};
-      @define-color surface ${colors.surface};
-      @define-color primary ${colors.primary};
-      @define-color secondary ${colors.secondary};
-      @define-color error ${colors.error};
-      @define-color on_error ${colors.onError};
-      @define-color on_secondary ${colors.onSecondary};
-      @define-color on_surface ${colors.onSurface};
+      /* Color aliases - mapped from stylix-injected @base0X vars */
+      @define-color blur_background alpha(@base00, 0.3);
+      @define-color backgroundlight @base01;
+      @define-color backgrounddark @base01;
+      @define-color workspacesbackground1 @base01;
+      @define-color workspacesbackground2 @base01;
+      @define-color bordercolor @base05;
+      @define-color textcolor1 @base0D;
+      @define-color textcolor2 @base0D;
+      @define-color textcolor3 @base0D;
+      @define-color iconcolor @base0D;
+      @define-color focuscolor @base0D;
+      @define-color surface @base00;
+      @define-color primary @base0D;
+      @define-color secondary @base0E;
+      @define-color error @base08;
+      @define-color on_error @base07;
+      @define-color on_secondary @base07;
+      @define-color on_surface @base05;
 
       /* General */
       * {

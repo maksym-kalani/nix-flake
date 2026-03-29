@@ -1,7 +1,4 @@
-{ pkgs, ... }:
-let
-  colors = import ./colors.nix;
-in
+{ lib, ... }:
 {
   # Config file (JSON)
   xdg.configFile."swaync/config.json".text = builtins.toJSON {
@@ -73,33 +70,24 @@ in
     };
   };
 
-  # Main style file - imports the other two
-  xdg.configFile."swaync/style.css".text = ''
-    @import "notifications.css";
-    @import "control_center.css";
-  '';
-
-  # Colors file
-  xdg.configFile."swaync/colors.css".text = ''
-    @define-color surface ${colors.backgroundDark};
-    @define-color surface_container ${colors.backgroundDark};
-    @define-color surface_container_high ${colors.backgroundDark};
-    @define-color surface_container_low ${colors.background};
-    @define-color primary ${colors.focus};
-    @define-color primary_container ${colors.primaryContainer};
-    @define-color primary_fixed ${colors.focus};
-    @define-color on_surface ${colors.focus};
-    @define-color on_primary ${colors.backgroundDark};
-    @define-color on_primary_fixed ${colors.backgroundDark};
-    @define-color inverse_primary ${colors.focus};
-    @define-color secondary ${colors.focus};
-    @define-color error_container ${colors.errorContainer};
-    @define-color on_error_container ${colors.onErrorContainer};
-  '';
-
-  # Notifications CSS (floating notifications)
-  xdg.configFile."swaync/notifications.css".text = ''
-    @import 'colors.css';
+  # Appended after stylix injects @base00–@base0F.
+  # Defines named aliases then inlines notification + control center styles.
+  services.swaync.style = lib.mkAfter ''
+    /* === Color aliases from stylix base16 palette === */
+    @define-color surface @base01;
+    @define-color surface_container @base01;
+    @define-color surface_container_high @base02;
+    @define-color surface_container_low @base00;
+    @define-color primary @base0D;
+    @define-color primary_container @base0E;
+    @define-color primary_fixed @base0D;
+    @define-color on_surface @base0D;
+    @define-color on_primary @base01;
+    @define-color on_primary_fixed @base01;
+    @define-color inverse_primary @base0D;
+    @define-color secondary @base0D;
+    @define-color error_container @base08;
+    @define-color on_error_container @base07;
 
     /* === Derived dynamic colors === */
     @define-color base alpha(@surface, 0.3);
@@ -115,7 +103,7 @@ in
     @define-color fontcolor @on_surface;
     @define-color text @on_surface;
 
-
+    /* === Floating notifications === */
     * {
       color: @text;
       font-size: 2rem;
@@ -145,7 +133,6 @@ in
                   inset 1px 1px 1px alpha(@on_surface, 0.15);
     }
 
-    /* Critical floating notifications */
     .floating-notifications.background
     .notification-row
     .notification-background
@@ -257,27 +244,8 @@ in
     .notification.normal progress {
       background-color: @primary;
     }
-  '';
 
-  # Control Center CSS
-  xdg.configFile."swaync/control_center.css".text = ''
-    @import 'colors.css';
-
-    /* === Derived dynamic colors === */
-    @define-color base alpha(@surface, 0.3);
-    @define-color surface_custom alpha(@surface_container_high, 0.3);
-    @define-color hovercolor alpha(@surface_container_high, 0.5);
-    @define-color activecolor alpha(@primary, 0.3);
-
-    @define-color buttoncolor alpha(@inverse_primary, 0.3);
-    @define-color hoverbutton alpha(@inverse_primary, 0.5);
-    @define-color activebutton @inverse_primary;
-
-    @define-color bordercolor transparent;
-    @define-color fontcolor @on_surface;
-    @define-color text @on_surface;
-
-    /* === Global Reset === */
+    /* === Global Reset (control center) === */
     * {
       color: @text;
       font-size: 1rem;
@@ -363,7 +331,6 @@ in
     }
 
     .widget-mpris-subtitle {
-
       font-weight: 900;
       font-size: 0.8rem;
       margin: 0px 20px 5px 0px;
@@ -419,7 +386,7 @@ in
       background: alpha(@inverse_primary, 0.7);
     }
 
-    /* === Notifications === */
+    /* === Notifications (control center) === */
     .control-center .notification-row .notification-background {
       background-color: alpha(@surface_container, 0.3);
       border-radius: 12px;
