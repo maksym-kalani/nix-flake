@@ -1,4 +1,10 @@
 {pkgs, ...}: {
+  # Required for xdg.portal when using home-manager with useUserPackages
+  environment.pathsToLink = [
+    "/share/applications"
+    "/share/xdg-desktop-portal"
+  ];
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;

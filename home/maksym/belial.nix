@@ -23,7 +23,6 @@
     jellyfin-desktop
     obsidian
     jetbrains-toolbox
-    obs-studio
     chromium
     audacity
     bitwarden-desktop
