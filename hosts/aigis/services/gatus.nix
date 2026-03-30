@@ -31,7 +31,8 @@ in
 
       endpoints = [
         {
-                  url = "tcp://192.168.2.20:8006";
+          name = "Morgana";
+          url = "tcp://192.168.2.20:8006";
           interval = "1m";
           conditions = [
             "[CONNECTED] == true"
@@ -48,7 +49,8 @@ in
           ];
         }
         {
-                  url = "http://192.168.2.5:8123";
+          name = "Home Assistant";
+          url = "http://192.168.2.5:8123";
           interval = "1m";
           conditions = [
             "[STATUS] == 200"
@@ -65,7 +67,8 @@ in
           ];
         }
         {
-                  url = "https://matrix.laufin.online/";
+          name = "Cloudflare Tunnel";
+          url = "https://matrix.laufin.online/";
           interval = "1m";
           conditions = [
             "[STATUS] == 200"
@@ -82,7 +85,8 @@ in
           ];
         }
         {
-                  url = "http://192.168.2.201:5066";
+          name = "Kavita on Morgana";
+          url = "http://192.168.2.201:5066";
           interval = "1m";
           conditions = [
             "[STATUS] == 200"
@@ -99,7 +103,8 @@ in
           ];
         }
         {
-                  url = "http://192.168.2.201:8008";
+          name = "Synapse on Morgana";
+          url = "http://192.168.2.201:8008";
           interval = "1m";
           conditions = [
             "[STATUS] == 200"
@@ -116,7 +121,8 @@ in
           ];
         }
         {
-                  url = "http://192.168.2.207:5380";
+          name = "DNS 2 on Morgana";
+          url = "http://192.168.2.207:5380";
           interval = "1m";
           conditions = [
             "[STATUS] == 200"
