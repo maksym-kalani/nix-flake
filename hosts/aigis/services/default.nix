@@ -29,5 +29,6 @@
     ./technitium-dns.nix
     ./vikunja.nix
     ./wallos.nix
+    ./bazarr.nix
   ];
 }
