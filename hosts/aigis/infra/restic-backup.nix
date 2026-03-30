@@ -21,6 +21,7 @@ let
       /var/lib/vikunja
       /var/lib/immich
       /var/lib/caddy
+      /var/lib/bazarr
     )
 
     # 1) Run the backup
