@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
   ...
 }:
 let
@@ -41,12 +39,4 @@ in
       ];
     }
   ];
-
-  services.caddy.virtualHosts = {
-    "${name}.${domain}" = {
-      extraConfig = ''
-        reverse_proxy 127.0.0.1:${toString port}
-      '';
-    };
-  };
 }

@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   domain = "laufin.xyz";
   ip = "192.168.2.50";
   appdata = "/mnt/tank/appdata/";
@@ -66,11 +67,12 @@
     # Run settings
     autoStart = true;
   };
-in {
+in
+{
   # Container definition
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
-    ports = ["${toString cfg.port.external}:${toString cfg.port.internal}"];
+    ports = [ "${toString cfg.port.external}:${toString cfg.port.internal}" ];
 
     # Optional configs
     extraOptions = cfg.extraOptions;
@@ -79,7 +81,7 @@ in {
     autoStart = cfg.autoStart;
   };
 
-  networking.firewall.allowedTCPPorts = [cfg.port.external];
+  networking.firewall.allowedTCPPorts = [ cfg.port.external ];
 
   services.gatus.settings.endpoints = [
     {
@@ -101,12 +103,4 @@ in {
       ];
     }
   ];
-
-  services.caddy.virtualHosts = {
-    "${cfg.name}.${domain}" = {
-      extraConfig = ''
-        reverse_proxy 127.0.0.1:${toString cfg.port.external}
-      '';
-    };
-  };
 }

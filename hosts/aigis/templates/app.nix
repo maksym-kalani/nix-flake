@@ -3,15 +3,17 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   name = "name";
   port = 0000;
   domain = "laufin.xyz";
   ip = "192.168.2.50";
-in {
+in
+{
   #services.ntfy-sh.enable = true;
 
-  networking.firewall.allowedTCPPorts = [port];
+  networking.firewall.allowedTCPPorts = [ port ];
 
   services.gatus.settings.endpoints = [
     {
@@ -33,12 +35,4 @@ in {
       ];
     }
   ];
-
-  services.caddy.virtualHosts = {
-    "${name}.${domain}" = {
-      extraConfig = ''
-        reverse_proxy 127.0.0.1:${toString port}
-      '';
-    };
-  };
 }

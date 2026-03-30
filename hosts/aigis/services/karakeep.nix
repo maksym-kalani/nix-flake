@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }: let
   name = "karakeep";
@@ -50,12 +49,4 @@ in {
       ];
     }
   ];
-
-  services.caddy.virtualHosts = {
-    "${name}.${domain}" = {
-      extraConfig = ''
-        reverse_proxy 127.0.0.1:${toString port}
-      '';
-    };
-  };
 }
