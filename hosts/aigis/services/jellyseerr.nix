@@ -1,13 +1,9 @@
 {
-  config,
-  pkgs,
-  lib,
   ...
 }:
 let
   name = "jellyseerr";
   port = 5055;
-  domain = "laufin.xyz";
   ip = "192.168.2.50";
 in
 {
@@ -36,12 +32,4 @@ in
       ];
     }
   ];
-
-  services.caddy.virtualHosts = {
-    "${name}.${domain}" = {
-      extraConfig = ''
-        reverse_proxy 127.0.0.1:${toString port}
-      '';
-    };
-  };
 }

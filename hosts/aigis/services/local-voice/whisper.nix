@@ -6,12 +6,10 @@ let
     name = "whisper";
     image = "rhasspy/wyoming-whisper";
     port = {
-      internal = 10300; # Port inside the container
-      external = 10300; # Port on the host
+      internal = 10300;
+      external = 10300;
     };
     extraOptions = [
-      #"--tty"
-      #"--stdin_open"
     ];
     volumes = [
       "${appdata}${cfg.name}:/data"
@@ -25,12 +23,10 @@ let
   };
 in
 {
-  # Container definition
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
     ports = [ "${toString cfg.port.external}:${toString cfg.port.internal}" ];
 
-    # Optional configs
     extraOptions = cfg.extraOptions;
     volumes = cfg.volumes;
     environment = cfg.environmentVariables;

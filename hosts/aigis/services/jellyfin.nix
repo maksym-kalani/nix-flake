@@ -1,16 +1,11 @@
 {
-  config,
-  pkgs,
-  lib,
   ...
 }: let
   name = "jellyfin";
   port = 8096;
-  domain = "laufin.xyz";
   ip = "192.168.2.50";
 in {
   services.jellyfin.enable = true;
-  #services.jellyfin.configDir = "/mnt/tank/appdata/jellyfin";
   users.users.jellyfin.extraGroups = ["tankusers" "render" "video"];
 
   networking.firewall.allowedTCPPorts = [port];
@@ -35,12 +30,4 @@ in {
       ];
     }
   ];
-
-  services.caddy.virtualHosts = {
-    "${name}.${domain}" = {
-      extraConfig = ''
-        reverse_proxy 127.0.0.1:${toString port}
-      '';
-    };
-  };
 }

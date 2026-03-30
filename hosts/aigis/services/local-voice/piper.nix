@@ -6,8 +6,8 @@ let
     name = "piper";
     image = "rhasspy/wyoming-piper:latest";
     port = {
-      internal = 10200; # Port inside the container
-      external = 10200; # Port on the host
+      internal = 10200;
+      external = 10200;
     };
     extraOptions = [ ];
     volumes = [
@@ -18,12 +18,10 @@ let
   };
 in
 {
-  # Container definition
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
     ports = [ "${toString cfg.port.external}:${toString cfg.port.internal}" ];
 
-    # Optional configs
     extraOptions = cfg.extraOptions;
     volumes = cfg.volumes;
     environment = cfg.environmentVariables;
