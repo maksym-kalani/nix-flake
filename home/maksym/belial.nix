@@ -37,7 +37,7 @@
     element-desktop
     papers
     loupe
-    claude-code
+    stable.claude-code
     sops
     nil
     nixd
