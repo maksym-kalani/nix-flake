@@ -7,7 +7,6 @@
 let
   name = "name";
   port = 0000;
-  domain = "laufin.xyz";
   ip = "192.168.2.50";
 in
 {

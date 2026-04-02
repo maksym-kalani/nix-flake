@@ -1,8 +1,8 @@
 {
   ...
-}: let
+}:
+let
   ip = "192.168.2.50";
-  appdata = "/mnt/tank/appdata/";
   cfg = {
     name = "mazanoke";
 
@@ -13,16 +13,17 @@
       external = 3474;
     };
 
-    extraOptions = [];
-    volumes = [];
-    environmentVariables = {};
+    extraOptions = [ ];
+    volumes = [ ];
+    environmentVariables = { };
 
     autoStart = true;
   };
-in {
+in
+{
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
-    ports = ["${toString cfg.port.external}:${toString cfg.port.internal}"];
+    ports = [ "${toString cfg.port.external}:${toString cfg.port.internal}" ];
 
     extraOptions = cfg.extraOptions;
     volumes = cfg.volumes;
@@ -30,7 +31,7 @@ in {
     autoStart = cfg.autoStart;
   };
 
-  networking.firewall.allowedTCPPorts = [cfg.port.external];
+  networking.firewall.allowedTCPPorts = [ cfg.port.external ];
 
   services.gatus.settings.endpoints = [
     {
