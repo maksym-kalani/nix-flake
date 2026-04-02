@@ -35,7 +35,10 @@
   environment.systemPackages = with pkgs; [
     mangohud
     heroic
+    jemalloc
   ];
 
   programs.gamemode.enable = true;
+
+  boot.kernelModules = [ "ntsync" ];
 }
