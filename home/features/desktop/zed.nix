@@ -4,6 +4,7 @@
     enable = true;
     userSettings = {
       agent_servers.claude-acp.type = "registry";
+      appearance = "dark";
     };
   };
 }
