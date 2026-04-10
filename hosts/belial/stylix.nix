@@ -8,6 +8,7 @@
     base16Scheme = {
       scheme = "Material Dark";
       author = "maksym";
+      variant = "dark";
       # Backgrounds
       base00 = "0f1019"; # background
       base01 = "1a1b2e"; # backgroundDark
