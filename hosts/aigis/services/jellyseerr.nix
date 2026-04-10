@@ -7,7 +7,7 @@ let
   ip = "192.168.2.50";
 in
 {
-  services.jellyseerr = {
+  services.seerr = {
     enable = true;
     openFirewall = true;
   };
