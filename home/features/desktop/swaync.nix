@@ -86,7 +86,7 @@ in
     @define-color primary #${c.base0D};
     @define-color primary_container #${c.base0E};
     @define-color primary_fixed #${c.base0D};
-    @define-color on_surface #${c.base0D};
+    @define-color on_surface #${c.base07};
     @define-color on_primary #${c.base01};
     @define-color on_primary_fixed #${c.base01};
     @define-color inverse_primary #${c.base0D};
