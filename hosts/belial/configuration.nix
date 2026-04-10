@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./hardware-configuration.nix
   ];
@@ -31,10 +32,6 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-
   programs.nix-ld.enable = true;
-
-  services.openssh.enable = true;
-
   system.stateVersion = "25.11";
 }
