@@ -272,11 +272,11 @@
       @define-color workspacesbackground1 @base01;
       @define-color workspacesbackground2 @base01;
       @define-color bordercolor @base05;
-      @define-color textcolor1 @base0D;
-      @define-color textcolor2 @base0D;
-      @define-color textcolor3 @base0D;
-      @define-color iconcolor @base0D;
-      @define-color focuscolor @base0D;
+      @define-color textcolor1 @base07;
+      @define-color textcolor2 @base07;
+      @define-color textcolor3 @base07;
+      @define-color iconcolor @base07;
+      @define-color focuscolor @base07;
       @define-color surface @base00;
       @define-color primary @base0D;
       @define-color secondary @base0E;
