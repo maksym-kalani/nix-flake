@@ -46,5 +46,6 @@
     satty
     kenku-fm
     jetbrains.rider
+    wonderdraft
   ];
 }
