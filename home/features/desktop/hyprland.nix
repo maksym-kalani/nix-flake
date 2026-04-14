@@ -298,12 +298,14 @@
         "ignore_alpha 0, match:namespace swaync-control-center"
         "ignore_alpha 0, match:namespace swaync-notification-window"
         "ignore_alpha 0, match:namespace vicinae"
+        "animation slide top, match:namespace swaync-control-center"
       ];
 
       windowrule = [
         # Pavucontrol
         "float on, pin on, center on, match:class (.*org.pulseaudio.pavucontrol.*)"
         "size 700 600, match:class (.*org.pulseaudio.pavucontrol.*)"
+        "animation slide top, match:class (.*org.pulseaudio.pavucontrol.*)"
 
         # Satty
         "float on, pin on, center on, match:class (.*satty.*)"
@@ -312,6 +314,7 @@
         # Blueman Manager
         "float on, center on, match:title (Bluetooth Devices)"
         "size 800 600, match:title (Bluetooth Devices)"
+        "animation slide top, match:title (Bluetooth Devices)"
 
         # nwg-look
         "float on, center on, match:class (nwg-look)"
@@ -332,6 +335,7 @@
         # nm-connection-editor
         "float on, center on, match:class (nm-connection-editor)"
         "size 800 700, match:class (nm-connection-editor)"
+        "animation slide top, match:class (nm-connection-editor)"
 
         # Picture-in-Picture
         "float on, center on, pin on, match:title (Picture-in-Picture)"
@@ -349,11 +353,7 @@
         "float on, match:class (org.gnome.Calendar)"
         "size 400 600, match:class (org.gnome.Calendar)"
         "move 3020 70, match:class (org.gnome.Calendar)"
-
-        # Toolbox
-        "float on, match:class (jetbrains-toolbox)"
-        "size 440 700, match:class (jetbrains-toolbox)"
-        "move 2980 70, match:class (jetbrains-toolbox)"
+        "animation slide top, match:class (org.gnome.Calendar)"
       ];
     };
   };
