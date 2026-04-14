@@ -183,7 +183,6 @@ in
 
         @bazarr host bazarr.laufin.xyz
         handle @bazarr {
-          uri replace / /bazarr/
           reverse_proxy http://192.168.2.50:6767
         }
       }
