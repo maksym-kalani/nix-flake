@@ -346,6 +346,9 @@
         "workspace 10, match:class ^(steam)$, match:title .*Big Picture.*"
         "fullscreen on, match:class ^(steam)$, match:title .*Big Picture.*"
 
+        # Vesktop
+        "opaque on, match:class (vesktop)"
+
         # Bitwarden
         "float on, match:title .*Bitwarden Password Manager.*"
 
