@@ -24,9 +24,9 @@ in
     notification-body-image-width = 200;
     notification-window-preferred-output = "DP-1";
 
-    timeout = 4;
-    timeout-low = 2;
-    timeout-critical = 6;
+    timeout = 8;
+    timeout-low = 4;
+    timeout-critical = 10;
 
     fit-to-screen = true;
     keyboard-shortcuts = true;
