@@ -48,5 +48,6 @@
     jetbrains.rider
     wonderdraft
     mcp-nixos
+    devenv
   ];
 }
