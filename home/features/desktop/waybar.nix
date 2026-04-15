@@ -115,19 +115,6 @@
           on-click = "gnome-calendar";
         };
 
-        network = {
-          format = "{ifname}";
-          format-wifi = "󰖩 {essid} ({signalStrength}%)";
-          format-ethernet = "󰈀 {ifname}";
-          format-disconnected = "󰖪 Disconnected";
-          tooltip-format = "{ifname} via {gwaddr}";
-          on-click = "nm-connection-editor";
-          tooltip-format-wifi = "{ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}";
-          tooltip-format-ethernet = "{ifname}\nIP: {ipaddr}\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}";
-          tooltip-format-disconnected = "Disconnected";
-          max-length = 50;
-        };
-
         pulseaudio = {
           format = "<span size='18pt' rise='-3pt'>{icon}</span> {volume}%";
           format-bluetooth = "{volume}% <span size='18pt' rise='-3pt'>{icon}</span> {format_source}";
@@ -399,21 +386,6 @@
         background-color: transparent;
       }
 
-      /* Taskbar */
-      #taskbar {
-        padding: 5px 0px 5px 0px;
-      }
-
-      #taskbar button {
-        border-radius: 6px;
-        padding: 0px 5px 0px 5px;
-      }
-
-      #taskbar button:hover {
-        background: @primary;
-        color: @backgrounddark;
-      }
-
       /* Custom Appmenu */
       #custom-appmenu {
         font-size: 24px;
@@ -434,29 +406,6 @@
         color: @textcolor2;
       }
 
-      /* Custom Updates */
-      #custom-updates.yellow {
-        border-radius: 8px;
-        margin: 5px 0px 5px 5px;
-        padding: 0px 6px 0px 6px;
-        background-color: @secondary;
-        color: @on_secondary;
-      }
-
-      #custom-updates.red {
-        border-radius: 8px;
-        margin: 6px 0px 6px 7px;
-        padding: 0px 6px 0px 6px;
-        background-color: @error;
-        color: @on_error;
-      }
-
-      /* Hardware */
-      #disk, #memory, #cpu {
-        margin: 0px;
-        padding: 0px;
-      }
-
       #language {
         padding-top: 2px;
       }
@@ -474,12 +423,6 @@
 
       #pulseaudio.muted {
         color: @textcolor1;
-      }
-
-      /* Network */
-      #network {
-        font-size: 14px;
-        color: @textcolor2;
       }
 
       /* Bluetooth */

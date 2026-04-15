@@ -12,10 +12,10 @@ in
     cssPriority = "user";
 
     control-center-width = 450;
-    control-center-height = 560;
+    control-center-height = 500;
     control-center-margin-top = 20;
-    control-center-margin-bottom = 500;
-    control-center-margin-right = 14;
+    control-center-margin-bottom = 750;
+    control-center-margin-right = 15;
     control-center-margin-left = 0;
 
     notification-window-width = 450;
@@ -47,25 +47,16 @@ in
     };
 
     widgets = [
-      "dnd"
       "backlight"
-      "mpris"
       "title"
       "notifications"
     ];
 
     widget-config = {
-      dnd = {
-        text = "Do not Disturb";
-      };
       title = {
         text = "Notifications";
         clear-all-button = true;
         button-text = "Clear";
-      };
-      mpris = {
-        image-size = 0;
-        image-radius = 0;
       };
       backlight = {
         label = "󰃟";
@@ -113,16 +104,11 @@ in
     @define-color text @on_surface;
 
     * {
+      all: unset;
       color: @text;
-      font-size: 2rem;
+      font-size: 1rem;
       font-weight: 900;
-      all: unset;
       font-family: "Inter", "Font Awesome 6 Free", "Font Awesome 6 Brands", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-      transition: 200ms;
-    }
-
-    .widget-mpris {
-      all: unset;
     }
 
     .notification-row {
@@ -206,6 +192,8 @@ in
     .notification-content .image {
       margin-right: 12px;
       border-radius: 10px;
+      min-width: 64px;
+      min-height: 64px;
     }
 
     .summary {
@@ -272,13 +260,13 @@ in
     @define-color text @on_surface;
 
     * {
+      all: unset;
       color: @text;
       font-size: 1rem;
       font-weight: 900;
       font-family: "Inter", "JetBrainsMono Nerd Font Propo", "Font Awesome 7 Free",
       "Font Awesome 7 Brands", "Font Awesome 6 Free", "Font Awesome 6 Brands",
       FontAwesome;
-      transition: 200ms;
     }
 
     .control-center {
@@ -309,55 +297,6 @@ in
       background: alpha(@primary, 0.5);
       border: 2px solid alpha(@primary, 0.5);
       border-radius: 5px;
-    }
-
-    .widget-mpris {
-      border-radius: 10px;
-      margin: 12px 12px 12px 12px;
-      align-items: center;
-      color: alpha(#000000, 0.8);
-    }
-
-    .widget-mpris button {
-      background: @surface_custom;
-      border-radius: 20px;
-      padding: 4px;
-      margin: 20px 2px;
-      color: alpha(#000000, 0.8);
-    }
-
-    .widget-mpris button:hover {
-      background: @hovercolor;
-    }
-
-    .widget-mpris-player {
-      border-radius: 10px;
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-      color: alpha(#000000, 0.8);
-    }
-
-    .widget-mpris-album-art {
-      border-radius: 1000px;
-      margin: 8px 0 0 8px;
-    }
-
-    .widget-mpris-title {
-      font-weight: 900;
-      font-size: 2em;
-      margin: 10px 20px 0 0;
-      color: alpha(white, 0.9);
-      background-color: alpha(black, 0.6);
-    }
-
-    .widget-mpris-subtitle {
-      font-weight: 900;
-      font-size: 0.8rem;
-      margin: 0px 20px 5px 0px;
-      color: alpha(white, 0.9);
-      background-color: alpha(black, 0.6);
     }
 
     .widget-title {
