@@ -47,5 +47,6 @@
     kenku-fm
     jetbrains.rider
     wonderdraft
+    mcp-nixos
   ];
 }
