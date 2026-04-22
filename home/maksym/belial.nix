@@ -49,5 +49,6 @@
     wonderdraft
     mcp-nixos
     devenv
+    opencode
   ];
 }
