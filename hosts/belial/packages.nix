@@ -4,6 +4,7 @@
     pkgs.nix-init
     pkgs.glib
     pkgs.gsettings-desktop-schemas
+    pkgs.lmstudio
   ];
 
   fonts.packages = with pkgs; [
