@@ -28,16 +28,14 @@
     blueman
     rofi-network-manager
     caligula
-    #wonderdraft
     nautilus
     libreoffice-fresh
-    solaar
     vlc
     mission-center
     element-desktop
     papers
     loupe
-    stable.claude-code
+    claude-code
     sops
     nil
     nixd
@@ -50,5 +48,7 @@
     mcp-nixos
     devenv
     opencode
+    nodejs_20
+    nix-weather
   ];
 }
