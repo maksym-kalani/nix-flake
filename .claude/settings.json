@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "path=$(jq -r '.tool_input.file_path // empty'); case \"$path\" in */secrets/*.yaml|*/secrets/*.yml) echo \"Refusing to edit SOPS-encrypted secret: $path. Decrypt via 'sops $path' instead — direct edits will corrupt the ciphertext.\" >&2; exit 2 ;; esac"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "path=$(jq -r '.tool_input.file_path // empty'); case \"$path\" in *.nix) cd /home/maksym/nix-flake && out=$(nix flake check --no-build --show-trace 2>&1); status=$?; if [ $status -ne 0 ]; then echo \"--- nix flake check failed (CLAUDE.md mandates eval validation) ---\" >&2; echo \"$out\" | tail -40 >&2; exit 2; fi ;; esac"
+          }
+        ]
+      }
+    ]
+  }
+}
