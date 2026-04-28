@@ -1,0 +1,30 @@
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [
+    spotify
+    vesktop
+    telegram-desktop
+    jellyfin-desktop
+    obsidian
+    chromium
+    audacity
+    bitwarden-desktop
+    blueman
+    rofi-network-manager
+    caligula
+    nautilus
+    libreoffice-fresh
+    vlc
+    mission-center
+    element-desktop
+    papers
+    loupe
+    gnome-calendar
+    gnome-calculator
+    satty
+    kenku-fm
+    jetbrains.rider
+    wonderdraft
+    kdePackages.kate
+  ];
+}
