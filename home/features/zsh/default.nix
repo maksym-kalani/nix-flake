@@ -91,7 +91,7 @@
             "type": "custom"
         },
         {
-            "key": "│ {#31} user    {#keys}│",
+            "key": "│ {#31} user    {#keys}│",
             "type": "title",
             "format": "{user-name}"
         },
@@ -109,11 +109,11 @@
             "type": "os"
         },
         {
-            "key": "│ {#35} kernel  {#keys}│",
+            "key": "│ {#35} kernel  {#keys}│",
             "type": "kernel"
         },
         {
-            "key": "│ {#36} wm      {#keys}│",
+            "key": "│ {#36} wm      {#keys}│",
             "type": "wm"
         },
         {
@@ -121,11 +121,11 @@
             "type": "de"
         },
         {
-            "key": "│ {#31} term    {#keys}│",
+            "key": "│ {#31} term    {#keys}│",
             "type": "terminal"
         },
         {
-            "key": "│ {#32} shell   {#keys}│",
+            "key": "│ {#32} shell   {#keys}│",
             "type": "shell"
         },
         {
@@ -139,7 +139,7 @@
             "folders": "/"
         },
         {
-            "key": "│ {#36} memory  {#keys}│",
+            "key": "│ {#36} memory  {#keys}│",
             "type": "memory"
         },
         {
@@ -147,7 +147,7 @@
             "type": "custom"
         },
         {
-            "key": "│ {#39} colors  {#keys}│",
+            "key": "│ {#39} colors  {#keys}│",
             "type": "colors",
             "symbol": "circle"
         },
