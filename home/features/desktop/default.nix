@@ -14,7 +14,6 @@
 {
   imports = [
     ./stylix.nix
-    ./packages.nix
     ./apps.nix
     ./scripts.nix
     ./hyprland.nix
