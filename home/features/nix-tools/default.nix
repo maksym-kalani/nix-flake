@@ -7,5 +7,6 @@
     nix-weather
     devenv
     stable.mcp-nixos
+    deadnix
   ];
 }
