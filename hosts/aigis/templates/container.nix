@@ -1,11 +1,8 @@
 {
-  lib,
-  config,
   ...
 }:
 let
   ip = "192.168.2.50";
-  appdata = "/var/lib/containers/";
   # Configuration options with defaults
   cfg = {
     # Container name
