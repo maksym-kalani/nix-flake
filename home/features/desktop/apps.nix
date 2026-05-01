@@ -12,7 +12,6 @@
     blueman
     rofi-network-manager
     caligula
-    nautilus
     libreoffice-fresh
     vlc
     mission-center

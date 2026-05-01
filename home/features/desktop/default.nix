@@ -25,5 +25,6 @@
     ./vicinae.nix
     ./zed.nix
     ./kitty.nix
+    ./nautilus.nix
   ];
 }
