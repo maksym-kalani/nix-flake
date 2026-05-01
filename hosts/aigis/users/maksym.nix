@@ -10,5 +10,6 @@
   };
   environment.interactiveShellInit = ''
     alias rebuild='sudo nixos-rebuild switch --flake .#aigis'
+    alias zfs-users='sudo fuser -vm /mnt/tank'
   '';
 }
