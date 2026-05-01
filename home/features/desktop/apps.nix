@@ -21,10 +21,10 @@
     loupe
     gnome-calendar
     gnome-calculator
-    satty
     kenku-fm
     jetbrains.rider
     wonderdraft
     kdePackages.kate
+    kdePackages.kdenlive
   ];
 }
