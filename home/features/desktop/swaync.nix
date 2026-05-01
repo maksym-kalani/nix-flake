@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, ... }:
 let
   c = config.lib.stylix.colors;
 in

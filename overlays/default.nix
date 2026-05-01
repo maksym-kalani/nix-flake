@@ -6,11 +6,11 @@
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
-  modifications = final: prev: {
+  modifications = _final: prev: {
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
-    caddy = prev.caddy.overrideAttrs (oldAttrs: rec {
+    caddy = prev.caddy.overrideAttrs (_oldAttrs: rec {
       version = "2.9.1";
       vendorHash = "sha256-qrlpuqTnFn/9oMTMovswpS1eAI7P9gvesoMpsIWKcY8=";
       src = prev.fetchFromGitHub {
