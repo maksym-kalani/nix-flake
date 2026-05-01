@@ -1,6 +1,11 @@
 { pkgs, ... }:
 {
-  programs.bash.enable = true;
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      ns() { nix shell "''${@/#/nixpkgs#}"; }
+    '';
+  };
 
   home.shellAliases = {
     # General
