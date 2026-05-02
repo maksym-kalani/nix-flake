@@ -19,7 +19,7 @@
 
     ];
     environmentVariables = {
-      PASSWORD = "";
+      FUSION_ALLOW_EMPTY_PASSWORD = "true";
     };
 
     autoStart = true;
