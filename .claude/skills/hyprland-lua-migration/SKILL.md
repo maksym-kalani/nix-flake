@@ -229,6 +229,22 @@ sudo nixos-rebuild switch --flake .#<host>
 tail -F ~/.local/share/hyprland/hyprland.log
 ```
 
+## Runtime monitor control (Lua mode)
+
+`hyprctl keyword` is **completely broken** in Lua config mode — it returns "keyword can't work with non-legacy parsers". Use `hyprctl eval` with Lua expressions instead:
+
+```bash
+# Enable monitor
+hyprctl eval 'hl.monitor({ output = "HDMI-A-1", mode = "3840x2160@60", position = "-3840x0", scale = 1, disabled = false })'
+
+# Disable monitor
+hyprctl eval 'hl.monitor({ output = "HDMI-A-1", disabled = true })'
+```
+
+Important: if a catch-all `hl.monitor({ output = "", disabled = true })` is in the static config, you **must** pass `disabled = false` explicitly in the enable eval — omitting it leaves the monitor disabled even when mode/position are set correctly.
+
+Detection: use `hyprctl -j monitors` (not `monitors all`). When a monitor is active it appears with `disabled: false`; when disabled via eval it disappears from the list entirely.
+
 ## Common pitfalls
 
 | Symptom | Cause | Fix |
