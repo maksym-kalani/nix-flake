@@ -1,5 +1,5 @@
 # Custom scripts for desktop environment
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   toggle-audio = pkgs.writeShellScriptBin "toggle-audio" ''
     # toggle-audio — cycle through all sinks, move streams, and notify
@@ -79,7 +79,9 @@ let
     set -euo pipefail
 
     MON="HDMI-A-1"
-    PLACEMENT="3840x2160@60,-3840x0,1"
+    MODE="3840x2160@60"
+    POSITION="-3840x0"
+    SCALE=1
     USB_SINK="alsa_output.usb-Solid_State_Logic_SSL_2_Mk_II-00.pro-output-0"
     HDMI_SINK="alsa_output.pci-0000_0d_00.1.pro-output-9"
 
@@ -101,17 +103,18 @@ let
     }
 
     enable_tv() {
-      hyprctl keyword monitor "$MON,$PLACEMENT" >/dev/null
+      hyprctl eval "hl.monitor({ output = \"$MON\", mode = \"$MODE\", position = \"$POSITION\", scale = $SCALE, disabled = false })" >/dev/null
       for _ in {1..40}; do
         sink_exists "$HDMI_SINK" && break
         sleep 0.25
       done
       switch_sink "$HDMI_SINK" || true
+      swaybg -o "$MON" -i "${config.stylix.image}" -m fill &>/dev/null &
       ${pkgs.libnotify}/bin/notify-send "🖥️ TV ON" "$MON enabled; audio → HDMI"
     }
 
     disable_tv() {
-      hyprctl keyword monitor "$MON,disable" >/dev/null
+      hyprctl eval "hl.monitor({ output = \"$MON\", disabled = true })" >/dev/null
       switch_sink "$USB_SINK" || true
       ${pkgs.libnotify}/bin/notify-send "🖥️ TV OFF" "$MON disabled; audio → USB DAC"
     }
@@ -119,20 +122,10 @@ let
     mon_json="$(hyprctl -j monitors 2>/dev/null || echo '[]')"
     mon_entry="$(${pkgs.jq}/bin/jq -r --arg n "$MON" '.[] | select(.name==$n)' <<<"$mon_json" || true)"
 
-    mon_present=false
-    mon_dpms=true
-    if [[ -n "''${mon_entry}" ]]; then
-      mon_present=true
-      mon_dpms="$(${pkgs.jq}/bin/jq -r 'if has("dpmsStatus") then .dpmsStatus else true end' <<<"$mon_entry")"
-    fi
-
-    cur_sink="$(${pkgs.pulseaudio}/bin/pactl info | ${pkgs.gawk}/bin/awk -F': ' '/Default Sink/ {print $2}')"
-    hdmi_sink_present=false
-    sink_exists "$HDMI_SINK" && hdmi_sink_present=true
-
     tv_on=false
-    if [[ "$mon_present" == true && "$mon_dpms" == "true" && "$hdmi_sink_present" == true && "$cur_sink" == "$HDMI_SINK" ]]; then
-      tv_on=true
+    if [[ -n "''${mon_entry}" ]]; then
+      disabled="$(${pkgs.jq}/bin/jq -r '.disabled // false' <<<"$mon_entry")"
+      [[ "$disabled" == "false" ]] && tv_on=true
     fi
 
     if [[ "$tv_on" == true ]]; then
