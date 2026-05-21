@@ -583,7 +583,7 @@ in
         (bind' "SUPER + CTRL + R" (dsp.exec "hyprctl reload"))
         (bind' "SUPER + CTRL + Q" (dsp.exec "wlogout-launcher"))
         (bind' "SUPER + CTRL + L" (dsp.exec "loginctl terminate-session $XDG_SESSION_ID"))
-        (bind' "SUPER + V" (dsp.exec "vicinae vicinae://extensions/vicinae/clipboard/history"))
+        (bind' "SUPER + V" (dsp.exec "vicinae deeplink vicinae://launch/clipboard/history"))
         (bind' "SUPER + SHIFT + B" (dsp.exec "pkill waybar || waybar"))
 
         # Screenshot
