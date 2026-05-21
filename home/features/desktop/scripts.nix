@@ -119,20 +119,10 @@ let
     mon_json="$(hyprctl -j monitors 2>/dev/null || echo '[]')"
     mon_entry="$(${pkgs.jq}/bin/jq -r --arg n "$MON" '.[] | select(.name==$n)' <<<"$mon_json" || true)"
 
-    mon_present=false
-    mon_dpms=true
-    if [[ -n "''${mon_entry}" ]]; then
-      mon_present=true
-      mon_dpms="$(${pkgs.jq}/bin/jq -r 'if has("dpmsStatus") then .dpmsStatus else true end' <<<"$mon_entry")"
-    fi
-
-    cur_sink="$(${pkgs.pulseaudio}/bin/pactl info | ${pkgs.gawk}/bin/awk -F': ' '/Default Sink/ {print $2}')"
-    hdmi_sink_present=false
-    sink_exists "$HDMI_SINK" && hdmi_sink_present=true
-
     tv_on=false
-    if [[ "$mon_present" == true && "$mon_dpms" == "true" && "$hdmi_sink_present" == true && "$cur_sink" == "$HDMI_SINK" ]]; then
-      tv_on=true
+    if [[ -n "''${mon_entry}" ]]; then
+      disabled="$(${pkgs.jq}/bin/jq -r '.disabled // false' <<<"$mon_entry")"
+      [[ "$disabled" == "false" ]] && tv_on=true
     fi
 
     if [[ "$tv_on" == true ]]; then
