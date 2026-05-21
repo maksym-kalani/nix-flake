@@ -1,5 +1,5 @@
 # Custom scripts for desktop environment
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   toggle-audio = pkgs.writeShellScriptBin "toggle-audio" ''
     # toggle-audio — cycle through all sinks, move streams, and notify
@@ -79,7 +79,9 @@ let
     set -euo pipefail
 
     MON="HDMI-A-1"
-    PLACEMENT="3840x2160@60,-3840x0,1"
+    MODE="3840x2160@60"
+    POSITION="-3840x0"
+    SCALE=1
     USB_SINK="alsa_output.usb-Solid_State_Logic_SSL_2_Mk_II-00.pro-output-0"
     HDMI_SINK="alsa_output.pci-0000_0d_00.1.pro-output-9"
 
@@ -101,17 +103,18 @@ let
     }
 
     enable_tv() {
-      hyprctl keyword monitor "$MON,$PLACEMENT" >/dev/null
+      hyprctl eval "hl.monitor({ output = \"$MON\", mode = \"$MODE\", position = \"$POSITION\", scale = $SCALE, disabled = false })" >/dev/null
       for _ in {1..40}; do
         sink_exists "$HDMI_SINK" && break
         sleep 0.25
       done
       switch_sink "$HDMI_SINK" || true
+      swaybg -o "$MON" -i "${config.stylix.image}" -m fill &>/dev/null &
       ${pkgs.libnotify}/bin/notify-send "🖥️ TV ON" "$MON enabled; audio → HDMI"
     }
 
     disable_tv() {
-      hyprctl keyword monitor "$MON,disable" >/dev/null
+      hyprctl eval "hl.monitor({ output = \"$MON\", disabled = true })" >/dev/null
       switch_sink "$USB_SINK" || true
       ${pkgs.libnotify}/bin/notify-send "🖥️ TV OFF" "$MON disabled; audio → USB DAC"
     }
