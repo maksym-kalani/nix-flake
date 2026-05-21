@@ -13,6 +13,7 @@
   stylix = {
     # Disable targets we configure manually with custom CSS/structure
     targets.swaync.enable = false;
+    targets.hyprland.enable = false;
     # Qt doesn't auto-enable for standalone Home Manager — set it explicitly
     targets.qt.enable = true;
     # Waybar: let stylix inject @base0X CSS vars, but skip the opinionated default rules
