@@ -40,7 +40,7 @@
       home-manager,
       nixpkgs,
       sops-nix,
-      hermes-agent
+      hermes-agent,
       ...
     }@inputs:
     let
