@@ -30,5 +30,6 @@
     ./vikunja.nix
     ./wallos.nix
     ./bazarr.nix
+    ./hermes.nix
   ];
 }
