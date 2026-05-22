@@ -31,7 +31,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vicinae.url = "github:vicinaehq/vicinae";
-    hermes-agent.url = "github:NousResearch/hermes-agent";
   };
 
   outputs =
@@ -40,7 +39,6 @@
       home-manager,
       nixpkgs,
       sops-nix,
-      hermes-agent,
       ...
     }@inputs:
     let
@@ -67,7 +65,6 @@
           modules = [
             ./hosts/aigis
             sops-nix.nixosModules.sops
-            hermes-agent.nixosModules.default
           ];
         };
         belial = nixpkgs.lib.nixosSystem {
