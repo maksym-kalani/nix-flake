@@ -20,4 +20,16 @@
     environmentFiles = [ config.sops.secrets."hermes-env".path ];
     addToSystemPackages = true;
   };
+
+  security.sudo.extraRules = [
+    {
+      users = [ "maksym" ];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/podman";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
 }
