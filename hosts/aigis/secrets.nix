@@ -40,6 +40,9 @@
       minio = {
         key = "minio";
       };
+      hermes-env = {
+        key = "hermes-env";
+      };
     };
   };
 }
