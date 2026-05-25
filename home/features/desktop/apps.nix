@@ -7,7 +7,7 @@
     jellyfin-desktop
     obsidian
     chromium
-    audacity
+    tenacity
     bitwarden-desktop
     blueman
     rofi-network-manager
