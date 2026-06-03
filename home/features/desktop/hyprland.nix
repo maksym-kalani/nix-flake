@@ -80,14 +80,14 @@ in
         }
         {
           output = "DP-1";
-          mode = "3440x1440@144";
+          mode = "2560x1440@500";
           position = "0x0";
           scale = 1;
         }
         {
           output = "DP-2";
           mode = "1920x1080@100";
-          position = "3440x0";
+          position = "2560x0";
           scale = 1;
           transform = 3;
         }
