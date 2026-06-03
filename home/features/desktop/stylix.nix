@@ -3,8 +3,6 @@
   # Core stylix settings (enable, image, polarity, fonts, cursor) are configured
   # at the NixOS level in hosts/belial/stylix.nix and inherited automatically.
 
-  gtk.gtk4.theme = config.gtk.theme;
-
   gtk.iconTheme = {
     name = "Colloid";
     package = pkgs.colloid-icon-theme;
