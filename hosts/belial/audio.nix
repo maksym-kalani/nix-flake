@@ -48,6 +48,20 @@
         }
       ];
     };
+    "99-hide-monitor-audio" = {
+      "monitor.alsa.rules" = [
+        {
+          matches = [
+            { "node.name" = "alsa_output.pci-0000_0f_00.4.iec958-stereo"; }
+          ];
+          actions = {
+            update-props = {
+              "node.disabled" = true;
+            };
+          };
+        }
+      ];
+    };
   };
 
   environment.systemPackages = with pkgs; [
