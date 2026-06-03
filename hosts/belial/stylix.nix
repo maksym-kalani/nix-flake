@@ -58,5 +58,6 @@
     };
 
     targets.console.enable = false;
+    targets.kmscon.enable = false;
   };
 }
