@@ -1,7 +1,8 @@
 {
   pkgs,
   ...
-}: {
+}:
+{
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     intel-gpu-tools
@@ -19,5 +20,8 @@
     restic
     openssh
     sysstat
+  ];
+  nixpkgs.config.permittedInsecurePackages = [
+    "pnpm-9.15.9"
   ];
 }
