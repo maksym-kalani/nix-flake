@@ -1,42 +1,23 @@
 { ... }:
 let
-  appdata = "/var/lib/containers/";
   ip = "192.168.2.50";
-  cfg = {
-    name = "piper";
-    image = "rhasspy/wyoming-piper:latest";
-    port = {
-      internal = 10200;
-      external = 10200;
-    };
-    extraOptions = [ ];
-    volumes = [
-      "${appdata}${cfg.name}:/config"
-    ];
-    environmentVariables = { };
-    autoStart = true;
-  };
+  port = 10200;
+  name = "piper";
 in
 {
-  virtualisation.oci-containers.containers.${cfg.name} = {
-    image = cfg.image;
-    ports = [ "${toString cfg.port.external}:${toString cfg.port.internal}" ];
-
-    extraOptions = cfg.extraOptions;
-    volumes = cfg.volumes;
-    environment = cfg.environmentVariables;
-    autoStart = cfg.autoStart;
-    cmd = [
-      "--voice=en_US-lessac-medium"
-    ];
+  services.wyoming.piper.servers.${name} = {
+    enable = true;
+    uri = "tcp://0.0.0.0:${toString port}";
+    voice = "en_US-lessac-medium";
+    zeroconf.enable = false;
   };
 
-  networking.firewall.allowedTCPPorts = [ cfg.port.external ];
+  networking.firewall.allowedTCPPorts = [ port ];
 
   services.gatus.settings.endpoints = [
     {
-      name = cfg.name;
-      url = "tcp://${ip}:${toString cfg.port.external}";
+      name = name;
+      url = "tcp://${ip}:${toString port}";
       interval = "1m";
       conditions = [
         "[CONNECTED] == true"
@@ -46,7 +27,7 @@ in
           type = "ntfy";
           enabled = true;
           send-on-resolved = true;
-          description = "${cfg.name} health check";
+          description = "${name} health check";
           failure-threshold = 3;
           success-threshold = 1;
         }
