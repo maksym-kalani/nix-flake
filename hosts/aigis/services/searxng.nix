@@ -1,44 +1,106 @@
-{
-  ...
-}: let
+{ config, ... }:
+let
   ip = "192.168.2.50";
-  appdata = "/var/lib/containers/";
-  cfg = {
-    name = "search";
+  port = 8882;
+in
+{
+  sops.templates."searxng-env" = {
+    owner = "searx";
+    content = ''
+      SEARXNG_SECRET_KEY=${config.sops.placeholder.searxng_secret_key}
+    '';
+  };
 
-    image = "searxng/searxng:latest";
+  services.searx = {
+    enable = true;
+    environmentFile = config.sops.templates."searxng-env".path;
+    settings = {
+      use_default_settings = true;
 
-    port = {
-      internal = 8080;
-      external = 8882;
+      search = {
+        autocomplete = "google";
+        autocomplete_min = 3;
+        favicon_resolver = "google";
+        formats = [
+          "html"
+          "json"
+        ];
+        suspended_times = {
+          SearxEngineAccessDenied = 86400;
+          SearxEngineCaptcha = 86400;
+          SearxEngineTooManyRequests = 3600;
+          cf_SearxEngineCaptcha = 1296000;
+          cf_SearxEngineAccessDenied = 86400;
+          recaptcha_SearxEngineCaptcha = 604800;
+        };
+      };
+
+      server = {
+        port = port;
+        bind_address = "0.0.0.0";
+        base_url = "/";
+        secret_key = "$SEARXNG_SECRET_KEY";
+      };
+
+      ui.infinite_scroll = true;
+
+      plugins."searx.plugins.tracker_url_remover.SXNGPlugin".active = false;
+
+      engines = [
+        {
+          name = "cloudflareai";
+          disabled = true;
+        }
+        {
+          name = "duckduckgo images";
+          disabled = true;
+        }
+        {
+          name = "duckduckgo news";
+          disabled = true;
+        }
+        {
+          name = "duckduckgo videos";
+          disabled = true;
+        }
+        {
+          name = "il post";
+          disabled = false;
+        }
+        {
+          name = "libretranslate";
+          disabled = true;
+        }
+        {
+          name = "public domain image archive";
+          disabled = false;
+        }
+        {
+          name = "qwant images";
+          disabled = false;
+        }
+        {
+          name = "qwant news";
+          disabled = false;
+        }
+        {
+          name = "qwant videos";
+          disabled = false;
+        }
+        {
+          name = "semantic scholar";
+          disabled = true;
+        }
+      ];
     };
-
-    extraOptions = [];
-    volumes = [
-      "${appdata}${cfg.name}:/etc/searxng"
-
-    ];
-    environmentVariables = {};
-
-    autoStart = true;
-  };
-in {
-  virtualisation.oci-containers.containers.${cfg.name} = {
-    image = cfg.image;
-    ports = ["${toString cfg.port.external}:${toString cfg.port.internal}"];
-
-    extraOptions = cfg.extraOptions;
-    volumes = cfg.volumes;
-    environment = cfg.environmentVariables;
-    autoStart = cfg.autoStart;
   };
 
-  networking.firewall.allowedTCPPorts = [cfg.port.external];
+  networking.firewall.allowedTCPPorts = [ port ];
 
   services.gatus.settings.endpoints = [
     {
-      name = cfg.name;
-      url = "http://${ip}:${toString cfg.port.external}";
+      name = "search";
+      url = "http://${ip}:${toString port}";
       interval = "1m";
       conditions = [
         "[STATUS] == 200"
@@ -48,7 +110,7 @@ in {
           type = "ntfy";
           enabled = true;
           send-on-resolved = true;
-          description = "${cfg.name} health check";
+          description = "search health check";
           failure-threshold = 3;
           success-threshold = 1;
         }

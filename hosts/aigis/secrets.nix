@@ -22,6 +22,10 @@
       openai_api_key = {
         key = "openai_api_key";
       };
+      searxng_secret_key = {
+        key = "searxng_secret_key";
+        owner = "searx";
+      };
       flame_homepage_password = {
         key = "flame_homepage_password";
       };
