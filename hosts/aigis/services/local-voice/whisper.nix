@@ -1,45 +1,26 @@
 { ... }:
 let
-  appdata = "/var/lib/containers/";
   ip = "192.168.2.50";
-  cfg = {
-    name = "whisper";
-    image = "rhasspy/wyoming-whisper";
-    port = {
-      internal = 10300;
-      external = 10300;
-    };
-    extraOptions = [
-    ];
-    volumes = [
-      "${appdata}${cfg.name}:/data"
-    ];
-    environmentVariables = { };
-    autoStart = true;
-    cmd = [
-      "--model=tiny-int8"
-      "--language=en"
-    ];
-  };
+  port = 10300;
+  name = "whisper";
 in
 {
-  virtualisation.oci-containers.containers.${cfg.name} = {
-    image = cfg.image;
-    ports = [ "${toString cfg.port.external}:${toString cfg.port.internal}" ];
-
-    extraOptions = cfg.extraOptions;
-    volumes = cfg.volumes;
-    environment = cfg.environmentVariables;
-    autoStart = cfg.autoStart;
-    cmd = cfg.cmd;
+  services.wyoming.faster-whisper.servers.${name} = {
+    enable = true;
+    uri = "tcp://0.0.0.0:${toString port}";
+    sttLibrary = "faster-whisper";
+    model = "tiny-int8";
+    language = "en";
+    device = "cpu";
+    zeroconf.enable = false;
   };
 
-  networking.firewall.allowedTCPPorts = [ cfg.port.external ];
+  networking.firewall.allowedTCPPorts = [ port ];
 
   services.gatus.settings.endpoints = [
     {
-      name = cfg.name;
-      url = "tcp://${ip}:${toString cfg.port.external}";
+      name = name;
+      url = "tcp://${ip}:${toString port}";
       interval = "1m";
       conditions = [
         "[CONNECTED] == true"
@@ -49,7 +30,7 @@ in
           type = "ntfy";
           enabled = true;
           send-on-resolved = true;
-          description = "${cfg.name} health check";
+          description = "${name} health check";
           failure-threshold = 3;
           success-threshold = 1;
         }
