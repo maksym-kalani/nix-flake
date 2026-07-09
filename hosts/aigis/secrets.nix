@@ -29,6 +29,9 @@
       flame_homepage_password = {
         key = "flame_homepage_password";
       };
+      kavita_token_key = {
+        key = "kavita_token_key";
+      };
       hass_mariadb_root_password = {
         key = "hass_mariadb_root_password";
       };

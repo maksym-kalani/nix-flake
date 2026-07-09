@@ -1,45 +1,25 @@
 {
+  config,
   ...
-}: let
+}:
+let
   ip = "192.168.2.50";
-  appdata = "/var/lib/containers/";
-  cfg = {
-    name = "kavita";
-
-    image = "jvmilazz0/kavita:latest";
-
-    port = {
-      internal = 5000;
-      external = 5000;
-    };
-
-    extraOptions = [];
-    volumes = [
-      "/mnt/tank/media/ttrpgs:/ttrpgs"
-      "${appdata}${cfg.name}:/kavita/config"
-
-    ];
-    environmentVariables = {};
-
-    autoStart = true;
-  };
-in {
-  virtualisation.oci-containers.containers.${cfg.name} = {
-    image = cfg.image;
-    ports = ["${toString cfg.port.external}:${toString cfg.port.internal}"];
-
-    extraOptions = cfg.extraOptions;
-    volumes = cfg.volumes;
-    environment = cfg.environmentVariables;
-    autoStart = cfg.autoStart;
+  port = 5000;
+  name = "kavita";
+in
+{
+  services.kavita = {
+    enable = true;
+    tokenKeyFile = config.sops.secrets.kavita_token_key.path;
+    settings.Port = port;
   };
 
-  networking.firewall.allowedTCPPorts = [cfg.port.external];
+  networking.firewall.allowedTCPPorts = [ port ];
 
   services.gatus.settings.endpoints = [
     {
-      name = cfg.name;
-      url = "http://${ip}:${toString cfg.port.external}";
+      name = name;
+      url = "http://${ip}:${toString port}";
       interval = "1m";
       conditions = [
         "[STATUS] == 200"
@@ -49,7 +29,7 @@ in {
           type = "ntfy";
           enabled = true;
           send-on-resolved = true;
-          description = "${cfg.name} health check";
+          description = "${name} health check";
           failure-threshold = 3;
           success-threshold = 1;
         }

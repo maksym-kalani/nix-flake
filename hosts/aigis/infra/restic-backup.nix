@@ -13,6 +13,7 @@ let
       /mnt/tank/users
       /var/lib/containers
       /var/lib/jellyfin
+      /var/lib/kavita
       /var/lib/karakeep
       /var/lib/prowlarr
       /var/lib/radarr
