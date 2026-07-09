@@ -14,6 +14,8 @@ in
     settings.Port = port;
   };
 
+  users.users.kavita.extraGroups = [ "tankusers" ];
+
   networking.firewall.allowedTCPPorts = [ port ];
 
   services.gatus.settings.endpoints = [
