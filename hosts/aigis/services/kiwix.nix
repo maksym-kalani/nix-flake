@@ -1,48 +1,28 @@
 {
   ...
-}: let
+}:
+let
   ip = "192.168.2.50";
   appdata = "/srv/kiwix";
-  cfg = {
-    name = "kiwix";
-
-    image = "ghcr.io/kiwix/kiwix-serve:latest";
-
-    port = {
-      internal = 8080;
-      external = 8012;
+  port = 8012;
+  name = "kiwix";
+in
+{
+  services.kiwix-serve = {
+    enable = true;
+    port = port;
+    library = {
+      "wikipedia_en_all_maxi_2025-08" = "${appdata}/wikipedia_en_all_maxi_2025-08.zim";
+      "wikipedia_uk_all_maxi_2025-09" = "${appdata}/wikipedia_uk_all_maxi_2025-09.zim";
     };
-
-    extraOptions = [
-      "--userns=host"
-
-    ];
-    volumes = [
-      "${appdata}:/data:ro"
-
-    ];
-    environmentVariables = {};
-
-    autoStart = true;
-  };
-in {
-  virtualisation.oci-containers.containers.${cfg.name} = {
-    image = cfg.image;
-    ports = ["${toString cfg.port.external}:${toString cfg.port.internal}"];
-
-    extraOptions = cfg.extraOptions;
-    volumes = cfg.volumes;
-    environment = cfg.environmentVariables;
-    autoStart = cfg.autoStart;
-    cmd = ["*.zim"];
   };
 
-  networking.firewall.allowedTCPPorts = [cfg.port.external];
+  networking.firewall.allowedTCPPorts = [ port ];
 
   services.gatus.settings.endpoints = [
     {
-      name = cfg.name;
-      url = "http://${ip}:${toString cfg.port.external}";
+      name = name;
+      url = "http://${ip}:${toString port}";
       interval = "1m";
       conditions = [
         "[STATUS] == 200"
@@ -52,7 +32,7 @@ in {
           type = "ntfy";
           enabled = true;
           send-on-resolved = true;
-          description = "${cfg.name} health check";
+          description = "kiwix health check";
           failure-threshold = 3;
           success-threshold = 1;
         }
