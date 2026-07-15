@@ -12,4 +12,5 @@
 
   # belial-only: kitty's `kitten` SSH wrapper
   programs.zsh.shellAliases.aigis = "kitten ssh aigis";
+  home.pointerCursor.enable = true;
 }
