@@ -12,6 +12,7 @@ let
       /mnt/tank/media/ttrpgs
       /mnt/tank/users
       /var/lib/containers
+      /var/lib/suwayomi-server
       /var/lib/jellyfin
       /var/lib/kavita
       /var/lib/karakeep
