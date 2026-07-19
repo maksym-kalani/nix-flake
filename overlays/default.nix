@@ -21,6 +21,17 @@
       };
       doCheck = false;
     });
+
+    # nixpkgs 2.1.1867 bundles H2 1.4.200, which cannot read the database
+    # already migrated to the H2 v2 format by the previously-run upstream
+    # stable container (>= v2.3). Track upstream stable until nixpkgs catches up.
+    suwayomi-server = prev.suwayomi-server.overrideAttrs (_oldAttrs: rec {
+      version = "2.3.2243";
+      src = prev.fetchurl {
+        url = "https://github.com/Suwayomi/Suwayomi-Server/releases/download/v${version}/Suwayomi-Server-v${version}.jar";
+        hash = "sha256-ghFBsy4XDUoC08vf7Vd+2PB70iOD/19BMuu1rkDpjdU=";
+      };
+    });
   };
 
   stable-packages = final: _prev: {
