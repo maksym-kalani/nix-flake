@@ -8,7 +8,6 @@
     ./immich.nix
     ./it-tools.nix
     ./jellyfin.nix
-    ./jellyseerr.nix
     ./karakeep.nix
     ./kavita.nix
     ./kiwix.nix
