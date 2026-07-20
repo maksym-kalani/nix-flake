@@ -180,11 +180,6 @@ in
         handle @recommendarr {
           reverse_proxy http://192.168.2.50:3007
         }
-
-        @bazarr host bazarr.laufin.xyz
-        handle @bazarr {
-          reverse_proxy http://192.168.2.50:6767
-        }
       }
     '';
   };
