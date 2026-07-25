@@ -52,7 +52,16 @@
 
       # Fastfetch on terminal start
       if [[ $(tty) == *"pts"* ]]; then
-        fastfetch
+        if [[ -n "$KITTY_WINDOW_ID" ]]; then
+          fastfetch_pic=$(find "$HOME/Pictures/fastfetch-pics" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" \) 2>/dev/null | shuf -n 1)
+          if [[ -n "$fastfetch_pic" ]]; then
+            fastfetch --kitty "$fastfetch_pic" --logo-height 16
+          else
+            fastfetch
+          fi
+        else
+          fastfetch
+        fi
       fi
 
       ns() { nix shell "''${@/#/nixpkgs#}"; }
@@ -77,10 +86,7 @@
     {
       "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
       "logo": {
-        "type": "small",
-        "padding": {
-          "top": 4
-        }
+        "type": "small"
       },
       "display": {
         "separator": " "
