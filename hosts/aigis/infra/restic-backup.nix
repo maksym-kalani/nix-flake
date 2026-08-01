@@ -10,6 +10,7 @@ let
     SOURCES=(
       /mnt/tank/appdata
       /mnt/tank/media/ttrpgs
+      /mnt/tank/media/photos
       /mnt/tank/users
       /var/lib/containers
       /var/lib/suwayomi-server
