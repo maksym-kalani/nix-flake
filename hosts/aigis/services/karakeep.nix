@@ -23,7 +23,7 @@ in {
     enable = true;
     package = pkgs.meilisearch;
     settings = {
-      experimental_dumpless_upgrade = true;
+      upgrade_db = true;
     };
   };
 
