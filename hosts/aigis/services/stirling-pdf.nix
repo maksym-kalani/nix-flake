@@ -1,4 +1,5 @@
 {
+  pkgs
   ...
 }:
 let
@@ -8,6 +9,7 @@ let
 in
 {
   services.stirling-pdf = {
+    package = pkgs.stable.stirling-pdf;
     enable = true;
     environment = {
       SERVER_PORT = port;
