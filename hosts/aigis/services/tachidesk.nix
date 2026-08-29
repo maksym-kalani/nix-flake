@@ -28,18 +28,12 @@ in {
       basicAuthPasswordFile = config.sops.secrets.tachidesk_password.path;
       extensionRepos = [];
 
-      # Modern auth schema written by Suwayomi 2.x; envsubst substitutes the
-      # same secret into authPassword at service start
-      authMode = "BASIC_AUTH";
-      authUsername = "maksym";
-      authPassword = "$TACHIDESK_SERVER_BASIC_AUTH_PASSWORD";
-
       # Carried over from the previous container's server.conf
       extensionStores = [
-        "https://raw.githubusercontent.com/yuzono/manga-repo/repo/index.pb"
-        "https://raw.githubusercontent.com/suwayomi/tachiyomi-extension/repo/repo.json"
-        "https://raw.githubusercontent.com/yuzono/cursed-manga-repo/repo/index.pb"
+        "https://github.com/keiyoushi/extensions/raw/repo/index.pb"
+        "https://github.com/yuzono/cursed-manga-repo/raw/repo/index.pb"
       ];
+
       autoDownloadNewChapters = true;
       excludeEntryWithUnreadChapters = false;
       maxSourcesInParallel = 3;
