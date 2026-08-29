@@ -14,10 +14,22 @@ let
 
   # Wlogout launcher script with dynamic margins based on monitor
   wlogoutScript = pkgs.writeShellScriptBin "wlogout-launcher" ''
-    res_h=$(hyprctl -j monitors | ${pkgs.jq}/bin/jq '.[] | select(.focused==true) | .height')
-    h_scale=$(hyprctl -j monitors | ${pkgs.jq}/bin/jq '.[] | select (.focused == true) | .scale' | sed 's/\.//')
-    w_margin=$((res_h * 27 / h_scale))
-    wlogout -b 3 -T $w_margin -B $w_margin
+    monitor=$(hyprctl -j monitors | ${pkgs.jq}/bin/jq '.[] | select(.focused==true)')
+    res_w=$(echo "$monitor" | ${pkgs.jq}/bin/jq '.width')
+    res_h=$(echo "$monitor" | ${pkgs.jq}/bin/jq '.height')
+    scale_pct=$(echo "$monitor" | ${pkgs.jq}/bin/jq '(.scale * 100) | round')
+
+    screen_w=$((res_w * 100 / scale_pct))
+    screen_h=$((res_h * 100 / scale_pct))
+    v_margin=$((screen_h * 27 / 100))
+    button_size=$((screen_h - 2 * v_margin))
+    h_margin=$(((screen_w - button_size * 3) / 2))
+
+    if [ "$h_margin" -lt 0 ]; then
+      h_margin=0
+    fi
+
+    wlogout -b 3 -T "$v_margin" -B "$v_margin" -L "$h_margin" -R "$h_margin"
   '';
 in
 {

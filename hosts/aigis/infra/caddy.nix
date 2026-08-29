@@ -190,7 +190,7 @@ in
       plugins = [
         "github.com/caddy-dns/namecheap@v0.0.0-20250228023406-ef9fadb67785"
       ];
-      hash = "sha256-aZmXJPB9mZnF37c8Xx9T54/4/RhDVLjGWfLw9X2PEZA=";
+      hash = "sha256-gmM02heQEuLSQb8hPR5Lo0pUrhpPWAuaquheDNcMrkM=";
     };
     configFile = caddyfile;
     group = "tankusers";

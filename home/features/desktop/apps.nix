@@ -14,7 +14,7 @@
     blueman
     rofi-network-manager
     caligula
-    libreoffice-fresh
+    libreoffice-stable
     vlc
     mission-center
     element-desktop
