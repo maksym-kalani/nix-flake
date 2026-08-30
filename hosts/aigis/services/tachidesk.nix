@@ -23,9 +23,6 @@ in {
       inherit port;
 
       downloadAsCbz = true;
-      basicAuthEnabled = true;
-      basicAuthUsername = "maksym";
-      basicAuthPasswordFile = config.sops.secrets.tachidesk_password.path;
       extensionRepos = [];
 
       # Carried over from the previous container's server.conf
