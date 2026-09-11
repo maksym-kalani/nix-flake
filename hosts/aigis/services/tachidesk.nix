@@ -51,7 +51,7 @@ in {
       url = "http://${ip}:${toString port}";
       interval = "1m";
       conditions = [
-        "[STATUS] == 401"
+        "[STATUS] == 200"
       ];
       alerts = [
         {
