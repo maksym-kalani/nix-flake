@@ -180,11 +180,6 @@ in
         handle @recommendarr {
           reverse_proxy http://192.168.2.50:3007
         }
-
-        @trek host trek.laufin.xyz
-        handle @trek {
-          reverse_proxy http://192.168.2.50:3000
-        }
       }
     '';
   };
