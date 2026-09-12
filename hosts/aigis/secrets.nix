@@ -53,6 +53,12 @@
       trek_encryption_key = {
         key = "trek_encryption_key";
       };
+      rxresume_auth_secret = {
+        key = "rxresume_auth_secret";
+      };
+      rxresume_db_password = {
+        key = "rxresume_db_password";
+      };
     };
   };
 }

@@ -185,6 +185,11 @@ in
         handle @trek {
           reverse_proxy http://192.168.2.50:3000
         }
+
+        @rxresume host rxresume.laufin.xyz
+        handle @rxresume {
+          reverse_proxy http://192.168.2.50:3300
+        }
       }
     '';
   };
