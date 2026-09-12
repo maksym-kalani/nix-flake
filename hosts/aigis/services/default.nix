@@ -22,6 +22,7 @@
     ./qbittorrent.nix
     ./radarr.nix
     ./recommendarr.nix
+    ./rxresume.nix
     ./searxng.nix
     ./sonarr.nix
     ./stirling-pdf.nix
