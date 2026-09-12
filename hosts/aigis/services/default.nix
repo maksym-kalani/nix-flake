@@ -27,6 +27,7 @@
     ./stirling-pdf.nix
     ./tachidesk.nix
     ./technitium-dns.nix
+    ./trek.nix
     ./vikunja.nix
     ./wallos.nix
   ];
