@@ -4,6 +4,8 @@
 }:
 {
   virtualisation = {
+    containers.registries.settings.unqualified-search-registries = ["docker.io"];
+
     podman = {
       enable = true;
       dockerCompat = true;
