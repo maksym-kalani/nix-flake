@@ -50,9 +50,6 @@
       hermes-env = {
         key = "hermes-env";
       };
-      trek_encryption_key = {
-        key = "trek_encryption_key";
-      };
     };
   };
 }
