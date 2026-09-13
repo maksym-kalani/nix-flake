@@ -40,6 +40,15 @@ in {
 
   networking.firewall.allowedTCPPorts = [cfg.port.external 53];
 
+  services.flame.apps = [
+    {
+      name = "Technitium DNS";
+      url = "dns.laufin.xyz";
+      icon = "shield";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = cfg.name;

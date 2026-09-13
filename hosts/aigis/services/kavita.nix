@@ -18,6 +18,15 @@ in
 
   networking.firewall.allowedTCPPorts = [ port ];
 
+  services.flame.apps = [
+    {
+      name = "Kavita";
+      url = "kavita.laufin.xyz";
+      icon = "book-open";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = name;
