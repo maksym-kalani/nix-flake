@@ -32,6 +32,15 @@ in {
 
   networking.firewall.allowedTCPPorts = [cfg.port.external];
 
+  services.flame.apps = [
+    {
+      name = "IT Tools";
+      url = "it-tools.laufin.xyz";
+      icon = "tools";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = cfg.name;

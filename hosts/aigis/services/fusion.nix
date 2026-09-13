@@ -37,6 +37,15 @@ in {
 
   networking.firewall.allowedTCPPorts = [cfg.port.external];
 
+  services.flame.apps = [
+    {
+      name = "Fusion RSS";
+      url = "rss.laufin.xyz";
+      icon = "rss-box";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = cfg.name;
