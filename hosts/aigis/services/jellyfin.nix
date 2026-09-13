@@ -10,6 +10,15 @@ in {
 
   networking.firewall.allowedTCPPorts = [port];
 
+  services.flame.apps = [
+    {
+      name = "Jellyfin";
+      url = "jellyfin.laufin.xyz";
+      icon = "television";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = name;

@@ -13,6 +13,15 @@ in
   };
   users.users.sonarr.extraGroups = [ "tankusers" ];
 
+  services.flame.apps = [
+    {
+      name = "Sonarr";
+      url = "sonarr.laufin.xyz";
+      icon = "alpha-s-box-outline";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = name;

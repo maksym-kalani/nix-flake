@@ -13,6 +13,15 @@ in {
 
   networking.firewall.allowedTCPPorts = [port];
 
+  services.flame.apps = [
+    {
+      name = "ntfy.sh";
+      url = "ntfy.laufin.xyz";
+      icon = "bell-ring";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = name;

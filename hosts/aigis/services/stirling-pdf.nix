@@ -22,6 +22,15 @@ in
 
   networking.firewall.allowedTCPPorts = [ port ];
 
+  services.flame.apps = [
+    {
+      name = "Stirling PDF";
+      url = "stirling-pdf.laufin.xyz";
+      icon = "file-pdf-box";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = name;

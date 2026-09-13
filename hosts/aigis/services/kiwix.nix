@@ -19,6 +19,15 @@ in
 
   networking.firewall.allowedTCPPorts = [ port ];
 
+  services.flame.apps = [
+    {
+      name = "Wikipedia";
+      url = "wikipedia.laufin.xyz";
+      icon = "wikipedia";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = name;
