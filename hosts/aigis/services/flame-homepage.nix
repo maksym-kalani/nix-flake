@@ -160,6 +160,28 @@ in
     };
   };
 
+  # Flame bundles the `docker-secret` npm package, which unconditionally
+  # readdir()s /run/secrets at require()-time (unguarded by try/catch) to
+  # look for Docker Swarm secrets. Under the DynamicUser sandbox it has no
+  # access to sops-nix's real /run/secrets, so readdirSync throws EACCES
+  # and crashes the whole process before it can even start listening.
+  # Mask the path with an empty, world-readable tmpfs so the existsSync
+  # check still succeeds but readdirSync just sees an empty directory,
+  # without granting flame any visibility into the real secrets directory.
+  #
+  # preStart shares this same sandboxed namespace and still needs to `cat`
+  # the weather API key from its real sops-nix path (upstream flame.nix
+  # reads it directly, not via LoadCredential), so bind the one real file
+  # back through the mask at its original path — systemd applies bind
+  # mounts after the generic TemporaryFileSystem protection, so this
+  # exposes only that single file, not the rest of /run/secrets.
+  systemd.services.flame.serviceConfig = {
+    TemporaryFileSystem = "/run/secrets:ro,mode=0555";
+    BindReadOnlyPaths = [
+      "${config.sops.secrets.flame_weather_api_key.path}:/run/secrets/flame_weather_api_key"
+    ];
+  };
+
   services.gatus.settings.endpoints = [
     {
       inherit name;
