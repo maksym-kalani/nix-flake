@@ -1,34 +1,23 @@
 {
+  lib,
   ...
 }:
 let
   name = "name";
   port = 0000;
-  ip = "192.168.2.50";
 in
 {
   #services.ntfy-sh.enable = true;
 
   networking.firewall.allowedTCPPorts = [ port ];
 
-  services.gatus.settings.endpoints = [
-    {
-      name = name;
-      url = "http://${ip}:${toString port}";
-      interval = "1m";
-      conditions = [
-        "[STATUS] == 200"
-      ];
-      alerts = [
-        {
-          type = "ntfy";
-          enabled = true;
-          send-on-resolved = true;
-          description = "${name} health check";
-          failure-threshold = 3;
-          success-threshold = 1;
-        }
-      ];
-    }
+  imports = [
+    (import ../lib/monitored-app.nix { inherit lib; } {
+      inherit name port;
+      # Flame app tile — url is the public domain, icon is a Material
+      # Design Icons name (see https://pictogrammers.com/library/mdi/).
+      url = "${name}.laufin.xyz";
+      icon = "cancel";
+    })
   ];
 }

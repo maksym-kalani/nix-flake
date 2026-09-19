@@ -1,6 +1,7 @@
 {
   imports = [
     ./caddy.nix
+    ./gatus.nix
     ./podman.nix
     ./wireguard.nix
     ./samba.nix

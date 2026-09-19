@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   ...
 }:
 let
@@ -142,13 +143,13 @@ in
     };
   };
 
-  services.flame.apps = [
-    {
+  imports = [
+    (import ../lib/monitored-app.nix { inherit lib; } {
       name = "Gatus";
       url = "gatus.laufin.xyz";
       icon = "arrow-up-box";
-      isPinned = true;
-    }
+      enableGatus = false;
+    })
   ];
 
   networking.firewall.allowedTCPPorts = [ port ];
