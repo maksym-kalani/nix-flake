@@ -1,8 +1,8 @@
 {
+  lib,
   ...
 }:
 let
-  ip = "192.168.2.50";
   cfg = {
     name = "mazanoke";
 
@@ -21,6 +21,16 @@ let
   };
 in
 {
+  imports = [
+    (import ../lib/monitored-app.nix { inherit lib; } {
+      name = "Mazanoke";
+      url = "mazanoke.laufin.xyz/";
+      icon = "image-auto-adjust";
+      port = cfg.port.external;
+      gatusName = cfg.name;
+    })
+  ];
+
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
     ports = [ "${toString cfg.port.external}:${toString cfg.port.internal}" ];
@@ -32,34 +42,4 @@ in
   };
 
   networking.firewall.allowedTCPPorts = [ cfg.port.external ];
-
-  services.flame.apps = [
-    {
-      name = "Mazanoke";
-      url = "mazanoke.laufin.xyz/";
-      icon = "image-auto-adjust";
-      isPinned = true;
-    }
-  ];
-
-  services.gatus.settings.endpoints = [
-    {
-      name = cfg.name;
-      url = "http://${ip}:${toString cfg.port.external}";
-      interval = "1m";
-      conditions = [
-        "[STATUS] == 200"
-      ];
-      alerts = [
-        {
-          type = "ntfy";
-          enabled = true;
-          send-on-resolved = true;
-          description = "${cfg.name} health check";
-          failure-threshold = 3;
-          success-threshold = 1;
-        }
-      ];
-    }
-  ];
 }

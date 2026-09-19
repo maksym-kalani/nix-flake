@@ -1,6 +1,8 @@
 {
   imports = [
     ./caddy.nix
+    ./flame-homepage.nix
+    ./gatus.nix
     ./podman.nix
     ./wireguard.nix
     ./samba.nix
