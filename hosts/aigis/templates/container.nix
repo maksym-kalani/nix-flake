@@ -1,8 +1,8 @@
 {
+  lib,
   ...
 }:
 let
-  ip = "192.168.2.50";
   # Configuration options with defaults
   cfg = {
     # Container name
@@ -79,24 +79,14 @@ in
 
   networking.firewall.allowedTCPPorts = [ cfg.port.external ];
 
-  services.gatus.settings.endpoints = [
-    {
+  imports = [
+    (import ../lib/monitored-app.nix { inherit lib; } {
       name = cfg.name;
-      url = "http://${ip}:${toString cfg.port.external}";
-      interval = "1m";
-      conditions = [
-        "[STATUS] == 200"
-      ];
-      alerts = [
-        {
-          type = "ntfy";
-          enabled = true;
-          send-on-resolved = true;
-          description = "${cfg.name} health check";
-          failure-threshold = 3;
-          success-threshold = 1;
-        }
-      ];
-    }
+      port = cfg.port.external;
+      # Flame app tile — url is the public domain, icon is a Material
+      # Design Icons name (see https://pictogrammers.com/library/mdi/).
+      url = "${cfg.name}.laufin.xyz";
+      icon = "cancel";
+    })
   ];
 }

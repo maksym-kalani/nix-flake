@@ -1,9 +1,7 @@
 {
   imports = [
-    ./flame-homepage.nix
     ./flaresolverr.nix
     ./fusion.nix
-    ./gatus.nix
     ./hass-mariadb.nix
     ./immich.nix
     ./it-tools.nix

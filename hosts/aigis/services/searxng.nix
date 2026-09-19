@@ -1,6 +1,5 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
-  ip = "192.168.2.50";
   port = 8882;
 in
 {
@@ -97,33 +96,13 @@ in
 
   networking.firewall.allowedTCPPorts = [ port ];
 
-  services.flame.apps = [
-    {
+  imports = [
+    (import ../lib/monitored-app.nix { inherit lib; } {
       name = "SearxNG";
       url = "search.laufin.xyz";
       icon = "search-web";
-      isPinned = true;
-    }
-  ];
-
-  services.gatus.settings.endpoints = [
-    {
-      name = "search";
-      url = "http://${ip}:${toString port}";
-      interval = "1m";
-      conditions = [
-        "[STATUS] == 200"
-      ];
-      alerts = [
-        {
-          type = "ntfy";
-          enabled = true;
-          send-on-resolved = true;
-          description = "search health check";
-          failure-threshold = 3;
-          success-threshold = 1;
-        }
-      ];
-    }
+      inherit port;
+      gatusName = "search";
+    })
   ];
 }

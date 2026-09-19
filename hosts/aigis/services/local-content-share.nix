@@ -1,8 +1,8 @@
 {
+  lib,
   ...
 }:
 let
-  ip = "192.168.2.50";
   port = 8087;
   name = "local-content-share";
 in
@@ -14,33 +14,13 @@ in
 
   networking.firewall.allowedTCPPorts = [ port ];
 
-  services.flame.apps = [
-    {
+  imports = [
+    (import ../lib/monitored-app.nix { inherit lib; } {
       name = "Local Content Share";
       url = "share.laufin.xyz";
       icon = "share";
-      isPinned = true;
-    }
-  ];
-
-  services.gatus.settings.endpoints = [
-    {
-      name = name;
-      url = "http://${ip}:${toString port}";
-      interval = "1m";
-      conditions = [
-        "[STATUS] == 200"
-      ];
-      alerts = [
-        {
-          type = "ntfy";
-          enabled = true;
-          send-on-resolved = true;
-          description = "${name} health check";
-          failure-threshold = 3;
-          success-threshold = 1;
-        }
-      ];
-    }
+      inherit port;
+      gatusName = name;
+    })
   ];
 }

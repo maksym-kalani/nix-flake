@@ -1,7 +1,7 @@
 {
+  lib,
   ...
 }: let
-  ip = "192.168.2.50";
   appdata = "/var/lib/containers/";
   cfg = {
     name = "dns";
@@ -28,6 +28,16 @@
     autoStart = true;
   };
 in {
+  imports = [
+    (import ../lib/monitored-app.nix { inherit lib; } {
+      name = "Technitium DNS";
+      url = "dns.laufin.xyz";
+      icon = "shield";
+      port = cfg.port.external;
+      gatusName = cfg.name;
+    })
+  ];
+
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
     ports = ["${toString cfg.port.external}:${toString cfg.port.internal}" "53:53/udp" "53:53/tcp"];
@@ -39,34 +49,4 @@ in {
   };
 
   networking.firewall.allowedTCPPorts = [cfg.port.external 53];
-
-  services.flame.apps = [
-    {
-      name = "Technitium DNS";
-      url = "dns.laufin.xyz";
-      icon = "shield";
-      isPinned = true;
-    }
-  ];
-
-  services.gatus.settings.endpoints = [
-    {
-      name = cfg.name;
-      url = "http://${ip}:${toString cfg.port.external}";
-      interval = "1m";
-      conditions = [
-        "[STATUS] == 200"
-      ];
-      alerts = [
-        {
-          type = "ntfy";
-          enabled = true;
-          send-on-resolved = true;
-          description = "${cfg.name} health check";
-          failure-threshold = 3;
-          success-threshold = 1;
-        }
-      ];
-    }
-  ];
 }
