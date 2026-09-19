@@ -33,6 +33,15 @@ in
 
   networking.firewall.allowedTCPPorts = [ cfg.port.external ];
 
+  services.flame.apps = [
+    {
+      name = "Mazanoke";
+      url = "mazanoke.laufin.xyz/";
+      icon = "image-auto-adjust";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = cfg.name;

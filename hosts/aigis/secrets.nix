@@ -26,8 +26,12 @@
         key = "searxng_secret_key";
         owner = "searx";
       };
-      flame_homepage_password = {
-        key = "flame_homepage_password";
+      flame_password = {
+        key = "flame_password";
+      };
+      flame_weather_api_key = {
+        key = "flame_weather_api_key";
+        mode = "0444";
       };
       kavita_token_key = {
         key = "kavita_token_key";
