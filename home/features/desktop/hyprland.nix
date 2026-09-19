@@ -915,9 +915,6 @@ in
     waybar
     font-awesome
 
-    # === Rofi ===
-    rofi
-
     # === Qt theming - runtime plugins (stylix generates the Base16Kvantum theme) ===
     libsForQt5.qt5ct
     kdePackages.qt6ct
