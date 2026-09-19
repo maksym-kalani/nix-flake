@@ -39,6 +39,15 @@ in {
 
   networking.firewall.allowedTCPPorts = [cfg.port.external];
 
+  services.flame.apps = [
+    {
+      name = "Wallos";
+      url = "wallos.laufin.xyz";
+      icon = "playlist-check";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = cfg.name;

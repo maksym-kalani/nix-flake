@@ -19,6 +19,15 @@ in
 
   networking.firewall.allowedTCPPorts = [ port ];
 
+  services.flame.apps = [
+    {
+      name = "TODO";
+      url = "todo.laufin.xyz";
+      icon = "checkbox-marked-outline";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = name;

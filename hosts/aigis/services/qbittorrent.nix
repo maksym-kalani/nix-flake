@@ -56,6 +56,15 @@ in {
 
   networking.firewall.allowedTCPPorts = [cfg.port.external 6881];
 
+  services.flame.apps = [
+    {
+      name = "QBittorrent";
+      url = "qbittorrent.laufin.xyz";
+      icon = "download-circle-outline";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = cfg.name;

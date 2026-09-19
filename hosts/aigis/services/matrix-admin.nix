@@ -31,6 +31,15 @@ in {
 
   networking.firewall.allowedTCPPorts = [cfg.port.external];
 
+  services.flame.apps = [
+    {
+      name = "Matrix Admin";
+      url = "matrix-admin.laufin.xyz";
+      icon = "shield-crown";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = cfg.name;

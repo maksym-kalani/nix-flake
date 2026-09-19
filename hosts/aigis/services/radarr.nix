@@ -13,6 +13,15 @@ in
   };
   users.users.radarr.extraGroups = [ "tankusers" ];
 
+  services.flame.apps = [
+    {
+      name = "Radarr";
+      url = "radarr.laufin.xyz";
+      icon = "alpha-r-box-outline";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = name;

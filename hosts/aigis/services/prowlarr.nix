@@ -12,6 +12,15 @@ in
     openFirewall = true;
   };
 
+  services.flame.apps = [
+    {
+      name = "Prowlarr";
+      url = "prowlarr.laufin.xyz";
+      icon = "alpha-p-box-outline";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = name;

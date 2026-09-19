@@ -142,5 +142,14 @@ in
     };
   };
 
+  services.flame.apps = [
+    {
+      name = "Gatus";
+      url = "gatus.laufin.xyz";
+      icon = "arrow-up-box";
+      isPinned = true;
+    }
+  ];
+
   networking.firewall.allowedTCPPorts = [ port ];
 }

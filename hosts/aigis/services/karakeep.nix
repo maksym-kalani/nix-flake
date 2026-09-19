@@ -29,6 +29,15 @@ in {
 
   networking.firewall.allowedTCPPorts = [port];
 
+  services.flame.apps = [
+    {
+      name = "Karakeep";
+      url = "karakeep.laufin.xyz";
+      icon = "bookmark-check-outline";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = name;

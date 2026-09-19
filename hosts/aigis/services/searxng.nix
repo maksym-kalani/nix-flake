@@ -97,6 +97,15 @@ in
 
   networking.firewall.allowedTCPPorts = [ port ];
 
+  services.flame.apps = [
+    {
+      name = "SearxNG";
+      url = "search.laufin.xyz";
+      icon = "search-web";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = "search";

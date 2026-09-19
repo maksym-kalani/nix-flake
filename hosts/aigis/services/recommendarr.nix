@@ -35,6 +35,15 @@ in {
 
   networking.firewall.allowedTCPPorts = [cfg.port.external];
 
+  services.flame.apps = [
+    {
+      name = "Recommendarr";
+      url = "recommendarr.laufin.xyz";
+      icon = "television-classic";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = cfg.name;

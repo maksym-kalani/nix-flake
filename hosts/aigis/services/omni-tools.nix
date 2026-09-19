@@ -33,6 +33,15 @@ in
 
   networking.firewall.allowedTCPPorts = [ cfg.port.external ];
 
+  services.flame.apps = [
+    {
+      name = "Omni-Tools";
+      url = "omni-tools.laufin.xyz";
+      icon = "hammer-screwdriver";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = cfg.name;

@@ -14,6 +14,15 @@ in
 
   networking.firewall.allowedTCPPorts = [ port ];
 
+  services.flame.apps = [
+    {
+      name = "Local Content Share";
+      url = "share.laufin.xyz";
+      icon = "share";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = name;

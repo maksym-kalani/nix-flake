@@ -33,6 +33,15 @@ in
 
   networking.firewall.allowedTCPPorts = [ cfg.port.external ];
 
+  services.flame.apps = [
+    {
+      name = "Morphos";
+      url = "morphos.laufin.xyz/";
+      icon = "reload";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = cfg.name;

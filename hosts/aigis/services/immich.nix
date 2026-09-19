@@ -17,6 +17,15 @@ in
 
   services.immich.openFirewall = true;
 
+  services.flame.apps = [
+    {
+      name = "Immich";
+      url = "immich.laufin.xyz";
+      icon = "camera";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = name;

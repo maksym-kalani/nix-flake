@@ -45,6 +45,16 @@ in {
     };
   };
 
+  services.flame.apps = [
+    {
+      name = "Tachidesk";
+      url = "manga.laufin.xyz";
+      icon = "thought-bubble-outline";
+      description = "Manga reader app";
+      isPinned = true;
+    }
+  ];
+
   services.gatus.settings.endpoints = [
     {
       name = name;
