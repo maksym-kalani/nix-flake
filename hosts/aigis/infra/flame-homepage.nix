@@ -6,6 +6,8 @@ let
   ip = "192.168.2.50";
   name = "home";
   port = 3311;
+  weatherCredentialName = "flame-weather-api-key";
+  weatherCredentialPath = "/run/credentials/flame.service/${weatherCredentialName}";
 in
 {
   services.flame = {
@@ -123,7 +125,7 @@ in
     ];
 
     settings = {
-      weatherApiKeyFile = config.sops.secrets.flame_weather_api_key.path;
+      weatherApiKeyFile = weatherCredentialPath;
       lat = 50.45;
       long = 30.42;
       isCelsius = true;
@@ -169,16 +171,14 @@ in
   # check still succeeds but readdirSync just sees an empty directory,
   # without granting flame any visibility into the real secrets directory.
   #
-  # preStart shares this same sandboxed namespace and still needs to `cat`
-  # the weather API key from its real sops-nix path (upstream flame.nix
-  # reads it directly, not via LoadCredential), so bind the one real file
-  # back through the mask at its original path — systemd applies bind
-  # mounts after the generic TemporaryFileSystem protection, so this
-  # exposes only that single file, not the rest of /run/secrets.
+  # Upstream flame.nix directly `cat`s weatherApiKeyFile from preStart.
+  # Deliver the sops-nix source through a systemd credential so the dynamic
+  # user can read only this key without making it world-readable or exposing
+  # the real /run/secrets directory through the sandbox mask.
   systemd.services.flame.serviceConfig = {
     TemporaryFileSystem = "/run/secrets:ro,mode=0555";
-    BindReadOnlyPaths = [
-      "${config.sops.secrets.flame_weather_api_key.path}:/run/secrets/flame_weather_api_key"
+    LoadCredential = [
+      "${weatherCredentialName}:${config.sops.secrets.flame_weather_api_key.path}"
     ];
   };
 
