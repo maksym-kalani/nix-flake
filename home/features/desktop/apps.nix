@@ -12,7 +12,6 @@
     tenacity
     bitwarden-desktop
     blueman
-    rofi-network-manager
     caligula
     libreoffice-stable
     vlc
