@@ -3,6 +3,8 @@ let
   port = 8882;
 in
 {
+  sops.secrets.searxng_secret_key.owner = "searx";
+
   sops.templates."searxng-env" = {
     owner = "searx";
     content = ''

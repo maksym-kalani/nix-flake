@@ -21,6 +21,11 @@
     autoStart = true;
   };
 in {
+  sops.secrets = {
+    hass_mariadb_root_password = {};
+    hass_mariadb_password = {};
+  };
+
   # Container definition
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;

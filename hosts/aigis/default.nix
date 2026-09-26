@@ -5,7 +5,6 @@
     ./infra
     ./services
     ./health
-    ./secrets.nix
     ./users
     ./packages.nix
   ];

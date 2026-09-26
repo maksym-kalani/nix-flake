@@ -8,6 +8,8 @@
   port = 3050;
   domain = "laufin.xyz";
 in {
+  sops.secrets.openai_api_key = {};
+
   services.karakeep = {
     enable = true;
     extraEnvironment = {
