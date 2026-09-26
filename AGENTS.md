@@ -47,7 +47,7 @@ Services live in `hosts/aigis/services/` as individual `.nix` files. Templates a
 - `templates/app.nix` - Template for native NixOS services
 - `templates/container.nix` - Template for OCI/Podman container services
 
-Services include: bazarr, fusion, hass-mariadb, immich, it-tools, jellyfin, jellyseerr, karakeep, kavita, kiwix, local-content-share, local-voice (piper + whisper), matrix-admin, mazanoke, morphos, ntfy, omni-tools, prowlarr, qbittorrent, radarr, recommendarr, searxng, sonarr, stirling-pdf, tachidesk, technitium-dns, vikunja, wallos.
+Services include: bazarr, fusion, hass-mariadb, immich, it-tools, jellyfin, jellyseerr, karakeep, kavita, kiwix, local-content-share, local-voice (piper + whisper), matrix-admin, mazanoke, morphos, ntfy, omni-tools, prowlarr, qbittorrent, radarr, recommendarr, searxng, sonarr, stirling-pdf, suwayomi, technitium-dns, vikunja, wallos.
 
 A shared `hosts/aigis/lib/monitored-app.nix` helper generates the Flame dashboard tile and Gatus health-check endpoint for a service from one call (see any service file's `imports` for the pattern); both templates use it too.
 

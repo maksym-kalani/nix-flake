@@ -47,12 +47,6 @@
       restic_password = {
         key = "restic_password";
       };
-      minio = {
-        key = "minio";
-      };
-      hermes-env = {
-        key = "hermes-env";
-      };
     };
   };
 }
