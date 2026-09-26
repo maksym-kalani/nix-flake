@@ -16,13 +16,22 @@ let
       /var/lib/jellyfin
       /var/lib/kavita
       /var/lib/karakeep
-      /var/lib/prowlarr
+      /var/lib/private/prowlarr
       /var/lib/radarr
       /var/lib/sonarr
-      /var/lib/vikunja
+      /var/lib/private/vikunja
       /var/lib/immich
       /var/lib/caddy
       /var/lib/bazarr
+      /var/lib/postgresql
+      /var/lib/private/ntfy-sh
+      /var/lib/private/local-content-share
+      /var/lib/private/flame
+      /var/lib/samba
+      /etc/NetworkManager/system-connections
+      /etc/wireguard/server.key
+      /etc/ssh/ssh_host_*
+      /srv/kiwix
     )
 
     # 1) Run the backup. Avoid per-file verbose output so journald retains
