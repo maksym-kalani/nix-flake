@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  name = "tachidesk";
+  name = "suwayomi";
   port = 4568;
 in {
-  sops.secrets.tachidesk_password = {
+  sops.secrets.suwayomi_password = {
     key = "tachidesk_password";
     owner = config.services.suwayomi-server.user;
   };
@@ -47,7 +47,7 @@ in {
 
   imports = [
     (import ../lib/monitored-app.nix { inherit lib; } {
-      name = "Tachidesk";
+      name = "Suwayomi";
       url = "manga.laufin.xyz";
       icon = "thought-bubble-outline";
       description = "Manga reader app";
