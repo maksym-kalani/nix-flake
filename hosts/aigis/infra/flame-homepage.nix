@@ -10,6 +10,11 @@ let
   weatherCredentialPath = "/run/credentials/flame.service/${weatherCredentialName}";
 in
 {
+  sops.secrets = {
+    flame_password = { };
+    flame_weather_api_key = { };
+  };
+
   services.flame = {
     enable = true;
     inherit port;

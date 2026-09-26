@@ -16,7 +16,6 @@ in {
 
   # SMB credentials secret
   sops.secrets.smb_credentials = {
-    key = "smb_credentials";
     mode = "0400";
   };
 

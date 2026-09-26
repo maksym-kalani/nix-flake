@@ -41,6 +41,11 @@ let
   '';
 in
 {
+  sops.secrets = {
+    restic_repo = { };
+    restic_password = { };
+  };
+
   environment.systemPackages = [ restic_backup ];
 
   systemd.services.restic-zfs-backup = {

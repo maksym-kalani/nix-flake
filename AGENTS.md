@@ -67,7 +67,7 @@ Health monitor, smartd, ZFS logging.
 
 ### Secrets Management
 
-Uses sops-nix with age encryption. Secrets defined in `hosts/common/secrets.nix` and stored in `secrets/secrets.yaml`. Age key located at `/home/maksym/.config/sops/age/keys.txt`.
+Uses sops-nix with age encryption. Global sops settings live in `hosts/common/secrets.nix`; each secret is declared (`sops.secrets.<name>`) in the module that consumes it. Values are stored in `secrets/secrets.yaml`. List all declared secrets with `nix eval .#nixosConfigurations.<host>.config.sops.secrets --apply builtins.attrNames`. Age key located at `/home/maksym/.config/sops/age/keys.txt`.
 
 ### Flake Inputs
 

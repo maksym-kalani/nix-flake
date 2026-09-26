@@ -4,6 +4,8 @@
   inputs,
   ...
 }: {
+  sops.secrets.maksym_hashed_password = {};
+
   users.users.maksym = {
     hashedPasswordFile = config.sops.secrets.maksym_hashed_password.path;
     isNormalUser = true;
