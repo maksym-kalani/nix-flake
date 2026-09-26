@@ -6,10 +6,6 @@
   name = "suwayomi";
   port = 4568;
 in {
-  sops.secrets.suwayomi_password = {
-    owner = config.services.suwayomi-server.user;
-  };
-
   services.suwayomi-server = {
     enable = true;
     openFirewall = true;
