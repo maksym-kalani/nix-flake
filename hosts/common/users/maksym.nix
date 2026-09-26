@@ -4,7 +4,7 @@
   inputs,
   ...
 }: {
-  sops.secrets.maksym_hashed_password = {};
+  sops.secrets.maksym_hashed_password.neededForUsers = true;
 
   users.users.maksym = {
     hashedPasswordFile = config.sops.secrets.maksym_hashed_password.path;

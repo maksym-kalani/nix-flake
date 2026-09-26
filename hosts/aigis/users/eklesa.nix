@@ -3,7 +3,7 @@
   ...
 }:
 {
-  sops.secrets.eklesa_hashed_password = { };
+  sops.secrets.eklesa_hashed_password.neededForUsers = true;
 
   users.users.eklesa = {
     isNormalUser = true;
