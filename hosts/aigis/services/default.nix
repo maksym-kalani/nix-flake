@@ -23,7 +23,7 @@
     ./searxng.nix
     ./sonarr.nix
     ./stirling-pdf.nix
-    ./tachidesk.nix
+    ./suwayomi.nix
     ./technitium-dns.nix
     ./vikunja.nix
     ./wallos.nix
