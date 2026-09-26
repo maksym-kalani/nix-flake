@@ -8,6 +8,8 @@ let
   name = "kavita";
 in
 {
+  sops.secrets.kavita_token_key = { };
+
   services.kavita = {
     enable = true;
     tokenKeyFile = config.sops.secrets.kavita_token_key.path;

@@ -7,6 +7,11 @@ let
   caddyfile = config.sops.templates."Caddyfile".path;
 in
 {
+  sops.secrets = {
+    namecheap_api_user.owner = "caddy";
+    namecheap_api_key.owner = "caddy";
+  };
+
   sops.templates."Caddyfile" = {
     owner = "caddy";
     content = ''

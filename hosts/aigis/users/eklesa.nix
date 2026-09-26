@@ -3,6 +3,8 @@
   ...
 }:
 {
+  sops.secrets.eklesa_hashed_password = { };
+
   users.users.eklesa = {
     isNormalUser = true;
     description = "Eklesa (SMB user)";
