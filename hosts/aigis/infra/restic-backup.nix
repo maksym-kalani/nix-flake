@@ -8,7 +8,6 @@ let
   restic_backup = pkgs.writeShellScriptBin "restic-backup" ''
     set -euo pipefail
     SOURCES=(
-      /mnt/tank/appdata
       /mnt/tank/media/ttrpgs
       /mnt/tank/media/photos
       /mnt/tank/users
