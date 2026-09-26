@@ -9,6 +9,8 @@
   };
 
   stylix = {
+    # Rofi is not installed; do not let Stylix emit its Home Manager options.
+    targets.rofi.enable = false;
     # Disable targets we configure manually with custom CSS/structure
     targets.swaync.enable = false;
     targets.hyprland.enable = false;
