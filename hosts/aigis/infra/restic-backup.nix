@@ -26,9 +26,10 @@ let
       /var/lib/bazarr
     )
 
-    # 1) Run the backup
-    restic backup -v "''${SOURCES[@]}" \
-      --verbose \
+    # 1) Run the backup. Avoid per-file verbose output so journald retains
+    # actionable errors, and skip ephemeral live overlay mount views.
+    restic backup "''${SOURCES[@]}" \
+      --exclude '/var/lib/containers/storage/overlay/*/merged' \
       --tag zfs-share
 
     # 2) Forget/prune old snapshots (e.g. keep 7 daily, 4 weekly, 6 monthly)
