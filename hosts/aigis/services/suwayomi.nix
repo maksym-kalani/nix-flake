@@ -7,7 +7,7 @@
   port = 4568;
 in {
   sops.secrets.suwayomi_password = {
-    key = "tachidesk_password";
+    key = "suwayomi_password";
     owner = config.services.suwayomi-server.user;
   };
 
