@@ -26,10 +26,10 @@
     # already migrated to the H2 v2 format by the previously-run upstream
     # stable container (>= v2.3). Track upstream stable until nixpkgs catches up.
     suwayomi-server = prev.suwayomi-server.overrideAttrs (_oldAttrs: rec {
-      version = "2.3.2243";
+      version = "2.4.2366";
       src = prev.fetchurl {
         url = "https://github.com/Suwayomi/Suwayomi-Server/releases/download/v${version}/Suwayomi-Server-v${version}.jar";
-        hash = "sha256-ghFBsy4XDUoC08vf7Vd+2PB70iOD/19BMuu1rkDpjdU=";
+        hash = "sha256-r5/rIK+dfr6eMHaebG68f8erHERziNQuAoCx2l/ge/0=";
       };
     });
   };
