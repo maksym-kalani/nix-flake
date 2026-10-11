@@ -15,6 +15,7 @@
           "npm:@narumitw/pi-plan-mode"
           "npm:@lenard9191/pi-project-profile"
           "npm:pi-subagents"
+          "git:github.com/aliceisjustplaying/pi-you-should-know"
 
           # Ready upstream skill snapshots
           "git:github.com/dotnet/skills"
