@@ -18,8 +18,6 @@
           "git:github.com/aliceisjustplaying/pi-you-should-know"
 
           # Ready upstream skill snapshots
-          "git:github.com/dotnet/skills"
-          "git:github.com/StefanTheCode/dotnet-ai-toolkit"
           "git:github.com/olafkfreund/nix-skills"
         ];
       };
