@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/home/maksym/worktrees/nix-flake-pi-harness/tests/pi/api_acceptance.py", line 14, in <module>
-    assert fixture.exists(), 'ASP.NET API acceptance fixture not implemented/built'
-AssertionError: ASP.NET API acceptance fixture not implemented/built

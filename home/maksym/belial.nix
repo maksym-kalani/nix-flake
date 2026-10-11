@@ -6,12 +6,12 @@
     ../features/cli
     ../features/nix-tools
     ../features/ai
-    ../features/pi-harness
+    ../features/pi-coding-agent
     ../features/zsh
     ../features/desktop
   ];
 
-  features.piHarness.enable = true;
+  features.piCodingAgent.enable = true;
 
   # belial-only: kitty's `kitten` SSH wrapper
   programs.zsh.shellAliases.aigis = "kitten ssh aigis";

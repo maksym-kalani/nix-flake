@@ -1,9 +1,0 @@
-test_containment_argv_has_only_scoped_writes_and_clean_env (test_launcher.LauncherTests.test_containment_argv_has_only_scoped_writes_and_clean_env) ... ok
-test_projection_preserves_auth_sessions_and_user_settings (test_launcher.LauncherTests.test_projection_preserves_auth_sessions_and_user_settings) ... ok
-test_projection_rejects_symlink_without_reading_external_target (test_launcher.LauncherTests.test_projection_rejects_symlink_without_reading_external_target) ... ok
-test_rejects_external_git_worktree_and_symlink_roots (test_launcher.LauncherTests.test_rejects_external_git_worktree_and_symlink_roots) ... ok
-
-----------------------------------------------------------------------
-Ran 4 tests in 0.008s
-
-OK

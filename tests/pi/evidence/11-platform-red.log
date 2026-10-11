@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-AssertionError: Linux-only Pi outputs leak into unrelated Darwin platform
-Darwin package exports: ['kenku-fm', 'pi-addons', 'pi-harness', 'pi-runtime', 'pi-sandbox-acceptance', 'pi-skills']

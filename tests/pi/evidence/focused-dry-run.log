@@ -1,9 +1,0 @@
-warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty
-these 7 derivations will be built:
-  /nix/store/c29r1rgcf755211cwr38pwqlp5pcfic7-pi-project-check.drv
-  /nix/store/bc6684gd9ksd8l9s3s6kp7nh72kv6yrr-pi-sandbox-tools.drv
-  /nix/store/hc9yk7zcr0hk08ybnsfcqfh5hlxvy631-pi-harness-launch.json.drv
-  /nix/store/47yyc3q7vjdhjxchi8p1cjfppx72qpg2-pi-harness-behavior-check.drv
-  /nix/store/aakrhraf3f89pk2b7li9vafg2ax21j2j-pi.drv
-  /nix/store/5pbjqfqkf7ffwpwk1ksyzpbfcfx2qc40-pi-sandbox-acceptance.drv
-  /nix/store/lqfvbvxj88hz7qb18zydxhc573xgbmdk-pi-home-manager-opt-in-check.drv
