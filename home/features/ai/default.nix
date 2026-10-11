@@ -3,7 +3,6 @@
   home.packages = with pkgs; [
     rtk
     nodejs
-    pi-coding-agent
   ];
 
   programs.claude-code = {
