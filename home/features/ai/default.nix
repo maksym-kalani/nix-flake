@@ -23,19 +23,5 @@
         sha256 = "00vgspf1p7kl5wp5jbk014kcakhm1ykibihvg7l5wy1bps1cligh";
       };
     };
-
-    settings = {
-      hooks.PreToolUse = [
-        {
-          matcher = "Bash";
-          hooks = [
-            {
-              type = "command";
-              command = "rtk hook claude";
-            }
-          ];
-        }
-      ];
-    };
   };
 }
