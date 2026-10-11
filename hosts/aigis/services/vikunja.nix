@@ -15,6 +15,11 @@ in
     port = port;
     frontendHostname = "todo.${domain}";
     frontendScheme = "https";
+    # Caddy reaches Vikunja via the host IP; only trust X-Forwarded-For from it.
+    settings.service = {
+      ipextractionmethod = "xff";
+      trustedproxies = "192.168.2.50/32";
+    };
   };
 
   networking.firewall.allowedTCPPorts = [ port ];
