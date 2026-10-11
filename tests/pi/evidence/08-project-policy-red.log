@@ -1,0 +1,54 @@
+TAP version 13
+# Subtest: published baseline addons load in real Pi 1.1.0 Node loader
+ok 1 - published baseline addons load in real Pi 1.1.0 Node loader
+  ---
+  duration_ms: 903.122496
+  type: 'test'
+  ...
+# Subtest: real SDK selects the per-call child model instead of parent model without auth or inference
+ok 2 - real SDK selects the per-call child model instead of parent model without auth or inference
+  ---
+  duration_ms: 57.775437
+  type: 'test'
+  ...
+# Subtest: declarative dispatcher resources resist trusted project removal of safety/deadline profiles
+not ok 3 - declarative dispatcher resources resist trusted project removal of safety/deadline profiles
+  ---
+  duration_ms: 139.049739
+  type: 'test'
+  location: '/home/maksym/worktrees/nix-flake-pi-harness/tests/pi/extensions.test.mjs:51:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+    + [
+    +   {
+    +     error: 'Failed to load extension: Invalid pi-delegator config at /home/maksym/.hermes/cache/scratch/pi-runtime-test-KxJpUu/pi-delegator.json: profile "reviewer" prompt must identify a Markdown file (resolved /home/maksym/.hermes/cache/scratch/pi-runtime-test-KxJpUu/Complete only the approved delegated task. No recursion, schedules, deployments or privilege exceptions. Report actual checks and blockers.). Corrective action: point prompt to a non-empty .md file',
+    +     path: '/nix/store/210xhc75pqfrkchd7p215bnzpdqavdcs-pi-harness-admission/delegator.ts'
+    +   }
+    + ]
+    - []
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      path: '/nix/store/210xhc75pqfrkchd7p215bnzpdqavdcs-pi-harness-admission/delegator.ts'
+      error: 'Failed to load extension: Invalid pi-delegator config at /home/maksym/.hermes/cache/scratch/pi-runtime-test-KxJpUu/pi-delegator.json: profile "reviewer" prompt must identify a Markdown file (resolved /home/maksym/.hermes/cache/scratch/pi-runtime-test-KxJpUu/Complete only the approved delegated task. No recursion, schedules, deployments or privilege exceptions. Report actual checks and blockers.). Corrective action: point prompt to a non-empty .md file'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/maksym/worktrees/nix-flake-pi-harness/tests/pi/extensions.test.mjs:62:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 2
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1213.969063

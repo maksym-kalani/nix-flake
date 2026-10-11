@@ -1,0 +1,44 @@
+warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty
+these 2 derivations will be built:
+  /nix/store/ndrb8qcq19mn99q8y3x0c4226yq5axmv-pi-harness-behavior-check.drv
+  /nix/store/r3kmgp1805rb7mwqjqdqgci7ndrw7dyw-pi-home-manager-opt-in-check.drv
+building '/nix/store/ndrb8qcq19mn99q8y3x0c4226yq5axmv-pi-harness-behavior-check.drv'...
+pi-harness-behavior-check> test_dotnet_runner_override_is_executed_as_argv_not_shell (test_checks.CheckRunnerTests.test_dotnet_runner_override_is_executed_as_argv_not_shell) ... ok
+pi-harness-behavior-check> test_native_mtp_without_project_command_is_blocked (test_checks.CheckRunnerTests.test_native_mtp_without_project_command_is_blocked) ... ok
+pi-harness-behavior-check> test_nix_daemon_exception_never_attempts_switch_or_privilege (test_checks.CheckRunnerTests.test_nix_daemon_exception_never_attempts_switch_or_privilege) ... ok
+pi-harness-behavior-check> test_containment_argv_has_only_scoped_writes_and_clean_env (test_launcher.LauncherTests.test_containment_argv_has_only_scoped_writes_and_clean_env) ... ok
+pi-harness-behavior-check> test_projection_preserves_auth_sessions_and_user_settings (test_launcher.LauncherTests.test_projection_preserves_auth_sessions_and_user_settings) ... ok
+pi-harness-behavior-check> test_projection_rejects_symlink_without_reading_external_target (test_launcher.LauncherTests.test_projection_rejects_symlink_without_reading_external_target) ... ok
+pi-harness-behavior-check> test_rejects_external_git_worktree_and_symlink_roots (test_launcher.LauncherTests.test_rejects_external_git_worktree_and_symlink_roots) ... ok
+pi-harness-behavior-check> test_state_isolated_per_checkout_and_socket_mounts_rejected (test_launcher.LauncherTests.test_state_isolated_per_checkout_and_socket_mounts_rejected) ... ok
+pi-harness-behavior-check> test_system_directories_are_not_project_roots (test_launcher.LauncherTests.test_system_directories_are_not_project_roots) ... ok
+pi-harness-behavior-check> 
+pi-harness-behavior-check> ----------------------------------------------------------------------
+pi-harness-behavior-check> Ran 9 tests in 0.115s
+pi-harness-behavior-check> 
+pi-harness-behavior-check> OK
+pi-harness-behavior-check> ✔ published baseline addons load in real Pi 1.1.0 Node loader (2289.623456ms)
+pi-harness-behavior-check> ✔ real SDK selects the per-call child model instead of parent model without auth or inference (42.549322ms)
+pi-harness-behavior-check> ✔ declarative dispatcher resources resist trusted project removal of safety/deadline profiles (62.757484ms)
+pi-harness-behavior-check> ✔ real delegator subprocess selects each configured model and fails honestly without credentials (1642.869952ms)
+pi-harness-behavior-check> ✔ per-call routing forbids missing, paid, ambiguous and priority selectors (2.342485ms)
+pi-harness-behavior-check> ✔ stack presets configure real format/build/test and Nix boundary checks (1.72866ms)
+pi-harness-behavior-check> ✔ editing requires a real plan extension implementation entry (0.334739ms)
+pi-harness-behavior-check> ℹ tests 7
+pi-harness-behavior-check> ℹ suites 0
+pi-harness-behavior-check> ℹ pass 7
+pi-harness-behavior-check> ℹ fail 0
+pi-harness-behavior-check> ℹ cancelled 0
+pi-harness-behavior-check> ℹ skipped 0
+pi-harness-behavior-check> ℹ todo 0
+pi-harness-behavior-check> ℹ duration_ms 4135.586285
+pi-harness-behavior-check> All checks passed!
+building '/nix/store/r3kmgp1805rb7mwqjqdqgci7ndrw7dyw-pi-home-manager-opt-in-check.drv'...
+/nix/store/hcmkxmazwx18d7h4f311a7727c90nfw7-pi
+/nix/store/6d259y2zixr8gjky06cvcinqrj5gnrlp-belial-pi-runtime-1.1.0
+/nix/store/6d259y2zixr8gjky06cvcinqrj5gnrlp-belial-pi-runtime-1.1.0
+/nix/store/6d259y2zixr8gjky06cvcinqrj5gnrlp-belial-pi-runtime-1.1.0
+/nix/store/6d259y2zixr8gjky06cvcinqrj5gnrlp-belial-pi-runtime-1.1.0
+/nix/store/ry72iq3bri5l03mylmxgscxcajfxjr9n-pi-ready-skills
+/nix/store/1bwlwi7rrx9fqm5hcr4qqynkb5wd30qr-pi-harness-behavior-check
+/nix/store/jwd7vgrfvd3p1hh21mx10708i07008lf-pi-home-manager-opt-in-check

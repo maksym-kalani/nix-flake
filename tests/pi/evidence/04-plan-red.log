@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: per-call routing forbids missing, paid, ambiguous and priority selectors
+ok 1 - per-call routing forbids missing, paid, ambiguous and priority selectors
+  ---
+  duration_ms: 2.096757
+  type: 'test'
+  ...
+# Subtest: editing requires a real plan extension implementation entry
+not ok 2 - editing requires a real plan extension implementation entry
+  ---
+  duration_ms: 1.030013
+  type: 'test'
+  location: '/home/maksym/worktrees/nix-flake-pi-harness/tests/pi/policy.test.mjs:28:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    plan approval admission not implemented
+    + actual - expected
+    
+    + 'undefined'
+    - 'function'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'function'
+  actual: 'undefined'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/maksym/worktrees/nix-flake-pi-harness/tests/pi/policy.test.mjs:30:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 1
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 62.795996

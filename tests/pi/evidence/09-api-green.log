@@ -1,0 +1,114 @@
+warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty
+these 2 derivations will be built:
+  /nix/store/3zr8z589nkja4y01x4115lhxhsgdlmvw-pi-harness-behavior-check.drv
+  /nix/store/wk1gafj993zywzivf9x01klkd5886zid-pi-aspnet-http-acceptance.drv
+these 15 paths will be fetched (221.5 MiB download, 696.5 MiB unpacked):
+  /nix/store/b8lqbpbgy4lyp46dwxks5x5i8mrvc806-dotnet-sdk-10.0.401
+  /nix/store/qivn469nzs5z0527x873v90wywl0mflf-dotnet-sdk-wrapped-10.0.401
+  /nix/store/wrsjd3mp8kp4idbwk9wx9588291k9fcg-liburcu-0.15.7
+  /nix/store/yrbbb58yixplil78xq672hwpisb26mv9-lttng-ust-2.12.2
+  /nix/store/3j24hw169x8lba6ixvyz6n8b4lp3341z-nuget-package-hook
+  /nix/store/ck1aiwyfp2kk9v7ga53df9bq751q4gvn-perl5.42.3-Archive-Cpio-0.10
+  /nix/store/pksaqd3mzjiyw7axprdasn1j01k9p053-perl5.42.3-Archive-Zip-1.68
+  /nix/store/h2zkd99w4xcl88n3g11s5l23ddcqj89j-perl5.42.3-SUPER-1.20190531
+  /nix/store/rpfagzbgjbi1cpn4kkq5m48hqg2plgwl-perl5.42.3-Sub-Identify-0.14
+  /nix/store/mg2ccz9gn345lmllqb9sk3j03s2n9k3p-perl5.42.3-Sub-Override-0.09
+  /nix/store/wsfj5xl6x6klkjj8z6mc3xklc5lbcx4l-perl5.42.3-Test-MockModule-0.177.0
+  /nix/store/hbvqbsifcjh10bb599ljsgspg8s68339-perl5.42.3-strip-nondeterminism-1.14.1
+  /nix/store/h2jrsr48ss7i2lq9bscyqjmj2y8pmk4a-unzip-6.0
+  /nix/store/7zxg9yn01rbwh1c7qh173rp3pnc3f5cf-xmlstarlet-1.7.0
+  /nix/store/5ypvkry3qra47dylc9kfk36r1q9vha80-zip-3.0
+copying path '/nix/store/mg2ccz9gn345lmllqb9sk3j03s2n9k3p-perl5.42.3-Sub-Override-0.09' from 'https://cache.nixos.org'...
+copying path '/nix/store/7zxg9yn01rbwh1c7qh173rp3pnc3f5cf-xmlstarlet-1.7.0' from 'https://cache.nixos.org'...
+copying path '/nix/store/h2jrsr48ss7i2lq9bscyqjmj2y8pmk4a-unzip-6.0' from 'https://cache.nixos.org'...
+copying path '/nix/store/5ypvkry3qra47dylc9kfk36r1q9vha80-zip-3.0' from 'https://cache.nixos.org'...
+building '/nix/store/3zr8z589nkja4y01x4115lhxhsgdlmvw-pi-harness-behavior-check.drv'...
+copying path '/nix/store/wrsjd3mp8kp4idbwk9wx9588291k9fcg-liburcu-0.15.7' from 'https://cache.nixos.org'...
+copying path '/nix/store/ck1aiwyfp2kk9v7ga53df9bq751q4gvn-perl5.42.3-Archive-Cpio-0.10' from 'https://cache.nixos.org'...
+copying path '/nix/store/rpfagzbgjbi1cpn4kkq5m48hqg2plgwl-perl5.42.3-Sub-Identify-0.14' from 'https://cache.nixos.org'...
+copying path '/nix/store/h2zkd99w4xcl88n3g11s5l23ddcqj89j-perl5.42.3-SUPER-1.20190531' from 'https://cache.nixos.org'...
+copying path '/nix/store/yrbbb58yixplil78xq672hwpisb26mv9-lttng-ust-2.12.2' from 'https://cache.nixos.org'...
+copying path '/nix/store/wsfj5xl6x6klkjj8z6mc3xklc5lbcx4l-perl5.42.3-Test-MockModule-0.177.0' from 'https://cache.nixos.org'...
+copying path '/nix/store/b8lqbpbgy4lyp46dwxks5x5i8mrvc806-dotnet-sdk-10.0.401' from 'https://cache.nixos.org'...
+copying path '/nix/store/pksaqd3mzjiyw7axprdasn1j01k9p053-perl5.42.3-Archive-Zip-1.68' from 'https://cache.nixos.org'...
+pi-harness-behavior-check> test_dotnet_runner_override_is_executed_as_argv_not_shell (test_checks.CheckRunnerTests.test_dotnet_runner_override_is_executed_as_argv_not_shell) ... ok
+copying path '/nix/store/hbvqbsifcjh10bb599ljsgspg8s68339-perl5.42.3-strip-nondeterminism-1.14.1' from 'https://cache.nixos.org'...
+pi-harness-behavior-check> test_native_mtp_without_project_command_is_blocked (test_checks.CheckRunnerTests.test_native_mtp_without_project_command_is_blocked) ... ok
+pi-harness-behavior-check> test_nix_daemon_exception_never_attempts_switch_or_privilege (test_checks.CheckRunnerTests.test_nix_daemon_exception_never_attempts_switch_or_privilege) ... ok
+copying path '/nix/store/3j24hw169x8lba6ixvyz6n8b4lp3341z-nuget-package-hook' from 'https://cache.nixos.org'...
+pi-harness-behavior-check> test_containment_argv_has_only_scoped_writes_and_clean_env (test_launcher.LauncherTests.test_containment_argv_has_only_scoped_writes_and_clean_env) ... ok
+pi-harness-behavior-check> test_projection_preserves_auth_sessions_and_user_settings (test_launcher.LauncherTests.test_projection_preserves_auth_sessions_and_user_settings) ... ok
+pi-harness-behavior-check> test_projection_rejects_symlink_without_reading_external_target (test_launcher.LauncherTests.test_projection_rejects_symlink_without_reading_external_target) ... ok
+pi-harness-behavior-check> test_rejects_external_git_worktree_and_symlink_roots (test_launcher.LauncherTests.test_rejects_external_git_worktree_and_symlink_roots) ... ok
+pi-harness-behavior-check> test_state_isolated_per_checkout_and_socket_mounts_rejected (test_launcher.LauncherTests.test_state_isolated_per_checkout_and_socket_mounts_rejected) ... ok
+pi-harness-behavior-check> 
+pi-harness-behavior-check> ----------------------------------------------------------------------
+pi-harness-behavior-check> Ran 8 tests in 0.122s
+pi-harness-behavior-check> 
+pi-harness-behavior-check> OK
+pi-harness-behavior-check> ✔ published baseline addons load in real Pi 1.1.0 Node loader (2416.018103ms)
+pi-harness-behavior-check> ✔ real SDK selects the per-call child model instead of parent model without auth or inference (46.953445ms)
+pi-harness-behavior-check> ✔ declarative dispatcher resources resist trusted project removal of safety/deadline profiles (70.411441ms)
+pi-harness-behavior-check> ✖ real delegator subprocess selects each configured model and fails honestly without credentials (498.044511ms)
+pi-harness-behavior-check> ✔ per-call routing forbids missing, paid, ambiguous and priority selectors (2.390699ms)
+pi-harness-behavior-check> ✔ stack presets configure real format/build/test and Nix boundary checks (2.448055ms)
+pi-harness-behavior-check> ✔ editing requires a real plan extension implementation entry (0.522709ms)
+pi-harness-behavior-check> ℹ tests 7
+pi-harness-behavior-check> ℹ suites 0
+pi-harness-behavior-check> ℹ pass 6
+pi-harness-behavior-check> ℹ fail 1
+pi-harness-behavior-check> ℹ cancelled 0
+pi-harness-behavior-check> ℹ skipped 0
+pi-harness-behavior-check> ℹ todo 0
+pi-harness-behavior-check> ℹ duration_ms 3131.163803
+pi-harness-behavior-check> 
+pi-harness-behavior-check> ✖ failing tests:
+pi-harness-behavior-check> 
+pi-harness-behavior-check> test at tests/pi/extensions.test.mjs:85:1
+pi-harness-behavior-check> ✖ real delegator subprocess selects each configured model and fails honestly without credentials (498.044511ms)
+pi-harness-behavior-check>   AssertionError [ERR_ASSERTION]: The input did not match the regular expression /No API key found for ollama-cloud/. Input:
+pi-harness-behavior-check> 
+pi-harness-behavior-check>   'Could not launch Pi: Cannot capture launch gate session: spawnSync ps ETIMEDOUT; gatePid=37; parentPid=19; gate=missing; parent=missing; platform=linux; release="6.8.12-11-pve"; arch=x64; node=v24.21.0; uv=1.52.1; ps="ps -axo pid=,pgid=,sess=,stat="; sessionSource=ps sess'
+pi-harness-behavior-check> 
+pi-harness-behavior-check>       at TestContext.<anonymous> (file:///build/source/tests/pi/extensions.test.mjs:99:12)
+pi-harness-behavior-check>       at async Test.run (node:internal/test_runner/test:1409:7)
+pi-harness-behavior-check>       at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+pi-harness-behavior-check>     generatedMessage: true,
+pi-harness-behavior-check>     code: 'ERR_ASSERTION',
+pi-harness-behavior-check>     actual: 'Could not launch Pi: Cannot capture launch gate session: spawnSync ps ETIMEDOUT; gatePid=37; parentPid=19; gate=missing; parent=missing; platform=linux; release="6.8.12-11-pve"; arch=x64; node=v24.21.0; uv=1.52.1; ps="ps -axo pid=,pgid=,sess=,stat="; sessionSource=ps sess',
+pi-harness-behavior-check>     expected: /No API key found for ollama-cloud/,
+pi-harness-behavior-check>     operator: 'match',
+pi-harness-behavior-check>     diff: 'simple'
+pi-harness-behavior-check>   }
+error: Cannot build '/nix/store/3zr8z589nkja4y01x4115lhxhsgdlmvw-pi-harness-behavior-check.drv'.
+       Reason: builder failed with exit code 1.
+       Output paths:
+         /nix/store/541k1fcn499nipn995znwmxxs0h4qd1n-pi-harness-behavior-check
+       Last 25 log lines:
+       > ℹ pass 6
+       > ℹ fail 1
+       > ℹ cancelled 0
+       > ℹ skipped 0
+       > ℹ todo 0
+       > ℹ duration_ms 3131.163803
+       >
+       > ✖ failing tests:
+       >
+       > test at tests/pi/extensions.test.mjs:85:1
+       > ✖ real delegator subprocess selects each configured model and fails honestly without credentials (498.044511ms)
+       >   AssertionError [ERR_ASSERTION]: The input did not match the regular expression /No API key found for ollama-cloud/. Input:
+       >
+       >   'Could not launch Pi: Cannot capture launch gate session: spawnSync ps ETIMEDOUT; gatePid=37; parentPid=19; gate=missing; parent=missing; platform=linux; release="6.8.12-11-pve"; arch=x64; node=v24.21.0; uv=1.52.1; ps="ps -axo pid=,pgid=,sess=,stat="; sessionSource=ps sess'
+       >
+       >       at TestContext.<anonymous> (file:///build/source/tests/pi/extensions.test.mjs:99:12)
+       >       at async Test.run (node:internal/test_runner/test:1409:7)
+       >       at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+       >     generatedMessage: true,
+       >     code: 'ERR_ASSERTION',
+       >     actual: 'Could not launch Pi: Cannot capture launch gate session: spawnSync ps ETIMEDOUT; gatePid=37; parentPid=19; gate=missing; parent=missing; platform=linux; release="6.8.12-11-pve"; arch=x64; node=v24.21.0; uv=1.52.1; ps="ps -axo pid=,pgid=,sess=,stat="; sessionSource=ps sess',
+       >     expected: /No API key found for ollama-cloud/,
+       >     operator: 'match',
+       >     diff: 'simple'
+       >   }
+       For full logs, run:
+         nix-store -l /nix/store/3zr8z589nkja4y01x4115lhxhsgdlmvw-pi-harness-behavior-check.drv

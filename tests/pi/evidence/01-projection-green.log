@@ -1,0 +1,6 @@
+test_projection_preserves_auth_sessions_and_user_settings (test_launcher.LauncherTests.test_projection_preserves_auth_sessions_and_user_settings) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+OK

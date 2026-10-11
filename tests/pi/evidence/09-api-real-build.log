@@ -1,0 +1,18 @@
+warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty
+this derivation will be built:
+  /nix/store/wk1gafj993zywzivf9x01klkd5886zid-pi-aspnet-http-acceptance.drv
+this path will be fetched (3.8 KiB download, 13.2 KiB unpacked):
+  /nix/store/qivn469nzs5z0527x873v90wywl0mflf-dotnet-sdk-wrapped-10.0.401
+copying path '/nix/store/qivn469nzs5z0527x873v90wywl0mflf-dotnet-sdk-wrapped-10.0.401' from 'https://cache.nixos.org'...
+building '/nix/store/wk1gafj993zywzivf9x01klkd5886zid-pi-aspnet-http-acceptance.drv'...
+pi-aspnet-http-acceptance>   Determining projects to restore...
+pi-aspnet-http-acceptance>   Restored /build/api/HarnessApi.csproj (in 82 ms).
+pi-aspnet-http-acceptance>   HarnessApi -> /build/api/bin/Debug/net10.0/HarnessApi.dll
+pi-aspnet-http-acceptance> 
+pi-aspnet-http-acceptance> Build succeeded.
+pi-aspnet-http-acceptance>     0 Warning(s)
+pi-aspnet-http-acceptance>     0 Error(s)
+pi-aspnet-http-acceptance> 
+pi-aspnet-http-acceptance> Time Elapsed 00:00:03.07
+pi-aspnet-http-acceptance> PASS: real ASP.NET HTTP health, greeting, validation, create/read/delete, not-found (8 scenarios)
+/nix/store/hrvkmd0p6vdll603f1dri7w2njbdklvk-pi-aspnet-http-acceptance

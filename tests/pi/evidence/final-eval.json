@@ -1,0 +1,51 @@
+[
+  {
+    "command": "nix eval --raw '.#nixosConfigurations.belial.config.system.build.toplevel.drvPath'",
+    "attribute": "nixosConfigurations.belial.config.system.build.toplevel.drvPath",
+    "output": "warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty\n/nix/store/a3mkd0x6pf3pr3f3z917b7wljbm2ig2r-nixos-system-belial-26.11.20261008.e7439b6.drv",
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "command": "nix eval --raw '.#nixosConfigurations.belial.config.home-manager.users.maksym.home.activationPackage.drvPath'",
+    "attribute": "nixosConfigurations.belial.config.home-manager.users.maksym.home.activationPackage.drvPath",
+    "output": "warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty\n/nix/store/iba4q15cnw6n66915nyhaas69arrvkal-home-manager-generation.drv",
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "command": "nix eval --raw '.#nixosConfigurations.aigis.config.system.build.toplevel.drvPath'",
+    "attribute": "nixosConfigurations.aigis.config.system.build.toplevel.drvPath",
+    "output": "warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty\n/nix/store/s322gp1srghsd3hix92xifdxn759vjva-nixos-system-aigis-26.11.20261008.e7439b6.drv",
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "command": "nix eval --raw '.#homeConfigurations.\"maksym@aigis\".activationPackage.drvPath'",
+    "attribute": "homeConfigurations.\"maksym@aigis\".activationPackage.drvPath",
+    "output": "warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty\n/nix/store/j0skc34id94wivws77iwcq73q0i590yf-home-manager-generation.drv",
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "command": "nix eval --raw '.#homeConfigurations.\"maksym@belial\".activationPackage.drvPath'",
+    "attribute": "homeConfigurations.\"maksym@belial\".activationPackage.drvPath",
+    "output": "warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty\nerror:\n       \u2026 in the left operand of the update (//) operator\n         at \u00abgithub:nix-community/home-manager/dfadbe5162d5e86bc0808badec8f346f81b4b3f0?narHash=sha256-iKxFHJrg7Sltwhq3ssCZYQ4CFEDVvReVVuVuO9dj3sE%3D\u00bb/modules/default.nix:60:5:\n           59|     in\n           60|     module\n             |     ^\n           61|     // {\n\n       \u2026 while evaluating a branch condition\n         at \u00abgithub:nixos/nixpkgs/e7439b6b14ad3cc35d05608ebca9bce01a25f5f8?narHash=sha256-H83yz/do%2BhjOO0uujHyH8RgtIQP2v7Mw%2BcLwcZK/xKc%3D\u00bb/lib/lists.nix:141:18:\n          140|       len = length list;\n          141|       fold' = n: if n == len then nul else op (elemAt list n) (fold' (n + 1));\n             |                  ^\n          142|     in\n\n       \u2026 while evaluating the error message for definitions for `stylix', which is an option that does not exist\n\n       \u2026 while evaluating a definition from `/nix/store/az6nbzd6s22ldnbix11hwx7m2jqgxcva-source/home/features/desktop/vicinae.nix'\n\n       \u2026 while evaluating an attribute `targets`\n\n       \u2026 while evaluating an attribute `vicinae`\n\n       \u2026 while evaluating an attribute `colors`\n\n       \u2026 while evaluating an attribute `override`\n\n       \u2026 while evaluating an attribute `base01`\n\n       (stack trace truncated; use '--show-trace' to show the full, detailed trace)\n\n       error: attribute 'stylix' missing\n       at /home/maksym/worktrees/nix-flake-pi-harness/home/features/desktop/vicinae.nix:10:14:\n            9|   stylix.targets.vicinae.colors.override = {\n           10|     base01 = config.lib.stylix.colors.base00;\n             |              ^\n           11|   };",
+    "exit_code": 1,
+    "error": null
+  },
+  {
+    "command": "nix eval --raw '.#checks.x86_64-linux.pi-home-manager.drvPath'",
+    "attribute": "checks.x86_64-linux.pi-home-manager.drvPath",
+    "output": "warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty\n/nix/store/qn9gyrz9rc9qfwqkf5l90hln2in2434q-pi-home-manager-opt-in-check.drv",
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "command": "nix eval --raw '.#checks.x86_64-linux.pi-sandbox-vm.drvPath'",
+    "attribute": "checks.x86_64-linux.pi-sandbox-vm.drvPath",
+    "output": "warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty\n/nix/store/40m2n1l35nqkc8c7mkalxx1z4659hlgj-vm-test-run-pi-whole-process-containment.drv",
+    "exit_code": 0,
+    "error": null
+  }
+]

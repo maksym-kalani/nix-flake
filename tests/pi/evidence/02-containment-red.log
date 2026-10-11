@@ -1,0 +1,33 @@
+test_containment_argv_has_only_scoped_writes_and_clean_env (test_launcher.LauncherTests.test_containment_argv_has_only_scoped_writes_and_clean_env) ... FAIL
+test_projection_preserves_auth_sessions_and_user_settings (test_launcher.LauncherTests.test_projection_preserves_auth_sessions_and_user_settings) ... ok
+test_projection_rejects_symlink_without_reading_external_target (test_launcher.LauncherTests.test_projection_rejects_symlink_without_reading_external_target) ... FAIL
+test_rejects_external_git_worktree_and_symlink_roots (test_launcher.LauncherTests.test_rejects_external_git_worktree_and_symlink_roots) ... FAIL
+
+======================================================================
+FAIL: test_containment_argv_has_only_scoped_writes_and_clean_env (test_launcher.LauncherTests.test_containment_argv_has_only_scoped_writes_and_clean_env)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/maksym/worktrees/nix-flake-pi-harness/tests/pi/test_launcher.py", line 39, in test_containment_argv_has_only_scoped_writes_and_clean_env
+    self.assertTrue(hasattr(module, "sandbox_argv"), "containment not implemented")
+AssertionError: False is not true : containment not implemented
+
+======================================================================
+FAIL: test_projection_rejects_symlink_without_reading_external_target (test_launcher.LauncherTests.test_projection_rejects_symlink_without_reading_external_target)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/maksym/worktrees/nix-flake-pi-harness/tests/pi/test_launcher.py", line 88, in test_projection_rejects_symlink_without_reading_external_target
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_external_git_worktree_and_symlink_roots (test_launcher.LauncherTests.test_rejects_external_git_worktree_and_symlink_roots)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/maksym/worktrees/nix-flake-pi-harness/tests/pi/test_launcher.py", line 64, in test_rejects_external_git_worktree_and_symlink_roots
+    self.assertTrue(hasattr(module, "validate_project"), "path containment not implemented")
+AssertionError: False is not true : path containment not implemented
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.002s
+
+FAILED (failures=3)

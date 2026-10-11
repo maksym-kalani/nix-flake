@@ -1,0 +1,6 @@
+{
+  "command": "nix develop .#pi-harness -c ruff check pkgs/pi-harness/*.py tests/pi/*.py && nix develop .#pi-harness -c ruff format --check pkgs/pi-harness/*.py tests/pi/*.py && nix develop .#pi-harness -c nixfmt --check flake.nix pkgs/default.nix pkgs/pi-harness/*.nix tests/pi/checks.nix home/features/pi-harness/default.nix home/features/ai/default.nix home/maksym/belial.nix && nix develop .#pi-harness -c statix check pkgs/pi-harness && nix shell nixpkgs#actionlint -c actionlint .github/workflows/pi-harness.yml",
+  "output": "warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty\nAll checks passed!\nwarning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty\n7 files already formatted\nwarning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty\nwarning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty\nthese 2 paths will be fetched (3.6 MiB download, 13.3 MiB unpacked):\n  /nix/store/bwxcfsghzk4hyynxgl3lvjgmcnkc7qhf-actionlint-1.7.12\n  /nix/store/x3ssi7xb2qz6p8h4xqjg1xy0j61l998m-shellcheck-0.11.0-bin\ncopying path '/nix/store/x3ssi7xb2qz6p8h4xqjg1xy0j61l998m-shellcheck-0.11.0-bin' from 'https://cache.nixos.org'...\ncopying path '/nix/store/bwxcfsghzk4hyynxgl3lvjgmcnkc7qhf-actionlint-1.7.12' from 'https://cache.nixos.org'...",
+  "exit_code": 0,
+  "error": null
+}

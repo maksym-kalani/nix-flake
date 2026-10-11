@@ -1,0 +1,58 @@
+warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty
+these 7 derivations will be built:
+  /nix/store/c29r1rgcf755211cwr38pwqlp5pcfic7-pi-project-check.drv
+  /nix/store/bc6684gd9ksd8l9s3s6kp7nh72kv6yrr-pi-sandbox-tools.drv
+  /nix/store/hc9yk7zcr0hk08ybnsfcqfh5hlxvy631-pi-harness-launch.json.drv
+  /nix/store/47yyc3q7vjdhjxchi8p1cjfppx72qpg2-pi-harness-behavior-check.drv
+  /nix/store/aakrhraf3f89pk2b7li9vafg2ax21j2j-pi.drv
+  /nix/store/5pbjqfqkf7ffwpwk1ksyzpbfcfx2qc40-pi-sandbox-acceptance.drv
+  /nix/store/lqfvbvxj88hz7qb18zydxhc573xgbmdk-pi-home-manager-opt-in-check.drv
+building '/nix/store/lqfvbvxj88hz7qb18zydxhc573xgbmdk-pi-home-manager-opt-in-check.drv'...
+building '/nix/store/c29r1rgcf755211cwr38pwqlp5pcfic7-pi-project-check.drv'...
+pi-project-check> structuredAttrs is enabled
+building '/nix/store/bc6684gd9ksd8l9s3s6kp7nh72kv6yrr-pi-sandbox-tools.drv'...
+pi-sandbox-tools> structuredAttrs is enabled
+pi-sandbox-tools> created 725 symlinks in user environment
+building '/nix/store/hc9yk7zcr0hk08ybnsfcqfh5hlxvy631-pi-harness-launch.json.drv'...
+pi-harness-launch.json> structuredAttrs is enabled
+building '/nix/store/47yyc3q7vjdhjxchi8p1cjfppx72qpg2-pi-harness-behavior-check.drv'...
+pi-harness-behavior-check> test_dotnet_runner_override_is_executed_as_argv_not_shell (test_checks.CheckRunnerTests.test_dotnet_runner_override_is_executed_as_argv_not_shell) ... ok
+pi-harness-behavior-check> test_native_mtp_without_project_command_is_blocked (test_checks.CheckRunnerTests.test_native_mtp_without_project_command_is_blocked) ... ok
+pi-harness-behavior-check> test_nix_daemon_exception_never_attempts_switch_or_privilege (test_checks.CheckRunnerTests.test_nix_daemon_exception_never_attempts_switch_or_privilege) ... ok
+pi-harness-behavior-check> test_containment_argv_has_only_scoped_writes_and_clean_env (test_launcher.LauncherTests.test_containment_argv_has_only_scoped_writes_and_clean_env) ... ok
+pi-harness-behavior-check> test_projection_preserves_auth_sessions_and_user_settings (test_launcher.LauncherTests.test_projection_preserves_auth_sessions_and_user_settings) ... ok
+pi-harness-behavior-check> test_projection_rejects_symlink_without_reading_external_target (test_launcher.LauncherTests.test_projection_rejects_symlink_without_reading_external_target) ... ok
+pi-harness-behavior-check> test_rejects_external_git_worktree_and_symlink_roots (test_launcher.LauncherTests.test_rejects_external_git_worktree_and_symlink_roots) ... ok
+pi-harness-behavior-check> test_state_isolated_per_checkout_and_socket_mounts_rejected (test_launcher.LauncherTests.test_state_isolated_per_checkout_and_socket_mounts_rejected) ... ok
+pi-harness-behavior-check> 
+pi-harness-behavior-check> ----------------------------------------------------------------------
+pi-harness-behavior-check> Ran 8 tests in 0.113s
+pi-harness-behavior-check> 
+pi-harness-behavior-check> OK
+pi-harness-behavior-check> ✔ published baseline addons load in real Pi 1.1.0 Node loader (2521.722479ms)
+pi-harness-behavior-check> ✔ real SDK selects the per-call child model instead of parent model without auth or inference (40.483392ms)
+pi-harness-behavior-check> ✔ per-call routing forbids missing, paid, ambiguous and priority selectors (2.359943ms)
+pi-harness-behavior-check> ✔ stack presets configure real format/build/test and Nix boundary checks (1.737919ms)
+pi-harness-behavior-check> ✔ editing requires a real plan extension implementation entry (0.345545ms)
+pi-harness-behavior-check> ℹ tests 5
+pi-harness-behavior-check> ℹ suites 0
+pi-harness-behavior-check> ℹ pass 5
+pi-harness-behavior-check> ℹ fail 0
+pi-harness-behavior-check> ℹ cancelled 0
+pi-harness-behavior-check> ℹ skipped 0
+pi-harness-behavior-check> ℹ todo 0
+pi-harness-behavior-check> ℹ duration_ms 2670.142576
+pi-harness-behavior-check> All checks passed!
+building '/nix/store/aakrhraf3f89pk2b7li9vafg2ax21j2j-pi.drv'...
+pi> structuredAttrs is enabled
+building '/nix/store/5pbjqfqkf7ffwpwk1ksyzpbfcfx2qc40-pi-sandbox-acceptance.drv'...
+pi-sandbox-acceptance> structuredAttrs is enabled
+/nix/store/qji6cixg6n9x5jb3lwixn07f7wdsvwjx-pi
+/nix/store/4n6mvhs3qjqsqiliddb6iqh4bcc905xv-belial-pi-runtime-1.1.0
+/nix/store/4n6mvhs3qjqsqiliddb6iqh4bcc905xv-belial-pi-runtime-1.1.0
+/nix/store/4n6mvhs3qjqsqiliddb6iqh4bcc905xv-belial-pi-runtime-1.1.0
+/nix/store/4n6mvhs3qjqsqiliddb6iqh4bcc905xv-belial-pi-runtime-1.1.0
+/nix/store/ry72iq3bri5l03mylmxgscxcajfxjr9n-pi-ready-skills
+/nix/store/rfan67pf88v600igcf55a322bqiw4aai-pi-sandbox-acceptance
+/nix/store/xqn5r8qnc0gq1iida0dpf57pvdv6wmjj-pi-harness-behavior-check
+/nix/store/lhw22ga3j4y1isvs46fhvmpb1wimpgfj-pi-home-manager-opt-in-check

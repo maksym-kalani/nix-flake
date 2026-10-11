@@ -1,0 +1,2 @@
+# Preserve exact tool output in execution evidence, including terminal whitespace.
+tests/pi/evidence/*.log -whitespace

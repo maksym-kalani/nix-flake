@@ -1,0 +1,3 @@
+warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty
+bwrap: cannot open /proc/sys/user/max_user_namespaces: Read-only file system
+BLOCKED/FAIL: real sandbox acceptance did not execute successfully; no unsandboxed fallback

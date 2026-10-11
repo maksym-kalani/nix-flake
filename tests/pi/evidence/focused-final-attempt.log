@@ -1,0 +1,83 @@
+warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty
+this derivation will be built:
+  /nix/store/3zr8z589nkja4y01x4115lhxhsgdlmvw-pi-harness-behavior-check.drv
+building '/nix/store/3zr8z589nkja4y01x4115lhxhsgdlmvw-pi-harness-behavior-check.drv'...
+pi-harness-behavior-check> test_dotnet_runner_override_is_executed_as_argv_not_shell (test_checks.CheckRunnerTests.test_dotnet_runner_override_is_executed_as_argv_not_shell) ... ok
+pi-harness-behavior-check> test_native_mtp_without_project_command_is_blocked (test_checks.CheckRunnerTests.test_native_mtp_without_project_command_is_blocked) ... ok
+pi-harness-behavior-check> test_nix_daemon_exception_never_attempts_switch_or_privilege (test_checks.CheckRunnerTests.test_nix_daemon_exception_never_attempts_switch_or_privilege) ... ok
+pi-harness-behavior-check> test_containment_argv_has_only_scoped_writes_and_clean_env (test_launcher.LauncherTests.test_containment_argv_has_only_scoped_writes_and_clean_env) ... ok
+pi-harness-behavior-check> test_projection_preserves_auth_sessions_and_user_settings (test_launcher.LauncherTests.test_projection_preserves_auth_sessions_and_user_settings) ... ok
+pi-harness-behavior-check> test_projection_rejects_symlink_without_reading_external_target (test_launcher.LauncherTests.test_projection_rejects_symlink_without_reading_external_target) ... ok
+pi-harness-behavior-check> test_rejects_external_git_worktree_and_symlink_roots (test_launcher.LauncherTests.test_rejects_external_git_worktree_and_symlink_roots) ... ok
+pi-harness-behavior-check> test_state_isolated_per_checkout_and_socket_mounts_rejected (test_launcher.LauncherTests.test_state_isolated_per_checkout_and_socket_mounts_rejected) ... ok
+pi-harness-behavior-check> 
+pi-harness-behavior-check> ----------------------------------------------------------------------
+pi-harness-behavior-check> Ran 8 tests in 0.112s
+pi-harness-behavior-check> 
+pi-harness-behavior-check> OK
+pi-harness-behavior-check> ✔ published baseline addons load in real Pi 1.1.0 Node loader (2177.079225ms)
+pi-harness-behavior-check> ✔ real SDK selects the per-call child model instead of parent model without auth or inference (43.753484ms)
+pi-harness-behavior-check> ✔ declarative dispatcher resources resist trusted project removal of safety/deadline profiles (62.151133ms)
+pi-harness-behavior-check> ✖ real delegator subprocess selects each configured model and fails honestly without credentials (39.349346ms)
+pi-harness-behavior-check> ✔ per-call routing forbids missing, paid, ambiguous and priority selectors (2.306488ms)
+pi-harness-behavior-check> ✔ stack presets configure real format/build/test and Nix boundary checks (1.585975ms)
+pi-harness-behavior-check> ✔ editing requires a real plan extension implementation entry (0.318102ms)
+pi-harness-behavior-check> ℹ tests 7
+pi-harness-behavior-check> ℹ suites 0
+pi-harness-behavior-check> ℹ pass 6
+pi-harness-behavior-check> ℹ fail 1
+pi-harness-behavior-check> ℹ cancelled 0
+pi-harness-behavior-check> ℹ skipped 0
+pi-harness-behavior-check> ℹ todo 0
+pi-harness-behavior-check> ℹ duration_ms 2426.01561
+pi-harness-behavior-check> 
+pi-harness-behavior-check> ✖ failing tests:
+pi-harness-behavior-check> 
+pi-harness-behavior-check> test at tests/pi/extensions.test.mjs:85:1
+pi-harness-behavior-check> ✖ real delegator subprocess selects each configured model and fails honestly without credentials (39.349346ms)
+pi-harness-behavior-check>   AssertionError [ERR_ASSERTION]: The input did not match the regular expression /No API key found for ollama-cloud/. Input:
+pi-harness-behavior-check> 
+pi-harness-behavior-check>   'Could not launch Pi: write EPIPE'
+pi-harness-behavior-check> 
+pi-harness-behavior-check>       at TestContext.<anonymous> (file:///build/source/tests/pi/extensions.test.mjs:99:12)
+pi-harness-behavior-check>       at async Test.run (node:internal/test_runner/test:1409:7)
+pi-harness-behavior-check>       at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+pi-harness-behavior-check>     generatedMessage: true,
+pi-harness-behavior-check>     code: 'ERR_ASSERTION',
+pi-harness-behavior-check>     actual: 'Could not launch Pi: write EPIPE',
+pi-harness-behavior-check>     expected: /No API key found for ollama-cloud/,
+pi-harness-behavior-check>     operator: 'match',
+pi-harness-behavior-check>     diff: 'simple'
+pi-harness-behavior-check>   }
+error: Cannot build '/nix/store/3zr8z589nkja4y01x4115lhxhsgdlmvw-pi-harness-behavior-check.drv'.
+       Reason: builder failed with exit code 1.
+       Output paths:
+         /nix/store/541k1fcn499nipn995znwmxxs0h4qd1n-pi-harness-behavior-check
+       Last 25 log lines:
+       > ℹ pass 6
+       > ℹ fail 1
+       > ℹ cancelled 0
+       > ℹ skipped 0
+       > ℹ todo 0
+       > ℹ duration_ms 2426.01561
+       >
+       > ✖ failing tests:
+       >
+       > test at tests/pi/extensions.test.mjs:85:1
+       > ✖ real delegator subprocess selects each configured model and fails honestly without credentials (39.349346ms)
+       >   AssertionError [ERR_ASSERTION]: The input did not match the regular expression /No API key found for ollama-cloud/. Input:
+       >
+       >   'Could not launch Pi: write EPIPE'
+       >
+       >       at TestContext.<anonymous> (file:///build/source/tests/pi/extensions.test.mjs:99:12)
+       >       at async Test.run (node:internal/test_runner/test:1409:7)
+       >       at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+       >     generatedMessage: true,
+       >     code: 'ERR_ASSERTION',
+       >     actual: 'Could not launch Pi: write EPIPE',
+       >     expected: /No API key found for ollama-cloud/,
+       >     operator: 'match',
+       >     diff: 'simple'
+       >   }
+       For full logs, run:
+         nix-store -l /nix/store/3zr8z589nkja4y01x4115lhxhsgdlmvw-pi-harness-behavior-check.drv

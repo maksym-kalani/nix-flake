@@ -1,0 +1,121 @@
+warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty
+these 7 derivations will be built:
+  /nix/store/msnz0b9kd0pngnal4cpdn0jdgz31msxc-belial-pi-runtime-1.1.0.drv
+  /nix/store/2hbjmiq2vzk80yjcic38zimmpwk6xa0x-pi-harness-admission.drv
+  /nix/store/3plfad467yl8bikgk3palhgj66fd4ykd-pi-child.drv
+  /nix/store/cgw47ih13fnjspkyi7r7jbyv3smi1hqc-pi-harness-template.json.drv
+  /nix/store/iz3k9qhpp7lnv8w4gqnzc2nyxjbki8fn-pi-sandbox-tools.drv
+  /nix/store/hvqynh3dcky8dp5y6kw9bvv47ryhkl60-pi-harness-launch.json.drv
+  /nix/store/l9zwgglw8zfxqkj6dj43x4dikjvplr2l-pi-harness-behavior-check.drv
+building '/nix/store/msnz0b9kd0pngnal4cpdn0jdgz31msxc-belial-pi-runtime-1.1.0.drv'...
+belial-pi-runtime> Running phase: unpackPhase
+belial-pi-runtime> unpacking source archive /nix/store/r9lqvxd8ca4r83ldvd7iipwahlzf05s5-npm
+belial-pi-runtime> source root is npm
+belial-pi-runtime> Running phase: patchPhase
+belial-pi-runtime> Executing npmConfigHook
+belial-pi-runtime> Configuring npm
+belial-pi-runtime> Validating consistency between /build/npm/package-lock.json and /nix/store/2qd6gmh2mg4r7v7qlzffdf4kqwhp955p-belial-pi-runtime-1.1.0-npm-deps/package-lock.json
+belial-pi-runtime> Setting npm_config_cache to /nix/store/2qd6gmh2mg4r7v7qlzffdf4kqwhp955p-belial-pi-runtime-1.1.0-npm-deps
+belial-pi-runtime> Installing dependencies
+belial-pi-runtime> npm warn Unknown env config "nodedir". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+belial-pi-runtime> npm warn Unknown env config "platform". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+belial-pi-runtime> npm warn Unknown env config "arch". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+belial-pi-runtime> npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+belial-pi-runtime> 
+belial-pi-runtime> added 129 packages, and audited 130 packages in 3s
+belial-pi-runtime> 
+belial-pi-runtime> 9 packages are looking for funding
+belial-pi-runtime>   run `npm fund` for details
+belial-pi-runtime> 
+belial-pi-runtime> found 0 vulnerabilities
+belial-pi-runtime> patching script interpreter paths in node_modules
+belial-pi-runtime> node_modules/@earendil-works/pi-ai/dist/cli.js: interpreter directive changed from "#!/usr/bin/env node" to "/nix/store/gxq2cd70i077rah1d4hkzc1lpq8q4pv8-nodejs-24.21.0/bin/node"
+belial-pi-runtime> node_modules/@earendil-works/pi-tui/native/darwin/build.sh: interpreter directive changed from "#!/usr/bin/env bash" to "/nix/store/10dxp0qxqxxsyiljrh2kp0xqhz6arhcx-bash-5.3p15/bin/bash"
+belial-pi-runtime> node_modules/@earendil-works/pi-tui/native/linux/build.sh: interpreter directive changed from "#!/usr/bin/env bash" to "/nix/store/10dxp0qxqxxsyiljrh2kp0xqhz6arhcx-bash-5.3p15/bin/bash"
+belial-pi-runtime> node_modules/@earendil-works/pi-coding-agent/dist/cli.js: interpreter directive changed from "#!/usr/bin/env node" to "/nix/store/gxq2cd70i077rah1d4hkzc1lpq8q4pv8-nodejs-24.21.0/bin/node"
+belial-pi-runtime> node_modules/@earendil-works/pi-coding-agent/dist/bundle/cli.js: interpreter directive changed from "#!/usr/bin/env node" to "/nix/store/gxq2cd70i077rah1d4hkzc1lpq8q4pv8-nodejs-24.21.0/bin/node"
+belial-pi-runtime> node_modules/@earendil-works/pi-coding-agent/dist/bundle/rpc-entry.js: interpreter directive changed from "#!/usr/bin/env node" to "/nix/store/gxq2cd70i077rah1d4hkzc1lpq8q4pv8-nodejs-24.21.0/bin/node"
+belial-pi-runtime> node_modules/@earendil-works/pi-coding-agent/dist/bundle/cli-runtime.js: interpreter directive changed from "#!/usr/bin/env node" to "/nix/store/gxq2cd70i077rah1d4hkzc1lpq8q4pv8-nodejs-24.21.0/bin/node"
+belial-pi-runtime> node_modules/@earendil-works/pi-coding-agent/dist/rpc-entry.js: interpreter directive changed from "#!/usr/bin/env node" to "/nix/store/gxq2cd70i077rah1d4hkzc1lpq8q4pv8-nodejs-24.21.0/bin/node"
+belial-pi-runtime> node_modules/@earendil-works/pi-coding-agent/examples/extensions/doom-overlay/doom/build.sh: interpreter directive changed from "#!/usr/bin/env bash" to "/nix/store/10dxp0qxqxxsyiljrh2kp0xqhz6arhcx-bash-5.3p15/bin/bash"
+belial-pi-runtime> node_modules/esbuild/bin/esbuild: interpreter directive changed from "#!/usr/bin/env node" to "/nix/store/gxq2cd70i077rah1d4hkzc1lpq8q4pv8-nodejs-24.21.0/bin/node"
+belial-pi-runtime> node_modules/yaml/bin.mjs: interpreter directive changed from "#!/usr/bin/env node" to "/nix/store/gxq2cd70i077rah1d4hkzc1lpq8q4pv8-nodejs-24.21.0/bin/node"
+belial-pi-runtime> node_modules/semver/bin/semver.js: interpreter directive changed from "#!/usr/bin/env node" to "/nix/store/gxq2cd70i077rah1d4hkzc1lpq8q4pv8-nodejs-24.21.0/bin/node"
+belial-pi-runtime> node_modules/marked/bin/marked.js: interpreter directive changed from "#!/usr/bin/env node" to "/nix/store/gxq2cd70i077rah1d4hkzc1lpq8q4pv8-nodejs-24.21.0/bin/node"
+belial-pi-runtime> node_modules/jiti/lib/jiti-cli.mjs: interpreter directive changed from "#!/usr/bin/env node" to "/nix/store/gxq2cd70i077rah1d4hkzc1lpq8q4pv8-nodejs-24.21.0/bin/node"
+belial-pi-runtime> node_modules/which/bin/node-which: interpreter directive changed from "#!/usr/bin/env node" to "/nix/store/gxq2cd70i077rah1d4hkzc1lpq8q4pv8-nodejs-24.21.0/bin/node"
+belial-pi-runtime> node_modules/@anthropic-ai/sdk/bin/cli: interpreter directive changed from "#!/usr/bin/env node" to "/nix/store/gxq2cd70i077rah1d4hkzc1lpq8q4pv8-nodejs-24.21.0/bin/node"
+belial-pi-runtime> npm warn Unknown env config "nodedir". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+belial-pi-runtime> npm warn Unknown env config "platform". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+belial-pi-runtime> npm warn Unknown env config "arch". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+belial-pi-runtime> rebuilt dependencies successfully
+belial-pi-runtime> patching script interpreter paths in node_modules
+belial-pi-runtime> Finished npmConfigHook
+belial-pi-runtime> Running phase: updateAutotoolsGnuConfigScriptsPhase
+belial-pi-runtime> Running phase: configurePhase
+belial-pi-runtime> no configure script, doing nothing
+belial-pi-runtime> Running phase: buildPhase
+belial-pi-runtime> no Makefile or custom buildPhase, doing nothing
+belial-pi-runtime> Running phase: installPhase
+belial-pi-runtime> Running phase: fixupPhase
+belial-pi-runtime> shrinking RPATHs of ELF executables and libraries in /nix/store/3qndyy0aa85r2f9sv1rynqwd4l5rih3x-belial-pi-runtime-1.1.0
+belial-pi-runtime> shrinking /nix/store/3qndyy0aa85r2f9sv1rynqwd4l5rih3x-belial-pi-runtime-1.1.0/lib/pi/node_modules/@earendil-works/pi-tui/native/linux/prebuilds/linux-arm64/linux-platform-x11.node
+belial-pi-runtime> shrinking /nix/store/3qndyy0aa85r2f9sv1rynqwd4l5rih3x-belial-pi-runtime-1.1.0/lib/pi/node_modules/@earendil-works/pi-tui/native/linux/prebuilds/linux-x64/linux-platform-x11.node
+belial-pi-runtime> shrinking /nix/store/3qndyy0aa85r2f9sv1rynqwd4l5rih3x-belial-pi-runtime-1.1.0/lib/pi/node_modules/@esbuild/linux-x64/bin/esbuild
+belial-pi-runtime> patchelf: cannot find section '.dynamic'. The input file is most likely statically linked
+belial-pi-runtime> checking for references to /build/ in /nix/store/3qndyy0aa85r2f9sv1rynqwd4l5rih3x-belial-pi-runtime-1.1.0...
+belial-pi-runtime> patchelf: cannot find section '.dynamic'. The input file is most likely statically linked
+belial-pi-runtime> patching script interpreter paths in /nix/store/3qndyy0aa85r2f9sv1rynqwd4l5rih3x-belial-pi-runtime-1.1.0
+building '/nix/store/3plfad467yl8bikgk3palhgj66fd4ykd-pi-child.drv'...
+pi-child> structuredAttrs is enabled
+building '/nix/store/2hbjmiq2vzk80yjcic38zimmpwk6xa0x-pi-harness-admission.drv'...
+building '/nix/store/iz3k9qhpp7lnv8w4gqnzc2nyxjbki8fn-pi-sandbox-tools.drv'...
+pi-sandbox-tools> structuredAttrs is enabled
+pi-sandbox-tools> created 725 symlinks in user environment
+building '/nix/store/cgw47ih13fnjspkyi7r7jbyv3smi1hqc-pi-harness-template.json.drv'...
+pi-harness-template.json> structuredAttrs is enabled
+building '/nix/store/hvqynh3dcky8dp5y6kw9bvv47ryhkl60-pi-harness-launch.json.drv'...
+pi-harness-launch.json> structuredAttrs is enabled
+building '/nix/store/l9zwgglw8zfxqkj6dj43x4dikjvplr2l-pi-harness-behavior-check.drv'...
+pi-harness-behavior-check> test_dotnet_runner_override_is_executed_as_argv_not_shell (test_checks.CheckRunnerTests.test_dotnet_runner_override_is_executed_as_argv_not_shell) ... ok
+pi-harness-behavior-check> test_native_mtp_without_project_command_is_blocked (test_checks.CheckRunnerTests.test_native_mtp_without_project_command_is_blocked) ... ok
+pi-harness-behavior-check> test_nix_daemon_exception_never_attempts_switch_or_privilege (test_checks.CheckRunnerTests.test_nix_daemon_exception_never_attempts_switch_or_privilege) ... ok
+pi-harness-behavior-check> test_containment_argv_has_only_scoped_writes_and_clean_env (test_launcher.LauncherTests.test_containment_argv_has_only_scoped_writes_and_clean_env) ... ok
+pi-harness-behavior-check> test_projection_preserves_auth_sessions_and_user_settings (test_launcher.LauncherTests.test_projection_preserves_auth_sessions_and_user_settings) ... ok
+pi-harness-behavior-check> test_projection_rejects_symlink_without_reading_external_target (test_launcher.LauncherTests.test_projection_rejects_symlink_without_reading_external_target) ... ok
+pi-harness-behavior-check> test_rejects_external_git_worktree_and_symlink_roots (test_launcher.LauncherTests.test_rejects_external_git_worktree_and_symlink_roots) ... ok
+pi-harness-behavior-check> test_state_isolated_per_checkout_and_socket_mounts_rejected (test_launcher.LauncherTests.test_state_isolated_per_checkout_and_socket_mounts_rejected) ... ok
+pi-harness-behavior-check> test_system_directories_are_not_project_roots (test_launcher.LauncherTests.test_system_directories_are_not_project_roots) ... ok
+pi-harness-behavior-check> 
+pi-harness-behavior-check> ----------------------------------------------------------------------
+pi-harness-behavior-check> Ran 9 tests in 0.116s
+pi-harness-behavior-check> 
+pi-harness-behavior-check> OK
+pi-harness-behavior-check> ✔ trusted parent before_agent_start cannot execute checks before Implement (1330.171131ms)
+pi-harness-behavior-check> ✔ trusted parent tool_result cannot execute checks before Implement (446.952933ms)
+pi-harness-behavior-check> ✔ trusted parent run_checks cannot execute checks before Implement (432.947186ms)
+pi-harness-behavior-check> ✔ trusted parent agent_before_settle cannot execute checks before Implement (430.211925ms)
+pi-harness-behavior-check> ✔ trusted parent turn_end cannot execute checks before Implement (429.54602ms)
+pi-harness-behavior-check> ✔ trusted parent verify cannot execute checks before Implement (429.669617ms)
+pi-harness-behavior-check> ✔ approved parent and admitted child retain actual automatic project checks (277.843104ms)
+pi-harness-behavior-check> ✔ actual pinned /plan start, complete and human implement admits checks; exit revokes approval (982.846338ms)
+pi-harness-behavior-check> ✔ actual resource loader rejects ambient packages before any installer call in parent/child and reload (25.346025ms)
+pi-harness-behavior-check> ✔ mutable resource settings cannot substitute pinned extensions or skills on startup/reload (20.009682ms)
+pi-harness-behavior-check> ✔ actual package manager refuses interactive install/update/remove and unapproved explicit sources without installer/network calls (0.988666ms)
+pi-harness-behavior-check> ✔ published CLI/RPC entry points cannot bypass declarative package boundary via bundled copies (2708.569606ms)
+pi-harness-behavior-check> ✔ published baseline addons load in real Pi 1.1.0 Node loader (1790.845725ms)
+pi-harness-behavior-check> ✔ real SDK selects the per-call child model instead of parent model without auth or inference (41.271333ms)
+pi-harness-behavior-check> ✔ declarative dispatcher resources resist trusted project removal of safety/deadline profiles (46.854253ms)
+pi-harness-behavior-check> ✔ real delegator subprocess selects each configured model and fails honestly without credentials (1664.369567ms)
+pi-harness-behavior-check> ✔ per-call routing forbids missing, paid, ambiguous and priority selectors (2.384238ms)
+pi-harness-behavior-check> ✔ stack presets configure real format/build/test and Nix boundary checks (1.086ms)
+pi-harness-behavior-check> ✔ editing requires a real plan extension implementation entry (0.330747ms)
+pi-harness-behavior-check> ℹ tests 19
+pi-harness-behavior-check> ℹ suites 0
+pi-harness-behavior-check> ℹ pass 19
+pi-harness-behavior-check> ℹ fail 0
+pi-harness-behavior-check> ℹ cancelled 0
+pi-harness-behavior-check> ℹ skipped 0
+pi-harness-behavior-check> ℹ todo 0
+pi-harness-behavior-check> ℹ duration_ms 8270.208069
+pi-harness-behavior-check> All checks passed!

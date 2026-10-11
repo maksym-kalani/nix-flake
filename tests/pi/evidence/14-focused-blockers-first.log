@@ -1,0 +1,75 @@
+warning: Git tree '/home/maksym/worktrees/nix-flake-pi-harness' is dirty
+this derivation will be built:
+  /nix/store/0z4cnkgh0v99i8np7hmhyp5w3j4izzkl-pi-harness-behavior-check.drv
+building '/nix/store/0z4cnkgh0v99i8np7hmhyp5w3j4izzkl-pi-harness-behavior-check.drv'...
+pi-harness-behavior-check> test_dotnet_runner_override_is_executed_as_argv_not_shell (test_checks.CheckRunnerTests.test_dotnet_runner_override_is_executed_as_argv_not_shell) ... ok
+pi-harness-behavior-check> test_native_mtp_without_project_command_is_blocked (test_checks.CheckRunnerTests.test_native_mtp_without_project_command_is_blocked) ... ok
+pi-harness-behavior-check> test_nix_daemon_exception_never_attempts_switch_or_privilege (test_checks.CheckRunnerTests.test_nix_daemon_exception_never_attempts_switch_or_privilege) ... ok
+pi-harness-behavior-check> test_containment_argv_has_only_scoped_writes_and_clean_env (test_launcher.LauncherTests.test_containment_argv_has_only_scoped_writes_and_clean_env) ... ok
+pi-harness-behavior-check> test_projection_preserves_auth_sessions_and_user_settings (test_launcher.LauncherTests.test_projection_preserves_auth_sessions_and_user_settings) ... ok
+pi-harness-behavior-check> test_projection_rejects_symlink_without_reading_external_target (test_launcher.LauncherTests.test_projection_rejects_symlink_without_reading_external_target) ... ok
+pi-harness-behavior-check> test_rejects_external_git_worktree_and_symlink_roots (test_launcher.LauncherTests.test_rejects_external_git_worktree_and_symlink_roots) ... ok
+pi-harness-behavior-check> test_state_isolated_per_checkout_and_socket_mounts_rejected (test_launcher.LauncherTests.test_state_isolated_per_checkout_and_socket_mounts_rejected) ... ok
+pi-harness-behavior-check> test_system_directories_are_not_project_roots (test_launcher.LauncherTests.test_system_directories_are_not_project_roots) ... ok
+pi-harness-behavior-check> 
+pi-harness-behavior-check> ----------------------------------------------------------------------
+pi-harness-behavior-check> Ran 9 tests in 0.117s
+pi-harness-behavior-check> 
+pi-harness-behavior-check> OK
+pi-harness-behavior-check> ✔ trusted parent before_agent_start cannot execute checks before Implement (1390.011562ms)
+pi-harness-behavior-check> ✔ trusted parent tool_result cannot execute checks before Implement (446.777297ms)
+pi-harness-behavior-check> ✔ trusted parent run_checks cannot execute checks before Implement (431.029476ms)
+pi-harness-behavior-check> ✔ approved parent and admitted child retain actual automatic project checks (269.480738ms)
+pi-harness-behavior-check> ✔ actual pinned /plan start, complete and human implement admits checks; exit revokes approval (984.960636ms)
+pi-harness-behavior-check> ✔ actual resource loader rejects ambient packages before any installer call in parent/child and reload (22.98557ms)
+pi-harness-behavior-check> ✔ mutable resource settings cannot substitute pinned extensions or skills on startup/reload (20.717459ms)
+pi-harness-behavior-check> ✔ actual package manager refuses interactive install/update/remove and unapproved explicit sources without installer/network calls (0.884611ms)
+pi-harness-behavior-check> ✔ published baseline addons load in real Pi 1.1.0 Node loader (1792.487916ms)
+pi-harness-behavior-check> ✔ real SDK selects the per-call child model instead of parent model without auth or inference (52.066812ms)
+pi-harness-behavior-check> ✔ declarative dispatcher resources resist trusted project removal of safety/deadline profiles (46.732123ms)
+pi-harness-behavior-check> ✔ real delegator subprocess selects each configured model and fails honestly without credentials (1652.773649ms)
+pi-harness-behavior-check> ✔ per-call routing forbids missing, paid, ambiguous and priority selectors (2.69781ms)
+pi-harness-behavior-check> ✔ stack presets configure real format/build/test and Nix boundary checks (1.090251ms)
+pi-harness-behavior-check> ✔ editing requires a real plan extension implementation entry (0.298416ms)
+pi-harness-behavior-check> ℹ tests 15
+pi-harness-behavior-check> ℹ suites 0
+pi-harness-behavior-check> ℹ pass 15
+pi-harness-behavior-check> ℹ fail 0
+pi-harness-behavior-check> ℹ cancelled 0
+pi-harness-behavior-check> ℹ skipped 0
+pi-harness-behavior-check> ℹ todo 0
+pi-harness-behavior-check> ℹ duration_ms 4318.517761
+pi-harness-behavior-check> All checks passed!
+pi-harness-behavior-check> pkgs/pi-harness/default.nix: not formatted
+error: Cannot build '/nix/store/0z4cnkgh0v99i8np7hmhyp5w3j4izzkl-pi-harness-behavior-check.drv'.
+       Reason: builder failed with exit code 1.
+       Output paths:
+         /nix/store/d8i7xcz213wn0xf3rsb4hq6d18af710m-pi-harness-behavior-check
+       Last 25 log lines:
+       > ✔ trusted parent before_agent_start cannot execute checks before Implement (1390.011562ms)
+       > ✔ trusted parent tool_result cannot execute checks before Implement (446.777297ms)
+       > ✔ trusted parent run_checks cannot execute checks before Implement (431.029476ms)
+       > ✔ approved parent and admitted child retain actual automatic project checks (269.480738ms)
+       > ✔ actual pinned /plan start, complete and human implement admits checks; exit revokes approval (984.960636ms)
+       > ✔ actual resource loader rejects ambient packages before any installer call in parent/child and reload (22.98557ms)
+       > ✔ mutable resource settings cannot substitute pinned extensions or skills on startup/reload (20.717459ms)
+       > ✔ actual package manager refuses interactive install/update/remove and unapproved explicit sources without installer/network calls (0.884611ms)
+       > ✔ published baseline addons load in real Pi 1.1.0 Node loader (1792.487916ms)
+       > ✔ real SDK selects the per-call child model instead of parent model without auth or inference (52.066812ms)
+       > ✔ declarative dispatcher resources resist trusted project removal of safety/deadline profiles (46.732123ms)
+       > ✔ real delegator subprocess selects each configured model and fails honestly without credentials (1652.773649ms)
+       > ✔ per-call routing forbids missing, paid, ambiguous and priority selectors (2.69781ms)
+       > ✔ stack presets configure real format/build/test and Nix boundary checks (1.090251ms)
+       > ✔ editing requires a real plan extension implementation entry (0.298416ms)
+       > ℹ tests 15
+       > ℹ suites 0
+       > ℹ pass 15
+       > ℹ fail 0
+       > ℹ cancelled 0
+       > ℹ skipped 0
+       > ℹ todo 0
+       > ℹ duration_ms 4318.517761
+       > All checks passed!
+       > pkgs/pi-harness/default.nix: not formatted
+       For full logs, run:
+         nix-store -l /nix/store/0z4cnkgh0v99i8np7hmhyp5w3j4izzkl-pi-harness-behavior-check.drv

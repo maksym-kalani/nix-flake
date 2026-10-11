@@ -1,0 +1,52 @@
+TAP version 13
+# Subtest: trusted parent before_agent_start cannot execute checks before Implement
+ok 1 - trusted parent before_agent_start cannot execute checks before Implement
+  ---
+  duration_ms: 1221.515089
+  type: 'test'
+  ...
+# Subtest: trusted parent tool_result cannot execute checks before Implement
+ok 2 - trusted parent tool_result cannot execute checks before Implement
+  ---
+  duration_ms: 449.284036
+  type: 'test'
+  ...
+# Subtest: trusted parent run_checks cannot execute checks before Implement
+ok 3 - trusted parent run_checks cannot execute checks before Implement
+  ---
+  duration_ms: 430.591766
+  type: 'test'
+  ...
+# Subtest: approved parent and admitted child retain actual automatic project checks
+ok 4 - approved parent and admitted child retain actual automatic project checks
+  ---
+  duration_ms: 268.022481
+  type: 'test'
+  ...
+# Subtest: actual resource loader rejects ambient packages before any installer call in parent/child and reload
+ok 5 - actual resource loader rejects ambient packages before any installer call in parent/child and reload
+  ---
+  duration_ms: 151.839647
+  type: 'test'
+  ...
+# Subtest: mutable resource settings cannot substitute pinned extensions or skills on startup/reload
+ok 6 - mutable resource settings cannot substitute pinned extensions or skills on startup/reload
+  ---
+  duration_ms: 22.985243
+  type: 'test'
+  ...
+# Subtest: actual package manager refuses interactive install/update/remove and unapproved explicit sources without installer/network calls
+ok 7 - actual package manager refuses interactive install/update/remove and unapproved explicit sources without installer/network calls
+  ---
+  duration_ms: 1.098463
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3208.332596
