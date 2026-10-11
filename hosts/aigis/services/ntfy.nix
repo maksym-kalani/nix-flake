@@ -9,6 +9,9 @@ in {
   services.ntfy-sh.settings = {
     base-url = "http://${ip}";
     listen-http = ":${toString port}";
+    # Caddy forwards the client IP; rate limits are per visitor IP.
+    behind-proxy = true;
+    proxy-trusted-hosts = ip;
   };
 
   networking.firewall.allowedTCPPorts = [port];
