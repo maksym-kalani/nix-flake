@@ -10,5 +10,6 @@
     ./ntfy-on-ssh.nix
     ./ssh.nix
     ./zfs.nix
+    ./nix-cache.nix
   ];
 }

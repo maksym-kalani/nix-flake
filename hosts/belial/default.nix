@@ -18,5 +18,6 @@
     ./packages.nix
     ./obs.nix
     ./webcam.nix
+    ./nix-cache.nix
   ];
 }
