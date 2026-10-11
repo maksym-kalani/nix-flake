@@ -9,18 +9,18 @@
       settings = {
         defaultProvider = "ollama";
         packages = [
-          # Addons
           "npm:pi-ollama-cloud"
           "npm:pi-quota-status"
           "npm:@narumitw/pi-plan-mode"
           "npm:@lenard9191/pi-project-profile"
           "npm:pi-subagents"
           "git:github.com/aliceisjustplaying/pi-you-should-know"
-
-          # Ready upstream skill snapshots
+          "git:github.com/ayghri/i-have-adhd"
           "git:github.com/olafkfreund/nix-skills"
         ];
       };
     };
+
+    home.file."${config.programs.pi-coding-agent.configDir}/skills".source = ./skills;
   };
 }
