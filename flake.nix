@@ -53,36 +53,7 @@
       forAllSystems = nixpkgs.lib.genAttrs systems;
     in
     {
-      packages = forAllSystems (
-        system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-          all = import ./pkgs pkgs;
-        in
-        pkgs.lib.filterAttrs (
-          name: _:
-          builtins.elem system [
-            "x86_64-linux"
-            "aarch64-linux"
-          ]
-          || !(pkgs.lib.hasPrefix "pi-" name)
-        ) all
-      );
-
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
-      checks.x86_64-linux = import ./tests/pi/checks.nix {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        inherit home-manager;
-      };
-      devShells.x86_64-linux.pi-harness = nixpkgs.legacyPackages.x86_64-linux.mkShell {
-        packages = with nixpkgs.legacyPackages.x86_64-linux; [
-          python3
-          nodejs_24
-          nixfmt
-          statix
-          ruff
-        ];
-      };
+      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
       overlays = import ./overlays {
         inherit inputs outputs;
