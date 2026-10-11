@@ -1,10 +1,5 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    rtk
-    nodejs
-  ];
-
   programs.claude-code = {
     enable = true;
 

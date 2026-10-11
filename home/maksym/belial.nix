@@ -5,7 +5,7 @@
     ../common
     ../features/cli
     ../features/nix-tools
-    ../features/ai
+    ../features/claude-code
     ../features/pi-coding-agent
     ../features/zsh
     ../features/desktop
