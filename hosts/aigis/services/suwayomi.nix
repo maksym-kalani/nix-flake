@@ -5,18 +5,10 @@
 }: let
   name = "suwayomi";
   port = 4568;
-  # WebInterfaceManager serves a working copy from /tmp/Tachidesk/webUI-serve.
-  # Age-based cleanup must not remove its lazily loaded JavaScript modules.
-  webuiTmpfilesRules = [
-    "x /tmp/Tachidesk - - - - -"
-  ];
 in {
-  systemd.tmpfiles.rules = webuiTmpfilesRules;
-
-  # On deployment, also rebuild the served copy using Suwayomi's startup logic.
-  # Tie the restart to this policy only, not to unrelated tmpfiles changes.
-  systemd.services.suwayomi-server.restartTriggers = [
-    (builtins.toFile "suwayomi-webui-tmpfiles.conf" (lib.concatLines webuiTmpfilesRules))
+  # Preserve the served WebUI copy, including lazily loaded JavaScript modules.
+  systemd.tmpfiles.rules = [
+    "x /tmp/Tachidesk - - - - -"
   ];
 
   services.suwayomi-server = {
