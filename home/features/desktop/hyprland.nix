@@ -87,7 +87,7 @@ in
         {
           output = "DP-2";
           mode = "1920x1080@100";
-          position = "2560x0";
+          position = "2560x-480";
           scale = 1;
           transform = 3;
         }
