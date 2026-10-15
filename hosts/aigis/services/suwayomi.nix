@@ -6,6 +6,11 @@
   name = "suwayomi";
   port = 4568;
 in {
+  # Preserve the served WebUI copy, including lazily loaded JavaScript modules.
+  systemd.tmpfiles.rules = [
+    "x /tmp/Tachidesk - - - - -"
+  ];
+
   services.suwayomi-server = {
     enable = true;
     openFirewall = true;
