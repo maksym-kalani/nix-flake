@@ -7,7 +7,9 @@
       enable = true;
 
       settings = {
-        defaultProvider = "ollama";
+        defaultProvider = "ollama-cloud";
+        defaultModel = "glm-5.3";
+        defaultThinkingLevel = "high";
         packages = [
           "npm:pi-ollama-cloud"
           "npm:pi-quota-status"
