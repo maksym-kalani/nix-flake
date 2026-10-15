@@ -31,6 +31,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vicinae.url = "github:vicinaehq/vicinae";
+    hermes-agent.url = "github:NousResearch/hermes-agent";
   };
 
   outputs =
