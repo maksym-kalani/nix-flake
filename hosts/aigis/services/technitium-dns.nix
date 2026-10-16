@@ -26,6 +26,11 @@
       DNS_SERVER_BLOCK_LIST_URLS = lib.concatStringsSep "," [
         "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro-onlydomains.txt"
         "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/tif.medium-onlydomains.txt"
+        # Preserve the existing Ukraine-specific subscriptions.
+        # UA: Malicious URL Blocklist — phishing targeting Ukrainian users.
+        "https://www.awwwwesome.org/url-blocklist/url-blocklist.txt"
+        # piholeparser's Ukraine country-code selection (discontinued upstream).
+        "https://raw.githubusercontent.com/deathbybandaid/piholeparser/master/Subscribable-Lists/CountryCodesLists/Ukraine.txt"
       ];
       DNS_SERVER_FORWARDERS = "9.9.9.10, 8.8.8.8, 149.112.112.10";
     };
