@@ -34,6 +34,9 @@
     });
   };
 
+  # Temporary Zen release pin, scoped to hosts that opt in.
+  zen-browser-release-pin = import ./zen-browser-patch-release-404.nix { inherit inputs; };
+
   stable-packages = final: _prev: {
     stable = import inputs.nixpkgs-stable {
       system = final.stdenv.hostPlatform.system;
