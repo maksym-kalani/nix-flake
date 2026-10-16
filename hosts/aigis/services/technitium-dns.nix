@@ -1,8 +1,11 @@
 {
   lib,
+  pkgs,
   ...
 }: let
   appdata = "/var/lib/containers/";
+  allowedDomains = ["sites.google.com"];
+  allowlist = pkgs.writeText "technitium-allowlist.txt" (lib.concatStringsSep "\n" allowedDomains + "\n");
   cfg = {
     name = "dns";
 
@@ -16,12 +19,19 @@
     extraOptions = [];
     volumes = [
       "${appdata}${cfg.name}:/etc/dns"
-
+      "${allowlist}:/etc/dns/allowlist.txt:ro"
     ];
     environmentVariables = {
       DNS_SERVER_DOMAIN = "aigis-dns-server";
       DNS_SERVER_ENABLE_BLOCKING = "true";
-      DNS_SERVER_BLOCK_LIST_URLS = "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt, https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt, https://adguardteam.github.io/HostlistsRegistry/assets/filter_49.txt, https://adguardteam.github.io/HostlistsRegistry/assets/filter_50.txt, https://adguardteam.github.io/HostlistsRegistry/assets/filter_8.txt, https://www.awwwwesome.org/url-blocklist/url-blocklist.txt, https://adguardteam.github.io/HostlistsRegistry/assets/filter_7.txt, https://blocklistproject.github.io/Lists/adguard/tracking-ags.txt, https://blocklistproject.github.io/Lists/adguard/ads-ags.txt, https://raw.githubusercontent.com/deathbybandaid/piholeparser/master/Subscribable-Lists/CountryCodesLists/Ukraine.txt";
+      # Bootstrap only: an existing /etc/dns config must be updated via the web UI/API.
+      # Three blocklists plus a local allowlist (Technitium's !URL syntax).
+      DNS_SERVER_BLOCK_LIST_URLS = lib.concatStringsSep "," [
+        "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro-onlydomains.txt"
+        "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/tif.medium-onlydomains.txt"
+        "https://raw.githubusercontent.com/eugenescodes/ema-ua-blocklist/refs/heads/main/hosts_ema.txt"
+        "!file:///etc/dns/allowlist.txt"
+      ];
       DNS_SERVER_FORWARDERS = "9.9.9.10, 8.8.8.8, 149.112.112.10";
     };
 
