@@ -1,8 +1,11 @@
 {
   lib,
+  pkgs,
   ...
 }: let
   appdata = "/var/lib/containers/";
+  allowedDomains = ["sites.google.com"];
+  allowlist = pkgs.writeText "technitium-allowlist.txt" (lib.concatStringsSep "\n" allowedDomains + "\n");
   cfg = {
     name = "dns";
 
@@ -16,21 +19,18 @@
     extraOptions = [];
     volumes = [
       "${appdata}${cfg.name}:/etc/dns"
-
+      "${allowlist}:/etc/dns/allowlist.txt:ro"
     ];
     environmentVariables = {
       DNS_SERVER_DOMAIN = "aigis-dns-server";
       DNS_SERVER_ENABLE_BLOCKING = "true";
       # Bootstrap only: an existing /etc/dns config must be updated via the web UI/API.
-      # HaGeZi Pro covers ads/trackers; TIF Medium adds threat intelligence.
+      # Three blocklists plus a local allowlist (Technitium's !URL syntax).
       DNS_SERVER_BLOCK_LIST_URLS = lib.concatStringsSep "," [
         "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro-onlydomains.txt"
         "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/tif.medium-onlydomains.txt"
-        # Preserve the existing Ukraine-specific subscriptions.
-        # UA: Malicious URL Blocklist — phishing targeting Ukrainian users.
-        "https://www.awwwwesome.org/url-blocklist/url-blocklist.txt"
-        # piholeparser's Ukraine country-code selection (discontinued upstream).
-        "https://raw.githubusercontent.com/deathbybandaid/piholeparser/master/Subscribable-Lists/CountryCodesLists/Ukraine.txt"
+        "https://raw.githubusercontent.com/eugenescodes/ema-ua-blocklist/refs/heads/main/hosts_ema.txt"
+        "!file:///etc/dns/allowlist.txt"
       ];
       DNS_SERVER_FORWARDERS = "9.9.9.10, 8.8.8.8, 149.112.112.10";
     };
