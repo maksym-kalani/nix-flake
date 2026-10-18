@@ -38,6 +38,11 @@ in
           }
         }
 
+        @hermes host hermes.laufin.xyz
+        handle @hermes {
+          reverse_proxy http://192.168.2.205:9119
+        }
+
         @dns host dns.laufin.xyz
         handle @dns {
           reverse_proxy http://192.168.2.50:5380
