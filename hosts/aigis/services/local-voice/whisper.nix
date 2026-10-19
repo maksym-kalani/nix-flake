@@ -11,9 +11,9 @@ in
     sttLibrary = "faster-whisper";
     # large-v3 on CPU took 26-150s per live utterance on aigis (Ryzen 5 PRO 4650G),
     # leaving the satellite yellow-listening long after speech ended. small-int8
-    # transcribes the same clip ~5x faster with acceptable Ukrainian accuracy.
+    # transcribes the same clip ~5x faster; English is now the assistant language.
     model = "small-int8";
-    language = "uk";
+    language = "en";
     device = "cpu";
     beamSize = 1;
     extraArgs = [ "--cpu-threads" "6" ];
