@@ -9,10 +9,14 @@ in
     enable = true;
     uri = "tcp://0.0.0.0:${toString port}";
     sttLibrary = "faster-whisper";
-    model = "large-v3";
+    # large-v3 on CPU took 26-150s per live utterance on aigis (Ryzen 5 PRO 4650G),
+    # leaving the satellite yellow-listening long after speech ended. small-int8
+    # transcribes the same clip ~5x faster with acceptable Ukrainian accuracy.
+    model = "small-int8";
     language = "uk";
     device = "cpu";
-    extraArgs = [ "--compute-type" "int8" ];
+    beamSize = 1;
+    extraArgs = [ "--cpu-threads" "6" ];
     zeroconf.enable = false;
   };
 
