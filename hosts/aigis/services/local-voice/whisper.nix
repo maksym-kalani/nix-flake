@@ -9,9 +9,10 @@ in
     enable = true;
     uri = "tcp://0.0.0.0:${toString port}";
     sttLibrary = "faster-whisper";
-    model = "tiny-int8";
-    language = "en";
+    model = "large-v3";
+    language = "uk";
     device = "cpu";
+    extraArgs = [ "--compute-type" "int8" ];
     zeroconf.enable = false;
   };
 
