@@ -8,7 +8,7 @@ in
   services.wyoming.piper.servers.${name} = {
     enable = true;
     uri = "tcp://0.0.0.0:${toString port}";
-    voice = "uk_UA-tetiana-high";
+    voice = "en_US-lessac-medium";
     zeroconf.enable = false;
   };
 
