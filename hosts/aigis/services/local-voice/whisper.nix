@@ -10,13 +10,15 @@ in
     uri = "tcp://0.0.0.0:${toString port}";
     sttLibrary = "faster-whisper";
     # large-v3 on CPU took 26-150s per live utterance on aigis (Ryzen 5 PRO 4650G),
-    # leaving the satellite yellow-listening long after speech ended. small-int8
-    # transcribes the same clip ~5x faster; English is now the assistant language.
-    model = "small-int8";
+    # leaving the satellite yellow-listening long after speech ended. "small" with
+    # int8 compute transcribes the same clip ~5x faster. NOTE: faster-whisper has no
+    # "small-int8" model id (ValueError: Invalid model size); int8 comes from
+    # --compute-type. English is the assistant language.
+    model = "small";
     language = "en";
     device = "cpu";
     beamSize = 1;
-    extraArgs = [ "--cpu-threads" "6" ];
+    extraArgs = [ "--compute-type" "int8" "--cpu-threads" "6" ];
     zeroconf.enable = false;
   };
 
