@@ -32,6 +32,24 @@ in
 
       endpoints = [
         {
+          name = "Hermes";
+          url = "http://192.168.2.205:9119/api/status";
+          interval = "1m";
+          conditions = [
+            "[STATUS] == 200"
+          ];
+          alerts = [
+            {
+              type = "ntfy";
+              enabled = true;
+              send-on-resolved = true;
+              description = "Hermes health check";
+              failure-threshold = 3;
+              success-threshold = 1;
+            }
+          ];
+        }
+        {
           name = "Morgana";
           url = "tcp://192.168.2.20:8006";
           interval = "1m";
