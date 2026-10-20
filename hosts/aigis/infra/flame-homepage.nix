@@ -23,6 +23,12 @@ in
 
     apps = [
       {
+        name = "Hermes";
+        url = "hermes.laufin.xyz";
+        icon = "robot";
+        isPinned = true;
+      }
+      {
         name = "Home Assistant";
         url = "hass.laufin.online";
         icon = "home-assistant";
