@@ -26,7 +26,7 @@ in
         name = "Hermes";
         url = "hermes.laufin.xyz";
         icon = "robot";
-        isPinned = false;
+        isPinned = true;
       }
       {
         name = "Home Assistant";
