@@ -88,8 +88,8 @@ in
           reverse_proxy http://192.168.2.50:7080
         }
 
-        @morphos host morphos.laufin.xyz
-        handle @morphos {
+        @vert host vert.laufin.xyz
+        handle @vert {
           reverse_proxy http://192.168.2.50:7090
         }
 

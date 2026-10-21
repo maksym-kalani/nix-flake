@@ -4,12 +4,12 @@
 }:
 let
   cfg = {
-    name = "morphos";
+    name = "vert";
 
-    image = "ghcr.io/danvergara/morphos-server:latest";
+    image = "ghcr.io/vert-sh/vert:latest";
 
     port = {
-      internal = 8080;
+      internal = 80;
       external = 7090;
     };
 
@@ -23,9 +23,9 @@ in
 {
   imports = [
     (import ../lib/monitored-app.nix { inherit lib; } {
-      name = "Morphos";
-      url = "morphos.laufin.xyz/";
-      icon = "reload";
+      name = "Vert";
+      url = "vert.laufin.xyz/";
+      icon = "swap-vertical";
       port = cfg.port.external;
       gatusName = cfg.name;
     })
