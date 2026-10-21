@@ -13,7 +13,7 @@
     ./local-voice
     ./matrix-admin.nix
     ./mazanoke.nix
-    ./morphos.nix
+    ./vert.nix
     ./ntfy.nix
     ./omni-tools.nix
     ./prowlarr.nix
