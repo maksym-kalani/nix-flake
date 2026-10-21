@@ -19,7 +19,6 @@
     ./prowlarr.nix
     ./qbittorrent.nix
     ./radarr.nix
-    ./recommendarr.nix
     ./searxng.nix
     ./sonarr.nix
     ./stirling-pdf.nix
