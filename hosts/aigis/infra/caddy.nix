@@ -186,10 +186,6 @@ in
           reverse_proxy http://192.168.2.50:7373
         }
 
-        @recommendarr host recommendarr.laufin.xyz
-        handle @recommendarr {
-          reverse_proxy http://192.168.2.50:3007
-        }
       }
     '';
   };
