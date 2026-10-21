@@ -44,12 +44,6 @@
     };
 
     initContent = ''
-      # FZF key bindings
-      source <(fzf --zsh)
-
-      # Oh-my-posh prompt
-      eval "$(oh-my-posh init zsh --config ${./themes/probua.minimal.omp.json})"
-
       # Fastfetch on terminal start
       if [[ $(tty) == *"pts"* ]]; then
         if [[ -n "$KITTY_WINDOW_ID" ]]; then
@@ -74,11 +68,18 @@
     "$HOME/.local/bin"
   ];
 
+  # Fuzzy finder; module sources `fzf --zsh` for keybindings/completion
+  programs.fzf.enable = true;
+
+  # Prompt; module also clears the init cache when the package store path changes
+  programs.oh-my-posh = {
+    enable = true;
+    configFile = ./themes/probua.minimal.omp.json;
+  };
+
   # Required packages
   home.packages = with pkgs; [
     eza
-    fzf
-    oh-my-posh
     fastfetch
   ];
 
