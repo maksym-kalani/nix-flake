@@ -13,6 +13,8 @@
         packages = [
           "npm:pi-ollama-cloud"
           "npm:pi-quota-status"
+          "npm:pi-model-pick"
+          "npm:pi-next-prompt"
           "npm:@narumitw/pi-plan-mode"
           "npm:@lenard9191/pi-project-profile"
           "npm:pi-subagents"
