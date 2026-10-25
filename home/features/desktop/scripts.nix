@@ -195,6 +195,17 @@ let
   '';
 in
 {
+  xdg.desktopEntries.hermes-browser = {
+    name = "Hermes Browser";
+    genericName = "Remote Browser";
+    comment = "Start Chromium and its SSH tunnel to Hermes";
+    exec = "${pkgs.kitty}/bin/kitty --title \"Hermes Browser\" ${hermes-browser}/bin/hermes-browser";
+    icon = "chromium";
+    terminal = false;
+    categories = [ "Network" "WebBrowser" ];
+    settings.Keywords = "Hermes;Chromium;Browser;SSH;CDP;";
+  };
+
   home.packages = [
     toggle-audio
     toggle-mute
