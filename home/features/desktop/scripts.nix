@@ -146,8 +146,66 @@ let
     sleep 0.5
     hyprctl dispatch workspace number 1
   '';
+
+  hermes-browser = pkgs.writeShellScriptBin "hermes-browser" ''
+    # hermes-browser — one-shot: launch a dedicated debuggable Chromium profile
+    # on belial and reverse-tunnel its CDP port to the Hermes server, so Hermes
+    # can drive this browser (logins stay local, only the control port crosses).
+    set -euo pipefail
+
+    PORT="''${HERMES_BROWSER_PORT:-9222}"
+    USER_DATA_DIR="''${HERMES_BROWSER_PROFILE:-$HOME/.local/share/chromium-hermes}"
+    HERMES_HOST="''${HERMES_BROWSER_HOST:-maksym@192.168.2.205}"
+    START_URL="''${1:-about:blank}"
+
+    CHROME_PID=""
+    cleanup() {
+      if [[ -n "$CHROME_PID" ]] && kill -0 "$CHROME_PID" 2>/dev/null; then
+        kill "$CHROME_PID" 2>/dev/null || true
+      fi
+    }
+    trap cleanup EXIT INT TERM
+
+    if ${pkgs.curl}/bin/curl -s --max-time 1 "http://127.0.0.1:$PORT/json/version" >/dev/null 2>&1; then
+      ${pkgs.libnotify}/bin/notify-send "🌐 Hermes browser" "Chromium already running on :$PORT — reusing it."
+    else
+      ${pkgs.chromium}/bin/chromium \
+        --user-data-dir="$USER_DATA_DIR" \
+        --remote-debugging-port="$PORT" \
+        --remote-debugging-address=127.0.0.1 \
+        --no-first-run \
+        --no-default-browser-check \
+        "$START_URL" &
+      CHROME_PID=$!
+
+      for _ in $(seq 1 50); do
+        ${pkgs.curl}/bin/curl -s --max-time 1 "http://127.0.0.1:$PORT/json/version" >/dev/null 2>&1 && break
+        sleep 0.2
+      done
+      ${pkgs.libnotify}/bin/notify-send "🌐 Hermes browser" "Chromium up on :$PORT, opening tunnel to $HERMES_HOST…"
+    fi
+
+    # Blocks here; Ctrl+C tears down the tunnel (and the Chromium we started).
+    ${pkgs.openssh}/bin/ssh -N \
+      -o ExitOnForwardFailure=yes \
+      -o ServerAliveInterval=30 \
+      -o ServerAliveCountMax=3 \
+      -R 127.0.0.1:"$PORT":127.0.0.1:"$PORT" \
+      "$HERMES_HOST"
+  '';
 in
 {
+  xdg.desktopEntries.hermes-browser = {
+    name = "Hermes Browser";
+    genericName = "Remote Browser";
+    comment = "Start Chromium and its SSH tunnel to Hermes";
+    exec = "${pkgs.kitty}/bin/kitty --title \"Hermes Browser\" ${hermes-browser}/bin/hermes-browser";
+    icon = "chromium";
+    terminal = false;
+    categories = [ "Network" "WebBrowser" ];
+    settings.Keywords = "Hermes;Chromium;Browser;SSH;CDP;";
+  };
+
   home.packages = [
     toggle-audio
     toggle-mute
@@ -156,5 +214,6 @@ in
     dec-volume-zen
     toggle-tv
     prepare-game
+    hermes-browser
   ];
 }
