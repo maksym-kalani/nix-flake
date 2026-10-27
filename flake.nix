@@ -101,6 +101,10 @@
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
+            # NixOS injects these via autoImport/sharedModules; standalone needs them explicitly
+            inputs.stylix.homeModules.stylix
+            inputs.vicinae.homeManagerModules.default
+            ./hosts/belial/stylix-theme.nix
             ./home/maksym/belial.nix
           ];
         };
