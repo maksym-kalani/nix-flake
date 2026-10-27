@@ -224,7 +224,7 @@ pkgs.testers.runNixOSTest {
         client.fail(f"{ssh} root@${ip} true")
         # the server must offer nothing but publickey (keyboard-interactive would take the password)
         out = client.fail(f"{ssh} -o PubkeyAuthentication=no maksym@${ip} true 2>&1")
-        assert "Permission denied (publickey)." in out, out
+        assert "Permission denied (publickey)." in out, f"SSH offers more than publickey: {out.strip()!r}"
 
     with subtest("SSH login posts to ntfy"):
         aigis.wait_until_succeeds("curl -sf 'http://localhost:8081/homelab/json?poll=1&since=all' | grep -q 'ssh login'", timeout=30)
