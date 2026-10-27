@@ -193,9 +193,7 @@ in
     ];
   };
 
-  # Upstream nixos/flame (0e283f6d06) seeds as soon as the apps table exists, while flame may still
-  # hold the SQLite lock from its startup, so the seed can fail with "database is locked". Retry it.
-  # Drop this once the upstream module sets a busy timeout or retries.
+  # upstream flame-seed can hit "database is locked" while flame starts; retry it
   systemd.services.flame-seed.serviceConfig = {
     Restart = "on-failure";
     RestartSec = 5;

@@ -1,12 +1,4 @@
-# Smoke test for aigis in a VM (https://nix.dev/tutorials/nixos/integration-testing-using-virtual-machines.html).
-# Boots the production modules offline and checks that services start and answer, not that they work:
-# - Gatus's own conditions pass for every local endpoint, and a LAN client can reach each one;
-# - every *.laufin.xyz route on aigis gets an answer from its upstream (any status below 500, so a login
-#   page or a 401 passes);
-# - SSH is key-only for maksym, ntfy hears about the login, one restic backup completes;
-# - no unit is in the failed state at the end (a running but broken service is not caught).
-# See docs/aigis-vm-inventory.md.
-# Run: nix build -L .#checks.x86_64-linux.aigis-vm
+# Smoke test: boots aigis offline in a VM and checks that services start and answer, not that they work.
 {
   pkgs,
   inputs,
@@ -17,13 +9,11 @@ let
   ip = "192.168.2.50";
   prod = inputs.self.nixosConfigurations.aigis.config;
 
-  # shortcut: the voice servers download models at runtime, so they are off and their Gatus endpoints
-  # skipped; upgrade by prefetching the models (hashes in docs/aigis-vm-inventory.md).
+  # shortcut: voice servers download models at runtime, so they are off; prefetch the models to test them.
   skipped =
     lib.attrNames prod.services.wyoming.piper.servers
     ++ lib.attrNames prod.services.wyoming.faster-whisper.servers;
 
-  # Load each pinned image from the store instead of pulling it; images.nix holds the archive hashes.
   imageHashes = import ./images.nix;
   containers = lib.mapAttrs (
     name: c:
@@ -37,7 +27,7 @@ let
         imageDigest = lib.last ref;
         hash = imageHashes.${name};
         finalImageTag = "vm-test";
-        # a fixed-output path ignores imageDigest; naming it by digest makes a stale hash fail, not reuse the old image
+        # digest in the name, so a stale hash fails instead of reusing the old archive
         name = "docker-image-${name}-${lib.removePrefix "sha256:" (lib.last ref)}.tar";
       };
       pull = "never";
@@ -68,7 +58,6 @@ let
 
   caddyfile = builtins.split "tls \\{[^}]*}[^}]*}" prod.sops.templates."Caddyfile".content;
   caddyContent = lib.concatMapStrings (s: if lib.isList s then "tls internal" else s) caddyfile;
-  # Routes served by this VM: upstream on aigis.
   caddyRoutes = lib.filter (r: lib.elemAt r 1 == ip) (
     lib.filter lib.isList (
       builtins.split "@[a-z0-9-]+ host ([a-z0-9.-]+)[^}]*reverse_proxy https?://([0-9.]+):([0-9]+)" caddyContent
@@ -77,7 +66,7 @@ let
 
   ssh-keys = import "${pkgs.path}/nixos/tests/ssh-keys.nix" pkgs;
 in
-assert lib.length caddyfile == 3; # exactly one namecheap tls block replaced below
+assert lib.length caddyfile == 3; # exactly one tls block replaced
 pkgs.testers.runNixOSTest {
   name = "aigis-smoke";
   node.specialArgs = { inherit inputs outputs; };
@@ -97,7 +86,7 @@ pkgs.testers.runNixOSTest {
       virtualisation = {
         memorySize = 8192;
         cores = 4;
-        diskSize = 20480; # unpacked images plus their restic copy
+        diskSize = 20480;
         oci-containers = { inherit containers; };
       };
       services.wyoming.piper.servers = lib.mkForce { };
@@ -126,7 +115,7 @@ pkgs.testers.runNixOSTest {
             prefixLength = 24;
           }
         ];
-        # belial's subnet, on-link so the client below can also speak from 192.168.1.107
+        # on-link route to belial's subnet
         ipv4.routes = [
           {
             address = "192.168.1.0";
@@ -135,22 +124,20 @@ pkgs.testers.runNixOSTest {
         ];
       };
 
-      # shortcut: no ZFS pool, /mnt/tank lives on the VM root disk; upgrade by adding a scratch disk.
+      # shortcut: no ZFS pool, so /mnt/tank is on the VM disk.
       boot.zfs.extraPools = lib.mkForce [ ];
       systemd.tmpfiles.rules = [
-        # the immich module only fixes this dir's mode ("e"); on aigis it pre-exists on the pool
+        # the immich module doesn't create it
         "d ${immich.mediaLocation} 0700 ${immich.user} ${immich.group} -"
-        # pool datasets restic backs up and qbittorrent mounts
         "d /mnt/tank/media/ttrpgs"
         "d /mnt/tank/media/downloads"
         "d /mnt/tank/users"
         "d /mnt/incomplete"
-        # throwaway WireGuard key; the real one exists only on aigis
         "f /etc/wireguard/server.key 0600 root root - IJo86x/3mTmK+bA4yiYZwaBb2Ts8/FhmKlShbHslamM="
       ]
       ++ lib.mapAttrsToList (name: path: "L+ ${path} - - - - ${zim name}") prod.services.kiwix-serve.library;
 
-      # root too, so only AllowUsers keeps it out
+      # root gets the key too, so only AllowUsers keeps it out
       users.users.maksym.openssh.authorizedKeys.keys = [ ssh-keys.snakeOilEd25519PublicKey ];
       users.users.root.openssh.authorizedKeys.keys = [ ssh-keys.snakeOilEd25519PublicKey ];
 
@@ -178,7 +165,7 @@ pkgs.testers.runNixOSTest {
 
     endpoints = json.loads('${builtins.toJSON endpoints}')
     caddy_routes = json.loads('${builtins.toJSON caddyRoutes}')
-    # QEMU disks have no SMART; health-monitor checks the tank2 pool the VM doesn't have
+    # no SMART disks or ZFS pool in the VM
     vm_only_failures = {"smartd.service", "health-monitor.service"}
 
     start_all()
@@ -222,7 +209,6 @@ pkgs.testers.runNixOSTest {
         ssh = "ssh -o StrictHostKeyChecking=no -o BatchMode=yes"
         client.succeed(f"{ssh} maksym@${ip} true")
         client.fail(f"{ssh} root@${ip} true")
-        # the server must offer nothing but publickey (keyboard-interactive would take the password)
         out = client.fail(f"{ssh} -o PubkeyAuthentication=no maksym@${ip} true 2>&1")
         assert "Permission denied (publickey)." in out, f"SSH offers more than publickey: {out.strip()!r}"
 

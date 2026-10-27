@@ -40,7 +40,7 @@ Reusable feature modules under `home/features/` composed per host:
 
 ## Tests
 
-`tests/aigis` is a smoke test that boots the aigis configuration offline in a VM, with throwaway secrets and its pinned container images. It checks that every local service passes its Gatus health check and is reachable through the firewall, that Caddy routes answer, that SSH is key-only, that one restic backup completes, and that no unit has failed. See the header of [tests/aigis/default.nix](tests/aigis/default.nix) for what it does and does not prove.
+`tests/aigis` is a smoke test that boots the aigis configuration offline in a VM, with throwaway secrets and its pinned container images. It checks that every local service passes its Gatus health check and is reachable through the firewall, that Caddy routes answer, that SSH is key-only, that one restic backup completes, and that no unit has failed. It checks that services start and answer, not that they work correctly.
 
 ```bash
 nix build -L .#checks.x86_64-linux.aigis-vm

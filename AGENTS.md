@@ -99,6 +99,10 @@ Access stable packages via `pkgs.stable.<package>`. Custom Caddy build with name
 - Home Manager: `nix eval .#homeConfigurations.<config>.activationPackage.drvPath`
 - When practical, follow eval with the matching dry-run/build/test command. Eval is the minimum bar, not the whole test plan.
 
+### Keep comments short
+
+- Comment only what the code cannot say, usually the why, in one short line. No multi-line comments, file headers or comments that restate the code.
+
 ### Run the aigis VM test
 
 - Any change under `hosts/aigis/`, `hosts/common/` or `tests/aigis/` must pass `nix build -L .#checks.x86_64-linux.aigis-vm` before the work is called done. Report a failure with its output; do not call the work done.

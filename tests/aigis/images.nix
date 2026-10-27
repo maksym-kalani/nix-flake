@@ -1,5 +1,4 @@
-# dockerTools.pullImage hashes for the image digests pinned in hosts/aigis/services, keyed by container.
-# After bumping a digest, set its hash to lib.fakeHash and copy the "got:" hash from the failed build.
+# pullImage hashes for the pinned digests; after a bump, use lib.fakeHash and copy the "got:" hash
 {
   dns = "sha256-AqupAoEk9CZpgCXD5dq1rFC1Co+qjKI4UnSmvoZKyF8=";
   fusion = "sha256-KcPxR2wXBdSVyLBK7AR/5CXCJ2GKfU16KbM19s6dWgA=";
