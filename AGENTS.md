@@ -15,13 +15,6 @@ nix flake check --show-trace
 # Rebuild and switch to new configuration (from the repo directory)
 sudo nixos-rebuild switch --flake .#aigis
 sudo nixos-rebuild switch --flake .#belial
-
-# Shell aliases available on the system
-rebuild    # sudo nixos-rebuild switch --flake .#aigis
-sstop      # sudo systemctl stop
-sstart     # sudo systemctl start
-srestart   # sudo systemctl restart
-sstatus    # sudo systemctl status
 ```
 
 ## Architecture
@@ -96,7 +89,7 @@ Access stable packages via `pkgs.stable.<package>`. Custom Caddy build with name
 - If an issue appears to come from upstream, first check whether it is already fixed upstream.
 - Update the relevant flake input or `flake.lock` first.
 - If the fix is not in the pinned version, prefer an upstream PR commit or a commit already merged upstream before writing a local patch.
-- Only write a local patch when those options fail. Keep it minimal and put it in a separate file named `{package}-patch-{fix-reason}.nix`.
+- Only write a local patch when those options fail, and keep it minimal.
 
 ### Always validate with eval
 
@@ -105,3 +98,9 @@ Access stable packages via `pkgs.stable.<package>`. Custom Caddy build with name
 - NixOS: `nix eval .#nixosConfigurations.<host>.config.system.build.toplevel.drvPath`
 - Home Manager: `nix eval .#homeConfigurations.<config>.activationPackage.drvPath`
 - When practical, follow eval with the matching dry-run/build/test command. Eval is the minimum bar, not the whole test plan.
+
+### Run the aigis VM test
+
+- Any change under `hosts/aigis/`, `hosts/common/` or `tests/aigis/` must pass `nix build -L .#checks.x86_64-linux.aigis-vm` before the work is called done. Report a failure with its output; do not call the work done.
+- Update `tests/aigis/` in the same change when needed. A new service is usually covered automatically through its Gatus endpoint and Caddy route. A new secret needs a test value in `tests/aigis/secrets.yaml`, and a new host path needs a stand-in in the test's tmpfiles. A changed image digest needs its new hash in `tests/aigis/images.nix`.
+- Fix the config, not the test. Only weaken a check or add to its allowed-failures list when the failure comes from the VM itself, and say so in a comment.
