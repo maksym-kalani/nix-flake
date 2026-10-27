@@ -8,7 +8,7 @@
   cfg = {
     name = "qbittorrent";
 
-    image = "lscr.io/linuxserver/qbittorrent:latest";
+    image = "lscr.io/linuxserver/qbittorrent@sha256:8d48fa8c619caadfb103f04efea8747e2a2762d6c7551690919cffb987e61cee";
 
     port = {
       internal = 8082;
@@ -55,6 +55,9 @@ in {
   };
 
   networking.firewall.allowedTCPPorts = [cfg.port.external 6881];
+  networking.firewall.allowedUDPPorts = [6881];
+
+  systemd.tmpfiles.rules = ["d ${appdata}${cfg.name} :0755 :root :root -"];
 
   imports = [
     (import ../lib/monitored-app.nix { inherit lib; } {
