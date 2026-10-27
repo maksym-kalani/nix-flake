@@ -6,7 +6,7 @@ let
   cfg = {
     name = "vert";
 
-    image = "ghcr.io/vert-sh/vert:latest";
+    image = "ghcr.io/vert-sh/vert@sha256:51edb89e7c57197b0281ba8427fb27eea63730a3683b10d422061afab2708a49"; # pinned to what aigis ran on 2026-10-27
 
     port = {
       internal = 80;

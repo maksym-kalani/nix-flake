@@ -6,7 +6,7 @@
   cfg = {
     name = "fusion";
 
-    image = "ghcr.io/0x2e/fusion:latest";
+    image = "ghcr.io/0x2e/fusion@sha256:4fa7eead46976f2090cfbb7e60f29946eccf0a5979c1fc168d7a9d89648a6a9b"; # pinned to what aigis ran on 2026-10-27
 
     port = {
       internal = 8080;
@@ -46,4 +46,6 @@ in {
   };
 
   networking.firewall.allowedTCPPorts = [cfg.port.external];
+
+  systemd.tmpfiles.rules = ["d ${appdata}${cfg.name} :0755 :root :root -"];
 }

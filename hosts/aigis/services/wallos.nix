@@ -6,7 +6,7 @@
   cfg = {
     name = "wallos";
 
-    image = "bellamy/wallos:latest";
+    image = "docker.io/bellamy/wallos@sha256:8defb438c52f5c1b2555f86d4abae6a428ff4968f0959ee82b4fa387844ee273"; # pinned to what aigis ran on 2026-10-27
 
     port = {
       internal = 80;
@@ -48,4 +48,9 @@ in {
   };
 
   networking.firewall.allowedTCPPorts = [cfg.port.external];
+
+  systemd.tmpfiles.rules = [
+    "d ${appdata}${cfg.name}/db :0755 :root :root -"
+    "d ${appdata}${cfg.name}/logos :0755 :root :root -"
+  ];
 }

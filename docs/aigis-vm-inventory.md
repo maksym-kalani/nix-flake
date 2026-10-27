@@ -113,7 +113,7 @@ External hosts that Aigis proxies to or monitors (the VM needs stand-ins answeri
 
 ## Production problems found on the way
 
-1. **Containers fail on a fresh host:** `/var/lib/containers/{dns,fusion,hass-mariadb,qbittorrent,wallos/*}` are bind-mount sources that nothing creates (`statfs …: no such file or directory`). Fix: add `systemd.tmpfiles.rules = [ "d <dir> - - - -" ]` in each module.
+1. **Containers fail on a fresh host:** `/var/lib/containers/{dns,fusion,hass-mariadb,qbittorrent,wallos/*}` are bind-mount sources that nothing creates (`statfs …: no such file or directory`). Fix: add `systemd.tmpfiles.rules = [ "d <dir> :0755 :root :root -" ]` in each module (the `:` keeps existing dirs' owner and mode; plain `-` would reset them to root 0755 every boot).
 2. **Dead Caddy route:** `jellyseer.laufin.xyz` → `192.168.2.50:5055` returns 502. Jellyseerr is no longer an Aigis service.
 3. **Backup fails:** `restic-zfs-backup` lists `/var/lib/bazarr`. Bazarr was removed, so on a host without that dir, restic exits 3 and the unit fails.
 4. **Images are unpinned (`latest`):** pinning means choosing digests. Check what Aigis actually runs first (`sudo podman images --digests`), especially MariaDB: `latest` is now 13.0.2.

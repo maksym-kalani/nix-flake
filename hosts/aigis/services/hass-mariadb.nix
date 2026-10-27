@@ -5,7 +5,7 @@
   appdata = "/var/lib/containers/";
   cfg = {
     name = "hass-mariadb";
-    image = "mariadb";
+    image = "docker.io/library/mariadb@sha256:ab1c3dd381940233af12512b97d47b508fd3a0f17fbe3ba388739b7bc17cbc0b"; # pinned to what aigis ran on 2026-10-27
     port = {
       internal = 3306; # Port inside the container
       external = 3306; # Port on the host
@@ -43,4 +43,6 @@ in {
   };
 
   networking.firewall.allowedTCPPorts = [cfg.port.external];
+
+  systemd.tmpfiles.rules = ["d ${appdata}${cfg.name} :0755 :root :root -"];
 }

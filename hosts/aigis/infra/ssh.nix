@@ -5,6 +5,7 @@
     ports = [22];
     settings = {
       PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false; # otherwise PAM still takes the password
       AllowUsers = ["maksym"];
       X11Forwarding = false;
       PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"

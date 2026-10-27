@@ -5,7 +5,7 @@
   cfg = {
     name = "matrix-admin";
 
-    image = "awesometechnologies/synapse-admin";
+    image = "docker.io/awesometechnologies/synapse-admin@sha256:a1c1f4662875f51ff1ca556a9eb7c802d9bc40ef58747b9efc163b42da3ad416"; # pinned to what aigis ran on 2026-10-27
 
     port = {
       internal = 80;

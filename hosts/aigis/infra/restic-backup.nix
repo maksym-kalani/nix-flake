@@ -22,7 +22,6 @@ let
       /var/lib/private/vikunja
       /var/lib/immich
       /var/lib/caddy
-      /var/lib/bazarr
       /var/lib/postgresql
       /var/lib/private/ntfy-sh
       /var/lib/private/local-content-share
