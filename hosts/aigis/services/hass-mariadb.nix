@@ -7,8 +7,8 @@
     name = "hass-mariadb";
     image = "docker.io/library/mariadb@sha256:ab1c3dd381940233af12512b97d47b508fd3a0f17fbe3ba388739b7bc17cbc0b";
     port = {
-      internal = 3306; # Port inside the container
-      external = 3306; # Port on the host
+      internal = 3306;
+      external = 3306;
     };
     extraOptions = [];
     volumes = [
@@ -26,12 +26,10 @@ in {
     hass_mariadb_password = {};
   };
 
-  # Container definition
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
     ports = ["${toString cfg.port.external}:${toString cfg.port.internal}"];
 
-    # Optional configs
     extraOptions = cfg.extraOptions;
     volumes = cfg.volumes;
     environment = cfg.environmentVariables;

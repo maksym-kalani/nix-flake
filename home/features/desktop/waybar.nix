@@ -272,7 +272,6 @@
       @define-color on_secondary @base07;
       @define-color on_surface @base05;
 
-      /* General */
       * {
         font-family: "Inter Semibold", "JetBrainsMono Nerd Font Propo", Roboto, Helvetica, Arial, sans-serif;
         border: none;
@@ -328,7 +327,6 @@
         border-radius: 5px;
       }
 
-      /* Workspaces */
       #workspaces {
         padding: 5px 3px 5px 3px;
         min-width: 176px;
@@ -358,7 +356,6 @@
         border-radius: 15px;
       }
 
-      /* Tooltips */
       tooltip {
         background-color: alpha(@surface, 0.7);
         border-radius: 12px;
@@ -374,7 +371,6 @@
         color: @textcolor2;
       }
 
-      /* Window */
       #window {
         font-size: 14px;
         font-weight: normal;
@@ -386,7 +382,6 @@
         background-color: transparent;
       }
 
-      /* Custom Appmenu */
       #custom-appmenu {
         font-size: 24px;
         color: @textcolor1;
@@ -394,13 +389,11 @@
         padding-left: 5px;
       }
 
-      /* Custom Notification */
       #custom-notification {
         font-size: 20px;
         color: @iconcolor;
       }
 
-      /* Custom Exit */
       #custom-exit {
         font-size: 20px;
         color: @textcolor2;
@@ -410,12 +403,10 @@
         padding-top: 2px;
       }
 
-      /* Clock */
       #clock {
         color: @focuscolor;
       }
 
-      /* Pulseaudio */
       #pulseaudio {
         font-size: 14px;
         color: @textcolor2;
@@ -425,7 +416,6 @@
         color: @textcolor1;
       }
 
-      /* Bluetooth */
       #bluetooth,
       #bluetooth.on,
       #bluetooth.connected {
@@ -438,7 +428,6 @@
         color: @textcolor2;
       }
 
-      /* Mpris */
       #mpris {
         font-size: 14px;
         color: @textcolor2;
@@ -446,7 +435,6 @@
         padding-right: 4px;
       }
 
-      /* Mic & Camera indicators */
       #custom-mic.active,
       #custom-camera.active {
         background: alpha(@focuscolor, 0.3);
@@ -468,7 +456,6 @@
         margin: 5px 2px;
       }
 
-      /* Tray */
       #tray {
         padding: 0px 5px 0px 10px;
         color: @textcolor3;

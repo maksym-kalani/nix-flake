@@ -10,7 +10,6 @@
     xwayland.enable = true;
   };
 
-  # XDG Portal configuration for Hyprland
   xdg.autostart.enable = true;
   xdg.portal = {
     enable = true;

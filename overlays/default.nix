@@ -1,15 +1,8 @@
 { inputs, ... }:
 {
-  # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs { pkgs = final; };
 
-  # This one contains whatever you want to overlay
-  # You can change versions, add patches, set compilation flags, anything really.
-  # https://nixos.wiki/wiki/Overlays
   modifications = _final: prev: {
-    # example = prev.example.overrideAttrs (oldAttrs: rec {
-    # ...
-    # });
     caddy = prev.caddy.overrideAttrs (_oldAttrs: rec {
       version = "2.9.1";
       vendorHash = "sha256-qrlpuqTnFn/9oMTMovswpS1eAI7P9gvesoMpsIWKcY8=";
@@ -22,9 +15,7 @@
       doCheck = false;
     });
 
-    # nixpkgs 2.1.1867 bundles H2 1.4.200, which cannot read the database
-    # already migrated to the H2 v2 format by the previously-run upstream
-    # stable container (>= v2.3). Track upstream stable until nixpkgs catches up.
+    # nixpkgs bundles H2 1.4, which cannot read our H2 v2 database; drop once nixpkgs catches up.
     suwayomi-server = prev.suwayomi-server.overrideAttrs (_oldAttrs: rec {
       version = "2.4.2366";
       src = prev.fetchurl {
@@ -34,8 +25,29 @@
     });
   };
 
-  # Temporary Zen release pin, scoped to hosts that opt in.
-  zen-browser-release-pin = import ./zen-browser-patch-release-404.nix { inherit inputs; };
+  # Opt-in pin for https://github.com/youwen5/zen-browser-flake/issues/22; drop once upstream releases download again.
+  zen-browser-release-pin = _final: prev:
+    let
+      system = prev.stdenv.hostPlatform.system;
+      upstream = inputs.zen-browser.packages.${system};
+      sources = {
+        x86_64-linux = {
+          url = "https://github.com/zen-browser/desktop/releases/download/1.23.2b/zen.linux-x86_64.tar.xz";
+          hash = "sha256-Xmf0+ggbG0NyQ8RkRJ6hvSo7Fbb5Mkh6iqDCWqhRRgA=";
+        };
+        aarch64-linux = {
+          url = "https://github.com/zen-browser/desktop/releases/download/1.23.2b/zen.linux-aarch64.tar.xz";
+          hash = "sha256-lpcfCZwK3q5qLttOEoWW0HBt+XSsJ5tezeKqk7B2Idg=";
+        };
+      };
+      unwrapped = upstream.zen-browser-unwrapped.override (sources.${system} // {
+        version = "1.23.2b";
+        firefoxVersion = "157.0.1";
+      });
+    in
+    {
+      zen-browser = upstream.default.override { zen-browser-unwrapped = unwrapped; };
+    };
 
   stable-packages = final: _prev: {
     stable = import inputs.nixpkgs-stable {

@@ -21,7 +21,6 @@
       DNS_SERVER_DOMAIN = "aigis-dns-server";
       DNS_SERVER_ENABLE_BLOCKING = "true";
       # Bootstrap only: an existing /etc/dns config must be updated via the web UI/API.
-      # HaGeZi Pro covers ads/trackers; TIF Medium adds threat intelligence.
       DNS_SERVER_BLOCK_LIST_URLS = lib.concatStringsSep "," [
         "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro-onlydomains.txt"
         "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/tif.medium-onlydomains.txt"

@@ -9,17 +9,14 @@
       scheme = "Material Dark";
       author = "maksym";
       variant = "dark";
-      # Backgrounds
       base00 = "0f1019"; # background
       base01 = "1a1b2e"; # backgroundDark
       base02 = "292a2f"; # surfaceContainerHigh
       base03 = "45464f"; # surfaceVariant
-      # Foregrounds
       base04 = "c6c5d0"; # onSurfaceVariant
       base05 = "e3e1e9"; # foreground
-      base06 = "e3e1e9"; # foreground (same)
+      base06 = "e3e1e9"; # foreground
       base07 = "dde1ff"; # primaryFixed (lightest)
-      # Accent colors
       base08 = "ffb4ab"; # error
       base09 = "e4bad9"; # tertiary (warm pink/mauve)
       base0A = "c3c5dd"; # secondary (muted blue-gray)

@@ -82,12 +82,10 @@ stdenv.mkDerivation rec {
     cp -r usr/lib/kenku-fm $out/lib/kenku-fm
     cp -r usr/share/* $out/share/
 
-    # Wrap the binary with required environment
     makeWrapper $out/lib/kenku-fm/kenku-fm $out/bin/kenku-fm \
       --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath buildInputs}" \
       --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}"
 
-    # Fix desktop file paths
     substituteInPlace $out/share/applications/kenku-fm.desktop \
       --replace-fail "Exec=kenku-fm" "Exec=$out/bin/kenku-fm"
 

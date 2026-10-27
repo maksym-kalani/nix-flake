@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 {
-  # Core stylix settings (enable, image, polarity, fonts, cursor) are configured
-  # at the NixOS level in hosts/belial/stylix.nix and inherited automatically.
+  # Core stylix settings are inherited from hosts/belial/stylix.nix.
 
   gtk.iconTheme = {
     name = "Colloid";

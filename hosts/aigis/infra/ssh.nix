@@ -1,5 +1,4 @@
 {pkgs, ...}: {
-  # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
     ports = [22];
@@ -8,7 +7,7 @@
       KbdInteractiveAuthentication = false; # otherwise PAM still takes the password
       AllowUsers = ["maksym"];
       X11Forwarding = false;
-      PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+      PermitRootLogin = "prohibit-password";
     };
     knownHosts = {
       storagebox = {
