@@ -1,15 +1,8 @@
 { inputs, ... }:
 {
-  # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs { pkgs = final; };
 
-  # This one contains whatever you want to overlay
-  # You can change versions, add patches, set compilation flags, anything really.
-  # https://nixos.wiki/wiki/Overlays
   modifications = _final: prev: {
-    # example = prev.example.overrideAttrs (oldAttrs: rec {
-    # ...
-    # });
     caddy = prev.caddy.overrideAttrs (_oldAttrs: rec {
       version = "2.9.1";
       vendorHash = "sha256-qrlpuqTnFn/9oMTMovswpS1eAI7P9gvesoMpsIWKcY8=";
@@ -22,9 +15,7 @@
       doCheck = false;
     });
 
-    # nixpkgs 2.1.1867 bundles H2 1.4.200, which cannot read the database
-    # already migrated to the H2 v2 format by the previously-run upstream
-    # stable container (>= v2.3). Track upstream stable until nixpkgs catches up.
+    # nixpkgs bundles H2 1.4, which cannot read our H2 v2 database; drop once nixpkgs catches up.
     suwayomi-server = prev.suwayomi-server.overrideAttrs (_oldAttrs: rec {
       version = "2.4.2366";
       src = prev.fetchurl {

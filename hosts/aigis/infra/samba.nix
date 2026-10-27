@@ -3,15 +3,13 @@
   services.samba-wsdd.openFirewall = true;
   services.samba = {
     enable = true;
-    openFirewall = true; # open SMB ports if firewall is enabled
-    # Samba server settings
+    openFirewall = true;
     settings = {
       global = {
         workgroup = "WORKGROUP";
         security = "user";
         "server string" = "Aigis File Server";
-        "map to guest" = "Bad User"; # Unauthenticated users treated as guest
-        # (We will require login, so guest access is disabled on shares)
+        "map to guest" = "Bad User"; # shares set valid users, so guests still get nothing
       };
       "media" = {
         path = "/mnt/tank/media";

@@ -8,13 +8,11 @@
   };
 
   home.shellAliases = {
-    # General
     c = "clear";
     shutdown = "systemctl poweroff";
     v = "$EDITOR";
     vim = "$EDITOR";
 
-    # Git
     g = "git";
     gs = "git status";
     gd = "git diff";
@@ -22,7 +20,6 @@
     gp = "git push";
     gl = "git log --oneline";
 
-    # System
     update-grub = "sudo grub-mkconfig -o /boot/grub/grub.cfg";
   };
 

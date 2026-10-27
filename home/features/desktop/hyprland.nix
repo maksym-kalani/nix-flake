@@ -211,7 +211,6 @@ in
         };
       };
 
-      # Bezier curve definitions (separate from config block)
       curve = [
         {
           _args = [
@@ -467,7 +466,6 @@ in
         }
       ];
 
-      # Animation definitions (separate from config block)
       animation = [
         {
           leaf = "windows";
@@ -544,13 +542,11 @@ in
       ];
 
       bind = [
-        # Applications
         (bind' "SUPER + RETURN" (dsp.exec "kitty"))
         (bind' "SUPER + B" (dsp.exec "zen"))
         (bind' "SUPER + E" (dsp.exec "nautilus"))
         (bind' "SUPER + A" (dsp.exec "vicinae toggle"))
 
-        # Windows
         (bind' "SUPER + Q" dsp.close)
         (bind' "SUPER + SHIFT + Q" (dsp.exec "hyprctl activewindow | grep pid | tr -d 'pid:' | xargs kill"))
         (bind' "SUPER + F" (dsp.fullscreen 0))
@@ -561,61 +557,50 @@ in
         (bind' "SUPER + G" dsp.group.toggle)
         (bind' "SUPER + K" (dsp.layout "swapsplit"))
 
-        # Focus
         (bind' "SUPER + left" (dsp.focus "left"))
         (bind' "SUPER + right" (dsp.focus "right"))
         (bind' "SUPER + up" (dsp.focus "up"))
         (bind' "SUPER + down" (dsp.focus "down"))
 
-        # Swap windows
         (bind' "SUPER + ALT + left" (dsp.swap "left"))
         (bind' "SUPER + ALT + right" (dsp.swap "right"))
         (bind' "SUPER + ALT + up" (dsp.swap "up"))
         (bind' "SUPER + ALT + down" (dsp.swap "down"))
 
-        # Resize
         (bind' "SUPER + SHIFT + right" (dsp.raw "resizeactive 100 0"))
         (bind' "SUPER + SHIFT + left" (dsp.raw "resizeactive -100 0"))
         (bind' "SUPER + SHIFT + down" (dsp.raw "resizeactive 0 100"))
         (bind' "SUPER + SHIFT + up" (dsp.raw "resizeactive 0 -100"))
 
-        # Actions
         (bind' "SUPER + CTRL + R" (dsp.exec "hyprctl reload"))
         (bind' "SUPER + CTRL + Q" (dsp.exec "wlogout-launcher"))
         (bind' "SUPER + CTRL + L" (dsp.exec "loginctl terminate-session $XDG_SESSION_ID"))
         (bind' "SUPER + V" (dsp.exec "vicinae deeplink vicinae://launch/clipboard/history"))
         (bind' "SUPER + SHIFT + B" (dsp.exec "pkill waybar || waybar"))
 
-        # Screenshot
         (bind' "PRINT" (raw ''hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | wl-copy")''))
         (bind' "SUPER + PRINT" (raw ''hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | satty --filename -")''))
         (bind' "SUPER + SHIFT + PRINT" (
           raw ''hl.dsp.exec_cmd("grim -g \"$(slurp)\" ~/Pictures/Screenshots/$(date +%Y%m%d_%H%M%S).png")''
         ))
 
-        # Special workspace
         (bind' "SUPER + TAB" dsp.toggleSpecial)
 
-        # Workspace navigation
         (bind' "SUPER + Tab" (dsp.focusWorkspace "e+1"))
         (bind' "SUPER + SHIFT + Tab" (dsp.focusWorkspace "e-1"))
         (bind' "SUPER + mouse_down" (dsp.focusWorkspace "e+1"))
         (bind' "SUPER + mouse_up" (dsp.focusWorkspace "e-1"))
         (bind' "SUPER + CTRL + down" (dsp.focusWorkspace "empty"))
 
-        # Zoom
         (bind' "SUPER + SHIFT + Z" (dsp.exec "hyprctl keyword cursor:zoom_factor 1"))
 
-        # Custom applications
         (bind' "SUPER + D" (dsp.exec "vesktop"))
         (bind' "SUPER + L" (dsp.exec "Telegram"))
         (bind' "SUPER + S" (dsp.exec "steam"))
 
-        # Group navigation
         (bind' "SUPER + CTRL + code:113" dsp.group.next)
         (bind' "SUPER + CTRL + code:114" dsp.group.prev)
 
-        # Fn keys
         (bind' "XF86MonBrightnessUp" (dsp.exec "brightnessctl -q s +10%"))
         (bind' "XF86MonBrightnessDown" (dsp.exec "brightnessctl -q s 10%-"))
         (bind' "XF86AudioMute" (dsp.exec "pactl set-sink-mute @DEFAULT_SINK@ toggle"))
@@ -625,7 +610,7 @@ in
         (bind' "XF86AudioPrev" (dsp.exec "playerctl previous"))
         (bind' "XF86AudioMicMute" (dsp.exec "pactl set-source-mute @DEFAULT_SOURCE@ toggle"))
 
-        # Custom scripts (macro keys)
+        # Macro keys
         (bind' "code:201" (dsp.exec "toggle-audio"))
         (bind' "code:202" (dsp.exec "toggle-mute"))
         (bind' "code:197" (dsp.exec "toggle-mute-zen"))
@@ -634,7 +619,6 @@ in
         (bind' "code:192" (dsp.exec "prepare-game"))
         (bind' "code:193" (dsp.exec "toggle-tv"))
 
-        # Volume (repeating)
         (bindOpts' "XF86AudioRaiseVolume" (dsp.exec "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+") {
           repeating = true;
         })
@@ -642,11 +626,9 @@ in
           repeating = true;
         })
 
-        # Cycle windows (repeating)
         (bindOpts' "ALT + Tab" (raw "hl.dsp.window.cycle_next()") { repeating = true; })
         (bindOpts' "ALT + Tab" (raw "hl.dsp.window.bring_to_top()") { repeating = true; })
 
-        # Mouse move/resize
         (bindOpts' "SUPER + mouse:272" dsp.drag { mouse = true; })
         (bindOpts' "SUPER + mouse:273" dsp.resize { mouse = true; })
       ]
@@ -692,7 +674,6 @@ in
       ];
 
       window_rule = [
-        # Pavucontrol
         {
           match.class = "(.*org.pulseaudio.pavucontrol.*)";
           float = true;
@@ -708,7 +689,6 @@ in
           animation = "slide top";
         }
 
-        # Satty
         {
           match.class = "(.*satty.*)";
           float = true;
@@ -720,7 +700,6 @@ in
           size = "900 700";
         }
 
-        # Blueman Manager
         {
           match.title = "(Bluetooth Devices)";
           float = true;
@@ -735,7 +714,6 @@ in
           animation = "slide top";
         }
 
-        # nwg-look
         {
           match.class = "(nwg-look)";
           float = true;
@@ -746,7 +724,6 @@ in
           size = "700 600";
         }
 
-        # nwg-displays
         {
           match.class = "(nwg-displays)";
           float = true;
@@ -757,7 +734,6 @@ in
           size = "900 600";
         }
 
-        # Gnome Calculator
         {
           match.class = "(org.gnome.Calculator)";
           float = true;
@@ -768,7 +744,6 @@ in
           size = "700 600";
         }
 
-        # Hyprland Share Picker
         {
           match.class = "(hyprland-share-picker)";
           float = true;
@@ -780,7 +755,6 @@ in
           size = "600 400";
         }
 
-        # nm-connection-editor
         {
           match.class = "(nm-connection-editor)";
           float = true;
@@ -795,7 +769,6 @@ in
           animation = "slide top";
         }
 
-        # Picture-in-Picture
         {
           match.title = "(Picture-in-Picture)";
           float = true;
@@ -803,7 +776,6 @@ in
           pin = true;
         }
 
-        # Steam
         {
           match.class = "^(steam)$";
           float = true;
@@ -830,19 +802,16 @@ in
           fullscreen = true;
         }
 
-        # Vesktop
         {
           match.class = "(vesktop)";
           opaque = true;
         }
 
-        # Bitwarden
         {
           match.title = ".*Bitwarden Password Manager.*";
           float = true;
         }
 
-        # Calendar
         {
           match.class = "(org.gnome.Calendar)";
           float = true;
@@ -875,22 +844,17 @@ in
   };
 
   home.packages = with pkgs; [
-    # === Hyprland ecosystem ===
     swaybg
     xdg-desktop-portal-hyprland
 
-    # === Notifications ===
     swaynotificationcenter
     libnotify
 
-    # === Clipboard ===
     cliphist
     wl-clipboard
 
-    # === Authentication ===
     polkit_gnome
 
-    # === System controls ===
     brightnessctl
     playerctl
     wireplumber
@@ -898,30 +862,25 @@ in
     pavucontrol
     psmisc
 
-    # === Screenshots ===
     grim
     slurp
     swappy
     satty
 
-    # === Wallpaper ===
     waypaper
 
-    # === Settings ===
     nwg-look
     nwg-displays
 
-    # === Waybar ===
     waybar
     font-awesome
 
-    # === Qt theming - runtime plugins (stylix generates the Base16Kvantum theme) ===
+    # Qt runtime plugins; stylix generates the Kvantum theme
     libsForQt5.qt5ct
     kdePackages.qt6ct
     libsForQt5.qtstyleplugin-kvantum
     kdePackages.qtstyleplugin-kvantum
 
-    # === Fonts ===
     fira
     inter
     fira-code

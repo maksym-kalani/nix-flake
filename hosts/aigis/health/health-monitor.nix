@@ -10,7 +10,6 @@ let
     export LC_ALL=C
     export LANG=C
 
-    # Configuration
     NTFY_URL="http://localhost:8081/homelab"
     POOL_NAME="tank2"
     ALERT_THRESHOLD_LOAD=10
@@ -34,7 +33,6 @@ let
            "$NTFY_URL" 2>/dev/null
     }
 
-    # Check if a ZFS scrub is currently running
     is_scrub_running() {
       zpool status "$POOL_NAME" 2>/dev/null | grep -q "scrub in progress"
     }
@@ -75,7 +73,7 @@ let
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
 
-    # 1. Load Average (skip during scrub — scrubs cause high load)
+    # scrubs cause high load
     echo "--- Load Average ---"
     LOAD_1MIN=$(uptime | awk -F'load average:' '{print $2}' | awk -F',' '{print $1}' | tr -d ' ')
     LOAD_5MIN=$(uptime | awk -F'load average:' '{print $2}' | awk -F',' '{print $2}' | tr -d ' ')
@@ -92,7 +90,7 @@ let
     echo "Load (15min): $LOAD_15MIN"
     echo ""
 
-    # 2. Stuck Processes (skip during scrub — scrubs cause D-state processes)
+    # scrubs leave processes in D state
     echo "--- Stuck Processes ---"
     STUCK_COUNT=$(ps aux | awk '$8 ~ /D/' | wc -l)
     if [ "$SCRUB_RUNNING" = false ]; then
@@ -105,7 +103,6 @@ let
     fi
     echo ""
 
-    # 3. ZFS Pool Health (always check)
     echo "--- ZFS Pool Health ---"
     POOL_HEALTH=$(zpool list -Ho health "$POOL_NAME" 2>/dev/null)
     if [ "$POOL_HEALTH" != "ONLINE" ]; then
@@ -124,7 +121,6 @@ let
     fi
     echo ""
 
-    # 4. Fragmentation (always check)
     echo "--- Fragmentation ---"
     FRAG=$(zpool list -Ho frag "$POOL_NAME" | tr -d '%')
     if ! check_metric "Fragmentation" "''${FRAG}%" "$ALERT_THRESHOLD_FRAG" "greater"; then
@@ -132,7 +128,6 @@ let
     fi
     echo ""
 
-    # 5. Memory Usage (always check)
     echo "--- Memory ---"
     MEM_TOTAL=$(free -h | grep Mem | awk '{print $2}')
     MEM_USED=$(free -h | grep Mem | awk '{print $3}')
@@ -140,7 +135,6 @@ let
     echo "Memory: $MEM_USED / $MEM_TOTAL (''${MEM_PERCENT}%)"
     echo ""
 
-    # 6. ARC Statistics (always check)
     echo "--- ZFS ARC ---"
     ARC_HITS=$(grep "^hits " /proc/spl/kstat/zfs/arcstats | awk '{print $3}')
     ARC_MISSES=$(grep "^misses " /proc/spl/kstat/zfs/arcstats | awk '{print $3}')
@@ -153,7 +147,7 @@ let
     fi
     echo ""
 
-    # 7. Disk I/O Statistics (skip during scrub — scrubs saturate disks)
+    # scrubs saturate disks
     echo "--- Disk I/O ---"
     if [ "$SCRUB_RUNNING" = false ]; then
       IOSTAT_OUTPUT=$(iostat -x sda sdb 1 2 2>/dev/null)
@@ -181,7 +175,6 @@ let
     fi
     echo ""
 
-    # 8. I/O Wait (skip during scrub)
     echo "--- CPU I/O Wait ---"
     if [ "$SCRUB_RUNNING" = false ]; then
       IOWAIT_RAW=$(iostat -c 1 2 2>/dev/null | awk '/^ /{val=$4} END{print val}')
@@ -194,13 +187,11 @@ let
     fi
     echo ""
 
-    # 9. Uptime
     echo "--- System Info ---"
     UPTIME=$(uptime -p 2>/dev/null || true)
     echo "Uptime: ''${UPTIME#up }"
     echo ""
 
-    # Summary and Alerts
     echo "==================================="
     if [ ''${#ALERTS[@]} -eq 0 ]; then
       echo "ALL CHECKS PASSED"

@@ -1,6 +1,4 @@
-# Temporary pin for https://github.com/youwen5/zen-browser-flake/issues/22.
-# Keep the release URL, hash and Firefox wrapper ABI together until the
-# upstream input supplies a downloadable release and Belial builds without it.
+# Temporary pin for https://github.com/youwen5/zen-browser-flake/issues/22; drop once upstream releases download again.
 { inputs }:
 _final: prev:
 let

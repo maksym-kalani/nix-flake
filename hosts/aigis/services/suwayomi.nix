@@ -14,9 +14,7 @@ in {
   services.suwayomi-server = {
     enable = true;
     openFirewall = true;
-    # dataDir left at default /var/lib/suwayomi-server;
-    # data migrated from /var/lib/containers/tachidesk
-    # (see docs/tachidesk-suwayomi-migration.md)
+    # data migrated from /var/lib/containers/tachidesk into the default dataDir
 
     settings.server = {
       ip = "0.0.0.0";

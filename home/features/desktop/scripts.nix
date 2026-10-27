@@ -1,8 +1,6 @@
-# Custom scripts for desktop environment
 { pkgs, config, ... }:
 let
   toggle-audio = pkgs.writeShellScriptBin "toggle-audio" ''
-    # toggle-audio — cycle through all sinks, move streams, and notify
     mapfile -t sinks < <(${pkgs.pulseaudio}/bin/pactl list short sinks | ${pkgs.gawk}/bin/awk '{print $2}')
     [ "''${#sinks[@]}" -gt 1 ] || exit 0
     current=$(${pkgs.pulseaudio}/bin/pactl info | ${pkgs.gawk}/bin/awk -F': ' '/Default Sink/ {print $2}')
@@ -19,7 +17,6 @@ let
   '';
 
   toggle-mute = pkgs.writeShellScriptBin "toggle-mute" ''
-    # toggle-mute — toggle default source mute and notify
     default_src=$(${pkgs.pulseaudio}/bin/pactl get-default-source)
     ${pkgs.pulseaudio}/bin/pactl set-source-mute "$default_src" toggle
     state=$(${pkgs.pulseaudio}/bin/pactl get-source-mute @DEFAULT_SOURCE@ | ${pkgs.gawk}/bin/awk '{print $2}')
@@ -31,7 +28,6 @@ let
   '';
 
   toggle-mute-zen = pkgs.writeShellScriptBin "toggle-mute-zen" ''
-    # toggle-mute-zen — find the Zen audio stream and toggle its mute state
     zen_id=$(${pkgs.pulseaudio}/bin/pactl list sink-inputs \
       | ${pkgs.gawk}/bin/awk '
           /^Sink Input #[0-9]+/ { id = $3 }
@@ -47,7 +43,6 @@ let
   '';
 
   inc-volume-zen = pkgs.writeShellScriptBin "inc-volume-zen" ''
-    # inc-volume-zen — increase Zen browser volume
     zen_id=$(${pkgs.pulseaudio}/bin/pactl list sink-inputs \
       | ${pkgs.gawk}/bin/awk '
           /^Sink Input #[0-9]+/ { id = $3 }
@@ -61,7 +56,6 @@ let
   '';
 
   dec-volume-zen = pkgs.writeShellScriptBin "dec-volume-zen" ''
-    # dec-volume-zen — decrease Zen browser volume
     zen_id=$(${pkgs.pulseaudio}/bin/pactl list sink-inputs \
       | ${pkgs.gawk}/bin/awk '
           /^Sink Input #[0-9]+/ { id = $3 }
@@ -75,7 +69,6 @@ let
   '';
 
   toggle-tv = pkgs.writeShellScriptBin "toggle-tv" ''
-    # toggle-tv — toggle HDMI-A-1 display + audio sink
     set -euo pipefail
 
     MON="HDMI-A-1"
@@ -136,7 +129,6 @@ let
   '';
 
   prepare-game = pkgs.writeShellScriptBin "prepare-game" ''
-    # prepare-game — spawn and arrange gaming layout
     hyprctl dispatch workspace number 1
     vesktop &
     zen-browser --new-instance https://kavita.laufin.xyz/home &
@@ -148,9 +140,7 @@ let
   '';
 
   hermes-browser = pkgs.writeShellScriptBin "hermes-browser" ''
-    # hermes-browser — one-shot: launch a dedicated debuggable Chromium profile
-    # on belial and reverse-tunnel its CDP port to the Hermes server, so Hermes
-    # can drive this browser (logins stay local, only the control port crosses).
+    # Reverse-tunnels this Chromium's CDP port to Hermes so it can drive it while logins stay local.
     set -euo pipefail
 
     PORT="''${HERMES_BROWSER_PORT:-9222}"
