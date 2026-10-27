@@ -1,16 +1,18 @@
 {
   ...
-}: let
+}:
+let
   name = "flaresolverr";
   port = 8191;
   ip = "192.168.2.50";
-in {
+in
+{
   services.flaresolverr = {
     enable = true;
     inherit port;
   };
 
-  networking.firewall.allowedTCPPorts = [port];
+  networking.firewall.allowedTCPPorts = [ port ];
 
   services.gatus.settings.endpoints = [
     {

@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   name = "suwayomi";
   port = 4568;
-in {
+in
+{
   # Preserve the served WebUI copy, including lazily loaded JavaScript modules.
   systemd.tmpfiles.rules = [
     "x /tmp/Tachidesk - - - - -"
@@ -21,7 +23,7 @@ in {
       inherit port;
 
       downloadAsCbz = true;
-      extensionRepos = [];
+      extensionRepos = [ ];
 
       # Carried over from the previous container's server.conf
       extensionStores = [

@@ -3,7 +3,8 @@
   inputs,
   outputs,
   ...
-}: {
+}:
+{
   imports = [
     ./users
     ./secrets.nix
@@ -11,7 +12,7 @@
   ];
   home-manager = {
     useUserPackages = true;
-    extraSpecialArgs = {inherit inputs outputs;};
+    extraSpecialArgs = { inherit inputs outputs; };
     backupFileExtension = "bak";
   };
   nixpkgs = {
@@ -35,16 +36,16 @@
         "root"
         "maksym"
       ];
-      nix-path = ["/etc/nix/path"];
+      nix-path = [ "/etc/nix/path" ];
     };
     gc = {
       automatic = true;
       options = "--delete-older-than 30d";
     };
     optimise.automatic = true;
-    registry =
-      (lib.mapAttrs (_: flake: {inherit flake;}))
-      ((lib.filterAttrs (_: lib.isType "flake")) inputs);
+    registry = (lib.mapAttrs (_: flake: { inherit flake; })) (
+      (lib.filterAttrs (_: lib.isType "flake")) inputs
+    );
   };
 
   environment.interactiveShellInit = ''

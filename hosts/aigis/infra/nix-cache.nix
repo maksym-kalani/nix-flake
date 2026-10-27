@@ -1,11 +1,13 @@
-{config, ...}: let
+{ config, ... }:
+let
   ip = "192.168.2.50";
   port = 5757;
   # bindAddress is not an ACL: Belial sits on another routed subnet, so only allow it explicitly.
-  allowedSources = ["192.168.1.107"]; # belial
-in {
+  allowedSources = [ "192.168.1.107" ]; # belial
+in
+{
   # Read by systemd LoadCredential as root, so the default root-only secret is fine.
-  sops.secrets.nix_cache_private_key = {};
+  sops.secrets.nix_cache_private_key = { };
 
   services.nix-serve = {
     enable = true;
@@ -15,10 +17,11 @@ in {
     secretKeyFile = config.sops.secrets.nix_cache_private_key.path;
   };
 
-  networking.firewall.extraCommands = builtins.concatStringsSep "\n" (map (src: ''
+  networking.firewall.extraCommands = builtins.concatStringsSep "\n" (
+    map (src: ''
       iptables -A nixos-fw -p tcp -s ${src} --dport ${toString port} -j nixos-fw-accept
-    '')
-    allowedSources);
+    '') allowedSources
+  );
 
   # "/" is not served by nix-serve; probe the cache metadata endpoint instead.
   services.gatus.settings.endpoints = [
@@ -26,7 +29,7 @@ in {
       name = "nix-cache";
       url = "http://${ip}:${toString port}/nix-cache-info";
       interval = "1m";
-      conditions = ["[STATUS] == 200"];
+      conditions = [ "[STATUS] == 200" ];
       alerts = [
         {
           type = "ntfy";

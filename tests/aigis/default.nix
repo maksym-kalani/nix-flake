@@ -98,7 +98,9 @@ pkgs.testers.runNixOSTest {
         templates."Caddyfile".content = lib.mkForce caddyContent;
       };
       system.activationScripts = {
-        aigisTestAgeKey = lib.stringAfter [ "specialfs" ] "install -m 600 ${./age-key.txt} /run/aigis-test-age-key";
+        aigisTestAgeKey = lib.stringAfter [
+          "specialfs"
+        ] "install -m 600 ${./age-key.txt} /run/aigis-test-age-key";
         setupSecrets.deps = [ "aigisTestAgeKey" ];
         setupSecretsForUsers.deps = [ "aigisTestAgeKey" ];
       };
@@ -134,7 +136,9 @@ pkgs.testers.runNixOSTest {
         "d /mnt/incomplete"
         "f /etc/wireguard/server.key 0600 root root - IJo86x/3mTmK+bA4yiYZwaBb2Ts8/FhmKlShbHslamM="
       ]
-      ++ lib.mapAttrsToList (name: path: "L+ ${path} - - - - ${zim name}") prod.services.kiwix-serve.library;
+      ++ lib.mapAttrsToList (
+        name: path: "L+ ${path} - - - - ${zim name}"
+      ) prod.services.kiwix-serve.library;
 
       # root gets the key too, so only AllowUsers keeps it out
       users.users.maksym.openssh.authorizedKeys.keys = [ ssh-keys.snakeOilEd25519PublicKey ];

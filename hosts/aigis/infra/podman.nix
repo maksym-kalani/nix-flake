@@ -1,7 +1,8 @@
 {
   pkgs,
   ...
-}: let
+}:
+let
   podman-update-all = pkgs.writeShellScriptBin "podman-update-all" ''
     set -euo pipefail
 
@@ -13,9 +14,10 @@
           sudo podman pull "$image" && sudo systemctl restart "$unit"
         done
   '';
-in {
+in
+{
   virtualisation = {
-    containers.registries.settings.unqualified-search-registries = ["docker.io"];
+    containers.registries.settings.unqualified-search-registries = [ "docker.io" ];
 
     podman = {
       enable = true;

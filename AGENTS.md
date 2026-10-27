@@ -9,6 +9,9 @@ This is a NixOS Flake configuration repository managing multiple hosts with Home
 ## Common Commands
 
 ```bash
+# Format all Nix files (nixfmt via nixfmt-tree)
+nix fmt
+
 # Validate the flake configuration
 nix flake check --show-trace
 
@@ -98,6 +101,11 @@ Access stable packages via `pkgs.stable.<package>`. Custom Caddy build with name
 - NixOS: `nix eval .#nixosConfigurations.<host>.config.system.build.toplevel.drvPath`
 - Home Manager: `nix eval .#homeConfigurations.<config>.activationPackage.drvPath`
 - When practical, follow eval with the matching dry-run/build/test command. Eval is the minimum bar, not the whole test plan.
+
+### Format with nixfmt
+
+- All Nix code follows nixfmt (RFC 166) style. Write new code in that style; do not use alejandra or other formatters.
+- Run `nix fmt` after every Nix change and include its result in the same change. `nix fmt -- --ci` must report 0 changed files before the work is called done.
 
 ### Keep comments short
 

@@ -1,6 +1,7 @@
 {
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
   ];
@@ -9,7 +10,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostId = "f6d2860c";
-  networking.hostName = "aigis"; 
+  networking.hostName = "aigis";
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Kyiv";

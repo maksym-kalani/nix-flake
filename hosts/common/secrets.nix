@@ -1,6 +1,7 @@
 {
   ...
-}: {
+}:
+{
   # Global sops-nix settings only. Declare each secret in the module that uses it.
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;

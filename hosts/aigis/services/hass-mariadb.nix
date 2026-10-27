@@ -1,7 +1,8 @@
 {
   config,
   ...
-}: let
+}:
+let
   appdata = "/var/lib/containers/";
   cfg = {
     name = "hass-mariadb";
@@ -10,7 +11,7 @@
       internal = 3306;
       external = 3306;
     };
-    extraOptions = [];
+    extraOptions = [ ];
     volumes = [
       "${appdata}${cfg.name}:/var/lib/mysql"
     ];
@@ -20,15 +21,16 @@
     };
     autoStart = true;
   };
-in {
+in
+{
   sops.secrets = {
-    hass_mariadb_root_password = {};
-    hass_mariadb_password = {};
+    hass_mariadb_root_password = { };
+    hass_mariadb_password = { };
   };
 
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
-    ports = ["${toString cfg.port.external}:${toString cfg.port.internal}"];
+    ports = [ "${toString cfg.port.external}:${toString cfg.port.internal}" ];
 
     extraOptions = cfg.extraOptions;
     volumes = cfg.volumes;
@@ -40,7 +42,7 @@ in {
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [cfg.port.external];
+  networking.firewall.allowedTCPPorts = [ cfg.port.external ];
 
-  systemd.tmpfiles.rules = ["d ${appdata}${cfg.name} :0755 :root :root -"];
+  systemd.tmpfiles.rules = [ "d ${appdata}${cfg.name} :0755 :root :root -" ];
 }
