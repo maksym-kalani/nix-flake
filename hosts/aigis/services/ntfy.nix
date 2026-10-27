@@ -28,10 +28,11 @@ in {
   services.gatus.settings.endpoints = [
     {
       name = name;
-      url = "http://${ip}:${toString port}";
+      url = "http://${ip}:${toString port}/v1/health";
       interval = "1m";
       conditions = [
         "[STATUS] == 200"
+        "[BODY].healthy == true"
       ];
     }
   ];

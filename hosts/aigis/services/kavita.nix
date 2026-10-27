@@ -26,6 +26,7 @@ in
       url = "kavita.laufin.xyz";
       icon = "book-open";
       inherit port;
+      healthPath = "/api/health";
       gatusName = name;
     })
   ];

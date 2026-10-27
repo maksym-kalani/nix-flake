@@ -1,21 +1,40 @@
-{ pkgs, ... }:
+{
+  lib,
+  pkgs,
+  ...
+}:
+let
+  nixSkills = pkgs.fetchFromGitHub {
+    owner = "olafkfreund";
+    repo = "nix-skills";
+    rev = "f5c8e8b3b3255e323e5b84192d0b6ed2e79ef4f4";
+    hash = "sha256-kpfzu06HYAMP/pmu3CRPQb+skIjZGByxvaUy7F08axw=";
+  };
+  iHaveAdhd = pkgs.fetchFromGitHub {
+    owner = "ayghri";
+    repo = "i-have-adhd";
+    rev = "1ecea1993b7fce257ffbd686c070948b5e07eda6";
+    hash = "sha256-GTqrnZxQvzo/ogAuUrffkOaMK1BYm/4rAZsnfmDt7DU=";
+  };
+  ponytail = pkgs.fetchzip {
+    url = "https://registry.npmjs.org/@dietrichgebert/ponytail/-/ponytail-5.3.2.tgz";
+    hash = "sha256-hx8sfsn5sHop9L3IgtUfL2ylBgE5gfgQi96wmvCfMnY=";
+  };
+
+  skillsFrom =
+    dir:
+    lib.mapAttrs (name: _: "${dir}/${name}") (
+      lib.filterAttrs (_: type: type == "directory") (builtins.readDir dir)
+    );
+in
 {
   programs.claude-code = {
     enable = true;
 
-    plugins = {
-      ecc = pkgs.fetchFromGitHub {
-        owner = "affaan-m";
-        repo = "ECC";
-        rev = "1e8c7e7994223e0ff337d1626cd08e04a1ae67ed";
-        sha256 = "0fpj9rb8yhmqqfnz9qan6p2hxdg3rmx1ja3sy8pxv63c5bfi7icr";
-      };
-      dotnet-skills = pkgs.fetchFromGitHub {
-        owner = "Aaronontheweb";
-        repo = "dotnet-skills";
-        rev = "316756fb309b9ee42d86d5db0d70504d62f3b0c3";
-        sha256 = "00vgspf1p7kl5wp5jbk014kcakhm1ykibihvg7l5wy1bps1cligh";
-      };
-    };
+    skills =
+      (skillsFrom ../pi-coding-agent/skills)
+      // (skillsFrom "${nixSkills}/skills")
+      // (skillsFrom "${iHaveAdhd}/skills")
+      // (skillsFrom "${ponytail}/skills");
   };
 }

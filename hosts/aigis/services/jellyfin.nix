@@ -16,6 +16,8 @@ in {
       url = "jellyfin.laufin.xyz";
       icon = "television";
       inherit port;
+      healthPath = "/health";
+      healthConditions = [ "[BODY] == Healthy" ];
       gatusName = name;
     })
   ];

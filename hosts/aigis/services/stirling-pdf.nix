@@ -28,6 +28,8 @@ in
       url = "stirling-pdf.laufin.xyz";
       icon = "file-pdf-box";
       inherit port;
+      healthPath = "/api/v1/info/status";
+      healthConditions = [ "[BODY].status == UP" ];
       gatusName = name;
     })
   ];

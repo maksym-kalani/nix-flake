@@ -37,6 +37,8 @@ in {
       url = "karakeep.laufin.xyz";
       icon = "bookmark-check-outline";
       inherit port;
+      healthPath = "/api/health";
+      healthConditions = [ "[BODY].status == ok" ];
       gatusName = name;
     })
   ];

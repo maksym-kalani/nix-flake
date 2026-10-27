@@ -15,10 +15,11 @@ in {
   services.gatus.settings.endpoints = [
     {
       name = name;
-      url = "http://${ip}:${toString port}";
+      url = "http://${ip}:${toString port}/health";
       interval = "1m";
       conditions = [
         "[STATUS] == 200"
+        "[BODY].status == ok"
       ];
       alerts = [
         {

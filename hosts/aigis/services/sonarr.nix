@@ -19,6 +19,8 @@ in
       url = "sonarr.laufin.xyz";
       icon = "alpha-s-box-outline";
       inherit port;
+      healthPath = "/ping";
+      healthConditions = [ "[BODY].status == OK" ];
       gatusName = name;
     })
   ];
