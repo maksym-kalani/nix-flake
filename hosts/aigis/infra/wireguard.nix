@@ -1,6 +1,7 @@
 {
   ...
-}: let
+}:
+let
   wireguardConfig = {
     serverPrivateKeyFile = "/etc/wireguard/server.key";
     serverAddress = "10.0.0.1/24";
@@ -28,26 +29,27 @@
     address = "10.0.0.4/32";
     keepAliveSeconds = 25;
   };
-in {
+in
+{
   networking.wireguard.interfaces.wg0 = {
-    ips = [wireguardConfig.serverAddress];
+    ips = [ wireguardConfig.serverAddress ];
     listenPort = wireguardConfig.listenPort;
     privateKeyFile = wireguardConfig.serverPrivateKeyFile;
 
     peers = [
       {
         publicKey = phoneClient.publicKey;
-        allowedIPs = [phoneClient.address];
+        allowedIPs = [ phoneClient.address ];
         persistentKeepalive = phoneClient.keepAliveSeconds;
       }
       {
         publicKey = eklesaPhoneClient.publicKey;
-        allowedIPs = [eklesaPhoneClient.address];
+        allowedIPs = [ eklesaPhoneClient.address ];
         persistentKeepalive = eklesaPhoneClient.keepAliveSeconds;
       }
       {
         publicKey = tabletClient.publicKey;
-        allowedIPs = [tabletClient.address];
+        allowedIPs = [ tabletClient.address ];
         persistentKeepalive = tabletClient.keepAliveSeconds;
       }
     ];
@@ -64,20 +66,20 @@ in {
 
   networking.nat = {
     enable = true;
-    internalInterfaces = ["wg0"];
+    internalInterfaces = [ "wg0" ];
     externalInterface = networkConfig.externalInterface;
   };
 
   networking.firewall = {
     enable = true;
-    allowedUDPPorts = [wireguardConfig.listenPort];
+    allowedUDPPorts = [ wireguardConfig.listenPort ];
 
     interfaces."wg0" = {
-      allowedTCPPortRanges = [];
-      allowedUDPPortRanges = [];
+      allowedTCPPortRanges = [ ];
+      allowedUDPPortRanges = [ ];
     };
 
-    trustedInterfaces = ["wg0"];
+    trustedInterfaces = [ "wg0" ];
 
     extraCommands = ''
       iptables -I FORWARD 1 -i wg0 -o ${networkConfig.externalInterface} -j ACCEPT

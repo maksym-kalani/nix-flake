@@ -14,7 +14,12 @@ in
     language = "en";
     device = "cpu";
     beamSize = 1;
-    extraArgs = [ "--compute-type" "int8" "--cpu-threads" "6" ]; # there is no "small-int8" model id
+    extraArgs = [
+      "--compute-type"
+      "int8"
+      "--cpu-threads"
+      "6"
+    ]; # there is no "small-int8" model id
     zeroconf.enable = false;
   };
 

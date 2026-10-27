@@ -4,5 +4,5 @@
     ./maksym.nix
   ];
 
-  users.groups.tankusers = {};
+  users.groups.tankusers = { };
 }
