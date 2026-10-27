@@ -8,7 +8,7 @@
   cfg = {
     name = "qbittorrent";
 
-    image = "lscr.io/linuxserver/qbittorrent@sha256:8d48fa8c619caadfb103f04efea8747e2a2762d6c7551690919cffb987e61cee"; # pinned to what aigis ran on 2026-10-27
+    image = "lscr.io/linuxserver/qbittorrent@sha256:8d48fa8c619caadfb103f04efea8747e2a2762d6c7551690919cffb987e61cee";
 
     port = {
       internal = 8082;

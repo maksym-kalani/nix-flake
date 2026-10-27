@@ -105,6 +105,6 @@ Access stable packages via `pkgs.stable.<package>`. Custom Caddy build with name
 
 ### Run the aigis VM test
 
-- Any change under `hosts/aigis/`, `hosts/common/` or `tests/aigis/` must pass `nix build -L .#checks.x86_64-linux.aigis-vm` before the work is called done. Report a failure with its output; do not call the work done.
+- A change that alters the built aigis system or the test (services, ports, secrets, images, packages; not comments, formatting or docs) must pass `nix build -L .#checks.x86_64-linux.aigis-vm` before the work is called done. Report a failure with its output; do not call the work done.
 - Update `tests/aigis/` in the same change when needed. A new service is usually covered automatically through its Gatus endpoint and Caddy route. A new secret needs a test value in `tests/aigis/secrets.yaml`, and a new host path needs a stand-in in the test's tmpfiles. A changed image digest needs its new hash in `tests/aigis/images.nix`.
 - Fix the config, not the test. Only weaken a check or add to its allowed-failures list when the failure comes from the VM itself, and say so in a comment.

@@ -6,7 +6,7 @@
   cfg = {
     name = "dns";
 
-    image = "docker.io/technitium/dns-server@sha256:3580381de00ba316748abced1ad0f942aff5a625993fa5dee22a902e26d2c524"; # pinned to what aigis ran on 2026-10-27
+    image = "docker.io/technitium/dns-server@sha256:3580381de00ba316748abced1ad0f942aff5a625993fa5dee22a902e26d2c524";
 
     port = {
       internal = 5380;

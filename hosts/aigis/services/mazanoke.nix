@@ -6,7 +6,7 @@ let
   cfg = {
     name = "mazanoke";
 
-    image = "ghcr.io/civilblur/mazanoke@sha256:92cc7474deb789af6549318563b7a9ee750131f9f7b297cc9c87ab67e656c22c"; # pinned to what aigis ran on 2026-10-27
+    image = "ghcr.io/civilblur/mazanoke@sha256:92cc7474deb789af6549318563b7a9ee750131f9f7b297cc9c87ab67e656c22c";
 
     port = {
       internal = 80;

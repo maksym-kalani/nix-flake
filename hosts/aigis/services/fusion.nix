@@ -6,7 +6,7 @@
   cfg = {
     name = "fusion";
 
-    image = "ghcr.io/0x2e/fusion@sha256:4fa7eead46976f2090cfbb7e60f29946eccf0a5979c1fc168d7a9d89648a6a9b"; # pinned to what aigis ran on 2026-10-27
+    image = "ghcr.io/0x2e/fusion@sha256:4fa7eead46976f2090cfbb7e60f29946eccf0a5979c1fc168d7a9d89648a6a9b";
 
     port = {
       internal = 8080;

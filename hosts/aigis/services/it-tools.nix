@@ -5,7 +5,7 @@
   cfg = {
     name = "it-tools";
 
-    image = "docker.io/corentinth/it-tools@sha256:8b8128748339583ca951af03dfe02a9a4d7363f61a216226fc28030731a5a61f"; # pinned to what aigis ran on 2026-10-27
+    image = "docker.io/corentinth/it-tools@sha256:8b8128748339583ca951af03dfe02a9a4d7363f61a216226fc28030731a5a61f";
 
     port = {
       internal = 80;
