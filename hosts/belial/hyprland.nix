@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # Required for xdg.portal when using home-manager with useUserPackages
   environment.pathsToLink = [
     "/share/applications"
@@ -20,13 +20,16 @@
     ];
     config = {
       common = {
-        default = ["gtk"];
-        "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
+        default = [ "gtk" ];
+        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
       };
       hyprland = {
-        default = ["hyprland" "gtk"];
-        "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
-        "org.freedesktop.impl.portal.OpenURI" = ["gtk"];
+        default = [
+          "hyprland"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        "org.freedesktop.impl.portal.OpenURI" = [ "gtk" ];
       };
     };
   };

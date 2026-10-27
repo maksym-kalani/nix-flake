@@ -1,7 +1,8 @@
 {
   lib,
   ...
-}: let
+}:
+let
   cfg = {
     name = "matrix-admin";
 
@@ -12,13 +13,14 @@
       external = 7373;
     };
 
-    extraOptions = [];
-    volumes = [];
-    environmentVariables = {};
+    extraOptions = [ ];
+    volumes = [ ];
+    environmentVariables = { };
 
     autoStart = true;
   };
-in {
+in
+{
   imports = [
     (import ../lib/monitored-app.nix { inherit lib; } {
       name = "Matrix Admin";
@@ -31,7 +33,7 @@ in {
 
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
-    ports = ["${toString cfg.port.external}:${toString cfg.port.internal}"];
+    ports = [ "${toString cfg.port.external}:${toString cfg.port.internal}" ];
 
     extraOptions = cfg.extraOptions;
     volumes = cfg.volumes;
@@ -39,5 +41,5 @@ in {
     autoStart = cfg.autoStart;
   };
 
-  networking.firewall.allowedTCPPorts = [cfg.port.external];
+  networking.firewall.allowedTCPPorts = [ cfg.port.external ];
 }

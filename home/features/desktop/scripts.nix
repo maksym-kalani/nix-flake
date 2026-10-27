@@ -192,7 +192,10 @@ in
     exec = "${pkgs.kitty}/bin/kitty --title \"Hermes Browser\" ${hermes-browser}/bin/hermes-browser";
     icon = "chromium";
     terminal = false;
-    categories = [ "Network" "WebBrowser" ];
+    categories = [
+      "Network"
+      "WebBrowser"
+    ];
     settings.Keywords = "Hermes;Chromium;Browser;SSH;CDP;";
   };
 

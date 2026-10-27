@@ -60,6 +60,8 @@
     {
       packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
+
       checks.x86_64-linux.aigis-vm = import ./tests/aigis {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         inherit inputs outputs;

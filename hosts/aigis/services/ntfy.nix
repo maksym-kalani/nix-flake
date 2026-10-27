@@ -1,10 +1,12 @@
 {
   ...
-}: let
+}:
+let
   name = "ntfy";
   port = 8081;
   ip = "192.168.2.50";
-in {
+in
+{
   services.ntfy-sh.enable = true;
   services.ntfy-sh.settings = {
     base-url = "http://${ip}";
@@ -14,7 +16,7 @@ in {
     proxy-trusted-hosts = ip;
   };
 
-  networking.firewall.allowedTCPPorts = [port];
+  networking.firewall.allowedTCPPorts = [ port ];
 
   services.flame.apps = [
     {

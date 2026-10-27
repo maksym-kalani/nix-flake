@@ -3,7 +3,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   sops.secrets.maksym_hashed_password.neededForUsers = true;
 
   users.users.maksym = {
@@ -22,8 +23,7 @@
       "kvm"
       "qemu-libvirtd"
     ];
-    packages = [inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default];
+    packages = [ inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default ];
   };
-  home-manager.users.maksym =
-    import ../../../home/maksym/${config.networking.hostName}.nix;
+  home-manager.users.maksym = import ../../../home/maksym/${config.networking.hostName}.nix;
 }

@@ -1,7 +1,8 @@
 {
   lib,
   ...
-}: let
+}:
+let
   appdata = "/var/lib/containers/";
   cfg = {
     name = "fusion";
@@ -13,7 +14,7 @@
       external = 8085;
     };
 
-    extraOptions = [];
+    extraOptions = [ ];
     volumes = [
       "${appdata}${cfg.name}:/data"
 
@@ -24,7 +25,8 @@
 
     autoStart = true;
   };
-in {
+in
+{
   imports = [
     (import ../lib/monitored-app.nix { inherit lib; } {
       name = "Fusion RSS";
@@ -37,7 +39,7 @@ in {
 
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
-    ports = ["${toString cfg.port.external}:${toString cfg.port.internal}"];
+    ports = [ "${toString cfg.port.external}:${toString cfg.port.internal}" ];
 
     extraOptions = cfg.extraOptions;
     volumes = cfg.volumes;
@@ -45,7 +47,7 @@ in {
     autoStart = cfg.autoStart;
   };
 
-  networking.firewall.allowedTCPPorts = [cfg.port.external];
+  networking.firewall.allowedTCPPorts = [ cfg.port.external ];
 
-  systemd.tmpfiles.rules = ["d ${appdata}${cfg.name} :0755 :root :root -"];
+  systemd.tmpfiles.rules = [ "d ${appdata}${cfg.name} :0755 :root :root -" ];
 }

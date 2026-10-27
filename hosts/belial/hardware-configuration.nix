@@ -3,15 +3,23 @@
   lib,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "ahci"
+    "usb_storage"
+    "usbhid"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/82cad224-d103-46f1-9228-5af578b3c0dc";
@@ -21,7 +29,10 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/700E-04CE";
     fsType = "vfat";
-    options = ["fmask=0077" "dmask=0077"];
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
   };
 
   fileSystems."/home/maksym/ssd1" = {
@@ -35,7 +46,7 @@
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/4235bca5-7fe7-4a39-862d-75af730fffdc";}
+    { device = "/dev/disk/by-uuid/4235bca5-7fe7-4a39-862d-75af730fffdc"; }
   ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

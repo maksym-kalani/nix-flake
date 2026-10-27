@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   options.features.piCodingAgent.enable = lib.mkEnableOption "Pi coding agent (personal, non-work use)";
 

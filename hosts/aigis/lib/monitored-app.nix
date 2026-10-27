@@ -18,7 +18,14 @@
     lib.optionalAttrs enableFlame {
       flame.apps = [
         (
-          { inherit name url icon isPinned; }
+          {
+            inherit
+              name
+              url
+              icon
+              isPinned
+              ;
+          }
           // lib.optionalAttrs (description != null) { inherit description; }
         )
       ];

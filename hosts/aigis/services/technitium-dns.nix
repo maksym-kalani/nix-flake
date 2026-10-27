@@ -1,7 +1,8 @@
 {
   lib,
   ...
-}: let
+}:
+let
   appdata = "/var/lib/containers/";
   cfg = {
     name = "dns";
@@ -13,7 +14,7 @@
       external = 5380;
     };
 
-    extraOptions = [];
+    extraOptions = [ ];
     volumes = [
       "${appdata}${cfg.name}:/etc/dns"
     ];
@@ -30,7 +31,8 @@
 
     autoStart = true;
   };
-in {
+in
+{
   imports = [
     (import ../lib/monitored-app.nix { inherit lib; } {
       name = "Technitium DNS";
@@ -43,7 +45,11 @@ in {
 
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
-    ports = ["${toString cfg.port.external}:${toString cfg.port.internal}" "53:53/udp" "53:53/tcp"];
+    ports = [
+      "${toString cfg.port.external}:${toString cfg.port.internal}"
+      "53:53/udp"
+      "53:53/tcp"
+    ];
 
     extraOptions = cfg.extraOptions;
     volumes = cfg.volumes;
@@ -51,8 +57,11 @@ in {
     autoStart = cfg.autoStart;
   };
 
-  networking.firewall.allowedTCPPorts = [cfg.port.external 53];
-  networking.firewall.allowedUDPPorts = [53];
+  networking.firewall.allowedTCPPorts = [
+    cfg.port.external
+    53
+  ];
+  networking.firewall.allowedUDPPorts = [ 53 ];
 
-  systemd.tmpfiles.rules = ["d ${appdata}${cfg.name} :0755 :root :root -"];
+  systemd.tmpfiles.rules = [ "d ${appdata}${cfg.name} :0755 :root :root -" ];
 }

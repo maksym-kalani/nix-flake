@@ -1,7 +1,8 @@
 {
   lib,
   ...
-}: let
+}:
+let
   appdata = "/var/lib/containers/";
   UID = 888;
   GID = 990;
@@ -15,7 +16,7 @@
       external = 8082;
     };
 
-    extraOptions = [];
+    extraOptions = [ ];
     volumes = [
       "${appdata}${cfg.name}:/config"
       "/mnt/tank/media/downloads:/mnt/tank/media/downloads"
@@ -32,7 +33,8 @@
 
     autoStart = true;
   };
-in {
+in
+{
   users.users = {
     pod-qbittorrent = {
       isSystemUser = true;
@@ -54,10 +56,13 @@ in {
     autoStart = cfg.autoStart;
   };
 
-  networking.firewall.allowedTCPPorts = [cfg.port.external 6881];
-  networking.firewall.allowedUDPPorts = [6881];
+  networking.firewall.allowedTCPPorts = [
+    cfg.port.external
+    6881
+  ];
+  networking.firewall.allowedUDPPorts = [ 6881 ];
 
-  systemd.tmpfiles.rules = ["d ${appdata}${cfg.name} :0755 :root :root -"];
+  systemd.tmpfiles.rules = [ "d ${appdata}${cfg.name} :0755 :root :root -" ];
 
   imports = [
     (import ../lib/monitored-app.nix { inherit lib; } {

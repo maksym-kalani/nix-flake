@@ -2,7 +2,8 @@
   inputs,
   pkgs,
   ...
-}: let
+}:
+let
   notify = pkgs.writeShellScript "comin-ntfy" ''
     case "$COMIN_PHASE/$COMIN_STATUS" in
       deploy/done) priority=2 title="deployed" tag=white_check_mark ;;
@@ -16,8 +17,9 @@
       -d "''${COMIN_GIT_SHA:0:7} $COMIN_GIT_REF: $COMIN_GIT_MSG $COMIN_ERROR_MSG" \
       http://localhost:8081/homelab || true
   '';
-in {
-  imports = [inputs.comin.nixosModules.comin];
+in
+{
+  imports = [ inputs.comin.nixosModules.comin ];
 
   services.comin = {
     enable = true;

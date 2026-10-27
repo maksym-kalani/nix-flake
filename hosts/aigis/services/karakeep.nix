@@ -3,12 +3,14 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   name = "karakeep";
   port = 3050;
   domain = "laufin.xyz";
-in {
-  sops.secrets.openai_api_key = {};
+in
+{
+  sops.secrets.openai_api_key = { };
 
   services.karakeep = {
     enable = true;
@@ -29,7 +31,7 @@ in {
     };
   };
 
-  networking.firewall.allowedTCPPorts = [port];
+  networking.firewall.allowedTCPPorts = [ port ];
 
   imports = [
     (import ../lib/monitored-app.nix { inherit lib; } {

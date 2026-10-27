@@ -1,7 +1,8 @@
 {
   lib,
   ...
-}: let
+}:
+let
   appdata = "/var/lib/containers/";
   cfg = {
     name = "wallos";
@@ -13,7 +14,7 @@
       external = 8282;
     };
 
-    extraOptions = [];
+    extraOptions = [ ];
     volumes = [
       "${appdata}${cfg.name}/db:/var/www/html/db"
       "${appdata}${cfg.name}/logos:/var/www/html/images/uploads/logos"
@@ -26,7 +27,8 @@
 
     autoStart = true;
   };
-in {
+in
+{
   imports = [
     (import ../lib/monitored-app.nix { inherit lib; } {
       name = "Wallos";
@@ -39,7 +41,7 @@ in {
 
   virtualisation.oci-containers.containers.${cfg.name} = {
     image = cfg.image;
-    ports = ["${toString cfg.port.external}:${toString cfg.port.internal}"];
+    ports = [ "${toString cfg.port.external}:${toString cfg.port.internal}" ];
 
     extraOptions = cfg.extraOptions;
     volumes = cfg.volumes;
@@ -47,7 +49,7 @@ in {
     autoStart = cfg.autoStart;
   };
 
-  networking.firewall.allowedTCPPorts = [cfg.port.external];
+  networking.firewall.allowedTCPPorts = [ cfg.port.external ];
 
   systemd.tmpfiles.rules = [
     "d ${appdata}${cfg.name}/db :0755 :root :root -"
