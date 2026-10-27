@@ -2,7 +2,6 @@
 let
   c = config.lib.stylix.colors;
 
-  # Generate blurred wallpaper at build time from stylix image
   blurredWallpaper =
     pkgs.runCommand "wlogout-blurred-wallpaper.png"
       {
@@ -12,7 +11,6 @@ let
         convert ${config.stylix.image} -blur 0x50 -brightness-contrast -10x-10 $out
       '';
 
-  # Wlogout launcher script with dynamic margins based on monitor
   wlogoutScript = pkgs.writeShellScriptBin "wlogout-launcher" ''
     monitor=$(hyprctl -j monitors | ${pkgs.jq}/bin/jq '.[] | select(.focused==true)')
     res_w=$(echo "$monitor" | ${pkgs.jq}/bin/jq '.width')

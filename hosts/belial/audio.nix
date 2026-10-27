@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-  # Audio - PipeWire
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -17,7 +16,7 @@
           matches = [ { "device.name" = "alsa_card.usb-Solid_State_Logic_SSL_2_Mk_II-00"; } ];
           actions.update-props = {
             "api.acp.auto-profile" = false;
-            "device.profile" = "pro-audio"; # або "input:analog-stereo+output:analog-stereo"
+            "device.profile" = "pro-audio";
           };
         }
       ];

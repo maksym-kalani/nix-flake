@@ -1,10 +1,8 @@
-# XDG MIME type associations (file type defaults)
 {...}: {
   xdg.mimeApps = {
     enable = true;
 
     defaultApplications = {
-      # Web browser - Zen
       "x-scheme-handler/http" = "zen.desktop";
       "x-scheme-handler/https" = "zen.desktop";
       "x-scheme-handler/chrome" = "zen.desktop";
@@ -16,10 +14,8 @@
       "application/x-extension-xhtml" = "zen.desktop";
       "application/x-extension-xht" = "zen.desktop";
 
-      # PDF - Papers
       "application/pdf" = "org.gnome.Papers.desktop";
 
-      # Images - Loupe
       "image/jpeg" = "org.gnome.Loupe.desktop";
       "image/png" = "org.gnome.Loupe.desktop";
       "image/gif" = "org.gnome.Loupe.desktop";
@@ -27,7 +23,6 @@
       "image/svg+xml" = "org.gnome.Loupe.desktop";
       "image/bmp" = "org.gnome.Loupe.desktop";
 
-      # Video - VLC
       "video/mp4" = "vlc.desktop";
       "video/x-matroska" = "vlc.desktop";
       "video/webm" = "vlc.desktop";
@@ -35,7 +30,6 @@
       "video/quicktime" = "vlc.desktop";
       "video/x-flv" = "vlc.desktop";
 
-      # Audio - VLC
       "audio/mpeg" = "vlc.desktop";
       "audio/mp3" = "vlc.desktop";
       "audio/flac" = "vlc.desktop";
@@ -47,7 +41,6 @@
       "audio/x-ms-wma" = "vlc.desktop";
       "audio/mp4" = "vlc.desktop";
 
-      # Code/text - Zed
       "text/plain" = "dev.zed.Zed.desktop";
       "text/x-csrc" = "dev.zed.Zed.desktop";
       "text/x-c++src" = "dev.zed.Zed.desktop";
@@ -63,13 +56,10 @@
       "application/toml" = "dev.zed.Zed.desktop";
       "application/xml" = "dev.zed.Zed.desktop";
 
-      # JetBrains
       "x-scheme-handler/jetbrains" = "jetbrains-toolbox.desktop";
 
-      # Discord - Vesktop
       "x-scheme-handler/discord" = "vesktop.desktop";
 
-      # File manager
       "inode/directory" = "org.gnome.Nautilus.desktop";
     };
   };

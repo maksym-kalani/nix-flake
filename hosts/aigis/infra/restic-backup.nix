@@ -3,7 +3,7 @@
   pkgs,
   ...
 }:
-#add restic init if running first time
+# run `restic init` once before the first backup
 let
   restic_backup = pkgs.writeShellScriptBin "restic-backup" ''
     set -euo pipefail
@@ -33,13 +33,11 @@ let
       /srv/kiwix
     )
 
-    # 1) Run the backup. Avoid per-file verbose output so journald retains
-    # actionable errors, and skip ephemeral live overlay mount views.
+    # no -v, so journald keeps the real errors; overlay merged dirs are live mount views
     restic backup "''${SOURCES[@]}" \
       --exclude '/var/lib/containers/storage/overlay/*/merged' \
       --tag zfs-share
 
-    # 2) Forget/prune old snapshots (e.g. keep 7 daily, 4 weekly, 6 monthly)
     restic forget -v \
       --prune \
       --keep-daily 7 \
@@ -64,7 +62,6 @@ in
       Type = "oneshot";
       User = "root";
       Environment = [
-        # point PATH at the active system profile
         "PATH=/run/current-system/sw/bin:$PATH"
       ];
       EnvironmentFile = [
@@ -79,7 +76,6 @@ in
     description = "Weekly Restic → ZFS share backup";
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      # Every Friday at 03:00 local time
       OnCalendar = "Fri *-*-* 03:00:00";
       Persistent = true;
     };

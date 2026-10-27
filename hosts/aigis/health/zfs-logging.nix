@@ -3,14 +3,10 @@
   ...
 }:
 {
-  # ZFS Event Daemon (ZED) → writes events to its debug log & syslog
   systemd.services."zfs-zed".enable = true;
   services.zfs.zed.settings = {
-    # where ZED writes its debug output
     ZED_DEBUG_LOG = "/var/log/zed.debug.log";
-    # how often to batch notifications
     ZED_NOTIFY_INTERVAL_SECS = "3600";
-    # include full event details
     ZED_NOTIFY_VERBOSE = "true";
   };
 

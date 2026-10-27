@@ -11,15 +11,12 @@
     options = ["${automount_opts},credentials=${config.sops.secrets.smb_credentials.path}"];
   };
 in {
-  # CIFS utilities for mounting SMB shares
   environment.systemPackages = [pkgs.cifs-utils];
 
-  # SMB credentials secret
   sops.secrets.smb_credentials = {
     mode = "0400";
   };
 
-  # Mount aigis SMB shares
   fileSystems."/home/maksym/aigis/users" = mkShare "users";
   fileSystems."/home/maksym/aigis/media" = mkShare "media";
 }

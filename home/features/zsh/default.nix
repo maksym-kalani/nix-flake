@@ -44,7 +44,6 @@
     };
 
     initContent = ''
-      # Fastfetch on terminal start
       if [[ $(tty) == *"pts"* ]]; then
         if [[ -n "$KITTY_WINDOW_ID" ]]; then
           fastfetch_pic=$(find "$HOME/Pictures/fastfetch-pics" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" \) 2>/dev/null | shuf -n 1)
@@ -62,22 +61,20 @@
     '';
   };
 
-  # Additional PATH entries
   home.sessionPath = [
     "$HOME/.cargo/bin"
     "$HOME/.local/bin"
   ];
 
-  # Fuzzy finder; module sources `fzf --zsh` for keybindings/completion
+  # module sources `fzf --zsh` for keybindings/completion
   programs.fzf.enable = true;
 
-  # Prompt; module also clears the init cache when the package store path changes
+  # module clears the init cache when the package store path changes
   programs.oh-my-posh = {
     enable = true;
     configFile = ./themes/probua.minimal.omp.json;
   };
 
-  # Required packages
   home.packages = with pkgs; [
     eza
     fastfetch

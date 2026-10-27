@@ -1,4 +1,3 @@
-# Smoke test: boots aigis offline in a VM and checks that services start and answer, not that they work.
 {
   pkgs,
   inputs,

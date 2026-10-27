@@ -1,5 +1,3 @@
-# LAN-only binary cache (nix-serve). Not exposed via Caddy/Cloudflare.
-# Public key (trusted on belial): aigis-cache-1:GzbUfqI4iVQwfw/bl0+zyU1Qak0GF4MnJ9PHSMKUtGs=
 {config, ...}: let
   ip = "192.168.2.50";
   port = 5757;

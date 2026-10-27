@@ -7,7 +7,6 @@ let
   ntfyTopicSmart = "http://localhost:8081/homelab";
 in
 {
-  # SMARTD notifier script — posts SMART alerts to ntfy
   environment.etc."smartd-ntfy.sh".text = lib.mkForce ''
     #!${pkgs.bash}/bin/bash
     device="$SMARTD_DEVICE"
@@ -17,7 +16,7 @@ in
   '';
   environment.etc."smartd-ntfy.sh".mode = "0755";
 
-  # Enable smartd with ntfy notifications (ZFS pool health is handled by health-monitor)
+  # ZFS pool health is handled by health-monitor
   services.smartd = {
     enable = true;
     autodetect = true;

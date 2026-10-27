@@ -3,10 +3,8 @@
   ...
 }:
 {
-  # Add v4l-utils to system packages
   environment.systemPackages = with pkgs; [ v4l-utils ];
 
-  # Apply webcam settings when the device is plugged in
   services.udev.extraRules = ''
     SUBSYSTEM=="video4linux", ACTION=="add", ATTR{name}=="*", \
       RUN+="${pkgs.bash}/bin/bash -c '${pkgs.v4l-utils}/bin/v4l2-ctl -d /dev/%k \

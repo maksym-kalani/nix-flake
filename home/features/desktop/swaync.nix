@@ -3,7 +3,6 @@ let
   c = config.lib.stylix.colors;
 in
 {
-  # Config file (JSON)
   xdg.configFile."swaync/config.json".text = builtins.toJSON {
     "$schema" = "/etc/xdg/swaync/configSchema.json";
     positionX = "right";
@@ -89,7 +88,6 @@ in
   xdg.configFile."swaync/notifications.css".text = ''
     @import 'colors.css';
 
-    /* === Derived dynamic colors === */
     @define-color base alpha(@surface, 0.3);
     @define-color surface_custom alpha(@surface_container_high, 0.3);
     @define-color hovercolor alpha(@surface_container_high, 0.5);
@@ -245,7 +243,6 @@ in
   xdg.configFile."swaync/control_center.css".text = ''
     @import 'colors.css';
 
-    /* === Derived dynamic colors === */
     @define-color base alpha(@surface, 0.3);
     @define-color surface_custom alpha(@surface_container_high, 0.3);
     @define-color hovercolor alpha(@surface_container_high, 0.5);
