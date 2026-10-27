@@ -9,6 +9,7 @@ in {
   users.users.jellyfin.extraGroups = ["tankusers" "render" "video"];
 
   networking.firewall.allowedTCPPorts = [port];
+  networking.firewall.allowedUDPPorts = [7359]; # client discovery
 
   imports = [
     (import ../lib/monitored-app.nix { inherit lib; } {

@@ -93,11 +93,6 @@ in
           reverse_proxy http://192.168.2.50:7090
         }
 
-        @jellyseer host jellyseer.laufin.xyz
-        handle @jellyseer {
-          reverse_proxy http://192.168.2.50:5055
-        }
-
         @manga host manga.laufin.xyz
         handle @manga {
           reverse_proxy http://192.168.2.50:4568
@@ -206,4 +201,5 @@ in
     80
     443
   ];
+  networking.firewall.allowedUDPPorts = [ 443 ]; # HTTP/3
 }

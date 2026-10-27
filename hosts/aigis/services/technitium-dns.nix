@@ -6,7 +6,7 @@
   cfg = {
     name = "dns";
 
-    image = "technitium/dns-server:latest";
+    image = "docker.io/technitium/dns-server@sha256:3580381de00ba316748abced1ad0f942aff5a625993fa5dee22a902e26d2c524";
 
     port = {
       internal = 5380;
@@ -53,4 +53,7 @@ in {
   };
 
   networking.firewall.allowedTCPPorts = [cfg.port.external 53];
+  networking.firewall.allowedUDPPorts = [53];
+
+  systemd.tmpfiles.rules = ["d ${appdata}${cfg.name} :0755 :root :root -"];
 }

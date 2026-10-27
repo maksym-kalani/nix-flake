@@ -56,6 +56,11 @@
     {
       packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
+      checks.x86_64-linux.aigis-vm = import ./tests/aigis {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        inherit inputs outputs;
+      };
+
       overlays = import ./overlays {
         inherit inputs outputs;
       };

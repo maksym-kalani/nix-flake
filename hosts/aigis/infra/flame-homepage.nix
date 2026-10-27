@@ -193,6 +193,12 @@ in
     ];
   };
 
+  # upstream flame-seed can hit "database is locked" while flame starts; retry it
+  systemd.services.flame-seed.serviceConfig = {
+    Restart = "on-failure";
+    RestartSec = 5;
+  };
+
   services.gatus.settings.endpoints = [
     {
       inherit name;

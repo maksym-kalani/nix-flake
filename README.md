@@ -16,6 +16,7 @@ home/
 overlays/         # Nixpkgs overlays (custom Caddy build, stable channel access)
 pkgs/             # Custom package definitions
 secrets/          # SOPS-encrypted secrets (age)
+tests/            # NixOS VM tests
 docs/             # Documentation
 ```
 
@@ -36,6 +37,16 @@ Reusable feature modules under `home/features/` composed per host:
 - **CLI** (both hosts) — Common shell utilities and dev tools.
 - **Zsh** (belial) — Shell configuration with Oh-My-Zsh, prompt theming, and fuzzy search.
 - **Desktop** (belial) — Full Hyprland desktop environment with applications for development, communication, media, and productivity. Consistent theming across all components.
+
+## Tests
+
+`tests/aigis` is a smoke test that boots the aigis configuration offline in a VM, with throwaway secrets and its pinned container images. It checks that every local service passes its Gatus health check and is reachable through the firewall, that Caddy routes answer, that SSH is key-only, that one restic backup completes, and that no unit has failed. It checks that services start and answer, not that they work correctly.
+
+```bash
+nix build -L .#checks.x86_64-linux.aigis-vm
+```
+
+It needs KVM and about 9 GB of RAM, and the first run downloads about 3.3 GB of container images. `nix flake check` runs it too.
 
 ## Documentation
 
