@@ -1,6 +1,11 @@
-# VM test for aigis (https://nix.dev/tutorials/nixos/integration-testing-using-virtual-machines.html).
-# Boots the production modules offline and checks that Gatus sees every local service up, that a LAN
-# client gets through the firewall, and that Caddy serves *.laufin.xyz. See docs/aigis-vm-inventory.md.
+# Smoke test for aigis in a VM (https://nix.dev/tutorials/nixos/integration-testing-using-virtual-machines.html).
+# Boots the production modules offline and checks that services start and answer, not that they work:
+# - Gatus's own conditions pass for every local endpoint, and a LAN client can reach each one;
+# - every *.laufin.xyz route on aigis gets an answer from its upstream (any status below 500, so a login
+#   page or a 401 passes);
+# - SSH is key-only for maksym, ntfy hears about the login, one restic backup completes;
+# - no unit is in the failed state at the end (a running but broken service is not caught).
+# See docs/aigis-vm-inventory.md.
 # Run: nix build -L .#checks.x86_64-linux.aigis-vm
 {
   pkgs,
@@ -32,6 +37,8 @@ let
         imageDigest = lib.last ref;
         hash = imageHashes.${name};
         finalImageTag = "vm-test";
+        # a fixed-output path ignores imageDigest; naming it by digest makes a stale hash fail, not reuse the old image
+        name = "docker-image-${name}-${lib.removePrefix "sha256:" (lib.last ref)}.tar";
       };
       pull = "never";
     }
@@ -72,7 +79,7 @@ let
 in
 assert lib.length caddyfile == 3; # exactly one namecheap tls block replaced below
 pkgs.testers.runNixOSTest {
-  name = "aigis";
+  name = "aigis-smoke";
   node.specialArgs = { inherit inputs outputs; };
   node.pkgsReadOnly = false; # hosts/common sets nixpkgs.overlays and nixpkgs.config
 
@@ -189,7 +196,7 @@ pkgs.testers.runNixOSTest {
             aigis.log(f"down in Gatus: {down}")
         return not down
 
-    with subtest("Gatus sees every local service up"):
+    with subtest("Gatus health conditions pass for every local endpoint"):
         retry(gatus_all_up, timeout_seconds=900)
 
     with subtest("LAN client reaches every local service through the firewall"):
@@ -201,7 +208,7 @@ pkgs.testers.runNixOSTest {
         client.succeed("curl -sf --max-time 10 --interface 192.168.1.107 http://${ip}:5757/nix-cache-info")
         client.fail("curl -sf --max-time 5 http://${ip}:5757/nix-cache-info")
 
-    with subtest("Caddy serves every *.laufin.xyz route"):
+    with subtest("Every *.laufin.xyz route on aigis answers below 500"):
         broken = {}
         for host, _, _ in caddy_routes:
             code = client.succeed(f"curl -sk -o /dev/null -w '%{{http_code}}' --max-time 10 --resolve {host}:443:${ip} https://{host}/")
@@ -222,11 +229,11 @@ pkgs.testers.runNixOSTest {
     with subtest("SSH login posts to ntfy"):
         aigis.wait_until_succeeds("curl -sf 'http://localhost:8081/homelab/json?poll=1&since=all' | grep -q 'ssh login'", timeout=30)
 
-    with subtest("Restic backup runs"):
+    with subtest("One restic backup completes"):
         aigis.succeed("RESTIC_REPOSITORY=/tmp/restic-test RESTIC_PASSWORD=test restic init")
         aigis.succeed("systemctl start restic-zfs-backup")
 
-    with subtest("No failed units"):
+    with subtest("No unit in failed state (VM-only ones excepted)"):
         failed = set(aigis.succeed("systemctl list-units --failed --no-legend --plain | cut -d' ' -f1").split())
         assert failed <= vm_only_failures, f"failed units: {failed - vm_only_failures}"
   '';
