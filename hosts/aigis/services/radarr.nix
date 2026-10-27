@@ -19,6 +19,8 @@ in
       url = "radarr.laufin.xyz";
       icon = "alpha-r-box-outline";
       inherit port;
+      healthPath = "/ping";
+      healthConditions = [ "[BODY].status == OK" ];
       gatusName = name;
     })
   ];

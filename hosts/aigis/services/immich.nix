@@ -24,6 +24,8 @@ in
       url = "immich.laufin.xyz";
       icon = "camera";
       inherit port;
+      healthPath = "/api/server/ping";
+      healthConditions = [ "[BODY].res == pong" ];
       gatusName = name;
     })
   ];

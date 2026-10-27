@@ -30,6 +30,7 @@ in
       url = "todo.laufin.xyz";
       icon = "checkbox-marked-outline";
       inherit port;
+      healthPath = "/health";
       gatusName = name;
     })
   ];

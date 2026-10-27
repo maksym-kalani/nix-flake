@@ -18,6 +18,8 @@ in
       url = "prowlarr.laufin.xyz";
       icon = "alpha-p-box-outline";
       inherit port;
+      healthPath = "/ping";
+      healthConditions = [ "[BODY].status == OK" ];
       gatusName = name;
     })
   ];
