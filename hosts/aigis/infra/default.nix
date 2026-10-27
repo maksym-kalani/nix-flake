@@ -11,5 +11,6 @@
     ./ssh.nix
     ./zfs.nix
     ./nix-cache.nix
+    ./comin.nix
   ];
 }
