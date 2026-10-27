@@ -8,6 +8,8 @@
   ip ? "192.168.2.50",
   port ? null,
   gatusName ? name,
+  healthPath ? "",
+  healthConditions ? [ ],
   enableFlame ? true,
   enableGatus ? true,
 }:
@@ -25,9 +27,9 @@
       gatus.settings.endpoints = [
         {
           name = gatusName;
-          url = "http://${ip}:${toString port}";
+          url = "http://${ip}:${toString port}${healthPath}";
           interval = "1m";
-          conditions = [ "[STATUS] == 200" ];
+          conditions = [ "[STATUS] == 200" ] ++ healthConditions;
           alerts = [
             {
               type = "ntfy";

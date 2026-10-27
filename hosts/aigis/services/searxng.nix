@@ -104,6 +104,8 @@ in
       url = "search.laufin.xyz";
       icon = "search-web";
       inherit port;
+      healthPath = "/healthz";
+      healthConditions = [ "[BODY] == OK" ];
       gatusName = "search";
     })
   ];
