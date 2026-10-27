@@ -1,0 +1,73 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [develop]
+  push:
+    branches: [develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    # public repo on a self-hosted runner: never run fork PR code on it
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 10
+    outputs:
+      code: ${{ steps.changes.outputs.code }}
+    steps:
+      - uses: actions/checkout@v5
+      - id: changes
+        uses: dorny/paths-filter@v3
+        with:
+          predicate-quantifier: every
+          filters: |
+            code:
+              - '**'
+              - '!docs/**'
+              - '!**/*.md'
+      - name: Format
+        run: nix fmt -- --ci
+      - name: Secrets are sops-encrypted
+        run: |
+          for f in secrets/secrets.yaml tests/aigis/secrets.yaml; do
+            nix run --inputs-from . nixpkgs#yq-go -- -e \
+              'del(.sops) | [.. | select(kind == "scalar")] | all_c(tag == "!!str" and test("^ENC\["))' "$f" \
+              || { echo "::error file=$f::unencrypted value"; exit 1; }
+          done
+
+  eval:
+    needs: lint
+    runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - run: nix flake check --no-build
+      - name: Eval hosts and homes
+        run: |
+          for o in \
+            nixosConfigurations.aigis.config.system.build.toplevel \
+            nixosConfigurations.belial.config.system.build.toplevel \
+            'homeConfigurations."maksym@aigis".activationPackage' \
+            'homeConfigurations."maksym@belial".activationPackage'; do
+            echo "::group::$o"
+            nix eval --raw ".#$o.drvPath"
+            echo "::endgroup::"
+          done
+
+  aigis-vm:
+    needs: [lint, eval]
+    if: needs.lint.outputs.code == 'true'
+    runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - run: nix build -L --no-link .#checks.x86_64-linux.aigis-vm
