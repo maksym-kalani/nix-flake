@@ -6,7 +6,7 @@ let
   appdata = "/var/lib/containers/";
   cfg = {
     name = "hass-mariadb";
-    image = "docker.io/library/mariadb@sha256:ab1c3dd381940233af12512b97d47b508fd3a0f17fbe3ba388739b7bc17cbc0b";
+    image = "docker.io/library/mariadb@sha256:f4054da26e3a9dd6c8b5cc97363e544408b15c0fb369d7359c25dc04826eb6e1";
     port = {
       internal = 3306;
       external = 3306;

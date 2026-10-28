@@ -7,7 +7,7 @@ let
   cfg = {
     name = "dns";
 
-    image = "docker.io/technitium/dns-server@sha256:3580381de00ba316748abced1ad0f942aff5a625993fa5dee22a902e26d2c524";
+    image = "docker.io/technitium/dns-server@sha256:eb48ac5c135f4ab936b536f74f853d53e15ab39ef37fdbc9598a089b90d9f245";
 
     port = {
       internal = 5380;
