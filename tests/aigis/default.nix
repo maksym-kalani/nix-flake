@@ -209,7 +209,7 @@ pkgs.testers.runNixOSTest {
 
     with subtest("SSH takes keys for maksym only"):
         client.succeed("install -Dm600 ${ssh-keys.snakeOilEd25519PrivateKey} /root/.ssh/id_ed25519")
-        ssh = "ssh -o StrictHostKeyChecking=no -o BatchMode=yes"
+        ssh = "ssh -n -o StrictHostKeyChecking=no -o BatchMode=yes"  # -n: ssh must not read the driver's command channel
         client.succeed(f"{ssh} maksym@${ip} true")
         client.fail(f"{ssh} root@${ip} true")
         out = client.fail(f"{ssh} -o PubkeyAuthentication=no maksym@${ip} true 2>&1")
