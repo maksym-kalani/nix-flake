@@ -50,7 +50,6 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
-      - run: nix flake check --no-build
       - name: Eval hosts and homes
         run: |
           for o in \
@@ -62,6 +61,8 @@ jobs:
             nix eval --raw ".#$o.drvPath"
             echo "::endgroup::"
           done
+      # after the evals: --no-build cannot fetch sources that are read during eval
+      - run: nix flake check --no-build
 
   aigis-vm:
     needs: [lint, eval]
