@@ -10,8 +10,8 @@ creation_rules:
   - path_regex: secrets/secrets.yaml$
     key_groups:
       - age:
-          - *primary  # Throwaway key for the aigis VM test (tests/aigis); its private half is committed on purpose.
+          - *primary
   - path_regex: tests/aigis/secrets.yaml$
     key_groups:
       - age:
-          - age1f3vt3mcqy8hc0dw4gqykttddqh7fp75lve6alvxmqxn98659csjs5k6uj5
+          - age1f3vt3mcqy8hc0dw4gqykttddqh7fp75lve6alvxmqxn98659csjs5k6uj5  # Throwaway key for the aigis VM test (tests/aigis); its private half is committed on purpose.
