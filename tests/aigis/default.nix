@@ -63,7 +63,7 @@ let
     )
   );
 
-  ssh-keys = import "${pkgs.path}/nixos/tests/ssh-keys.nix" pkgs;
+  ssh-keys = import (pkgs.path + "/nixos/tests/ssh-keys.nix") pkgs;
 in
 assert lib.length caddyfile == 3; # exactly one tls block replaced
 pkgs.testers.runNixOSTest {
@@ -201,7 +201,8 @@ pkgs.testers.runNixOSTest {
     with subtest("Every *.laufin.xyz route on aigis answers below 500"):
         broken = {}
         for host, _, _ in caddy_routes:
-            code = client.succeed(f"curl -sk -o /dev/null -w '%{{http_code}}' --max-time 10 --resolve {host}:443:${ip} https://{host}/")
+            # retries ride out slow app starts in the nested test VM; a 5xx that persists still fails
+            code = client.succeed(f"curl -sk -o /dev/null -w '%{{http_code}}' --max-time 10 --retry 2 --retry-all-errors --resolve {host}:443:${ip} https://{host}/")
             if not code.startswith(("2", "3", "4")):
                 broken[host] = code
         assert not broken, f"broken Caddy routes: {broken}"
@@ -209,7 +210,7 @@ pkgs.testers.runNixOSTest {
 
     with subtest("SSH takes keys for maksym only"):
         client.succeed("install -Dm600 ${ssh-keys.snakeOilEd25519PrivateKey} /root/.ssh/id_ed25519")
-        ssh = "ssh -o StrictHostKeyChecking=no -o BatchMode=yes"
+        ssh = "ssh -n -o StrictHostKeyChecking=no -o BatchMode=yes"  # -n: ssh must not read the driver's command channel
         client.succeed(f"{ssh} maksym@${ip} true")
         client.fail(f"{ssh} root@${ip} true")
         out = client.fail(f"{ssh} -o PubkeyAuthentication=no maksym@${ip} true 2>&1")

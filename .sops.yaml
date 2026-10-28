@@ -1,11 +1,17 @@
 keys:
   - &primary age1krs5n96ldl8jw900zcja484sdhhy5xjxxjnvshg8h5h80p2yspesnqeplt
+  - &ci-runner age1r93q2d3jg2m50293kl2hhpjkx2576rx5844xkyrwgt9mnkuup3cs8gmlsl
 creation_rules:
+  - path_regex: secrets/ci-runner.yaml$
+    key_groups:
+      - age:
+          - *primary
+          - *ci-runner
   - path_regex: secrets/secrets.yaml$
     key_groups:
       - age:
-          - *primary  # Throwaway key for the aigis VM test (tests/aigis); its private half is committed on purpose.
+          - *primary
   - path_regex: tests/aigis/secrets.yaml$
     key_groups:
       - age:
-          - age1f3vt3mcqy8hc0dw4gqykttddqh7fp75lve6alvxmqxn98659csjs5k6uj5
+          - age1f3vt3mcqy8hc0dw4gqykttddqh7fp75lve6alvxmqxn98659csjs5k6uj5  # Throwaway key for the aigis VM test (tests/aigis); its private half is committed on purpose.
