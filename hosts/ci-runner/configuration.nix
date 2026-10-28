@@ -29,7 +29,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFw5zxs2Rq/cLtaTQzGUcObyoCqwk+BXNqI1MpwYLH41 maksym@belial"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILEqvyzijm/T8BlLQS8EXtZ30aZBFeK0Of4FzPlzkFS8 maksym"
     ];
   };
   security.sudo.wheelNeedsPassword = false; # key-only host, no password hash to decrypt
