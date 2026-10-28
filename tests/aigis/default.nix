@@ -201,7 +201,8 @@ pkgs.testers.runNixOSTest {
     with subtest("Every *.laufin.xyz route on aigis answers below 500"):
         broken = {}
         for host, _, _ in caddy_routes:
-            code = client.succeed(f"curl -sk -o /dev/null -w '%{{http_code}}' --max-time 10 --resolve {host}:443:${ip} https://{host}/")
+            # retries ride out slow app starts in the nested test VM; a 5xx that persists still fails
+            code = client.succeed(f"curl -sk -o /dev/null -w '%{{http_code}}' --max-time 10 --retry 2 --retry-all-errors --resolve {host}:443:${ip} https://{host}/")
             if not code.startswith(("2", "3", "4")):
                 broken[host] = code
         assert not broken, f"broken Caddy routes: {broken}"
