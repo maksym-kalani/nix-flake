@@ -9,3 +9,7 @@ creation_rules:
     key_groups:
       - age:
           - age1f3vt3mcqy8hc0dw4gqykttddqh7fp75lve6alvxmqxn98659csjs5k6uj5
+  - path_regex: secrets/belial.yaml$
+    key_groups:
+      - age:
+          - *primary
