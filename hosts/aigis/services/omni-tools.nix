@@ -6,7 +6,7 @@ let
   cfg = {
     name = "omni-tools";
 
-    image = "docker.io/iib0011/omni-tools@sha256:9a94e6ebc8dada2c7a5607b232214307e6f903a7747878602281ecdb79ced851";
+    image = "docker.io/iib0011/omni-tools@sha256:99e21d937dbe5ff86f00ac06ce17b5507a81911fa8d781f9b244b4067350e1a7";
 
     port = {
       internal = 80;

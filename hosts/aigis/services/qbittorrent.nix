@@ -9,7 +9,7 @@ let
   cfg = {
     name = "qbittorrent";
 
-    image = "lscr.io/linuxserver/qbittorrent@sha256:8d48fa8c619caadfb103f04efea8747e2a2762d6c7551690919cffb987e61cee";
+    image = "lscr.io/linuxserver/qbittorrent@sha256:75ecbb1c89ab7b0a21c4bde40b4820e4f1649d2d56d83b91913422155e8d2a5f";
 
     port = {
       internal = 8082;
