@@ -12,7 +12,8 @@ in
 
   services.kavita = {
     enable = true;
-    tokenKeyFile = config.sops.secrets.kavita_token_key.path;
+    credentials.token_key = config.sops.secrets.kavita_token_key.path;
+    settings.TokenKey = "@token_key@";
     settings.Port = port;
   };
 
