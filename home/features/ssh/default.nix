@@ -21,6 +21,46 @@
         Port = 23;
         User = "u470428";
       };
+      morgana = {
+        HostName = "192.168.2.20";
+        User = "root";
+      };
+      pve = {
+        HostName = "192.168.2.20";
+        User = "root";
+      };
+      alpine-docker = {
+        HostName = "192.168.2.201";
+        User = "root";
+      };
+      tailscale = {
+        HostName = "192.168.2.203";
+        User = "maksym";
+      };
+      hermes = {
+        HostName = "192.168.2.205";
+        User = "maksym";
+      };
+      technitium-dns = {
+        HostName = "192.168.2.207";
+        User = "root";
+      };
+      banana = {
+        HostName = "192.168.5.5";
+        User = "maksym";
+      };
+      fish = {
+        HostName = "192.168.3.5";
+        User = "maksym";
+      };
+      hass = {
+        HostName = "192.168.2.5";
+        User = "maksym";
+      };
+      printer = {
+        HostName = "192.168.2.204";
+        User = "root";
+      };
     };
   };
 }
