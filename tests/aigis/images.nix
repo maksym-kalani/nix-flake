@@ -1,13 +1,13 @@
 # pullImage hashes for the pinned digests; after a bump, use lib.fakeHash and copy the "got:" hash
 {
-  dns = "sha256-AqupAoEk9CZpgCXD5dq1rFC1Co+qjKI4UnSmvoZKyF8=";
-  fusion = "sha256-KcPxR2wXBdSVyLBK7AR/5CXCJ2GKfU16KbM19s6dWgA=";
-  hass-mariadb = "sha256-bQ8HJ+nvETOyqAN+/BhhHHiWlngMmch7K4w2Cm/oXDk=";
+  dns = "sha256-tTt98RyRjg8fAABV0n4ZIOc2Zn/Q4bew9pDUY5AseYw=";
+  fusion = "sha256-5ZqnUuV4IESQEQWM7MQBI45cbafxj/SpeFuhVYiVQhQ=";
+  hass-mariadb = "sha256-AQgxnQdAgxFNwKxWbgU4DzSe1+hnIVlVN6l1NfZkgLQ=";
   it-tools = "sha256-2b18cMqlNZcUAbPeXWJwivAURqdQw3Ku4zlHnmGIzh0=";
   matrix-admin = "sha256-NH7z2S1TWyXJz0BXtHTcPBwq3UBUvlMIkAsb5ln3Udk=";
-  mazanoke = "sha256-P/ppeCkKMJjYbL623B/SUHk2isNEKjlHMrCuH/qbhoM=";
-  omni-tools = "sha256-F3gNifyGNMVBZFsyODegQCGAUWWrlVIuXZH8jVeOQec=";
-  qbittorrent = "sha256-ty82dl+nHKffk8XpuXDgUUT+Bm4haDEItWLYuKY2Sa0=";
+  mazanoke = "sha256-Cy7VRYifo74NVzvUNW81Pd15STwaDjukWnhKzgWGdok=";
+  omni-tools = "sha256-XUzNbBtF2VudxSX5RDOA/xv4vLl/oXintZFOt9QhXbU=";
+  qbittorrent = "sha256-5bonLKHZ9KnULIF+xB2aBML1aGiVxm6TzC/s0I9iQkg=";
   vert = "sha256-5X1xoCFsPvswuAqqEZADY4J6lzjKZN+gJW3QnuIEASA=";
-  wallos = "sha256-UG8pcxLeWgn08BlaVtjqqw8hFDatmYr0eQMu7Ajqt18=";
+  wallos = "sha256-OBHiaJrT6DoxeIG5WzpQhxC0vzBFstN/JlUylTEyBt8=";
 }
