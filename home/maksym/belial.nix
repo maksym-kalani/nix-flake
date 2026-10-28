@@ -10,6 +10,7 @@
     ../features/nix-tools
     ../features/claude-code
     ../features/pi-coding-agent
+    ../features/ssh
     ../features/zsh
     ../features/desktop
 

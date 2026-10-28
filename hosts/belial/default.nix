@@ -16,5 +16,6 @@
     ./obs.nix
     ./webcam.nix
     ./nix-cache.nix
+    ./ssh.nix
   ];
 }
