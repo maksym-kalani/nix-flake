@@ -36,6 +36,10 @@
       url = "github:nlewo/comin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -84,6 +88,14 @@
           modules = [
             inputs.stylix.nixosModules.stylix
             ./hosts/belial
+            sops-nix.nixosModules.sops
+          ];
+        };
+        ci-runner = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            inputs.disko.nixosModules.disko
+            ./hosts/ci-runner
             sops-nix.nixosModules.sops
           ];
         };
