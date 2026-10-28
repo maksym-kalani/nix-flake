@@ -15,6 +15,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   services.qemuGuest.enable = true;
+  zramSwap.enable = true; # headroom for the 8 GB aigis test VM
 
   services.openssh = {
     enable = true;
