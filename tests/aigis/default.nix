@@ -63,7 +63,7 @@ let
     )
   );
 
-  ssh-keys = import "${pkgs.path}/nixos/tests/ssh-keys.nix" pkgs;
+  ssh-keys = import (pkgs.path + "/nixos/tests/ssh-keys.nix") pkgs;
 in
 assert lib.length caddyfile == 3; # exactly one tls block replaced
 pkgs.testers.runNixOSTest {
