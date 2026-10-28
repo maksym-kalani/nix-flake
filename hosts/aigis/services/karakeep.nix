@@ -23,6 +23,18 @@ in
     environmentFile = config.sops.secrets.openai_api_key.path;
   };
 
+  # upstream unit neither waits for its backends nor restarts, so a slow boot leaves it dead
+  systemd.services.karakeep-workers = {
+    after = [
+      "karakeep-browser.service"
+      "meilisearch.service"
+    ];
+    serviceConfig = {
+      Restart = "on-failure";
+      RestartSec = 10;
+    };
+  };
+
   services.meilisearch = {
     enable = true;
     package = pkgs.meilisearch;
