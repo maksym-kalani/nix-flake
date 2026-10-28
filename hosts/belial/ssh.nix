@@ -1,6 +1,5 @@
 {
   sops.secrets.maksym_ssh_key = {
-    sopsFile = ../../secrets/belial.yaml;
     owner = "maksym";
     path = "/home/maksym/.ssh/maksym";
   };
