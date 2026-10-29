@@ -2,7 +2,7 @@
 {
   dns = "sha256-tTt98RyRjg8fAABV0n4ZIOc2Zn/Q4bew9pDUY5AseYw=";
   fusion = "sha256-5ZqnUuV4IESQEQWM7MQBI45cbafxj/SpeFuhVYiVQhQ=";
-  hass-mariadb = "sha256-AQgxnQdAgxFNwKxWbgU4DzSe1+hnIVlVN6l1NfZkgLQ=";
+  hass-mariadb = "sha256-kxUOMAIioq1gQK+Oa0FKubKM4zEac/ltuzObgeYP0Y8=";
   it-tools = "sha256-2b18cMqlNZcUAbPeXWJwivAURqdQw3Ku4zlHnmGIzh0=";
   matrix-admin = "sha256-NH7z2S1TWyXJz0BXtHTcPBwq3UBUvlMIkAsb5ln3Udk=";
   mazanoke = "sha256-Cy7VRYifo74NVzvUNW81Pd15STwaDjukWnhKzgWGdok=";
