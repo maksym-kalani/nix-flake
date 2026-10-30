@@ -1,10 +1,6 @@
+{ inputs, pkgs, ... }:
 {
-  outputs,
-  pkgs,
-  ...
-}:
-{
-  nixpkgs.overlays = [ outputs.overlays.zen-browser-release-pin ];
-
-  environment.systemPackages = [ pkgs.zen-browser ];
+  environment.systemPackages = [
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
 }
