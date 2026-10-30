@@ -2,7 +2,11 @@
 {
   additions = final: _prev: import ../pkgs { pkgs = final; };
 
-  modifications = _final: prev: {
+  modifications = final: prev: {
+    mcp-nixos = final.callPackage ./mcp-nixos.nix {
+      inherit (final) stable;
+    };
+
     caddy = prev.caddy.overrideAttrs (_oldAttrs: rec {
       version = "2.9.1";
       vendorHash = "sha256-qrlpuqTnFn/9oMTMovswpS1eAI7P9gvesoMpsIWKcY8=";
