@@ -1,9 +1,8 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
   programs.vicinae = {
     enable = true;
     systemd.enable = true;
-    package = pkgs.vicinae;
   };
 
   stylix.targets.vicinae.colors.override = {
