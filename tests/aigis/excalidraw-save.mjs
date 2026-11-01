@@ -1,8 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-const appDir = process.env.EXCALIDRAW_APP_DIR || '/app';
-const { default: WebSocket } = await import(`${appDir}/node_modules/ws/index.js`);
 const base = process.env.EXCALIDRAW_TEST_URL || 'http://127.0.0.1:3000';
 const dataDir = process.env.HOST_HOME_PATH || '/data';
 const filename = `${dataDir}/aigis-vm-roundtrip`;
@@ -51,8 +49,8 @@ async function rpc(method, params, notification = false) {
 let imported;
 let cleared = false;
 const socket = new WebSocket(base.replace(/^http/, 'ws'));
-socket.on('message', raw => {
-  const message = JSON.parse(raw.toString());
+socket.addEventListener('message', event => {
+  const message = JSON.parse(event.data);
   if (!message.requestId) return;
   let data = {};
   if (message.type === 'save_canvas_request') data = { excalidraw: JSON.stringify(scene) };
@@ -67,10 +65,10 @@ socket.on('message', raw => {
 try {
   await new Promise((resolve, reject) => {
     const timeout = setTimeout(() => reject(new Error('Canvas pin timed out')), 10000);
-    socket.on('error', reject);
-    socket.on('open', () => socket.send(JSON.stringify({ type: 'client_pin', pinned: true })));
-    socket.on('message', raw => {
-      const message = JSON.parse(raw.toString());
+    socket.addEventListener('error', () => reject(new Error('Canvas WebSocket connection failed')));
+    socket.addEventListener('open', () => socket.send(JSON.stringify({ type: 'client_pin', pinned: true })));
+    socket.addEventListener('message', event => {
+      const message = JSON.parse(event.data);
       if (message.type === 'pin_status' && message.isPinned) {
         clearTimeout(timeout);
         resolve();
