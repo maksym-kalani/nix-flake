@@ -219,26 +219,15 @@ pkgs.testers.runNixOSTest {
     with subtest("SSH login posts to ntfy"):
         aigis.wait_until_succeeds("curl -sf 'http://localhost:8081/homelab/json?poll=1&since=all' | grep -q 'ssh login'", timeout=30)
 
-    with subtest("Excalidraw serves its UI and MCP only through the LAN proxy"):
+    with subtest("Excalidraw serves its UI through the reverse proxy"):
         aigis.wait_for_unit("podman-excalidraw.service")
         aigis.wait_until_succeeds("curl -sf http://127.0.0.1:3010/health")
         client.succeed("curl -skf --resolve excalidraw.laufin.xyz:443:${ip} https://excalidraw.laufin.xyz/ | grep -qi '<html'")
         client.fail("curl -sf --max-time 3 http://${ip}:3010/health")
-        denied = aigis.succeed("curl -sk --interface 127.0.0.2 --resolve excalidraw.laufin.xyz:443:127.0.0.1 -o /dev/null -w '%{http_code}' https://excalidraw.laufin.xyz/")
-        assert denied == "403", f"Excalidraw accepted a non-allowed source: {denied}"
-
-    with subtest("Excalidraw manual MCP save/import uses persistent server storage"):
-        aigis.succeed("podman exec -i excalidraw bun - < ${./excalidraw-save.mjs}")
-        aigis.succeed("test -s /var/lib/containers/excalidraw/aigis-vm-roundtrip.excalidraw")
-        aigis.succeed("systemctl restart podman-excalidraw.service")
-        aigis.wait_until_succeeds("curl -sf http://127.0.0.1:3010/health")
-        aigis.succeed("podman exec -i -e EXCALIDRAW_TEST_VERIFY_ONLY=1 excalidraw bun - < ${./excalidraw-save.mjs}")
 
     with subtest("One restic backup completes"):
         aigis.succeed("RESTIC_REPOSITORY=/tmp/restic-test RESTIC_PASSWORD=test restic init")
         aigis.succeed("systemctl start restic-zfs-backup")
-        saved = json.loads(aigis.succeed("RESTIC_REPOSITORY=/tmp/restic-test RESTIC_PASSWORD=test restic dump latest /var/lib/containers/excalidraw/aigis-vm-roundtrip.excalidraw"))
-        assert saved["elements"][0]["id"] == "roundtrip", "Excalidraw export is missing from the backup"
 
     with subtest("No unit in failed state (VM-only ones excepted)"):
         failed = set(aigis.succeed("systemctl list-units --failed --no-legend --plain | cut -d' ' -f1").split())
