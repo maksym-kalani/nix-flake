@@ -43,6 +43,14 @@ in
           reverse_proxy http://192.168.2.205:9119
         }
 
+        @excalidraw host excalidraw.laufin.xyz
+        handle @excalidraw {
+          # The upstream API has no authentication; keep it on the LAN.
+          @outside not remote_ip 192.168.0.0/16 127.0.0.1 ::1
+          respond @outside "LAN access only" 403
+          reverse_proxy http://127.0.0.1:3010
+        }
+
         @dns host dns.laufin.xyz
         handle @dns {
           reverse_proxy http://192.168.2.50:5380
