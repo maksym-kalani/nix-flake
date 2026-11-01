@@ -1,5 +1,6 @@
 {
   imports = [
+    ./excalidraw.nix
     ./flaresolverr.nix
     ./fusion.nix
     ./hass-mariadb.nix

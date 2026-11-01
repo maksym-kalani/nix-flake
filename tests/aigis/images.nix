@@ -1,5 +1,6 @@
 # pullImage hashes for the pinned digests; after a bump, use lib.fakeHash and copy the "got:" hash
 {
+  excalidraw = "sha256-u/3XnCFt9BMej//Mvlh/8calclB99p0ublpQSv6xiTM=";
   dns = "sha256-tTt98RyRjg8fAABV0n4ZIOc2Zn/Q4bew9pDUY5AseYw=";
   fusion = "sha256-5ZqnUuV4IESQEQWM7MQBI45cbafxj/SpeFuhVYiVQhQ=";
   hass-mariadb = "sha256-kxUOMAIioq1gQK+Oa0FKubKM4zEac/ltuzObgeYP0Y8=";

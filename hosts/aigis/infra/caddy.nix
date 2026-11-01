@@ -43,6 +43,11 @@ in
           reverse_proxy http://192.168.2.205:9119
         }
 
+        @excalidraw host excalidraw.laufin.xyz
+        handle @excalidraw {
+          reverse_proxy http://127.0.0.1:3010
+        }
+
         @dns host dns.laufin.xyz
         handle @dns {
           reverse_proxy http://192.168.2.50:5380

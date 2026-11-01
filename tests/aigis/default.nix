@@ -219,6 +219,12 @@ pkgs.testers.runNixOSTest {
     with subtest("SSH login posts to ntfy"):
         aigis.wait_until_succeeds("curl -sf 'http://localhost:8081/homelab/json?poll=1&since=all' | grep -q 'ssh login'", timeout=30)
 
+    with subtest("Excalidraw serves its UI through the reverse proxy"):
+        aigis.wait_for_unit("podman-excalidraw.service")
+        aigis.wait_until_succeeds("curl -sf http://127.0.0.1:3010/health")
+        client.succeed("curl -skf --resolve excalidraw.laufin.xyz:443:${ip} https://excalidraw.laufin.xyz/ | grep -qi '<html'")
+        client.fail("curl -sf --max-time 3 http://${ip}:3010/health")
+
     with subtest("One restic backup completes"):
         aigis.succeed("RESTIC_REPOSITORY=/tmp/restic-test RESTIC_PASSWORD=test restic init")
         aigis.succeed("systemctl start restic-zfs-backup")
