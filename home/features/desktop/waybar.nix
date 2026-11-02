@@ -31,6 +31,7 @@
           "tray"
           "bluetooth"
           "custom/notification"
+          "custom/nixos"
           "custom/exit"
           "clock"
         ];
@@ -81,6 +82,14 @@
           on-click = "wlogout-launcher";
           on-click-right = "hyprlock";
           tooltip-format = "Left: Power menu\nRight: Lock screen";
+        };
+
+        "custom/nixos" = {
+          format = "{}";
+          return-type = "json";
+          interval = 300;
+          exec = "nix-flake-status";
+          on-click = "kitty --class nixos-rebuild --title 'NixOS Rebuild' nix-flake-rebuild";
         };
 
         "custom/notification" = {
@@ -392,6 +401,16 @@
       #custom-notification {
         font-size: 20px;
         color: @iconcolor;
+      }
+
+      #custom-nixos {
+        font-size: 16px;
+        color: @textcolor2;
+        padding: 0px 5px 0px 5px;
+      }
+
+      #custom-nixos.update {
+        color: @error;
       }
 
       #custom-exit {

@@ -139,6 +139,30 @@ let
     hyprctl dispatch workspace number 1
   '';
 
+  # Only shows a waybar tile when the running system's flake rev (develop) differs from the remote.
+  nix-flake-status = pkgs.writeShellScriptBin "nix-flake-status" ''
+    current=$(/run/current-system/sw/bin/nixos-version --json | ${pkgs.jq}/bin/jq -r '.configurationRevision // "unknown"')
+    remote=$(${pkgs.coreutils}/bin/timeout 15 ${pkgs.git}/bin/git ls-remote https://github.com/maksym-kalani/nix-flake.git refs/heads/develop | cut -f1)
+    if [[ -z "$remote" ]]; then
+      echo '{"text": "", "tooltip": "", "class": ""}'
+      exit 0
+    fi
+    if [[ "$current" == "$remote" ]]; then
+      echo '{"text": "", "tooltip": "", "class": ""}'
+      exit 0
+    fi
+    tooltip="NixOS update available on develop: ''${remote:0:7}"
+    [[ "$current" == "dirty" ]] && tooltip="System built from a dirty tree — commit and rebuild"
+    [[ "$current" == "unknown" ]] && tooltip="System rev unknown — rebuild once to enable tracking"
+    echo "{\"text\": \"󰚰\", \"tooltip\": \"$tooltip\", \"class\": \"update\"}"
+  '';
+
+  nix-flake-rebuild = pkgs.writeShellScriptBin "nix-flake-rebuild" ''
+    cd "$HOME/nix-flake"
+    ${pkgs.git}/bin/git pull --ff-only
+    sudo nixos-rebuild switch --flake .#belial
+  '';
+
   hermes-browser = pkgs.writeShellScriptBin "hermes-browser" ''
     # Reverse-tunnels this Chromium's CDP port to Hermes so it can drive it while logins stay local.
     set -euo pipefail
@@ -208,5 +232,7 @@ in
     toggle-tv
     prepare-game
     hermes-browser
+    nix-flake-status
+    nix-flake-rebuild
   ];
 }
