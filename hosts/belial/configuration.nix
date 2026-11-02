@@ -1,8 +1,11 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
   ];
+
+  # lets waybar compare the running system against the flake's develop branch
+  system.configurationRevision = inputs.self.rev or "dirty";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
