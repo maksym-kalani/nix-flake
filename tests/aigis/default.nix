@@ -222,7 +222,8 @@ pkgs.testers.runNixOSTest {
     with subtest("Excalidraw serves its UI through the reverse proxy"):
         aigis.wait_for_unit("podman-excalidraw.service")
         aigis.wait_until_succeeds("curl -sf http://127.0.0.1:3010/health")
-        client.succeed("curl -skf --resolve excalidraw.laufin.xyz:443:${ip} https://excalidraw.laufin.xyz/ | grep -qi '<html'")
+        # Drain the response so an early grep match cannot break curl's output pipe.
+        client.succeed("curl -skf --resolve excalidraw.laufin.xyz:443:${ip} https://excalidraw.laufin.xyz/ | grep -i '<html' > /dev/null")
         client.fail("curl -sf --max-time 3 http://${ip}:3010/health")
 
     with subtest("One restic backup completes"):
