@@ -89,7 +89,7 @@
           return-type = "json";
           interval = 300;
           exec = "nix-flake-status";
-          on-click = "kitty --title 'NixOS Rebuild' nix-flake-rebuild";
+          on-click = "kitty --class nixos-rebuild --title 'NixOS Rebuild' nix-flake-rebuild";
         };
 
         "custom/notification" = {
