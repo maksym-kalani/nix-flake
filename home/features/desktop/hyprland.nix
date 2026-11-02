@@ -675,6 +675,15 @@ in
 
       window_rule = [
         {
+          match.class = "(nixos-rebuild)";
+          float = true;
+          center = true;
+        }
+        {
+          match.class = "(nixos-rebuild)";
+          size = "900 600";
+        }
+        {
           match.class = "(.*org.pulseaudio.pavucontrol.*)";
           float = true;
           pin = true;
