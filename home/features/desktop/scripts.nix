@@ -159,8 +159,12 @@ let
 
   nix-flake-rebuild = pkgs.writeShellScriptBin "nix-flake-rebuild" ''
     cd "$HOME/nix-flake"
+    # the indicator compares against develop, so we must rebuild exactly that branch
+    ${pkgs.git}/bin/git checkout develop
     ${pkgs.git}/bin/git pull --ff-only
     sudo nixos-rebuild switch --flake .#belial
+    # force an immediate re-poll instead of waiting out the waybar interval
+    ${pkgs.procps}/bin/pkill -SIGUSR1 waybar
   '';
 
   hermes-browser = pkgs.writeShellScriptBin "hermes-browser" ''
