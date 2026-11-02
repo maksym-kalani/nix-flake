@@ -81,6 +81,43 @@ Access stable packages via `pkgs.stable.<package>`. Custom Caddy build with name
 
 ## Workflow Rules
 
+### Commit and PR titles
+
+- Use Conventional Commits: `type(scope): short English description`. The scope is optional; omit it when no single area fits.
+- Choose the type by the purpose of the change, not the file extension:
+
+  | Type | Purpose |
+  | --- | --- |
+  | `feat` | New feature or capability |
+  | `fix` | Bug or security fix |
+  | `refactor` | Restructuring without behavior changes |
+  | `perf` | Performance or resource-use improvement |
+  | `docs` | Documentation only |
+  | `test` | Tests only |
+  | `style` | Formatting only, not visual UI changes |
+  | `build` | Build or packaging mechanism |
+  | `ci` | CI/CD pipelines |
+  | `chore` | Routine maintenance, dependency or lock updates |
+  | `revert` | Reverting an earlier change |
+
+- A dependency update that fixes a specific failure is `fix`, not automatically `chore`.
+- Use the narrowest meaningful, consistent scope: a component such as `flame`, `caddy`, `suwayomi`, `pi`, `whisper`, or `restic`; `aigis` or `belial` for host-wide changes; `deps`, `secrets`, or `overlays` for cross-cutting changes.
+- Use `!` only for an incompatibility requiring consumer adaptation, not a large diff or a deployment. Explain the break and migration in the body.
+- Examples: `fix(caddy): correct service upstream`, `chore(deps): update flake inputs`, `docs: document naming conventions`.
+
+### Branch names
+
+- Name new work branches `type/short-kebab-case-description`, using the same purpose-based types as commit titles.
+- Use lowercase English words and include the component or host when it clarifies the change: `fix/caddy-service-upstream`, `feat/belial-update-indicator`, `docs/agent-naming-conventions`.
+- Keep names descriptive and free of spaces, personal prefixes, and agent or tool names. Leave automation-managed branch names unchanged.
+
+### PR descriptions
+
+- Write a short, self-contained English body, normally one to three bullets describing the actual technical changes. Add a reason or migration caveat only when needed to understand or use the change.
+- Run the relevant validation before opening the PR. Do not add routine Verification/Test Plan sections, test checklists, command transcripts, or repeated non-goals to the description.
+- Disclose substantive risks and validation blockers; brevity must not hide an unmet required check. Follow any required repository contribution fields.
+- Keep private conversation context out of PR descriptions and commit messages: describe the resulting change, not user instructions, screenshots, personal preferences, task history, agent orchestration, or local evidence paths.
+
 ### Verify the target first
 
 - Before making changes, identify the exact target config and the machine/OS required to validate it.
