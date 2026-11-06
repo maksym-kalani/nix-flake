@@ -157,11 +157,62 @@ let
     echo "{\"text\": \"󰚰\", \"tooltip\": \"$tooltip\", \"class\": \"update\"}"
   '';
 
+  # Reads PR bodies oldest first; a package bumped in several PRs collapses to oldest -> newest.
+  nix-flake-pr-packages = pkgs.writeShellScriptBin "nix-flake-pr-packages" ''
+    exec ${pkgs.gawk}/bin/awk '
+      { sub(/\r$/, "") }
+      /^## / { inpkgs = ($0 == "## Package / Home Manager / service updates"); next }
+      !inpkgs || !/^- / || !/\(hosts: [^)]*belial/ { next }
+      {
+        line = substr($0, 3)
+        name = substr(line, 1, index(line, ": ") - 1)
+        rest = substr(line, length(name) + 3)
+        if (!(name in seen)) { seen[name] = 1; order[++n] = name }
+        if (match(rest, /^`[^`]*` -> `[^`]*`/)) {
+          split(substr(rest, 1, RLENGTH), v, "`")
+          if (!(name in from)) from[name] = v[2]
+          to[name] = v[4]
+        } else {
+          sub(/ \(hosts:.*/, "", rest)
+          note[name] = rest
+        }
+      }
+      END {
+        for (i = 1; i <= n; i++) {
+          name = order[i]
+          if (name in from) { if (from[name] != to[name]) printf "  %s: %s -> %s\n", name, from[name], to[name] }
+          else printf "  %s: %s\n", name, note[name]
+        }
+      }
+    '
+  '';
+
   nix-flake-rebuild = pkgs.writeShellScriptBin "nix-flake-rebuild" ''
     cd "$HOME/nix-flake"
     # the indicator compares against develop, so we must rebuild exactly that branch
     ${pkgs.git}/bin/git checkout develop
     ${pkgs.git}/bin/git pull --ff-only
+
+    # Bump PRs list their package changes in the body; merge every one the running system is behind on.
+    current=$(/run/current-system/sw/bin/nixos-version --json | ${pkgs.jq}/bin/jq -r '.configurationRevision // "unknown"')
+    if ${pkgs.git}/bin/git cat-file -e "$current^{commit}" 2>/dev/null; then
+      prs=$(${pkgs.git}/bin/git log --reverse --format=%s "$current..HEAD" | ${pkgs.gnused}/bin/sed -nE 's/.*\(#([0-9]+)\)$/\1/p')
+      updates=$(for pr in $prs; do
+        ${pkgs.curl}/bin/curl -fsS --max-time 10 "https://api.github.com/repos/maksym-kalani/nix-flake/pulls/$pr" \
+          | ${pkgs.jq}/bin/jq -r '.body // ""' \
+          || echo "Could not fetch PR #$pr, its packages are missing from the list" >&2
+      done | ${nix-flake-pr-packages}/bin/nix-flake-pr-packages)
+      if [[ -n "$updates" ]]; then
+        echo "Packages to be updated on belial:"
+        echo "$updates"
+      else
+        echo "No belial package updates in the merged PRs"
+      fi
+    else
+      echo "Skipping the package list - running system rev ($current) is not on develop"
+    fi
+    echo
+
     sudo nixos-rebuild switch --flake .#belial
     # force an immediate re-poll instead of waiting out the waybar interval
     ${pkgs.procps}/bin/pkill -SIGUSR1 waybar
