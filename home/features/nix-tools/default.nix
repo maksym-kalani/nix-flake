@@ -6,7 +6,7 @@
     sops
     nix-weather
     devenv
-    mcp-nixos
+    stable.mcp-nixos
     deadnix
   ];
 }
