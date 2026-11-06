@@ -8,7 +8,7 @@
   matrix-admin = "sha256-NH7z2S1TWyXJz0BXtHTcPBwq3UBUvlMIkAsb5ln3Udk=";
   mazanoke = "sha256-Cy7VRYifo74NVzvUNW81Pd15STwaDjukWnhKzgWGdok=";
   omni-tools = "sha256-XUzNbBtF2VudxSX5RDOA/xv4vLl/oXintZFOt9QhXbU=";
-  qbittorrent = "sha256-5bonLKHZ9KnULIF+xB2aBML1aGiVxm6TzC/s0I9iQkg=";
+  qbittorrent = "sha256-/Ii36WBrXQx6QpOPwwOzX/MycKyBEuCMR2QVoSbGjAY=";
   vert = "sha256-5X1xoCFsPvswuAqqEZADY4J6lzjKZN+gJW3QnuIEASA=";
-  wallos = "sha256-OBHiaJrT6DoxeIG5WzpQhxC0vzBFstN/JlUylTEyBt8=";
+  wallos = "sha256-q+ww/LPqWYeskG74gCZbVGht2O7t6j2Q4DRbZsnbZ8Q=";
 }
