@@ -19,19 +19,8 @@ jobs:
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: [self-hosted, linux, x64]
     timeout-minutes: 10
-    outputs:
-      code: ${{ steps.changes.outputs.code }}
     steps:
-      - uses: actions/checkout@v5
-      - id: changes
-        uses: dorny/paths-filter@v3
-        with:
-          predicate-quantifier: every
-          filters: |
-            code:
-              - '**'
-              - '!docs/**'
-              - '!**/*.md'
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - name: Format
         run: nix fmt -- --ci
       - name: Secrets are sops-encrypted
@@ -46,8 +35,12 @@ jobs:
     needs: lint
     runs-on: [self-hosted, linux, x64]
     timeout-minutes: 30
+    outputs:
+      aigis_changed: ${{ steps.aigis.outputs.changed }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
       - name: Eval hosts and homes
         run: |
           for o in \
@@ -61,12 +54,24 @@ jobs:
           done
       # after the evals: --no-build cannot fetch sources that are read during eval
       - run: nix flake check --no-build
+      - name: Compare Aigis with PR base
+        id: aigis
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          changed=true
+          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+            base="git+file://$GITHUB_WORKSPACE?rev=$BASE_SHA"
+            candidate="git+file://$GITHUB_WORKSPACE?rev=$GITHUB_SHA"
+            changed=$(bash .github/scripts/aigis-changed.sh "$base" "$candidate")
+          fi
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
 
   aigis-vm:
     needs: [lint, eval]
-    if: needs.lint.outputs.code == 'true'
+    if: needs.eval.outputs.aigis_changed == 'true'
     runs-on: [self-hosted, linux, x64]
     timeout-minutes: 120
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - run: nix build -L --no-link .#checks.x86_64-linux.aigis-vm
