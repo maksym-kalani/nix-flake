@@ -49,6 +49,12 @@
 
     opacity.popups = 0.7;
 
+    icons = {
+      enable = true;
+      package = pkgs.reversal-icon-theme.override { colorVariants = [ "purple" ]; };
+      dark = "Reversal-purple-dark";
+    };
+
     cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
