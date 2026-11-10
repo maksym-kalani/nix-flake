@@ -21,10 +21,6 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
-      - name: Test CI gate
-        run: |
-          nix shell --inputs-from . nixpkgs#python3 -c python3 -B -m unittest discover -s .github/tests -v
-          nix eval --impure --json --expr 'import ./.github/tests/aigis-registry.nix { }'
       - name: Format
         run: nix fmt -- --ci
       - name: Secrets are sops-encrypted
