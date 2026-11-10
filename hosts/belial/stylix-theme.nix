@@ -51,8 +51,8 @@
 
     icons = {
       enable = true;
-      package = pkgs.reversal-icon-theme;
-      dark = "Reversal-dark";
+      package = pkgs.reversal-icon-theme.override { colorVariants = [ "purple" ]; };
+      dark = "Reversal-purple-dark";
     };
 
     cursor = {
