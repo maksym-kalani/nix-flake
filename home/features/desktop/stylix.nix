@@ -1,11 +1,6 @@
-{ config, pkgs, ... }:
+{ ... }:
 {
   # Core stylix settings are inherited from hosts/belial/stylix.nix.
-
-  gtk.iconTheme = {
-    name = "Colloid";
-    package = pkgs.colloid-icon-theme;
-  };
 
   stylix = {
     # Rofi is not installed; do not let Stylix emit its Home Manager options.
