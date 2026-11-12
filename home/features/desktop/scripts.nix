@@ -198,8 +198,7 @@ let
     if ${pkgs.git}/bin/git cat-file -e "$current^{commit}" 2>/dev/null; then
       prs=$(${pkgs.git}/bin/git log --reverse --format=%s "$current..HEAD" | ${pkgs.gnused}/bin/sed -nE 's/.*\(#([0-9]+)\)$/\1/p')
       updates=$(for pr in $prs; do
-        ${pkgs.curl}/bin/curl -fsS --max-time 10 "https://api.github.com/repos/maksym-kalani/nix-flake/pulls/$pr" \
-          | ${pkgs.jq}/bin/jq -r '.body // ""' \
+        ${pkgs.gh}/bin/gh api "repos/maksym-kalani/nix-flake/pulls/$pr" --jq '.body // ""' \
           || echo "Could not fetch PR #$pr, its packages are missing from the list" >&2
       done | ${nix-flake-pr-packages}/bin/nix-flake-pr-packages)
       if [[ -n "$updates" ]]; then
