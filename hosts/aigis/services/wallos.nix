@@ -7,7 +7,7 @@ let
   cfg = {
     name = "wallos";
 
-    image = "docker.io/bellamy/wallos@sha256:78b73a32ae24bcca67d6f4b96ca76fe29ee8da5e8df1769df1e612a4e776c904";
+    image = "docker.io/bellamy/wallos@sha256:182d4be4dae26834cc5cec3686bb142e78b0a139a0eb1059355d061d8c0de3e5";
 
     port = {
       internal = 80;
