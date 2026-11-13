@@ -194,9 +194,9 @@ in
     enable = true;
     package = pkgs.caddy.withPlugins {
       plugins = [
-        "github.com/caddy-dns/namecheap@v0.0.0-20250228023406-ef9fadb67785"
+        "github.com/caddy-dns/namecheap@v0.0.0-20251203154933-c7fcf32a68fb"
       ];
-      hash = "sha256-HrAvdmVSaAwXfyrh6x7/46ZKHwk8/CQUF2H9coUmxws=";
+      hash = "sha256-EDbnQ9yFw4vQJrEWtpMzimgGWkaczesGeHA0hRSAioY=";
     };
     configFile = caddyfile;
     group = "tankusers";

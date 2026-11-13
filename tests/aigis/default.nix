@@ -176,8 +176,12 @@ pkgs.testers.runNixOSTest {
     aigis.wait_for_open_port(8080)
 
     def gatus_down():
-        statuses = json.loads(aigis.succeed("curl -sf http://localhost:8080/api/v1/endpoints/statuses"))
-        up = {s["name"] for s in statuses if s.get("results") and s["results"][-1]["success"]}
+        # Keep the driver's command-channel response bounded as Gatus history grows.
+        # jq validates the complete HTTP JSON inside the VM before projecting names.
+        up = set(json.loads(aigis.succeed(
+            "curl -sf http://localhost:8080/api/v1/endpoints/statuses | "
+            "${pkgs.jq}/bin/jq -c '[.[] | select(.results[-1].success == true) | .name]'"
+        )))
         return [e["name"] for e in endpoints if e["name"] not in up]
 
     def gatus_all_up(last_try):
