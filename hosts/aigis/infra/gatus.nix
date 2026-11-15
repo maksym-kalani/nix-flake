@@ -7,6 +7,22 @@ let
   ntfyLink = "http://192.168.2.50:8081";
   ntfyTopic = "health";
   port = 8080;
+  morganaURL = "tcp://192.168.2.20:8006";
+  morganaDependent = endpoint: {
+    name = "${endpoint.name} availability";
+    interval = "1m";
+    timeout = "30s";
+    endpoints = [
+      {
+        name = "Morgana for ${endpoint.name}";
+        url = morganaURL;
+        conditions = [ "[CONNECTED] == true" ];
+        client.timeout = "5s";
+        alerts = [ ];
+      }
+      endpoint
+    ];
+  };
 in
 {
   services.gatus = {
@@ -32,26 +48,8 @@ in
 
       endpoints = [
         {
-          name = "Hermes";
-          url = "http://192.168.2.205:9119/api/status";
-          interval = "1m";
-          conditions = [
-            "[STATUS] == 200"
-          ];
-          alerts = [
-            {
-              type = "ntfy";
-              enabled = true;
-              send-on-resolved = true;
-              description = "Hermes health check";
-              failure-threshold = 3;
-              success-threshold = 1;
-            }
-          ];
-        }
-        {
           name = "Morgana";
-          url = "tcp://192.168.2.20:8006";
+          url = morganaURL;
           interval = "1m";
           conditions = [
             "[CONNECTED] == true"
@@ -80,6 +78,28 @@ in
               enabled = true;
               send-on-resolved = true;
               description = "Home Assistant health check";
+              failure-threshold = 3;
+              success-threshold = 1;
+            }
+          ];
+        }
+      ];
+
+      # Separate suites keep a sibling failure from skipping another service.
+      suites = map morganaDependent [
+        {
+          name = "Hermes";
+          url = "http://192.168.2.205:9119/api/status";
+          interval = "1m";
+          conditions = [
+            "[STATUS] == 200"
+          ];
+          alerts = [
+            {
+              type = "ntfy";
+              enabled = true;
+              send-on-resolved = true;
+              description = "Hermes health check";
               failure-threshold = 3;
               success-threshold = 1;
             }
