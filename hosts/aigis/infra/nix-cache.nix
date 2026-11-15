@@ -6,16 +6,18 @@ let
   allowedSources = [ "192.168.1.107" ]; # belial
 in
 {
-  # Read by systemd LoadCredential as root, so the default root-only secret is fine.
   sops.secrets.nix_cache_private_key = { };
 
-  services.nix-serve = {
+  services.harmonia.cache = {
     enable = true;
-    bindAddress = ip;
-    inherit port;
-    openFirewall = false;
-    secretKeyFile = config.sops.secrets.nix_cache_private_key.path;
+    signKeyPaths = [ config.sops.secrets.nix_cache_private_key.path ];
+    settings = {
+      bind = "${ip}:${toString port}";
+      priority = 30;
+    };
   };
+  # The socket may bind before the static address is up.
+  systemd.sockets.harmonia.socketConfig.FreeBind = true;
 
   networking.firewall.extraCommands = builtins.concatStringsSep "\n" (
     map (src: ''
@@ -23,10 +25,9 @@ in
     '') allowedSources
   );
 
-  # "/" is not served by nix-serve; probe the cache metadata endpoint instead.
   services.gatus.settings.endpoints = [
     {
-      name = "nix-cache";
+      name = "Harmonia Cache";
       url = "http://${ip}:${toString port}/nix-cache-info";
       interval = "1m";
       conditions = [ "[STATUS] == 200" ];

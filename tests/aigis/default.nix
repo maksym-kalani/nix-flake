@@ -156,7 +156,7 @@ pkgs.testers.runNixOSTest {
           prefixLength = 24;
         }
         {
-          address = "192.168.1.107"; # belial, the only nix-serve client
+          address = "192.168.1.107"; # belial, the only nix cache client
           prefixLength = 24;
         }
       ];
@@ -195,12 +195,17 @@ pkgs.testers.runNixOSTest {
 
     with subtest("LAN client reaches every local service through the firewall"):
         for e in endpoints:
-            if e["name"] != "nix-cache":
+            if ":5757/" not in e["url"]:
                 client.succeed(f"curl -sf --max-time 10 {e['url']}")
 
-    with subtest("nix-serve only answers belial"):
+    with subtest("nix cache only answers belial"):
         client.succeed("curl -sf --max-time 10 --interface 192.168.1.107 http://${ip}:5757/nix-cache-info")
         client.fail("curl -sf --max-time 5 http://${ip}:5757/nix-cache-info")
+
+    with subtest("nix cache serves signed NARs that verify against its key"):
+        nix = "nix --extra-experimental-features nix-command"
+        pub = aigis.succeed(f"{nix} key convert-secret-to-public < /run/secrets/nix_cache_private_key").strip()
+        aigis.succeed(f"{nix} store verify --store http://${ip}:5757 --trusted-public-keys '{pub}' ${prod.services.harmonia.package}")
 
     with subtest("Every *.laufin.xyz route on aigis answers below 500"):
         broken = {}
