@@ -365,6 +365,18 @@
         border-radius: 15px;
       }
 
+      #workspaces button.taskbar-window,
+      #workspaces button.taskbar-window:hover,
+      #workspaces button.taskbar-window.active {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+      }
+
       tooltip {
         background-color: alpha(@surface, 0.7);
         border-radius: 12px;
