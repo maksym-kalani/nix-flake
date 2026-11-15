@@ -15,6 +15,15 @@ in
   services.searx = {
     enable = true;
     environmentFile = config.sops.templates."searxng-env".path;
+    faviconsSettings.favicons = {
+      cfg_schema = 1;
+      cache = {
+        db_url = "/var/cache/searx/faviconcache.db";
+        LIMIT_TOTAL_BYTES = 134217728;
+        MAINTENANCE_MODE = "auto";
+        MAINTENANCE_PERIOD = 3600;
+      };
+    };
     settings = {
       use_default_settings = true;
 
@@ -43,9 +52,20 @@ in
         secret_key = "$SEARXNG_SECRET_KEY";
       };
 
-      ui.infinite_scroll = true;
-
-      plugins."searx.plugins.tracker_url_remover.SXNGPlugin".active = false;
+      # SearXNG replaces the complete upstream plugin registration map.
+      plugins = {
+        "searx.plugins.calculator.SXNGPlugin".active = true;
+        "searx.plugins.infinite_scroll.SXNGPlugin".active = true;
+        "searx.plugins.hash_plugin.SXNGPlugin".active = true;
+        "searx.plugins.self_info.SXNGPlugin".active = true;
+        "searx.plugins.unit_converter.SXNGPlugin".active = true;
+        "searx.plugins.ahmia_filter.SXNGPlugin".active = true;
+        "searx.plugins.hostnames.SXNGPlugin".active = true;
+        "searx.plugins.time_zone.SXNGPlugin".active = true;
+        "searx.plugins.oa_doi_rewrite.SXNGPlugin".active = false;
+        "searx.plugins.tor_check.SXNGPlugin".active = false;
+        "searx.plugins.tracker_url_remover.SXNGPlugin".active = true;
+      };
 
       engines = [
         {
