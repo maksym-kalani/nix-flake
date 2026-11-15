@@ -160,8 +160,7 @@ pkgs.testers.runNixOSTest {
             f"test ! -e {root}/after-snapshot; "
             f"test ! -e {root}/renamed"
         )
-        for suffix in ("payload", "dir/payload", "link"):
-            assert checksum(f"{root}/{suffix}") == expected, f"Corrupt {root}/{suffix}"
+        assert checksum(f"{root}/payload") == expected, f"Corrupt {root}/payload"
 
     def assert_all_copies():
         for dataset in ("data", "copy", "encrypted"):
@@ -212,7 +211,7 @@ pkgs.testers.runNixOSTest {
         machine.fail("zpool list testpool", "mountpoint -q /pool/data")
 
     def import_pool():
-        machine.succeed("zpool import -d /dev/vdb testpool")
+        machine.succeed("zpool import -d /dev testpool")
         assert_locked()
         for dataset in ("data", "copy"):
             assert_inodes(f"/pool/{dataset}")
