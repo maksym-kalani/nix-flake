@@ -67,6 +67,21 @@ jobs:
           fi
           echo "changed=$changed" >> "$GITHUB_OUTPUT"
 
+  zfs-linux-7-3:
+    needs: [lint, eval]
+    runs-on: [self-hosted, linux, x64]
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - name: Build stable userspace outputs and patched module
+        run: |
+          nix build -L --no-link \
+            '.#nixosConfigurations.aigis.config.boot.zfs.package^*' \
+            .#nixosConfigurations.aigis.config.boot.zfs.modulePackage \
+            .#checks.x86_64-linux.zfs-linux-7-3-contract
+      - name: ZFS initrd and cold-start regression
+        run: nix build -L --no-link .#checks.x86_64-linux.zfs-linux-7-3
+
   aigis-vm:
     needs: [lint, eval]
     if: needs.eval.outputs.aigis_changed == 'true'
