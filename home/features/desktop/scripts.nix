@@ -212,6 +212,9 @@ let
     fi
     echo
 
+    # wonderdraft's deb is fetched by fixed hash, so stage it in the store before the build
+    (cd "$HOME/nix-flake/pkgs/wonderdraft" && ./add-to-store.sh)
+
     sudo nixos-rebuild switch --flake .#belial
     # force an immediate re-poll instead of waiting out the waybar interval
     ${pkgs.procps}/bin/pkill -SIGUSR1 waybar
