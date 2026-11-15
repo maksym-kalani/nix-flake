@@ -1,4 +1,37 @@
-{ lib, zfs }:
+{
+  lib,
+  fetchurl,
+  zfs,
+}:
+let
+  patches =
+    map
+      (
+        patch:
+        fetchurl {
+          inherit (patch) name hash;
+          url = "https://git.launchpad.net/ubuntu/+source/zfs-linux/plain/debian/patches/${patch.name}?h=import/2.4.4-1ubuntu4";
+        }
+      )
+      [
+        {
+          name = "linux-7.3-iops-create-no-flag.patch";
+          hash = "sha256-YZyYh+dON0xj42M2SU5121/I0VX+vZTob1RI7Sbn9x0=";
+        }
+        {
+          name = "linux-7.3-bvec-iter-bi-offset.patch";
+          hash = "sha256-5sFcbOa8Mv1qLeOtb0r0t1+d04yyodi5pW5t0y1h2PY=";
+        }
+        {
+          name = "linux-cpu-feature-enabled.patch";
+          hash = "sha256-pAhD/i50ARryHkCAJt1QtS/6ap5kdmo20srBEjGYxSk=";
+        }
+        {
+          name = "linux-7.3-kthread-init-fs.patch";
+          hash = "sha256-2O6H8IF2xFt9zCU9tzRc/rHbSBsH2xZMW6ARa3KQQ7o=";
+        }
+      ];
+in
 assert lib.assertMsg (
   zfs.version == "2.4.4" && zfs.kernelModuleAttribute == "zfs_2_4"
 ) "The Linux 7.3 backports require stable ZFS 2.4.4 (zfs_2_4).";
@@ -7,12 +40,7 @@ assert lib.assertMsg (
 ) "The ZFS 2.4.4 backports are restricted to Linux 7.3.";
 zfs.overrideAttrs (old: {
   patchFlags = (old.patchFlags or [ "-p1" ]) ++ [ "--fuzz=0" ];
-  patches = (old.patches or [ ]) ++ [
-    ./linux-7.3-iops-create-no-flag.patch
-    ./linux-7.3-bvec-iter-bi-offset.patch
-    ./linux-cpu-feature-enabled.patch
-    ./linux-7.3-kthread-init-fs.patch
-  ];
+  patches = (old.patches or [ ]) ++ patches;
   # Only this patched module may bypass the upstream 7.2 compatibility ceiling.
   configureFlags = (old.configureFlags or [ ]) ++ [ "--enable-linux-experimental" ];
   meta = old.meta // {
@@ -31,9 +59,6 @@ zfs.overrideAttrs (old: {
   postInstall = (old.postInstall or "") + ''
     mkdir -p "$out/nix-support"
     cp zfs_config.h "$out/nix-support/zfs_config.h"
-    sha256sum ${./linux-7.3-iops-create-no-flag.patch} \
-      ${./linux-7.3-bvec-iter-bi-offset.patch} \
-      ${./linux-cpu-feature-enabled.patch} \
-      ${./linux-7.3-kthread-init-fs.patch} > "$out/nix-support/compatibility-patches.sha256"
+    sha256sum ${lib.escapeShellArgs (map toString patches)} > "$out/nix-support/compatibility-patches.sha256"
   '';
 })

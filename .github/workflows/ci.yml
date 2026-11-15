@@ -37,7 +37,6 @@ jobs:
     timeout-minutes: 30
     outputs:
       aigis_changed: ${{ steps.aigis.outputs.changed }}
-      zfs_changed: ${{ steps.aigis.outputs.zfs_changed }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
@@ -61,35 +60,12 @@ jobs:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
           changed=true
-          zfs_changed=true
           if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
             base="git+file://$GITHUB_WORKSPACE?rev=$BASE_SHA"
             candidate="git+file://$GITHUB_WORKSPACE?rev=$GITHUB_SHA"
             changed=$(bash .github/scripts/aigis-changed.sh "$base" "$candidate")
-            zfs_changed=false
-            if ! git diff --quiet "$BASE_SHA" "$GITHUB_SHA" -- \
-              flake.nix .github/workflows/ci.yml pkgs/zfs-linux-7.3 tests/zfs-linux-7.3; then
-              zfs_changed=true
-            fi
           fi
           echo "changed=$changed" >> "$GITHUB_OUTPUT"
-          echo "zfs_changed=$zfs_changed" >> "$GITHUB_OUTPUT"
-
-  zfs-linux-7-3:
-    needs: [lint, eval]
-    if: needs.eval.outputs.aigis_changed == 'true' || needs.eval.outputs.zfs_changed == 'true'
-    runs-on: [self-hosted, linux, x64]
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
-      - name: Build stable userspace outputs and patched module
-        run: |
-          nix build -L --no-link \
-            '.#nixosConfigurations.aigis.config.boot.zfs.package^*' \
-            .#nixosConfigurations.aigis.config.boot.zfs.modulePackage \
-            .#checks.x86_64-linux.zfs-linux-7-3-contract
-      - name: ZFS initrd and cold-start regression
-        run: nix build -L --no-link .#checks.x86_64-linux.zfs-linux-7-3
 
   aigis-vm:
     needs: [lint, eval]

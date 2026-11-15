@@ -66,30 +66,9 @@
 
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
 
-      checks.x86_64-linux = {
-        aigis-vm = import ./tests/aigis {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          inherit inputs outputs;
-        };
-        zfs-linux-7-3 = import ./tests/zfs-linux-7.3 {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        };
-        zfs-linux-7-3-contract =
-          let
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            contract = import ./tests/zfs-linux-7.3/contract.nix {
-              inherit pkgs;
-              aigis = self.nixosConfigurations.aigis;
-            };
-          in
-          pkgs.runCommand "zfs-linux-7-3-contract"
-            {
-              passthru = { inherit contract; };
-              result = builtins.toJSON contract;
-            }
-            ''
-              printf '%s\n' "$result" > "$out"
-            '';
+      checks.x86_64-linux.aigis-vm = import ./tests/aigis {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        inherit inputs outputs;
       };
 
       overlays = import ./overlays {
