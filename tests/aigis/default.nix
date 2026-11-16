@@ -86,7 +86,12 @@ pkgs.testers.runNixOSTest {
         memorySize = 8192;
         cores = 4;
         diskSize = 20480;
-        oci-containers = { inherit containers; };
+        oci-containers.containers = lib.recursiveUpdate containers {
+          trek.environment = {
+            ADMIN_EMAIL = "admin@example.test";
+            ADMIN_PASSWORD = "TrekSmokeTest!2026";
+          };
+        };
       };
       services.wyoming.piper.servers = lib.mkForce { };
       services.wyoming.faster-whisper.servers = lib.mkForce { };
@@ -234,6 +239,24 @@ pkgs.testers.runNixOSTest {
         # Drain the response so an early grep match cannot break curl's output pipe.
         client.succeed("curl -skf --resolve excalidraw.laufin.xyz:443:${ip} https://excalidraw.laufin.xyz/ | grep -i '<html' > /dev/null")
         client.fail("curl -sf --max-time 3 http://${ip}:3010/health")
+
+    with subtest("TREK serves HTTPS login and retains state across recreation"):
+        aigis.wait_for_unit("podman-trek.service")
+        aigis.wait_until_succeeds("curl -sf http://127.0.0.1:3011/api/health")
+        aigis.wait_until_succeeds("curl -sf http://localhost:8080/api/v1/endpoints/statuses | ${pkgs.jq}/bin/jq -e 'any(.[]; .name == \"trek\" and .results[-1].success == true)' > /dev/null", timeout=180)
+        client.fail("curl -sf --max-time 3 http://${ip}:3011/api/health")
+        trek = "curl -skf --resolve trek.laufin.xyz:443:${ip}"
+        client.succeed(f"{trek} https://trek.laufin.xyz/ | grep -i '<html' > /dev/null")
+        client.succeed(f"{trek} https://trek.laufin.xyz/api/health")
+        login = json.dumps({"email": "admin@example.test", "password": "TrekSmokeTest!2026"})
+        client.succeed(f"{trek} -D /tmp/trek-headers -c /tmp/trek-cookies -H 'Content-Type: application/json' -d '{login}' https://trek.laufin.xyz/api/auth/login > /tmp/trek-login")
+        client.succeed("grep -i '^set-cookie: trek_session=.*secure' /tmp/trek-headers > /dev/null")
+        client.succeed(f"{trek} -b /tmp/trek-cookies https://trek.laufin.xyz/api/auth/me | grep 'admin@example.test' > /dev/null")
+        aigis.succeed("sha256sum /var/lib/containers/trek/data/.encryption_key > /tmp/trek-key.sha256; printf persistence > /var/lib/containers/trek/uploads/vm-test")
+        aigis.succeed("systemctl restart podman-trek.service")
+        aigis.wait_until_succeeds("curl -sf http://127.0.0.1:3011/api/health")
+        aigis.succeed("sha256sum -c /tmp/trek-key.sha256; test $(cat /var/lib/containers/trek/uploads/vm-test) = persistence")
+        client.succeed(f"{trek} -b /tmp/trek-cookies https://trek.laufin.xyz/api/auth/me | grep 'admin@example.test' > /dev/null")
 
     with subtest("One restic backup completes"):
         aigis.succeed("RESTIC_REPOSITORY=/tmp/restic-test RESTIC_PASSWORD=test restic init")

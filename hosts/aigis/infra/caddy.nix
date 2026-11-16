@@ -48,6 +48,11 @@ in
           reverse_proxy http://127.0.0.1:3010
         }
 
+        @trek host trek.laufin.xyz
+        handle @trek {
+          reverse_proxy http://127.0.0.1:3011
+        }
+
         @dns host dns.laufin.xyz
         handle @dns {
           reverse_proxy http://192.168.2.50:5380
