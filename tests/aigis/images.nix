@@ -9,6 +9,7 @@
   mazanoke = "sha256-Cy7VRYifo74NVzvUNW81Pd15STwaDjukWnhKzgWGdok=";
   omni-tools = "sha256-XUzNbBtF2VudxSX5RDOA/xv4vLl/oXintZFOt9QhXbU=";
   qbittorrent = "sha256-gnjbGZ19ESLfzHHTot+OYPDvxgsNp99DY0B+moAHwiI=";
+  trek = "sha256-NJlgG1AzqHz0fb0FssHh5nRmtT7YAZBGIoMaq0JQK3o=";
   vert = "sha256-5X1xoCFsPvswuAqqEZADY4J6lzjKZN+gJW3QnuIEASA=";
   wallos = "sha256-4ogYthETD+dnj4MKm/vozih5N3HNpr0JitJOrRVUGU4=";
 }
