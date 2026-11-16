@@ -3,6 +3,18 @@
   ...
 }:
 let
+  not-activating = pkgs.writeShellScript "health-monitor-not-activating" ''
+    lock=/run/nixos/switch-to-configuration.lock
+    [ -e "$lock" ] || exit 0
+    [ -f "$lock" ] || exit 255
+
+    # Probe the activation lock without holding it while monitoring.
+    ${pkgs.util-linux}/bin/flock --shared --nonblock "$lock" ${pkgs.coreutils}/bin/true && exit 0
+    status=$?
+    [ "$status" -eq 1 ] && exit 1
+    exit 255
+  '';
+
   health-monitor = pkgs.writeShellScriptBin "health-monitor" ''
     set -euo pipefail
 
@@ -214,6 +226,17 @@ in
 {
   environment.systemPackages = [ health-monitor ];
 
+  system.preSwitchChecks.healthMonitor = ''
+    case "$2" in
+      switch|test)
+        # A check in flight during the activation window can only alert on the
+        # mass restart itself; quiesce it without failing the switch.
+        ${pkgs.systemd}/bin/systemctl stop health-monitor.service 2>/dev/null || :
+        ${pkgs.systemd}/bin/systemctl reset-failed health-monitor.service 2>/dev/null || :
+        ;;
+    esac
+  '';
+
   systemd.services."health-monitor" = {
     description = "System Health Monitor with ntfy Alerts";
     path = with pkgs; [
@@ -228,6 +251,7 @@ in
     ];
     serviceConfig = {
       Type = "oneshot";
+      ExecCondition = not-activating;
       ExecStart = "${health-monitor}/bin/health-monitor";
     };
     wantedBy = [ "multi-user.target" ];

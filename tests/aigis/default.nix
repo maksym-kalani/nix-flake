@@ -262,6 +262,8 @@ pkgs.testers.runNixOSTest {
         aigis.succeed("RESTIC_REPOSITORY=/tmp/restic-test RESTIC_PASSWORD=test restic init")
         aigis.succeed("systemctl start restic-zfs-backup")
 
+    ${(import ./health-monitor.nix { inherit pkgs prod; }).testScript}
+
     with subtest("No unit in failed state (VM-only ones excepted)"):
         failed = set(aigis.succeed("systemctl list-units --failed --no-legend --plain | cut -d' ' -f1").split())
         assert failed <= vm_only_failures, f"failed units: {failed - vm_only_failures}"
