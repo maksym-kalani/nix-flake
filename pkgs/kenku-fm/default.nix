@@ -31,11 +31,11 @@
 }:
 stdenv.mkDerivation rec {
   pname = "kenku-fm";
-  version = "1.5.4";
+  version = "1.6.7-experimental";
 
   src = fetchurl {
     url = "https://github.com/owlbear-rodeo/kenku-fm/releases/download/v${version}/kenku-fm_${version}_amd64.deb";
-    hash = "sha256-iItWx+rv0jOTBcPaa3ieCf28OI/HvcnRjGqxEw0O0cU=";
+    hash = "sha256-dyNvzxHFA+HpxhPdtFHHXgaiUe0O1TTyfl5yKIRwu/c=";
   };
 
   nativeBuildInputs = [
