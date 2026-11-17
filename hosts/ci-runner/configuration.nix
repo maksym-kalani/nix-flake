@@ -10,6 +10,10 @@
     efiInstallAsRemovable = true; # boots under both SeaBIOS and OVMF
   };
 
+  # Work around the outer KVM host's nested async-PF delivery bug.
+  boot.kernelParams = [ "no-kvmapf" ];
+  boot.kernel.sysctl."kernel.panic" = 60;
+
   networking.hostName = "ci-runner";
   time.timeZone = "Europe/Kyiv";
   i18n.defaultLocale = "en_US.UTF-8";
