@@ -12,8 +12,8 @@
       enable = true;
 
       settings = {
-        defaultProvider = "ollama-cloud";
-        defaultModel = "glm-5.3";
+        defaultProvider = "openai-codex";
+        defaultModel = "gpt-6.1-sol";
         defaultThinkingLevel = "high";
         packages = [
           "npm:pi-ollama-cloud"
@@ -29,6 +29,9 @@
           "git:github.com/olafkfreund/nix-skills"
         ];
       };
+
+      # Hermes' -900k suffix is an alias, not a Codex model ID.
+      models.providers.openai-codex.modelOverrides."gpt-6.1-sol".contextWindow = 900000;
     };
 
     # pi runs `npm install` for packages that ship a package.json
