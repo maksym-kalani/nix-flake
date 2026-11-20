@@ -16,7 +16,6 @@ in
   services.suwayomi-server = {
     enable = true;
     openFirewall = true;
-    # data migrated from /var/lib/containers/tachidesk into the default dataDir
 
     settings.server = {
       ip = "0.0.0.0";
@@ -25,7 +24,6 @@ in
       downloadAsCbz = true;
       extensionRepos = [ ];
 
-      # Carried over from the previous container's server.conf
       extensionStores = [
         "https://github.com/keiyoushi/extensions/raw/repo/index.pb"
         "https://github.com/yuzono/cursed-manga-repo/raw/repo/index.pb"

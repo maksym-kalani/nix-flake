@@ -9,7 +9,6 @@ let
     #!/usr/bin/env bash
     NTFYURL="http://localhost:8081/homelab"
 
-    # printf so no stray newline can end the quote early
     payload=$(printf "user: %s\nip/host: %s" "''${PAM_USER:-unknown}" "''${PAM_RHOST:-unknown}")
 
     case "''${PAM_TYPE}" in
