@@ -153,6 +153,19 @@ Access stable packages via `pkgs.stable.<package>`. Custom Caddy build with name
 
 - Comment only what the code cannot say, usually the why, in one short line. No multi-line comments, file headers or comments that restate the code.
 
+### Write comments for maintainers, not for the conversation
+
+- Assume the reader is a developer seeing this repository for the first
+  time, with no access to the chat or implementation history.
+- Comment only durable, non-obvious constraints, invariants, trade-offs,
+  or compatibility requirements needed to maintain the resulting code.
+- Do not narrate the task, user instructions, investigation, rejected
+  attempts, or how a request was translated into code.
+- Do not introduce unrelated tools or concepts merely because they were
+  involved in producing the change.
+- A comment being technically true does not make it useful. If removing
+  it loses no maintenance-relevant information, omit it.
+
 ### Run the aigis VM test
 
 - A change that alters the built aigis system or the test (services, ports, secrets, images, packages; not comments, formatting or docs) must pass `nix build -L .#checks.x86_64-linux.aigis-vm` before the work is called done. Report a failure with its output; do not call the work done.
