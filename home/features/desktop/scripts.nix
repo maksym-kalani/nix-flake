@@ -201,6 +201,9 @@ let
         ${pkgs.gh}/bin/gh api "repos/maksym-kalani/nix-flake/pulls/$pr" --jq '.body // ""' \
           || echo "Could not fetch PR #$pr, its packages are missing from the list" >&2
       done | ${nix-flake-pr-packages}/bin/nix-flake-pr-packages)
+      if [[ -t 1 ]]; then
+        printf '\033[H\033[2J\033[3J'
+      fi
       if [[ -n "$updates" ]]; then
         echo "Packages to be updated on belial:"
         echo "$updates"
