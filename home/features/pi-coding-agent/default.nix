@@ -30,7 +30,6 @@
         ];
       };
 
-      # Hermes' -900k suffix is an alias, not a Codex model ID.
       models.providers.openai-codex.modelOverrides."gpt-6.1-sol".contextWindow = 900000;
     };
 
