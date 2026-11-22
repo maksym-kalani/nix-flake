@@ -194,6 +194,13 @@ pkgs.testers.runNixOSTest {
         client.succeed("curl -sf --max-time 10 --interface 192.168.1.107 http://${ip}:5757/nix-cache-info")
         client.fail("curl -sf --max-time 5 http://${ip}:5757/nix-cache-info")
 
+    with subtest("Glances exposes hardware sensor telemetry"):
+        aigis.wait_for_unit("glances.service")
+        aigis.wait_for_open_port(61208)
+        client.wait_until_succeeds("curl -sf --max-time 10 http://${ip}:61208/api/4/status")
+        sensors = json.loads(client.succeed("curl -sf --max-time 10 http://${ip}:61208/api/4/sensors"))
+        assert isinstance(sensors, list), sensors
+
     with subtest("Every *.laufin.xyz route on aigis answers below 500"):
         broken = {}
         for host, _, _ in caddy_routes:
