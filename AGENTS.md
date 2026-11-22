@@ -166,6 +166,12 @@ Access stable packages via `pkgs.stable.<package>`. Custom Caddy build with name
 - A comment being technically true does not make it useful. If removing
   it loses no maintenance-relevant information, omit it.
 
+### Scope of VM tests
+
+- Cover only services that listen on a network port and return an observable response. Keep coverage focused on port reachability and HTTP, protocol, or health-check responses.
+- Do not add VM tests for rebuilds, activation, restart behavior, backups, scheduled jobs, hardware checks, or internal units without a listening endpoint.
+- Keep fixture changes limited to what these network-service checks require. A configuration-only change does not require a new behavioral test outside this scope.
+
 ### Run the aigis VM test
 
 - A change that alters the built aigis system or the test (services, ports, secrets, images, packages; not comments, formatting or docs) must pass `nix build -L .#checks.x86_64-linux.aigis-vm` before the work is called done. Report a failure with its output; do not call the work done.

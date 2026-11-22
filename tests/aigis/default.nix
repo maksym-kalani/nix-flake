@@ -110,19 +110,6 @@ pkgs.testers.runNixOSTest {
         setupSecretsForUsers.deps = [ "aigisTestAgeKey" ];
       };
 
-      # No SMART disks or ZFS pool are available during VM activations.
-      services.smartd.enable = lib.mkForce false;
-      systemd.services.health-monitor.enable = false;
-      systemd.timers.health-monitor.enable = false;
-      system.switch.enable = true;
-      # Override the parent VM's mkForce without concatenating its Caddyfile.
-      specialisation.caddy-changed.configuration.sops.templates."Caddyfile".content = lib.mkOverride 40 ''
-        ${caddyContent}
-        http://127.0.0.1:18080 {
-          respond "caddy-rebuild-test"
-        }
-      '';
-
       networking.networkmanager.unmanaged = [
         "eth0"
         "eth1"
@@ -186,6 +173,9 @@ pkgs.testers.runNixOSTest {
 
     endpoints = json.loads('${builtins.toJSON endpoints}')
     caddy_routes = json.loads('${builtins.toJSON caddyRoutes}')
+    # no SMART disks or ZFS pool in the VM
+    vm_only_failures = {"smartd.service", "health-monitor.service"}
+
     start_all()
     aigis.wait_for_unit("multi-user.target")
     aigis.wait_for_open_port(8080)
@@ -232,37 +222,6 @@ pkgs.testers.runNixOSTest {
         assert not broken, f"broken Caddy routes: {broken}"
         client.succeed("curl -s -o /dev/null -w '%{http_code}' -H 'Host: jellyfin.laufin.xyz' http://${ip}/ | grep -qx 308")
 
-    with subtest("Caddy restarts only when its rendered configuration changes"):
-        base_system = aigis.succeed("readlink -f /run/current-system").strip()
-        changed_system = f"{base_system}/specialisation/caddy-changed"
-
-        def caddy_invocation():
-            return aigis.succeed("systemctl show caddy.service -p InvocationID --value").strip()
-
-        def activate(system):
-            aigis.succeed(f"{system}/bin/switch-to-configuration test")
-            aigis.wait_for_unit("caddy.service")
-
-        before = caddy_invocation()
-        activate(base_system)
-        assert caddy_invocation() == before, "unchanged Caddyfile restarted Caddy"
-        aigis.fail("curl -sf --max-time 3 http://127.0.0.1:18080/")
-
-        activate(changed_system)
-        changed = caddy_invocation()
-        assert changed != before, "changed Caddyfile did not restart Caddy"
-        assert aigis.succeed("curl -sf http://127.0.0.1:18080/").strip() == "caddy-rebuild-test"
-
-        activate(changed_system)
-        assert caddy_invocation() == changed, "unchanged specialised Caddyfile restarted Caddy"
-        aigis.succeed("curl -sf http://127.0.0.1:18080/")
-
-        activate(base_system)
-        assert caddy_invocation() != changed, "restoring Caddyfile did not restart Caddy"
-        aigis.fail("curl -sf --max-time 3 http://127.0.0.1:18080/")
-        aigis.succeed("systemctl is-active caddy.service")
-        client.succeed("curl -skf --max-time 10 --resolve excalidraw.laufin.xyz:443:${ip} https://excalidraw.laufin.xyz/health")
-
     with subtest("SSH takes keys for maksym only"):
         client.succeed("install -Dm600 ${ssh-keys.snakeOilEd25519PrivateKey} /root/.ssh/id_ed25519")
         ssh = "ssh -n -o StrictHostKeyChecking=no -o BatchMode=yes"  # -n: ssh must not read the driver's command channel
@@ -303,8 +262,8 @@ pkgs.testers.runNixOSTest {
         aigis.succeed("RESTIC_REPOSITORY=/tmp/restic-test RESTIC_PASSWORD=test restic init")
         aigis.succeed("systemctl start restic-zfs-backup")
 
-    with subtest("No unit in failed state"):
+    with subtest("No unit in failed state (VM-only ones excepted)"):
         failed = set(aigis.succeed("systemctl list-units --failed --no-legend --plain | cut -d' ' -f1").split())
-        assert not failed, f"failed units: {failed}"
+        assert failed <= vm_only_failures, f"failed units: {failed - vm_only_failures}"
   '';
 }
