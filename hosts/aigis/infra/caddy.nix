@@ -14,6 +14,7 @@ in
 
   sops.templates."Caddyfile" = {
     owner = "caddy";
+    restartUnits = [ "caddy.service" ];
     content = ''
       *.laufin.xyz {
         tls {
