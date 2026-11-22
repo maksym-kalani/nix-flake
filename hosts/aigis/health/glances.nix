@@ -15,7 +15,7 @@ in
 
   services.glances = {
     enable = true;
-    openFirewall = false;
+    openFirewall = true;
     extraArgs = [
       "--webserver"
       "--disable-webui"
@@ -29,10 +29,4 @@ in
       "--disable-config-exec"
     ];
   };
-
-  networking.firewall.extraCommands = ''
-    # Trusted interfaces must not bypass the Glances source restriction.
-    iptables -I nixos-fw-accept 1 ! -i lo -p tcp ! -s 192.168.2.5 --dport ${toString port} -j nixos-fw-refuse
-    iptables -A nixos-fw -p tcp -s 192.168.2.5 --dport ${toString port} -j nixos-fw-accept
-  '';
 }
