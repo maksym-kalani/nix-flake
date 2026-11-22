@@ -154,6 +154,10 @@ pkgs.testers.runNixOSTest {
           address = "192.168.1.107"; # belial, the only nix cache client
           prefixLength = 24;
         }
+        {
+          address = "192.168.2.5"; # Home Assistant, the only Glances client
+          prefixLength = 24;
+        }
       ];
       environment.systemPackages = [ pkgs.curl ];
     };
@@ -193,6 +197,21 @@ pkgs.testers.runNixOSTest {
     with subtest("nix cache only answers belial"):
         client.succeed("curl -sf --max-time 10 --interface 192.168.1.107 http://${ip}:5757/nix-cache-info")
         client.fail("curl -sf --max-time 5 http://${ip}:5757/nix-cache-info")
+
+    with subtest("Glances API only answers Home Assistant"):
+        aigis.wait_for_unit("glances.service")
+        aigis.wait_for_open_port(61208)
+        client.wait_until_succeeds("curl -sf --max-time 10 --interface 192.168.2.5 http://${ip}:61208/api/4/status")
+        sensors = json.loads(client.succeed("curl -sf --max-time 10 --interface 192.168.2.5 http://${ip}:61208/api/4/sensors"))
+        assert isinstance(sensors, list), sensors
+        client.fail("curl -sf --max-time 5 --interface 192.168.2.10 http://${ip}:61208/api/4/status")
+        aigis.succeed("iptables -I nixos-fw 1 -i eth1 -j nixos-fw-accept")
+        try:
+            client.fail("curl -sf --max-time 5 --interface 192.168.2.10 http://${ip}:61208/api/4/status")
+            client.succeed("curl -sf --max-time 10 --interface 192.168.2.5 http://${ip}:61208/api/4/status")
+            aigis.succeed("curl -sf --max-time 10 http://127.0.0.1:61208/api/4/status")
+        finally:
+            aigis.succeed("iptables -D nixos-fw -i eth1 -j nixos-fw-accept")
 
     with subtest("Every *.laufin.xyz route on aigis answers below 500"):
         broken = {}
