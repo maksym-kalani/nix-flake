@@ -85,12 +85,7 @@ pkgs.testers.runNixOSTest {
         memorySize = 8192;
         cores = 4;
         diskSize = 20480;
-        oci-containers.containers = lib.recursiveUpdate containers {
-          trek.environment = {
-            ADMIN_EMAIL = "admin@example.test";
-            ADMIN_PASSWORD = "TrekSmokeTest!2026";
-          };
-        };
+        oci-containers.containers = containers;
       };
       services.wyoming.piper.servers = lib.mkForce { };
       services.wyoming.faster-whisper.servers = lib.mkForce { };
