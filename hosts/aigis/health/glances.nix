@@ -1,6 +1,14 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   port = config.services.glances.port;
+  glancesConfig = (pkgs.formats.ini { }).generate "glances.conf" {
+    sensors.alias = "i915 0_temperature_core:GPU temperature,i915 0_fan_speed:GPU fan";
+  };
 in
 {
   imports = [
@@ -17,6 +25,8 @@ in
     enable = true;
     openFirewall = true;
     extraArgs = [
+      "--config"
+      "${glancesConfig}"
       "--webserver"
       "--disable-webui"
       "--bind"
