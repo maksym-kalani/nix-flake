@@ -6,7 +6,7 @@ let
   cfg = {
     name = "vert";
 
-    image = "ghcr.io/vert-sh/vert@sha256:df3a22efeccf0e37adc3b4d01ecc1bd4ad2bc00ec44dc4672f74b23ba8f3ede9";
+    image = "ghcr.io/vert-sh/vert@sha256:67cc0ecfcc81ea6c0c7dd730582acc1093cd2e97a96f365fa5b69d7bc0edbd8b";
 
     port = {
       internal = 80;

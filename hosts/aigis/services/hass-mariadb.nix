@@ -6,8 +6,8 @@ let
   appdata = "/var/lib/containers/";
   cfg = {
     name = "hass-mariadb";
-    # MariaDB 12.3.3 LTS; frozen in the watchdog's Renovate exclusions.
-    image = "docker.io/library/mariadb@sha256:d46e102fa8b9b72bfcdeb56f9dd538742092119dc8b11f31fe662605cd234cd9";
+    # MariaDB LTS; the watchdog follows the official lts lookup channel.
+    image = "docker.io/library/mariadb@sha256:4aaf88b3106382c8c18e49f0cec60267be618fc22f858c4503afb2a2555afed3";
     port = {
       internal = 3306;
       external = 3306;
