@@ -230,7 +230,6 @@ in
       Type = "oneshot";
       ExecStart = "${health-monitor}/bin/health-monitor";
     };
-    wantedBy = [ "multi-user.target" ];
   };
 
   systemd.timers."health-monitor" = {
