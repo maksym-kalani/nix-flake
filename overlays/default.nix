@@ -5,10 +5,10 @@
   modifications = final: prev: {
     # nixpkgs bundles H2 1.4; drop once nixpkgs catches up.
     suwayomi-server = prev.suwayomi-server.overrideAttrs (_oldAttrs: rec {
-      version = "2.4.2366";
+      version = "2.4.2373";
       src = prev.fetchurl {
         url = "https://github.com/Suwayomi/Suwayomi-Server/releases/download/v${version}/Suwayomi-Server-v${version}.jar";
-        hash = "sha256-r5/rIK+dfr6eMHaebG68f8erHERziNQuAoCx2l/ge/0=";
+        hash = "sha256-3QXVI8x4W3rPkMn+rAvITFPV+zr1qyozZTZG4gduUhc=";
       };
     });
   };

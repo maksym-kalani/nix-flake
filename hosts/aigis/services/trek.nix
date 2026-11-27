@@ -18,7 +18,7 @@ in
   ];
 
   virtualisation.oci-containers.containers.${name} = {
-    image = "docker.io/mauriceboe/trek@sha256:991ff5aa53244b25d5a8ea40361dc286cfc8211638044eabe12b9926729db5cc";
+    image = "docker.io/mauriceboe/trek@sha256:7935eeb96db3202b5af896951fd96379d6eb4d3608ce93a1f2e8f850e10a2257";
     user = "1000:1000";
     ports = [ "127.0.0.1:${toString port}:3000" ];
     volumes = [

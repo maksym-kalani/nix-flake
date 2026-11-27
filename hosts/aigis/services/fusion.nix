@@ -7,7 +7,7 @@ let
   cfg = {
     name = "fusion";
 
-    image = "ghcr.io/0x2e/fusion@sha256:67e39cd0023f1ff638be2ec5f601571fde63177d98cb55a9969cd7ed6704c686";
+    image = "ghcr.io/0x2e/fusion@sha256:5e929945c3b966e515ffa037b9d4922fa8e214d6a243ca3699ed8610755ce617";
 
     port = {
       internal = 8080;
